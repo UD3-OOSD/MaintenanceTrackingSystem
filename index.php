@@ -24,8 +24,8 @@
   #echo $_SERVER['PATH_INFO'];
   $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : [];
   #var_dump($url);
-  $db = DB::getInstance();
-  dnd($db);
+  #$db = DB::getInstance();
+  #dnd($db);
 
   // Route the request
   Router::route($url);
