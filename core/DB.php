@@ -164,7 +164,7 @@
     }
 
     public function get_columns($tables){
-      return $this->query("SHOW COLUMNS FROM {$table}")->results();
+      return $this->query("SHOW COLUMNS FROM {$tables}")->results();
     }
 
     public function error(){

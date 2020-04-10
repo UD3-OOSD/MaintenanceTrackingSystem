@@ -15,3 +15,7 @@
 
 
   define('SITE_TITLE', 'OOSD'); // this is the site title
+
+  define('CURRENT_USER_SESSION_NAME', 'awdAwdadwWDADawadADWAWdADDwadDD'); // session for login user
+  define('REMEMBER_ME_COOKIE_NAME', 'AdAdAWDdNVJDiDJkDnJDvBjjDjk'); // cookie name for logged in user remember me
+  define('REMEMBER_COOKIE_EXPIRY', 604800); // expiry time is 30 dates.
