@@ -3,21 +3,22 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= $this->siteTitle(); ?></title>
+    <title><?=$this->siteTitle(); ?></title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?=PROOT?>CSS/bootstrap.min.css" media="screen" title="no title" charset="utf-8" >
-    <link rel="stylesheet" href="<?=PROOT?>CSS/custom.css" media="screen" title="no title" charset="utf-8" >
-    <script src="<?=PROOT?>js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="<?=PROOT?>css/bootstrap.min.css" media="screen" title="no title" charset="utf-8" >
+    <link rel="stylesheet" href="<?=PROOT?>css/custom.css" media="screen" title="no title" charset="utf-8" >
+    <script src="<?=PROOT?>js/jquery-2.2.4.min.js"></script>
     <script src="<?=PROOT?>js/bootstrap.min.js"></script>
 
-    <?= $this->content('head'); ?>
+    <?=$this->content('head'); ?>
 
   </head>
   <body>
-    <?= $this->content('body'); ?>
+    <?=$this->content('body'); ?>
 
   </body>
 </html>

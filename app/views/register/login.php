@@ -1,8 +1,10 @@
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
+
 <div class="col-md-6 col-md-offset-3 well">
   <form class="form" action="<?=PROOT?>register/login" method="post">
+    <div class="bg-danger"><?=$this->displayErrors ?></div>
     <h3 class="text-center">Log In</h3>
     <div class="form-group">
       <label for="username">Username</label>
@@ -23,5 +25,4 @@
     </div>
   </form>
 </div>
-
 <?php $this->end(); ?>

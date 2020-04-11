@@ -9,11 +9,21 @@ class Register extends Controller{
   }
 
   public function loginAction(){
+    $validation = new Validate();
     #echo password_hash('password', PASSWORD_DEFAULT);
     if($_POST){
       //form InvalidArgumentException
-      $validation = true;
-      if ($validation === true) {
+      $validation->check($_POST, [
+        'username' => [
+          'display' => 'Username',
+          'required' => true
+        ],
+        'password' => [
+          'display' => 'Password',
+          'required' => true
+        ]
+      ]);
+      if ($validation->passed()) {
         $user = $this->UsersModel->findByUserName($_POST['username']);
         if ($user && password_verify(Input::get('passsword'), $user->password)) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
@@ -22,6 +32,7 @@ class Register extends Controller{
         }
       }
     }
+    $this->view->displayErrors = $validation->displayErrors();
     $this->view->render('register/login');
   }
 }

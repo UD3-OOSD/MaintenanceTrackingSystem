@@ -38,7 +38,9 @@ class Model{
   public function findFirst($params = []){
     $resultsQuery = $this->_db->findFirst($this->_table, $params);
     $results = new $this->_modelName($this->_table);
-    $results->populateObjectData($resultsQuery);
+    if($resultsQuery){
+      $results->populateObjectData($resultsQuery);
+    }
     return $results;
   }
 
