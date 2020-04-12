@@ -16,11 +16,12 @@ class Register extends Controller{
       $validation->check($_POST, [
         'username' => [
           'display' => 'Username',
-          'required' => true
+          'require' => true
         ],
         'password' => [
           'display' => 'Password',
-          'required' => true
+          'require' => true,
+          'min' => 8
         ]
       ]);
       if ($validation->passed()) {
@@ -30,9 +31,18 @@ class Register extends Controller{
           $user->login($remember);
           Router::redirect('');
         }
+      }else{
+        $validation->addError("There is an error with your username or password.");
       }
     }
     $this->view->displayErrors = $validation->displayErrors();
     $this->view->render('register/login');
+  }
+
+  public function logoutAction(){
+    if (currentUser()) {
+      currentUser()->logout();
+      Router::redirect('register/login');
+    }  
   }
 }

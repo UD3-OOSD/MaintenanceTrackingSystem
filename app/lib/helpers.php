@@ -8,5 +8,10 @@ function dnd($data){
 }
 
 function sanitize($dirty){
+  echo "123";
   return htmlentities($dirty, ENT_QUOTES, 'utf-8');;
+}
+
+function currentUser(){
+  return Users::$currentLoggedInUser();
 }

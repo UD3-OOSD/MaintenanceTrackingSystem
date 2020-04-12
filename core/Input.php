@@ -2,7 +2,7 @@
 
 class Input{
 
-  public static function sanitize($dirty){
+  public static function sanitized($dirty){
     return htmlentities($dirty, ENT_QUOTES, "UTF-8");
   }
 

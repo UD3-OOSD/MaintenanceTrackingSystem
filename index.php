@@ -26,6 +26,8 @@
   #var_dump($url);
   #$db = DB::getInstance();
   #dnd($db);
-
+  if (!Session::exists(CURRENT_USER_SESSION_NAME) && Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
+    Users::loginUserFromCookie();
+  }
   // Route the request
   Router::route($url);

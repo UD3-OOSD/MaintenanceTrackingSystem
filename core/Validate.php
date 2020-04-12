@@ -7,13 +7,14 @@ class Validate{
     $this->_db = DB::getInstance();
   }
 
-  public function check($source, $items = []){
+  public function check($source, $items=[]){
     $this->_errors = [];
     foreach ($items as $item => $rules) {
-      $item  = Input::sanitize($item);
+      $item  = Input::sanitized($item);
       $display = $rules['display'];
       foreach ($rules as $rule => $rule_value) {
-        $value = Input::sanitize(trim($source[$item]));
+        $value = Input::sanitized(trim($source[$item]));
+
 
         if ($rule === 'require' && empty($value)) {
           $this->addError(["{$display} is required", $item]);
@@ -62,7 +63,7 @@ class Validate{
                 break;
 
               case 'valid_email':
-                if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                if(!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                   $this->addError(["{$display} must be a valid emial address.", $item]);
                 }
                 break;
@@ -70,6 +71,11 @@ class Validate{
         }
       }
     }
+
+    if(empty($this->_errors)){
+      $this->_passed = true;
+    }
+    return $this;
   }
 
   public function addError($error){
@@ -91,11 +97,15 @@ class Validate{
 
   public function displayErrors(){
     #echo "1";
-    print_r($this->_errors);
+    #print_r($this->_errors);
     $html = '<ul class="bg-danger">';
     foreach ($this->_errors as $error) {
-      $html .= '<li class="text-danger">'.$error[0].'</li>';
-      $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
+      if(is_array($error)){
+        $html .= '<li class="text-danger">'.$error[0].'</li>';
+        $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
+      }else{
+        $html .= '<li class="text-danger">'.$error.'</li>';
+      }
     }
     $html .= '</ul>';
     return $html;
