@@ -32,7 +32,7 @@
     }
 
     public static function redirect($location){
-      if(!header_sent()){
+      if(!headers_sent()){
         header('Location: '.PROOT.$location);
       }else{
         echo '<script type="text/javascript">';

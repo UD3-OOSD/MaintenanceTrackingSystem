@@ -21,7 +21,7 @@ class Register extends Controller{
         'password' => [
           'display' => 'Password',
           'require' => true,
-          'min' => 8
+          'min' => 6
         ]
       ]);
       if ($validation->passed()) {
@@ -35,6 +35,7 @@ class Register extends Controller{
         $validation->addError("There is an error with your username or password.");
       }
     }
+    #$this->view->post = ['username'=> '', 'password'=> ''];
     $this->view->displayErrors = $validation->displayErrors();
     $this->view->render('register/login');
   }
@@ -43,6 +44,58 @@ class Register extends Controller{
     if (currentUser()) {
       currentUser()->logout();
       Router::redirect('register/login');
-    }  
+    }
+  }
+
+  public function registerAction(){
+    $validation = new Validate();
+    $posted_values = ['f-name' => '', 'l-name'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
+    if ($_POST) {
+      $posted_values = posted_values($_POST);
+      $validation->check($_POST,[
+        'f-name' => [
+          'display' => 'First Name',
+          'require' => true
+        ],
+        'l-name' => [
+          'display' => 'Last Name',
+          'require' => true
+        ],
+        'username' => [
+          'display' => 'Username',
+          'require' => true,
+          'unique' => 'users',
+          'min' => 6,
+          'max' => 150
+        ],
+        'email' => [
+          'display' => 'Email',
+          'require' => true,
+          'unique' => 'users',
+          'max' => 150,
+          'valid_email' => true
+        ],
+        'password' => [
+          'display' => 'Password',
+          'require' => true,
+          'min' => 6
+        ],
+        'confirm' => [
+          'display' => 'Confirm Password',
+          'require' => true,
+          'matches' => 'password'
+        ]
+      ]);
+
+      if ($validation->passed()) {
+        $newUser = new Users();
+        $newUser->registerNewUser($_POST);
+        $newUser->login();
+        #Router::redirect('');
+      }
+    }
+    $this->view->post = $posted_values;
+    $this->view->displayErrors = $validation->displayErrors();
+    $this->view->render('register/register');
   }
 }

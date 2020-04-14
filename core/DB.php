@@ -9,6 +9,8 @@
       try {
         #echo "1";
         $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASSWORD);
+        $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         #$this->_pdo = new PDO("mysql:host=127.0.0.1;dbname=oosd_pr_1",'root','');
       } catch (PDOException $e) {
         die($e->getMessage());

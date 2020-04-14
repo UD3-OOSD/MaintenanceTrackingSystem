@@ -29,7 +29,7 @@ class Users extends Model{
   }
 
   public function login($rememberMe = false){
-    Session::set($this->$_sessionName, $this->id);
+    Session::set($this->_sessionName, $this->id);
     if ($rememberMe) {
       $hash = md5(uniqid() + rand(0, 100));
       $user_agent = Session::uagent_no_version();
@@ -41,7 +41,10 @@ class Users extends Model{
   }
 
   public function logout(){
-    $user_agent = Session::uagent_no_version();
+    $userSession = UserSession::getFromCookie();
+    if ($userSession) {
+      $userSession->delete();
+    }
     $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user->_agent]);
     Session::delete(CURRENT_USER_SESSION_NAME);
     if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)){
@@ -51,16 +54,26 @@ class Users extends Model{
     return true;
   }
 
+  public function registerNewUser($params){
+    $this->assign($params);
+    $this->password = password_hash($this->password,PASSWORD_DEFAULT);
+    $this->save();
+  }
+
   public static function loginUserFromCookie(){
-    $user_session_model = new UserSessions();
-    $user_session = $user_session_model->findFirst([
-      'condition' => "user_agent = ? AND session = ?",
-      'bind' => [Session::uagent_no_version(),Cookie::get(REMEMBER_ME_COOKIE_NAME)]
-    ]);
+    $userSession = UserSession::getFromCookie();
+    #$user_session_model = new UserSessions();
+    #$user_session = $user_session_model->findFirst([
+    #  'condition' => "user_agent = ? AND session = ?",
+    #  'bind' => [Session::uagent_no_version(),Cookie::get(REMEMBER_ME_COOKIE_NAME)]
+    #]);
     if ($user_session->user_id != '') {
       $user = new self($user_session->user_id);
     }
-    $user->login();
+    if ($user) {
+      $user->login();
+    }
+
     return $user;
   }
 

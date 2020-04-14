@@ -49,9 +49,9 @@ class Model{
   }
 
   public function save(){
-    $fileds = [];
-    foreach ($this->$_columnNames as $column) {
-      $fields[$column] = $this->column;
+    $fields = [];
+    foreach ($this->_columnNames as $column) {
+      $fields[$column] = $this->$column;
     }
     // determine whether to update or INSERT
     if(property_exists($this, 'id') && $this->id != ''){
@@ -62,8 +62,8 @@ class Model{
   }
 
   public function insert($fields){
-    if(empty($field))  return false;
-    return $this->_db->indert($this->_table, $fields);
+    if(empty($fields))  return false;
+    return $this->_db->insert($this->_table, $fields);
   }
 
   public function update($id, $fields){
@@ -96,7 +96,7 @@ class Model{
     if(!empty($params)){
       foreach ($params as $key => $value) {
         if(in_array($key, $this->_columnNames)){
-          $this->key = sanitize($val);
+          $this->key = sanitize($value);
         }
       }
     }

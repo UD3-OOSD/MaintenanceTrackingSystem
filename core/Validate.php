@@ -11,6 +11,7 @@ class Validate{
     $this->_errors = [];
     foreach ($items as $item => $rules) {
       $item  = Input::sanitized($item);
+      #echo $item;
       $display = $rules['display'];
       foreach ($rules as $rule => $rule_value) {
         $value = Input::sanitized(trim($source[$item]));
