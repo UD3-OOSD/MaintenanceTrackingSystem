@@ -14,4 +14,13 @@
     public function firstAction(){
       $this->view->render('tools/first');
     }
+
+    public function secondAction(){
+      $this->view->render('tools/first');
+    }
+
+    public function thirdAction(){
+      $this->view->render('tools/first');
+    }
+
   }

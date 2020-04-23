@@ -45,24 +45,27 @@ class Model{
   }
 
   public function findById($id){
-    return $this->findFirst(['conditioon'=>"id = ?", 'bind' => [$id]]);
+    return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
 
   public function save(){
     $fields = [];
     foreach ($this->_columnNames as $column) {
+      #echo $this->$column;
       $fields[$column] = $this->$column;
     }
     // determine whether to update or INSERT
     if(property_exists($this, 'id') && $this->id != ''){
       return $this->update($this->id, $fields);
     }else{
+      #print_r($fields);
       return $this->insert($fields);
     }
   }
 
   public function insert($fields){
     if(empty($fields))  return false;
+    echo "insert";
     return $this->_db->insert($this->_table, $fields);
   }
 
@@ -74,7 +77,7 @@ class Model{
   public function delete($id){
     if($id == '' && $this->id = '') return false;
     $id = ($id == '' ) ? $this->id : $id;
-    if($this->$_softDelete){
+    if($this->_softDelete){
       $this->update($id, ['deleted' => 1]);
     }
     return $this->_db->delete($this->_table, $id);
@@ -95,11 +98,14 @@ class Model{
   public function assign($params){
     if(!empty($params)){
       foreach ($params as $key => $value) {
+        #echo $key." ".$value;
         if(in_array($key, $this->_columnNames)){
-          $this->key = sanitize($value);
+          $this->$key = sanitize($value);
         }
       }
+      return true;
     }
+    return false;
   }
 
   protected function populateObjectData($result){

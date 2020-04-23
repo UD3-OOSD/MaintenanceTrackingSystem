@@ -9,6 +9,7 @@ class Register extends Controller{
   }
 
   public function loginAction(){
+    #echo password_hash('password', PASSWORD_DEFAULT);
     $validation = new Validate();
     #echo password_hash('password', PASSWORD_DEFAULT);
     if($_POST){
@@ -26,7 +27,10 @@ class Register extends Controller{
       ]);
       if ($validation->passed()) {
         $user = $this->UsersModel->findByUserName($_POST['username']);
-        if ($user && password_verify(Input::get('passsword'), $user->password)) {
+        #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
+        #echo Input::get('password') . ' '. $user->password;
+        #echo $user->password;
+        if ($user&& Input::get('password') == $user->password ) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $user->login($remember);
           Router::redirect('');
@@ -91,7 +95,7 @@ class Register extends Controller{
         $newUser = new Users();
         $newUser->registerNewUser($_POST);
         $newUser->login();
-        #Router::redirect('');
+        Router::redirect('');
       }
     }
     $this->view->post = $posted_values;

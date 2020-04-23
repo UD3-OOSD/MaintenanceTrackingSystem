@@ -1,9 +1,9 @@
 <?php
 
-class UserSession extends Model{
+class UserSessions extends Model{
 
   public function __construct(){
-    $table = 'user_session';
+    $table = 'user_sessions';
     parent::__construct($table);
   }
 
@@ -11,7 +11,7 @@ class UserSession extends Model{
     $userSession = new self();
     if (Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
       $userSession = $userSession->findFirst([
-        'condition' => "user_agent = ? AND session = ?",
+        'conditions' => "user_agent = ? AND session = ?",
         'bind' => [Session::uagent_no_version(),Cookie::get(REMEMBER_ME_COOKIE_NAME)]
       ]);
     }

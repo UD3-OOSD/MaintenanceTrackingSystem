@@ -2,7 +2,7 @@
 
   class DB{
     private static $_instance = null;
-    private $_pdo, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
+    private $_pdo, $_query ,$_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
     private function __construct(){
 
@@ -108,7 +108,7 @@
     public function insert($table, $fields = []){
       $fieldString = '';
       $valueString = '';
-      $value = [];
+      $values = [];
 
       foreach ($fields as $field => $value) {
         $fieldString .= '`'.$field.'`,';
@@ -119,8 +119,10 @@
       $valueString = rtrim($valueString, ',');
       $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ({$valueString})";
       if (!$this->query($sql, $values)->error()) {
+        #dnd($fieldString);
         return true;
       }
+      #dnd($valueString);
       return false;
     }
 

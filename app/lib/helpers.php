@@ -13,7 +13,7 @@ function sanitize($dirty){
 }
 
 function currentUser(){
-  return Users::$currentLoggedInUser();
+  return Users::currentLoggedInUser();
 }
 
 function posted_values($post){
@@ -22,4 +22,12 @@ function posted_values($post){
     $clean_array[$key] = sanitize($value);
   }
   return $clean_array;
+}
+
+function currentPage(){
+  $currentPage = $_SERVER['REQUEST_URI'];
+  if($currentPage == PROOT || $currentPage == PROOT.'home/index'){
+    $currentPage = PROOT.'home';
+  }
+  return $currentPage;
 }

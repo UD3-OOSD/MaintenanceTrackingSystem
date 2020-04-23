@@ -6,7 +6,7 @@
   <form class="form" action="" method="post">
     <div class="dg-danger"><?= $this->displayErrors ?></div>
     <div class="form-group">
-      <label for="f-name">Fisrt Name</label>
+      <label for="f-name">First Name</label>
       <input type="text" name="f-name" class="form-control" value="<?=$this->post['f-name']?>" id="f-name">
     </div>
     <div class="form-group">
