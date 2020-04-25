@@ -6,12 +6,12 @@
   <form class="form" action="" method="post">
     <div class="dg-danger"><?= $this->displayErrors ?></div>
     <div class="form-group">
-      <label for="f-name">First Name</label>
-      <input type="text" name="f-name" class="form-control" value="<?=$this->post['f-name']?>" id="f-name">
+      <label for="name">Name</label>
+      <input type="text" name="name" class="form-control" value="<?=$this->post['name']?>" id="name">
     </div>
     <div class="form-group">
-      <label for="l-name">Last Name</label>
-      <input type="text" name="l-name" class="form-control" value="<?=$this->post['l-name']?>" id="l-name">
+      <label for="acl">Rank</label>
+      <input type="text" name="acl" class="form-control" value="<?=$this->post['acl']?>" id="acl">
     </div>
     <div class="form-group">
       <label for="email">Email</label>

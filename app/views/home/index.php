@@ -1,7 +1,7 @@
 
-<?php $this->setSiteTitle('Home') ?>
+<?php $this->setSiteTitle('Home'); ?>
 
-<?php $this->start('head') ?>
+<?php $this->start('head'); ?>
   <link rel="stylesheet" href="<?=PROOT?>css/home_index.css" media="screen" title="no title" charset="utf-8" >
   <meta content="test /">
 <?php $this->end(); ?>

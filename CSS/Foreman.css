@@ -1,0 +1,122 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #34495e;
+  overflow: hidden; <!-- Hide scroll bars -->
+}
+header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 40px;
+  background: #262626;
+  width: 100%;
+  box-sizing: border-box;
+}
+header .foreman{
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  float: left;
+  font-weight: bold;
+  padding-left: 30px;
+  cursor: default;
+}
+.icon{
+  cursor: pointer;
+  color: #fff;
+  float: right;
+  line-height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+}
+#icon_1{
+  float: left;
+  cursor: default;
+}
+#icon_2{
+  padding-right: 20px;
+}
+a{
+  color: white;
+}
+.box{
+  width: 300px;
+  height: 465px;
+  padding: 20px;
+  background:  #34495e;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: white;
+  border-style: solid;
+  border-radius: 24px;
+}
+
+button{
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  color: #ccc;
+  width: 240px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 24px;
+  transition: 0.6s;
+  overflow: hidden;
+  padding: 10px 0;
+}
+button.btn{
+  background: #185999;
+}
+button:focus{
+  outline: none;
+}
+button::before{
+  content: '';
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  width: 60px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5s;
+  filter: blur(30px);
+  transform: translateX(-130px) skewX(-15deg);
+}
+button::after{
+  content: '';
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 30px;
+  height: 100%;
+  left: 30px;
+  top: 0;
+  opacity: 0;
+  filter: blur(30px);
+  transform: translateX(-100px) scaleX(-15deg);
+}
+button:hover{
+  background: #1e304d;
+  cursor: pointer;
+}
+button.btn:hover{
+  background: #463ccf;
+}
+button:hover::before{
+  transform: translateX(300px) skewX(-15deg);
+  opacity: 0.6;
+  transition: 0.7s;
+}
+button:hover::after{
+  transform: translateX(300px) skewX(-15deg);
+  opacity: 1;
+  transition: 0.7s;
+}

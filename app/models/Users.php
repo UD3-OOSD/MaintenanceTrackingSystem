@@ -18,7 +18,7 @@ class Users extends Model{
       }
       if ($u) {
         foreach ($u as $key => $value) {
-          $this->key = $value;
+          $this->$key = $value;
         }
       }
     }
@@ -38,6 +38,7 @@ class Users extends Model{
       $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
       $this->_db->insert('user_sessions', $fields);
     }
+    return $this->acl;
   }
 
   public function logout(){
@@ -58,7 +59,7 @@ class Users extends Model{
   public function registerNewUser($params){
     $this->assign($params);
     $this->deleted = 0;
-    $this->password = password_hash($this->password,PASSWORD_DEFAULT);
+    #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
     $this->save();
   }
 
@@ -69,7 +70,6 @@ class Users extends Model{
       'conditions' => "user_agent = ? AND session = ?",
       'bind' => [Session::uagent_no_version(),Cookie::get(REMEMBER_ME_COOKIE_NAME)]
     ]);
-    #dnd($userSession);
     if ($userSession->user_id != '') {
       $user = new self((int)$userSession->user_id);
       $user->login();
@@ -89,6 +89,8 @@ class Users extends Model{
 
   public function acls(){
     if (empty($this->acl)) return [];
-    return json_decode($this->acl, true);
+    #return json_decode($this->acl, true);
+
+    return $this->acl;
   }
 }

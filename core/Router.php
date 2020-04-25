@@ -43,6 +43,7 @@
     }
 
     public static function redirect($location){
+      #dnd($location);
       if(!headers_sent()){
         header('Location: '.PROOT.$location);
       }else{
@@ -64,9 +65,12 @@
 
         if (Session::exists(CURRENT_USER_SESSION_NAME)) {
           $current_user_acls[] = "LoggedIn";
-          foreach (currentUser()->acls() as $a) {
-            $current_user_acls[] = $a;
-          }
+          $lis = currentUser()->acls();
+          #dnd($lis);
+          $current_user_acls[] = $lis;
+          #foreach ($lis as $a) {
+          #  $current_user_acls[] = $a;
+          #}
         }
         foreach ($current_user_acls as $level) {
           if(array_key_exists($level,$acl) && array_key_exists($controller_name, $acl[$level])){

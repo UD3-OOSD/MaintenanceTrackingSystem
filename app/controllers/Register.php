@@ -32,16 +32,16 @@ class Register extends Controller{
         #echo $user->password;
         if ($user&& Input::get('password') == $user->password ) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-          $user->login($remember);
-          Router::redirect('');
+          $category = $user->login($remember);
+          Router::redirect(strtolower($category));
+        }else{
+          $validation->addError("There is an error with your username or password.");
         }
-      }else{
-        $validation->addError("There is an error with your username or password.");
       }
     }
-    #$this->view->post = ['username'=> '', 'password'=> ''];
-    $this->view->displayErrors = $validation->displayErrors();
-    $this->view->render('register/login');
+      #$this->view->post = ['username'=> '', 'password'=> ''];
+  $this->view->displayErrors = $validation->displayErrors();
+  $this->view->render('register/login');
   }
 
   public function logoutAction(){
@@ -53,16 +53,16 @@ class Register extends Controller{
 
   public function registerAction(){
     $validation = new Validate();
-    $posted_values = ['f-name' => '', 'l-name'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
+    $posted_values = ['name' => '', 'acl'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
     if ($_POST) {
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
-        'f-name' => [
-          'display' => 'First Name',
+        'name' => [
+          'display' => 'Name',
           'require' => true
         ],
-        'l-name' => [
-          'display' => 'Last Name',
+        'acl' => [
+          'display' => 'acl',
           'require' => true
         ],
         'username' => [

@@ -1,12 +1,21 @@
 {
   "Home" : "home",
-  "Tools" : {
-    "My Tools" : "tools",
-    "Tool 1" : "tools/first",
-    "Tool 2" : "tools/second",
-    "separator" : "",
-    "Tool 3" : "tools/third"
+  "Forman" :{
+    "Home" : "forman",
+    "Required Maintances" : "forman/required",
+    "Accepted Maintances" : "forman/accepted",
+    "Started Maintances" : "forman/started",
+    "Finished Maintances" : "forman/finished",
+    "Closed Maintances" : "forman/closed",
+    "Expired Maintances" : "forman/expired"
   },
+  "Admin" : {
+    "Home" : "admin",
+    "Add new BUS" : "admin/bus_form",
+    "Add new Profile" : "admin/user_form"
+  },
+  "Clerk" : "clerk",
+  "Mechanic" : "mechanic",
   "Google" : "https://www.google.com",
   "PHP Docs" : "http://php.net/manual/en",
   "Login" : "register/login",

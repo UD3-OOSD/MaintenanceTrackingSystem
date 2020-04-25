@@ -9,7 +9,24 @@
     "denied" : {
       "Register" : ["login", "register"]
     },
-    "Register" : ["logout"],
-    "Tools" : ["*"]
+    "Register" : ["logout"]
+  },
+  "Admin" : {
+    "denied" : {},
+    "Admin" : ["*"],
+    "Restricted" : ["*"]
+  },
+  "Forman" : {
+    "denied" : {},
+    "Forman" : ["*"]
+  },
+  "Mechanic" : {
+    "denied" : {},
+    "Mechanic" : ["*"]
+  },
+  "Clerk" : {
+    "denied" : {},
+    "Clerk" : ["*"]
   }
+
 }

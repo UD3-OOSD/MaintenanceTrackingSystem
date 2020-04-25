@@ -48,7 +48,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <?php if(currentUser()): ?>
-          <li><a href="#">Hello <?=currentUser()->key?></li>
+          <li><a href="#">Hello <?=currentUser()->username?></li>
         <?php endif; ?>
 
       </ul>
