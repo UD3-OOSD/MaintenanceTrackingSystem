@@ -59,8 +59,17 @@ class Users extends Model{
   public function registerNewUser($params){
     $this->assign($params);
     $this->deleted = 0;
-    #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
+
+    #$pass = $this->password;
+    #echo($this->password);
+    #echo("<br>");
+
+    $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
+    #echo($this->password);
+    #echo("<br>");
+    #if(password_verify($pass, $this->password)){echo("yessssss");}else{echo("nooooooo");}
     $this->save();
+    #dnd(".");
   }
 
   public static function loginUserFromCookie(){

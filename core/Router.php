@@ -72,14 +72,19 @@
           #  $current_user_acls[] = $a;
           #}
         }
-        foreach ($current_user_acls as $level) {
-          if(array_key_exists($level,$acl) && array_key_exists($controller_name, $acl[$level])){
-            if(in_array($action_name, $acl[$level][$controller_name]) || in_array("*", $acl[$level][$controller_name])){
-              $grantAccess = true;
-              break;
-            }
-          }
-        }
+        if(count($current_user_acls)>1){$current_user_acls=array_slice($current_user_acls,0,count($current_user_acls)-1);}
+                foreach ($current_user_acls as $level) {
+                  if(array_key_exists($level,$acl) && array_key_exists($controller_name, $acl[$level])){
+                  #  echo(gettype($level));
+                  #  echo("<br>");
+                  #  echo($level);
+                  #  echo("<br>");
+                    if(in_array($action_name, $acl[$level][$controller_name]) || in_array("*", $acl[$level][$controller_name])){
+                      $grantAccess = true;
+                      break;
+                    }
+                  }
+                }
 
         foreach ($current_user_acls as $level) {
           $denied = $acl[$level]['denied'];
