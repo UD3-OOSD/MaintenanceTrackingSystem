@@ -1,5 +1,8 @@
 <?php
 
+  print_r($_SERVER);
+  die();
+
   define('DS', DIRECTORY_SEPARATOR);
   define('ROOT', dirname(__FILE__));
 
@@ -23,6 +26,7 @@
 
   #echo $_SERVER['PATH_INFO'];
   $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : [];
+  #dnd($_SERVER['PATH_INFO']);
   #var_dump($url);
   #$db = DB::getInstance();
   #dnd($db);

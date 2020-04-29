@@ -27,7 +27,7 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
-      if ($this->_query = $this->_pdo->prepare($sql)) {
+      if ($this->_query = $this->_pdo->prepare($sql)) {   
         $x =  1;
         if (count($params)) {
           foreach ($params as $param) {
