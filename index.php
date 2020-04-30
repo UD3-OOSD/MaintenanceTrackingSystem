@@ -1,7 +1,5 @@
 <?php
 
-  print_r($_SERVER);
-  die();
 
   define('DS', DIRECTORY_SEPARATOR);
   define('ROOT', dirname(__FILE__));

@@ -8,6 +8,6 @@ class ClosedBus extends Controller implements BusState{
   }
 
   public function delete(){ // or can call directly to Model @avishka.
-    //delete from $bussess.
+    //delete from $bussess with related services but not all. @avishka
   }
 }

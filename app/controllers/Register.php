@@ -30,7 +30,7 @@ class Register extends Controller{
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
-        if ($user&& Input::get('password') == $user->password ) {
+        if ($user&& password_verify(Input::get('password'),$user->password )) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $category = $user->login($remember);
           Router::redirect(strtolower($category));

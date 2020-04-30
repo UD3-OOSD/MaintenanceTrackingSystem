@@ -59,7 +59,7 @@ class Users extends Model{
   public function registerNewUser($params){
     $this->assign($params);
     $this->deleted = 0;
-    #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
+    $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
     $this->save();
   }
 
@@ -88,7 +88,7 @@ class Users extends Model{
   }
 
   public function acls(){
-    if (empty($this->acl)) return [];
+    if (empty($this->acl)) return "";
     #return json_decode($this->acl, true);
 
     return $this->acl;

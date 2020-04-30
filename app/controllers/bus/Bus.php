@@ -2,12 +2,14 @@
 
 class Bus extends Controller{
 
+    //
+    private $mtns ;
     private $bs, $_if = false;
     //and some other attributes of bus .e.g. egine_numer, color....
 
 
     public function __construct(){
-      $this->load_model('bus'); // 'bus' is not sure .
+      $this->load_model('bus'); // 'bus' is not sure .its' Maintainance details as well @avishka.
       $bs = new NewBus();
 
     }
@@ -18,11 +20,6 @@ class Bus extends Controller{
 
     public function setState($st){
       $bs = $st;
-    }
-
-    public function show(){
-      //this will feed the bus data table accoring to it's bus_id.
-
     }
 
     public function getState(){
@@ -36,4 +33,17 @@ class Bus extends Controller{
     public function set_trigger($val){
       $_if = $val;
     }
+
+    public function showData(){
+      //this will feed the bus data table accoring to it's bus_id. @uda
+
+    }
+
+    public function showMtns(){
+      // here feeds $mtns to page @uda.
+    }
+
+
+
+
 }

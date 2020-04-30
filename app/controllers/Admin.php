@@ -41,6 +41,11 @@ class Admin extends Controller{
     $bus->getState()->fitAction($bus,$data);
   }
 
+  public function editLabourAction($lab,$data){
+    $lab->stateChange();
+    $lab->getState()->edit($lab,$data);
+  }
+
   public function deleteBus($bus){
     // jQuery code in here to fade @devin.
     $bus->set_trigger(true);
