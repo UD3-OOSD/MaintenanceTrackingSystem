@@ -11,7 +11,7 @@
   // if url is not defined.
   define('DEFAULT_LAYOUT', 'default'); // this outputs if we doesnt init layout.
 
-  define('PROOT', '/framework-1.0/'); //set to the root of thr live server.
+  define('PROOT', '/framework_1/'); //set to the root of thr live server.
 
 
   define('SITE_TITLE', 'OOSD'); // this is the site title
