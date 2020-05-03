@@ -1,7 +1,6 @@
 <?php
 
 class ClosedBus extends Controller implements BusState{
-  #what is closed bus state scraping of the bus?
   public function stateChange($bus){
     //no idea about state change @devin
     $this->delete();  // like
