@@ -43,6 +43,12 @@ class Bus extends Controller{
       // here feeds $mtns to page @uda.
     }
 
+    #function added by @devin for updating distance if wrong please rectify
+    public function updatedistance(){
+      $bs = new EdittingBus();
+      $this->bs->updateDistance();
+    }
+
 
 
 
