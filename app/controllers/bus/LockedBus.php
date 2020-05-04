@@ -12,6 +12,6 @@ class LockedBus extends Controller implements BusState{
 
   //show method
   public function feed(){
-    
+
   }
 }

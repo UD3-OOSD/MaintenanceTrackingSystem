@@ -25,7 +25,7 @@ class BM extends Model{
     return $this->findFirst(['conditions'=>'vehicle_num = ?', 'bind'=>[$VehicleNum]]);
   }
 
-  
+
 
 
 

@@ -9,7 +9,7 @@ class Bus extends Controller{
 
 
     public function __construct(){
-      $this->load_model('bus'); // 'bus' is not sure .its' Maintainance details as well @avishka.
+      $this->load_model('BM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
       $bs = new NewBus();
 
     }
@@ -45,7 +45,7 @@ class Bus extends Controller{
 
     #function added by @devin for updating distance if wrong please rectify
     public function updatedistance(){
-      $bs = new EdittingBus();
+      $this->stateChange($this);
       $this->bs->updateDistance();
     }
 
