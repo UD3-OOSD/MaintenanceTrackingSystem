@@ -32,11 +32,15 @@ class EdittingBus extends Controller implements BusState{
       ]);
 
       if($validation->passed()){
-        $bus= $this->BMModel->findByVehicleNum($_POST['vehical_num']);
+        $bus= $this->BusMModel->findByVehicleNum($_POST['vehical_num']);
         if($bus){
-          $updated = $_POST['distance'] + $bus->travelled;
-          $fields = ['travelled'=>$updated];
+          $updated_engine_travelled = $_POST['distance'] + $bus->engine_travelled;
+          $updated_tire_travelled = $_POST['distance'] + $bus->tire_travelled;
+          $fields = ['engine_travelled'=>$updated_engine_travelled,
+                     'tire_travelled' => $updated_tire_travelled
+                   ];
           $bus->update($bus->id,$fields);
+            #add the implementation of the checking for service
         }
       }
     }

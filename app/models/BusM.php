@@ -1,6 +1,6 @@
 <?php
 #the bus model
-class BM extends Model{
+class BusM extends Model{
 
 
 
@@ -23,6 +23,12 @@ class BM extends Model{
 
   public function findByVehicleNum($VehicalNum){
     return $this->findFirst(['conditions'=>'vehicle_num = ?', 'bind'=>[$VehicleNum]]);
+  }
+
+  public function registerNewBus($params){
+    $this->assign($params);
+    $this->deleted = 0;
+    $this->save();
   }
 
 
