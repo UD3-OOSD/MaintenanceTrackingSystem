@@ -5,7 +5,7 @@ class BusM extends Model{
 
 
   public function __construct($bus=''){
-    $table='bus_details';
+    $table='bustable';
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {

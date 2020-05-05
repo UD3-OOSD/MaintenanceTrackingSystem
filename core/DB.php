@@ -27,7 +27,7 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
-      if ($this->_query = $this->_pdo->prepare($sql)) {   
+      if ($this->_query = $this->_pdo->prepare($sql)) {
         $x =  1;
         if (count($params)) {
           foreach ($params as $param) {
@@ -141,6 +141,13 @@
       }
       return false;
       #$sql = "UPDATE contact SET f-name = 'Antonie' WHERE id = 3";
+    }
+
+    #not done nipun please check
+    public function LeftJoin($tables,$keys,$params){
+      if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
+        $sql = "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
+      }
     }
 
     public function delete($table, $id){
