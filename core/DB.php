@@ -105,6 +105,22 @@
       return false;
     }
 
+    public function LeftJoin($tables,$keys,$params){
+      $paramstring='';
+      $values=[];
+
+      foreach($params as $param){
+        $paramstring .= $param;
+      }
+      echo($paramstring);
+      echo '<br>';
+      if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
+        $sql = "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
+        echo($sql);
+        echo('<br>');
+      }
+    }
+
     public function insert($table, $fields = []){
       $fieldString = '';
       $valueString = '';
@@ -144,11 +160,7 @@
     }
 
     #not done nipun please check
-    public function LeftJoin($tables,$keys,$params){
-      if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
-        $sql = "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
-      }
-    }
+
 
     public function delete($table, $id){
       $sql = "DELETE FROM {$table} WHERE id = {$id}";

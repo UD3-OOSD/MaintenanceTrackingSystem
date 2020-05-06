@@ -30,10 +30,18 @@ class Register extends Controller{
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
+
+        $tables=['user_sessions','users'];
+        $keys = ['user_id','id'];
+        $params = ['id','email','session','user_agent'];
+
+        $user->_db->LeftJoin($tables,$keys,$params);
+
+
         if ($user&& password_verify(Input::get('password'),$user->password )) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $category = $user->login($remember);
-          Router::redirect(strtolower($category));
+          #Router::redirect(strtolower($category));
         }else{
           $validation->addError("There is an error with your username or password.");
         }
