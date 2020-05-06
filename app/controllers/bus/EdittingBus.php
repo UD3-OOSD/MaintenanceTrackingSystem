@@ -2,6 +2,8 @@
 
 class EdittingBus extends Controller implements BusState{
 
+  private $ServiceCheckList;
+
   public function stateChange($bus){
     $bus->setState(new LockedBus());
   }
@@ -18,13 +20,15 @@ class EdittingBus extends Controller implements BusState{
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
     $validation = new Validate();
-    if(isset($_POST['distance']) && isset($_POST['vehical_num'])){
+    if(isset($_POST['Distance']) && isset($_POST['BusNumber'])){
       $validation->check($_POST,[
-        'vehical_num' => [
-          'display' => 'Vehical Number',
-          'require' => true
+          'BusNumber' => [
+            'display' => 'Vehicle Number',
+            'require' => true.
+            'unique' => 'bustable'
+            'min' => 8  #check
         ],
-        'distance' =>[
+        'Distance' =>[
           'display' => 'Distance',
           'require' => true,
           'is_numeric' => true
@@ -32,15 +36,15 @@ class EdittingBus extends Controller implements BusState{
       ]);
 
       if($validation->passed()){
-        $bus= $this->BusMModel->findByVehicleNum($_POST['vehical_num']);
+        $bus= $this->BusMModel->findByBusNumber($_POST['BusNumber']);
         if($bus){
-          $updated_engine_travelled = $_POST['distance'] + $bus->engine_travelled;
-          $updated_tire_travelled = $_POST['distance'] + $bus->tire_travelled;
-          $fields = ['engine_travelled'=>$updated_engine_travelled,
-                     'tire_travelled' => $updated_tire_travelled
-                   ];
+          $updatedDistanceTravelled = $_POST['Distance'] + $bus->DistanceTravelled;
+          $fields = ['DistanceTravelled'=>$updatedDistanceTravelled];
           $bus->update($bus->id,$fields);
             #add the implementation of the checking for service
+
+          $this->populatechecklist($bus->id);
+          $this->check();
         }
       }
     }
@@ -61,6 +65,14 @@ class EdittingBus extends Controller implements BusState{
   public function check($data){
     //check for availible all services - @devin , @avishka
     // return arr[]
+    foreach($this->ServiceCheckList as $key => $value){
+
+    }
+  }
+
+  private function populatechecklist($id){
+    $this->ServiceCheckList= $this->BusMModel->populatechecklist($id);
+
   }
 
   public function addService($data = []){

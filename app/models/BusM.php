@@ -9,31 +9,36 @@ class BusM extends Model{
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
-        $u = $this->_db->findFirst('users', ['conditions'=>'id = ?', 'bind'=>[$user]]);
+        $b = $this->_db->findFirst('bustable', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);
       }else{
-        $u = $this->_db->findFirst('users', ['conditions'=>'vehicle_num = ?', 'bind'=>[$user]]);
+        $b = $this->_db->findFirst('bustable', ['conditions'=>'BusNumber = ?', 'bind'=>[$bus]]);
       }
-      if ($u) {
-        foreach ($u as $key => $value) {
+      if ($b) {
+        foreach ($b as $key => $value) {
           $this->$key = $value;
         }
       }
     }
   }
 
-  public function findByVehicleNum($VehicalNum){
-    return $this->findFirst(['conditions'=>'vehicle_num = ?', 'bind'=>[$VehicleNum]]);
+  public function findByBusNumber($BusNumber){
+    return $this->findFirst(['conditions'=>'BusNumber = ?', 'bind'=>[$BusNumber]]);
   }
 
   public function registerNewBus($params){
     $this->assign($params);
+    $this->DistaceTravelled = 0;
     $this->deleted = 0;
     $this->save();
   }
 
-
-
-
-
-
+  public function populatechecklist($id){
+    $tables=['bustable','buscategory'];
+    $keys = ['BusCategory','BusType'];
+    $params = ['BusId','*'];
+    $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
+    unset($result['BusId']);
+    unset($result['BusType']);
+    return($result);
+  }
 }

@@ -12,30 +12,34 @@ class NewBus extends Controller implements BusState{
 
   public function fillAction(){
     $validation = new Validate();
-    $posted_values = ['vehicle_num' => '', 'engine_num' => '', 'bus_type' => '' ]
+    $posted_values = ['BusNumber' => '', 'EngineNumber' => '', 'BusCategory' => '' , 'RegistrationDate' => '']
     if(isset($_POST['vehicle_num'])){
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
-        'vehicle_num' => [
+        'BusNumber' => [
           'display' => 'Vehicle Number',
           'require' => true.
-          'unique' => 'bus_details'
-          'min' => 6  #check
+          'unique' => 'bustable'
+          'min' => 8  #check
         ],
-        'engine_num' => [
+        'EngineNumber' => [
           'display' => 'Engine number',
           'require' => true,
-          'unique' => 'bus_details',
+          'unique' => 'bustable',
           'min' => 6,
         ],
-        'bus_type' => [
-          'display' => 'Bus Type',
+        'BusCategory' => [
+          'display' => 'Bus Make',
           'require' => true,
+          'unique' => 'buscategory'
+        ],
+        'RegistrationDate' => [
+          'display' => 'Registration Date',
+          'require' => true
         ]
       ]);
 
       if ($validation->passed()){
-        $this->BusMaintainanceDistances($_POST['bus_type']);
         $newBus = new BusM();
         $newBus->registerNewBus($_POST);
         Router::redirect('');  #will have to change
@@ -46,27 +50,5 @@ class NewBus extends Controller implements BusState{
   }
 
   private function BusMaintainanceDistances($type){
-    if(isset($type)){
-      $details= [[
-        'engine_maintanance'=> 5000,
-        'engine_travelled' => 0,
-        'tire_maintanance' => 2000,
-        'tire_travelled' => 0
-      ],[
-        'engine_maintanance'=> 7000,
-        'engine_travelled' => 0,
-        'tire_maintanance' => 5000,
-        'tire_travelled' => 0
-      ],[
-        'engine_maintanance'=> 1000,
-        'engine_travelled' => 0,
-        'tire_maintanance' => 7000,
-        'tire_travelled' => 0]
-    ];
-      foreach($details[$type] as $key => $value){
-        $_POST[$key] = $value ;
-      }
-      #method to assign the BusMainTanance Distance
-    }
-  }
+    #not needed right now 
 }

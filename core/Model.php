@@ -34,6 +34,49 @@ class Model{
     }
     return $results;
   }
+  public function LeftJoin($tables,$keys,$params='*'){
+    $this->_db->LeftJoin($tables,$keys,$params);
+    $rows=$this->_db->results();
+    return($rows);
+    #gives me a 2D array for now can make object but cant use populateObject since cant make object of
+    #this model
+  }
+
+  public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
+    $rows = $this->LeftJoin($tables,$keys,$params);
+    $ObjectArray = [];
+    foreach($rows as $row){
+      foreach($id as $key_id => $value_id){
+        if($row[$key_id]==$value){
+          return($row);
+        }
+      }
+    }
+    return false;
+  }
+
+  public function RightJoin($tables,$keys,$params='*'){
+    $this->_db->RightJoin($tables,$keys,$params);
+    $rows=$this->_db->results();
+    $jointObjects = [];
+    foreach($rows as $row){
+      $Object = new stdClass();
+      foreach($row as $key => $value){
+        $Object->$key = $value;
+      }
+      array_push($jointObjects,$Object);
+    }
+    return($jointObjects);
+    #gives me a 2D array for now can make object but cant use populateObject since cant make object of
+    #this model
+  }
+
+  public function RightJoinFirst($tables,$keys,$params='*'){
+    $rows = $this->RightJoin($tables,$keys,$params);
+    return($rows[0]);
+  }
+
+
 
   public function findFirst($params = []){
     $resultsQuery = $this->_db->findFirst($this->_table, $params);
@@ -65,7 +108,7 @@ class Model{
 
   public function insert($fields){
     if(empty($fields))  return false;
-    echo "insert";
+    #echo "insert";
     return $this->_db->insert($this->_table, $fields);
   }
 

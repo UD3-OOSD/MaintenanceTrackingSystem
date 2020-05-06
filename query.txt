@@ -1,0 +1,8 @@
+SELECT
+    bustable.BusId,
+    buscategory.*
+FROM
+    bustable
+LEFT JOIN buscategory ON bustable.BusCategory = buscategory.BusType;
+
+#for service checable joining BusM -> populatechecklist
