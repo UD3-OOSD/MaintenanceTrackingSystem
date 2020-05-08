@@ -11,8 +11,8 @@
   },
   "Admin" : {
     "Home" : "admin",
-    "Add new BUS" : "admin/bus_form",
-    "Add new Profile" : "admin/user_form"
+    "Add new BUS" : "admin/addNewBus",
+    "Add new Profile" : "admin/addNewLabour"
   },
   "Clerk" : "clerk",
   "Mechanic" : "mechanic",

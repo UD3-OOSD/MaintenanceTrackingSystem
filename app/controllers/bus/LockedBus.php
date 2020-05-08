@@ -4,7 +4,7 @@ class LockedBus extends Controller implements BusState{
 
   public function stateChange($bus){
     if($bus->get_trigger()){
-      $bus->setState(new LockedBus());
+      $bus->setState(new EdittingBus());
     }else{
       $bus->setState(new ClosedBus());
     }
@@ -12,6 +12,6 @@ class LockedBus extends Controller implements BusState{
 
   //show method
   public function feed(){
-    
+
   }
 }
