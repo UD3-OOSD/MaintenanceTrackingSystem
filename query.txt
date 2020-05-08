@@ -6,3 +6,13 @@ FROM
 LEFT JOIN buscategory ON bustable.BusCategory = buscategory.BusType;
 
 #for service checable joining BusM -> populatechecklist
+
+
+
+SELECT
+    busmileage.*
+FROM
+    bustable
+LEFT JOIN busmileage ON busmileage.BusId = bustable.BusId;
+
+#for busmileage joining BusM -> populatemileageobject
