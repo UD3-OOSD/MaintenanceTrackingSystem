@@ -10,7 +10,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3">
-      <img id="c001" class="mx-auto d-block" width="90" src="app/views/images/Emblem_of_Sri_Lanka.png">
+      <img id="c001" class="mx-auto d-block" width="90" src="<?=PROOT?>app/views/images/Emblem_of_Sri_Lanka.png">
       <!-- Original => width="172" height="245" -->
     </div>
     <div id="c002" class="col-sm-6 col-md-6 col-lg-6">
@@ -19,7 +19,7 @@
       <h3 class="mx-auto d-block"> <font size = "5"> இலங்கை போக்குவரத்து சபை - ஹொரானா டிப்போ</h3>
     </div>
     <div class="col-sm-3 col-md-3 col-lg-3">
-      <img id="c003" class="mx-auto d-block" width="200" height="120" src="app/views/images/sltb-sri-lanka-transport-board-logo-F90A8F0DBE-seeklogo.png">
+      <img id="c003" class="mx-auto d-block" width="200" height="120" src="<?=PROOT?>app/views/images/sltb-sri-lanka-transport-board-logo-F90A8F0DBE-seeklogo.png">
       <!-- Original => width="300" height="151" -->
     </div>
   </div>

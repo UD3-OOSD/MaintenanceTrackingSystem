@@ -30,6 +30,16 @@ class Register extends Controller{
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
+
+        #$tables=['user_sessions','users'];
+        #$keys = ['user_id','UserId'];
+        #$params = ['UserId','email','session','user_agent'];
+
+        #$results=$user->LeftJoinFirst($tables,$keys);
+        #echo($results->UserId);
+        #echo(implode('    |||',(array)$results));
+        #dnd('..............................');
+
         if ($user&& password_verify(Input::get('password'),$user->password )) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $category = $user->login($remember);

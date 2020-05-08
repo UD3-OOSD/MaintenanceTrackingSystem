@@ -27,7 +27,7 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
-      if ($this->_query = $this->_pdo->prepare($sql)) {   
+      if ($this->_query = $this->_pdo->prepare($sql)) {
         $x =  1;
         if (count($params)) {
           foreach ($params as $param) {
@@ -105,6 +105,58 @@
       return false;
     }
 
+    public function LeftJoin($tables,$keys,$params){
+      $paramstring='';
+      $values=[];
+
+      if($params!='*'){
+        foreach($params as $param){
+          $paramstring .= $param.', ';
+        }
+        $paramstring = substr($paramstring,0,strlen($paramstring)-2);
+      }
+      else{
+          $paramstring=$params;
+      }
+      #echo($paramstring);
+      #echo '<br>';
+      if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
+        $sql =  "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
+        #echo($sql);
+        #echo('<br>');
+        $prepared=$this->_pdo->prepare($sql);
+        $prepared->execute();
+        $this->_result=$prepared->fetchALL(PDO::FETCH_ASSOC);
+        return true;
+      }
+      return false;
+    }
+
+    public function RightJoin($tables,$keys,$params){
+      $paramstring='';
+      $values=[];
+
+      if($params!='*'){
+        foreach($params as $param){
+          $paramstring .= $param.', ';
+        }
+        $paramstring = substr($paramstring,0,strlen($paramstring)-2);
+      }
+      #echo($paramstring);
+      #echo '<br>';
+      if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
+        $sql =  "SELECT {$paramstring}  FROM {$tables[0]} Right JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
+        echo($sql);
+        #echo('<br>');
+        $prepared=$this->_pdo->prepare($sql);
+        $prepared->execute();
+        $this->_result=$prepared->fetchALL(PDO::FETCH_ASSOC);
+        return true;
+      }
+      return false;
+    }
+
+
     public function insert($table, $fields = []){
       $fieldString = '';
       $valueString = '';
@@ -142,6 +194,9 @@
       return false;
       #$sql = "UPDATE contact SET f-name = 'Antonie' WHERE id = 3";
     }
+
+    #not done nipun please check
+
 
     public function delete($table, $id){
       $sql = "DELETE FROM {$table} WHERE id = {$id}";

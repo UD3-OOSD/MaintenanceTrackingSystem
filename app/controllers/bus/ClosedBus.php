@@ -1,7 +1,6 @@
 <?php
 
 class ClosedBus extends Controller implements BusState{
-
   public function stateChange($bus){
     //no idea about state change @devin
     $this->delete();  // like
