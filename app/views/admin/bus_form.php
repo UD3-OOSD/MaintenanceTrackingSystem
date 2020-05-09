@@ -71,7 +71,7 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>
                         <div class="col-sm-offset-1 col-sm-2">
-                            <a href="BusReg.html"><button type="button" class="btn btn-default">Refresh</button></a>
+                            <a href=""><button type="button" class="btn btn-default">Refresh</button></a>
                         </div>
                     </div>
                 </form>

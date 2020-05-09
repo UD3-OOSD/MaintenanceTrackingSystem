@@ -30,7 +30,11 @@ class Forman extends Controller{
     $this->view->render('forman/accepted');
   }
 
-  public function close
+  public function showAction($id){
+    //fetch data by model on $id @devin. => $data;
+
+  }
+
 
   // show tables @nipun.
 

@@ -65,6 +65,11 @@ class EdittingBus extends Controller implements BusState{
     //}
   }
 
+  public function show($id){
+
+
+  }
+
   public function check($data){
     //check for availible all services - @devin , @avishka
     // return arr[]
