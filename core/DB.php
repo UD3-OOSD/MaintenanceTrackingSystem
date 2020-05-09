@@ -25,6 +25,7 @@
       return self::$_instance;
     }
 
+
     public function query($sql,$params=[]){
       $this->_error = false;
       if ($this->_query = $this->_pdo->prepare($sql)) {
@@ -105,6 +106,21 @@
       return false;
     }
 
+    public function getColumnNames($table){
+      $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{$table}'";
+      #echo($sql);
+      #echo('<br>');
+      if (isset($table)) {
+        $this->runSQL($sql);
+        #dnd($fieldString);
+        #$this->query($sql);
+        return true;
+      }
+      #dnd($valueString);
+      return false;
+    }
+
+
     public function LeftJoin($tables,$keys,$params){
       $paramstring='';
       $values=[];
@@ -124,12 +140,16 @@
         $sql =  "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
         #echo($sql);
         #echo('<br>');
-        $prepared=$this->_pdo->prepare($sql);
-        $prepared->execute();
-        $this->_result=$prepared->fetchALL(PDO::FETCH_ASSOC);
+        $this->runSQL($sql);
         return true;
       }
       return false;
+    }
+
+    public function runSQL($sql){
+      $prepared=$this->_pdo->prepare($sql);
+      $prepared->execute();
+      $this->_result=$prepared->fetchALL(PDO::FETCH_ASSOC);
     }
 
     public function RightJoin($tables,$keys,$params){

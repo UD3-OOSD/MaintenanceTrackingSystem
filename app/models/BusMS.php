@@ -36,6 +36,7 @@ class BusM extends Model{
     $tables=['bustable','buscategory'];
     $keys = ['BusCategory','BusType'];
     $params = ['BusId','*'];
+    $id = ['BusId' => $id];
     $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
     unset($result['BusId']);
     unset($result['BusType']);

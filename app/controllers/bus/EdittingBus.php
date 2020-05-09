@@ -38,13 +38,9 @@ class EdittingBus extends Controller implements BusState{
       if($validation->passed()){
         $bus= $this->BusMModel->findByBusNumber($_POST['BusNumber']);
         if($bus){
-          $updatedDistanceTravelled = $_POST['Distance'] + $bus->DistanceTravelled;
-          $fields = ['DistanceTravelled'=>$updatedDistanceTravelled];
-          $bus->update($bus->id,$fields);
             #add the implementation of the checking for service
-
-          $this->populatechecklist($bus->id);
-          $this->check();
+          $$this->populatechecklist($bus->id);
+          $this->check($_POST['Distance']);
         }
       }
     }
@@ -62,17 +58,22 @@ class EdittingBus extends Controller implements BusState{
     //}
   }
 
-  public function check($data){
+  public function check($distance){
     //check for availible all services - @devin , @avishka
     // return arr[]
     foreach($this->ServiceCheckList as $key => $value){
+      if(!($key=='TotalDistanceTravelled')){
 
+      }
     }
   }
 
   private function populatechecklist($id){
     $this->ServiceCheckList= $this->BusMModel->populatechecklist($id);
 
+  }
+  public function getDistanceTravelled(){
+    
   }
 
   public function addService($data = []){

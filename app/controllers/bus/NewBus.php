@@ -50,5 +50,5 @@ class NewBus extends Controller implements BusState{
   }
 
   private function BusMaintainanceDistances($type){
-    #not needed right now 
+    #not needed right now
 }

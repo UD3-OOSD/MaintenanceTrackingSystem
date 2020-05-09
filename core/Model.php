@@ -42,15 +42,34 @@ class Model{
     #this model
   }
 
+  public function getColumnNames($table){
+    $this->_db->getColumnNames($table);
+    $rows = $this->_db->results();
+    $values=[];
+    foreach($rows as $row){
+      array_push($values,$row['COLUMN_NAME']);
+    }
+    return($values);
+  }
+
   public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
     $rows = $this->LeftJoin($tables,$keys,$params);
     $ObjectArray = [];
     foreach($rows as $row){
-      foreach($id as $key_id => $value_id){
-        if($row[$key_id]==$value){
-          return($row);
+      #echo($row['UserId']);
+      if(!($id==[])){
+        foreach($id as $key_id => $value_id){
+          $key_id = "{$key_id}";
+          #echo($key_id);
+          #echo($value_id);
+          #echo($row[$key_id]);
+          #echo($row['UserId']);
+          if($row[$key_id]==$value_id){
+            return($row);
+          }
         }
       }
+      return($rows);
     }
     return false;
   }

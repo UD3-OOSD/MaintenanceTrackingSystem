@@ -16,3 +16,10 @@ FROM
 LEFT JOIN busmileage ON busmileage.BusId = bustable.BusId;
 
 #for busmileage joining BusM -> populatemileageobject
+
+
+#getting column details
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'bustable'

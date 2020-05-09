@@ -31,13 +31,15 @@ class Register extends Controller{
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
 
-        #$tables=['user_sessions','users'];
-        #$keys = ['user_id','UserId'];
-        #$params = ['UserId','email','session','user_agent'];
+        $tables=['user_sessions','users'];
+        $keys = ['user_id','UserId'];
+        $params = ['UserId','email','session','user_agent'];
 
-        #$results=$user->LeftJoinFirst($tables,$keys);
+        #$results=$user->getColumnNames('buscategory');
+        #$results=$user->LeftJoinSpecific($tables,$keys,$params,['UserId' => $user->UserId]);
         #echo($results->UserId);
-        #echo(implode('    |||',(array)$results));
+        #echo(implode('    |||',$results));
+        #echo($results);
         #dnd('..............................');
 
         if ($user&& password_verify(Input::get('password'),$user->password )) {
