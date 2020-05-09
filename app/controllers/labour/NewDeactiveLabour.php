@@ -1,17 +1,20 @@
 <?php
 
+require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
+
+
 class NewDeactiveLabour extends Controller implements LabourState{
 
-  public function __construct($lab, $data){
-    $this->fill($lab,$data);
+  public function __construct(){
+    $this->fill();
   }
 
   public function stateChange($lab){
     $lab->setState(new NewActiveLabour());
   }
 
-  public function fill($lab,$data){
-    $lab->setAttr($data);
+  public function fill(){
+    #$lab->setAttr($data);
   }
 
   public function send_mail($lab){
@@ -29,7 +32,7 @@ class NewDeactiveLabour extends Controller implements LabourState{
     //else
     $this->stateChange($lab);
     $lab->getState()->edit();
-    
+
   }
 
   public function checkValidation($id){

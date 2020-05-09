@@ -1,5 +1,8 @@
 <?php
 
+require_once(ROOT.DS.'app/controllers/bus/Bus.php');
+require_once(ROOT.DS.'app/controllers/labour/Labour.php');
+
 class Admin extends Controller{
 
   private $busses , $labours; // just assume or can to set seperate arrays to diff states. @avishka
@@ -27,13 +30,14 @@ class Admin extends Controller{
   public function addNewBusAction(){  // this is call by button in the index page of Admin. @uda
     $this->view->render('admin/bus_form');
     // here calls to the bus->stateChange.
-    $bus = new Bus();    // ?$busses UPDATE
-
+     $bus = new Bus();    // ?$busses UPDATE
 
   }
 
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda
     $this->view->render('admin/user_form');
+
+    $lab = new Labour();
   }
 
   public function editBusAction($bus,$data){  // call by button press @uda

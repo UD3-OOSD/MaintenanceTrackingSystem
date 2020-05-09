@@ -1,5 +1,8 @@
 <?php
 
+require_once(ROOT.DS.'app/controllers/bus/BusState.php');
+
+
 class EdittingBus extends Controller implements BusState{
 
   private $ServiceCheckList;
@@ -24,8 +27,8 @@ class EdittingBus extends Controller implements BusState{
       $validation->check($_POST,[
           'BusNumber' => [
             'display' => 'Vehicle Number',
-            'require' => true.
-            'unique' => 'bustable'
+            'require' => true,
+            'unique' => 'bustable',
             'min' => 8  #check
         ],
         'Distance' =>[
@@ -58,7 +61,12 @@ class EdittingBus extends Controller implements BusState{
     //}
   }
 
-  public function check($distance){
+  public function show($id){
+
+
+  }
+
+  public function check($data){
     //check for availible all services - @devin , @avishka
     // return arr[]
     foreach($this->ServiceCheckList as $key => $value){
@@ -73,7 +81,7 @@ class EdittingBus extends Controller implements BusState{
 
   }
   public function getDistanceTravelled(){
-    
+
   }
 
   public function addService($data = []){
