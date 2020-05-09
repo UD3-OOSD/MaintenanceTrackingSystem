@@ -5,5 +5,5 @@
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
-  <h2 class="text-center  red">Closed_Maintanance</h2>
+<div class="col-md-6"><?=$this->table_1?></div>
 <?php $this->end() ?>

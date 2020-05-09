@@ -1,7 +1,7 @@
 <?php
 
   $menu = Router::getMenu('menu_acl');
-  print_r($menu);
+  #print_r($menu);
   $currentPage = currentPage();
   #dnd($currentPage);
  ?>

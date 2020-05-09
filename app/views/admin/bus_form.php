@@ -1,7 +1,7 @@
 <?php $this->setSiteTitle('Bus Registration Form') ?>
 
 <?php $this->start('head') ?>
-
+<link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>

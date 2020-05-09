@@ -1,5 +1,8 @@
 <?php
 
+require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
+
+
 class NewBus extends Controller implements BusState{
 
   public function __construct(){
@@ -12,14 +15,14 @@ class NewBus extends Controller implements BusState{
 
   public function fillAction(){
     $validation = new Validate();
-    $posted_values = ['BusNumber' => '', 'EngineNumber' => '', 'BusCategory' => '' , 'RegistrationDate' => '']
+    $posted_values = ['BusNumber' => '', 'EngineNumber' => '', 'BusCategory' => '' , 'RegistrationDate' => ''];
     if(isset($_POST['vehicle_num'])){
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
         'BusNumber' => [
           'display' => 'Vehicle Number',
-          'require' => true.
-          'unique' => 'bustable'
+          'require' => true,
+          'unique' => 'bustable',
           'min' => 8  #check
         ],
         'EngineNumber' => [
@@ -40,9 +43,9 @@ class NewBus extends Controller implements BusState{
       ]);
 
       if ($validation->passed()){
-        $newBus = new BusM();
-        $newBus->registerNewBus($_POST);
-        Router::redirect('');  #will have to change
+        $this->load_model('BusM');
+        $this->BusMModel->registerNewBus($_POST);
+        Router::redirect('admin');  #will have to change
       }
 
     }
@@ -50,5 +53,6 @@ class NewBus extends Controller implements BusState{
   }
 
   private function BusMaintainanceDistances($type){
-    #not needed right now 
+    #not needed right now
+  }
 }

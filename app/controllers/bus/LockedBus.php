@@ -1,5 +1,8 @@
 <?php
 
+require_once(ROOT.DS.'app/controllers/bus/BusState.php');
+
+
 class LockedBus extends Controller implements BusState{
 
   public function stateChange($bus){

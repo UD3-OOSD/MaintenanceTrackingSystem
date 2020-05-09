@@ -31,3 +31,49 @@ function currentPage(){
   }
   return $currentPage;
 }
+
+function displayplaintable($heads,$list){
+  $html = '<table id="t1" class="content-table">';
+    $html.='<thead>';
+      $html.='<tr>';
+      foreach ($heads as $head) {
+        $html.= '<th>'.$head.'</th>';
+      };
+      $html.='</tr>';
+    $html.='</thead>';
+    $html.='<tbody>';
+    foreach ($list as $k){
+        $html.='<tr>';
+        foreach ($k as $val) {
+          $html.='<td>'.$val.'</td>';
+        }
+        $html.='</tr>';
+    }
+    $html.='</tbody>';
+  $html.='</table>';
+
+  return $html;
+}
+
+function displaylinkedtable($heads,$list,$links){
+  $html = '<table id="t1" class="content-table">';
+    $html.='<thead>';
+      $html.='<tr>';
+      foreach ($heads as $head) {
+        $html.= '<th>'.$head.'</th>';
+      };
+      $html.='</tr>';
+    $html.='</thead>';
+    $html.='<tbody>';
+    foreach ($list as $ind=> $k){
+        $html.='<tr>';
+        foreach ($k as $val) {
+          $html.='<td><a href = '.$links[$ind].'>'.$val.'</a></td>';
+        }
+        $html.='</tr>';
+    }
+    $html.='</tbody>';
+  $html.='</table>';
+
+  return $html;
+}
