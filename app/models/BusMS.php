@@ -1,6 +1,6 @@
 <?php
 #the bus model
-class BusM extends Model{
+class BusMS extends Model{
 
 
 
@@ -32,14 +32,4 @@ class BusM extends Model{
     $this->save();
   }
 
-  public function populatechecklist($id){
-    $tables=['bustable','buscategory'];
-    $keys = ['BusCategory','BusType'];
-    $params = ['BusId','*'];
-    $id = ['BusId' => $id];
-    $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
-    unset($result['BusId']);
-    unset($result['BusType']);
-    return($result);
-  }
 }

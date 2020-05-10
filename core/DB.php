@@ -249,4 +249,93 @@
     public function error(){
       return $this->_error;
     }
+
+
+
+
+
+
+
+
+
+
+    #return array functions
+    public function queryArray($sql,$params=[]){
+      $this->_error = false;
+      if ($this->_query = $this->_pdo->prepare($sql)) {
+        $x =  1;
+        if (count($params)) {
+          foreach ($params as $param) {
+            $this->_query->bindValue($x, $param);
+            $x++;
+          }
+        }
+
+        if ($this->_query->execute()) {
+          $this->_result = $this->_query->fetchAll(PDO::FETCH_ASSOC);
+          $this->_count = $this->_query->rowCount();
+          $this->_lastInsertID = $this->_pdo->lastInsertId();
+        }else{
+          $this->_error = true;
+        }
+      }
+      return $this;
+    }
+
+    protected function _readArray($table, $params = []){
+      $conditionString = '';
+      $bind = [];
+      $order = '';
+      $limit = '';
+
+      //conditions
+      if (isset($params['conditions'])) {
+        if (is_array($params['conditions'])) {
+          foreach ($params['conditions'] as $condition) {
+            $condition .= ' '.$condition.' AND';
+          }
+          $conditionString = trim($conditionString);
+          $conditionString = rtrim($conditionString,' AND');
+        }else{
+          $conditionString = $params['conditions'];
+
+        if($conditionString != ''){
+          $conditionString = ' Where '.$conditionString;
+        }
+      }
+    }
+      //bind
+      if(array_key_exists('bind', $params)){
+        $bind = $params['bind'];
+      }
+      //order
+      if(array_key_exists('order', $params)){
+        $roder = 'ORDER BY'.$params['order'];
+      }
+
+      //limit
+      if(array_key_exists('limit', $params)){
+        $limit = ' LIMIT '.$params['limit'];
+      }
+      $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
+      if($this->queryArray($sql, $bind)){
+          if(!count($this->_result)) return false;
+          return true;
+      }
+      return false;
+    }
+
+    public function findArray($table, $params = []){
+      if($this->_readArray($table, $params)){
+        return $this->results();
+      }
+      return false;
+    }
+
+    public function findFirstArray($table, $params=[]){
+      if($this->_readArray($table, $params)){
+        return $this->firstArray();
+      }
+      return false;
+    }
   }

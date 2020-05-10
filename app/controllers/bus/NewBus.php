@@ -7,6 +7,7 @@ class NewBus extends Controller implements BusState{
 
   public function __construct(){
     $this->fillAction();
+    $this->load_model('BusMS');
   }
 
   public function stateChange($bus){
@@ -44,7 +45,7 @@ class NewBus extends Controller implements BusState{
 
       if ($validation->passed()){
         $this->load_model('BusM');
-        $this->BusMModel->registerNewBus($_POST);
+        $this->BusMSModel->registerNewBus($_POST);
         Router::redirect('admin');  #will have to change
       }
 
@@ -54,8 +55,7 @@ class NewBus extends Controller implements BusState{
 
   private function BusMaintainanceDistances($type){
     #not needed right now
-<<<<<<< HEAD
-=======
+
+
   }
->>>>>>> ed406f1ec0aa4569ce583d8b5315b8ad9049c01c
 }

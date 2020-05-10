@@ -23,3 +23,6 @@ LEFT JOIN busmileage ON busmileage.BusId = bustable.BusId;
 SELECT COLUMN_NAME
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = N'bustable'
+
+
+ SELECT * FROM `bustable` WHERE BusCategory='Leyland'

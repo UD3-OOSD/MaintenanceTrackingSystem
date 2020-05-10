@@ -7,6 +7,10 @@ class EdittingBus extends Controller implements BusState{
 
   private $ServiceCheckList;
 
+  public function __construct(){
+    $this->load_model('BusME');
+  }
+
   public function stateChange($bus){
     $bus->setState(new LockedBus());
   }
@@ -39,11 +43,12 @@ class EdittingBus extends Controller implements BusState{
       ]);
 
       if($validation->passed()){
-        $bus= $this->BusMModel->findByBusNumber($_POST['BusNumber']);
+        $bus= $this->BusMEModel->findByBusNumber($_POST['BusNumber']);
         if($bus){
             #add the implementation of the checking for service
-          $$this->populatechecklist($bus->id);
-          $this->check($_POST['Distance']);
+          $this->populatechecklist($bus->id);
+          $this->check($_POST['Distance'],$bus);
+          $bus->save();
         }
       }
     }
@@ -62,26 +67,28 @@ class EdittingBus extends Controller implements BusState{
   }
 
   public function show($id){
-
+    #what does show do
 
   }
 
-  public function check($data){
+  public function check($distance,$bus){
     //check for availible all services - @devin , @avishka
     // return arr[]
     foreach($this->ServiceCheckList as $key => $value){
-      if(!($key=='TotalDistanceTravelled')){
-
+      #please check what to do when $value is null(dont need to check the service for this bus
+      #and new service addition)
+      if(!($key=='TotalDistanceTravelled') && isset($value)){
+        $UpdatedDistance = $bus->{$key} + $distance;
+        $bus->{$key} = $UpdatedDistance;
+        if($UpdatedDistance >= $value){
+          #add service
+        }
       }
     }
   }
 
   private function populatechecklist($id){
-    $this->ServiceCheckList= $this->BusMModel->populatechecklist($id);
-
-  }
-  public function getDistanceTravelled(){
-
+    $this->ServiceCheckList= $this->BusMEModel->populatechecklist($id);
   }
 
   public function addService($data = []){
@@ -90,6 +97,8 @@ class EdittingBus extends Controller implements BusState{
     // but forman send empty request @uda , @devin
 
     // update db @avishka.
+
+
   }
 
 
