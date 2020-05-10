@@ -42,15 +42,7 @@ class Model{
     #this model
   }
 
-  public function getColumnNames($table){
-    $this->_db->getColumnNames($table);
-    $rows = $this->_db->results();
-    $values=[];
-    foreach($rows as $row){
-      array_push($values,$row['COLUMN_NAME']);
-    }
-    return($values);
-  }
+  
 
   public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
     $rows = $this->LeftJoin($tables,$keys,$params);
