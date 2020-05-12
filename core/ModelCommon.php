@@ -32,4 +32,9 @@ class ModelCommon{
     }
     return($values);
   }
+
+  public static function ObjectTOArray($obj){
+    $array = json_decode(json_encode($object), true);
+    return($array);
+  }
 }
