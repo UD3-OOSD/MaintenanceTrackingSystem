@@ -6,5 +6,4 @@ interface BusState{
   public function updateDistance();
   public function show($id);
 
-
 }

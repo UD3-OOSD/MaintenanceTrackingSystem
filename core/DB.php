@@ -28,6 +28,10 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
+      #echo($sql);
+      #echo('<br>');
+      #echo(implode('    |||',$params));
+      #echo('<br>');
       if ($this->_query = $this->_pdo->prepare($sql)) {
         $x =  1;
         if (count($params)) {
@@ -37,6 +41,8 @@
           }
         }
 
+
+        #dnd('..............................');
         if ($this->_query->execute()) {
           $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
           $this->_count = $this->_query->rowCount();

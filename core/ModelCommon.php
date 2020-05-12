@@ -33,8 +33,26 @@ class ModelCommon{
     return($values);
   }
 
+
   public static function ObjectTOArray($obj){
-    $array = json_decode(json_encode($object), true);
-    return($array);
+    if (is_object($obj)) {
+        // Gets the properties of the given object
+        // with get_object_vars function
+        $obj = get_object_vars($obj);
+        #echo(implode('    |||',$obj));
+    }
+
+    if (is_array($obj)) {
+        /*S
+        * Return array converted to object
+        * Using __FUNCTION__ (Magic constant)
+        * for recursive call
+        */
+        #echo(implode('    |||',$obj));
+        return array_map(__FUNCTION__, $obj);
+    } else {
+        // Return array
+        return $obj;
+    }
   }
 }
