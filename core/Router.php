@@ -18,7 +18,10 @@
       //acl check
 
       $grantAccess = self::hasAccess($controller_name, $action_name);
-
+      #echo($grantAccess);
+      #echo("   Router");
+      #echo('<br>');
+      #$grantAccess=true;
       if (!$grantAccess) {
         $controller_name = $controller = ACCESS_RESTRICTED;
         $action = 'indexAction';
@@ -89,6 +92,9 @@
           }
 
         }
+        #echo($grantAccess);
+        #echo("   hasAccess");
+        #echo('<br>');
         return $grantAccess;
          //dnd($current_user_acls);
       }

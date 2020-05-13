@@ -27,8 +27,6 @@ class BusMS extends Model{
 
   public function registerNewBus($params){
     $this->assign($params);
-    $this->DistaceTravelled = 0;
-    $this->deleted = 0;
     $this->save();
   }
 

@@ -40,9 +40,6 @@ class Service extends Controller{
 
   public function show(){
     //gather some details to $data. @stats_absolute_deviation
-    $this->view->heading = "service details";
-    $this->view->details = ['name'=>'oil change','service id'=> 'S09231','date'=>'21/06/2020','bus id'=>'B452','run distace'=>'2341Km','states'=>'accepted'];
-    $this->view->render('home/service');
     return $data;
   }
 }

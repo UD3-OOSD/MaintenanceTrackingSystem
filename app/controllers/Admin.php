@@ -13,19 +13,73 @@ class Admin extends Controller{
 
   public function show_busses(){
     // just a example is below.
-    displayplaintable($heads,$details);
+    foreach ($busses as $bus) {
+      //here some JQuery and html padding.
+      $bus->show();
+    }
   }
 
   public function show_labours(){
     // just a example is below.
-    displaylinkedtable($heads,$details,$links);
+    foreach ($labours as $labour) {
+      //here some JQuery and html padding.
+      $labour->show();
+    }
   }
 
   public function addNewBusAction(){  // this is call by button in the index page of Admin. @uda
-    $this->view->render('admin/bus_form');
-    // here calls to the bus->stateChange.
-     $bus = new Bus();    // ?$busses UPDATE
+    $validation = new Validate();
+    $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    if (isset($_POST['BusNumber'])){
+      $posted_values = posted_values($_POST);
+      $validation->check($_POST,[
+        'BusNumber' => [
+          'display' => 'BusNumber',
+          'require' => true,
+          'unique' => 'bustable',
+          'min' => 8  #check
+        ],
+        'EngineNumber' => [
+          'display' => 'Engine number',
+          'require' => true,
+          'unique' => 'bustable',
+          'min' => 6,
+        ],
+        'ManufacturedYear' => [
+          'display' => 'Manufactured Year',
+          'require' => true,
+          'min' => 4,
+        ],
+        'BusCategory' => [
+          'display' => 'Model',
+          'require' => true,
+        ],
+        'Colour' => [
+          'display' => 'Colour',
+          'require' => true,
+        ],
+        'Mileage' => [
+          'display' => 'Mileage',
+          'require' => true,
+        ],
+        'NumberOfSeats' => [
+          'display' => 'NumberOfSeats',
+          'require' => true,
+        ],
+        'RegistrationDate' => [
+          'display' => 'Registration Date',
+          'require' => true
+        ]
+      ]);
+      if ($validation->passed()){
+        $bus = new bus($_POST);
+        Router::redirect('admin');
+      }
 
+    }
+    $this->view->post = $posted_values;
+    $this->view->displayErrors = $validation->displayErrors();
+    $this->view->render('admin/bus_form');
   }
 
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda

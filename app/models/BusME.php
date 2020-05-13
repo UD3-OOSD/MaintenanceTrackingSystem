@@ -1,11 +1,11 @@
 <?php
 #the bus model
 class BusME extends Model{
-
-
+ private $table;
 
   public function __construct($bus=''){
     $table='busmileage';
+    $this->table = $table;
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
@@ -34,5 +34,20 @@ class BusME extends Model{
     unset($result['BusId']);
     unset($result['BusType']);
     return($result);
+  }
+
+  public function NewDistanceTravelledRow($BusNumber,$Distance){
+    $columns = ModelCommon::getColumnNames($this->table);
+    $params=['BusNumber'=>$BusNumber];
+    #echo(implode('    |||',$columns));
+    #dnd('..............................');
+    foreach($columns as $key){
+      if($key!='BusNumber'){
+        $params[$key] = $Distance;
+      }
+    }
+    #echo(implode('    |||',$params));
+    #dnd('..............................');
+    $this->insert($params);
   }
 }

@@ -15,6 +15,7 @@ class Users extends Model{
         $u = $this->_db->findFirst('users', ['conditions'=>'id = ?', 'bind'=>[$user]]);
       }else{
         $u = $this->_db->findFirst('users', ['conditions'=>'username = ?', 'bind'=>[$user]]);
+        #echo($user);
       }
       if ($u) {
         foreach ($u as $key => $value) {
@@ -25,6 +26,7 @@ class Users extends Model{
   }
 
   public function findByUserName($username){
+    #echo(($this->findFirst(['conditions'=>'username = ?', 'bind'=>[$username]]))->UserId);
     return $this->findFirst(['conditions'=>'username = ?', 'bind'=>[$username]]);
   }
 
@@ -88,6 +90,7 @@ class Users extends Model{
   }
 
   public function acls(){
+    #dnd($this->acl);
     if (empty($this->acl)) return [];
     #return json_decode($this->acl, true);
 

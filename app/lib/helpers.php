@@ -55,7 +55,7 @@ function displayplaintable($heads,$list){
   return $html;
 }
 
-function displaylinkedtable($heads,$list,$link){
+function displaylinkedtable($heads,$list,$links){
   $html = '<table id="t1" class="content-table">';
     $html.='<thead>';
       $html.='<tr>';
@@ -68,7 +68,7 @@ function displaylinkedtable($heads,$list,$link){
     foreach ($list as $ind=> $k){
         $html.='<tr>';
         foreach ($k as $val) {
-          $html.='<td><a href = '.$link.DS.$k[1].'>'.$val.'</a></td>';
+          $html.='<td><a href = '.$links[$ind].'>'.$val.'</a></td>';
         }
         $html.='</tr>';
     }

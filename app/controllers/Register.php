@@ -26,6 +26,7 @@ class Register extends Controller{
         ]
       ]);
       if ($validation->passed()) {
+        #echo($_POST['username']);
         $user = $this->UsersModel->findByUserName($_POST['username']);
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         #echo Input::get('password') . ' '. $user->password;
@@ -41,13 +42,17 @@ class Register extends Controller{
         #echo($results->UserId);
         #echo(implode('    |||',$results));
         #echo($results);
-        #dnd('..............................');
+
 
         #ModelCommon::find('bustable',['conditions'=>'BusId=?','bind'=>[2]]);
-
+        #echo('<br>');
+        #echo($user&& password_verify(Input::get('password'),$user->password ));
+        #dnd('..............................');
         if ($user&& password_verify(Input::get('password'),$user->password )) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $category = $user->login($remember);
+          # echo($category);
+          #dnd('...............');
           Router::redirect(strtolower($category));
         }else{
           $validation->addError("There is an error with your username or password.");
