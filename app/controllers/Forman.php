@@ -25,15 +25,18 @@ class Forman extends Controller{
     #fetch data from busdb for accepted services and their headers. @devin @avishka.
     $heads = ['bus id','service id','service category'];
     $lis = [[001,156,'Engine'],[002,225,'tires'],[003,063,'Full service']];
-    $links = ['index','',''];
-    $this->view->table_1 = displaylinkedtable($heads,$lis,$links);
+    $links = ['index','index','index'];
+    $this->view->table_1 = displaylinkedtable($heads,$lis,'show');
     $this->view->render('forman/accepted');
   }
 
   public function showAction($id){
     //fetch data by model on $id @devin. => $data;
-
+    $service = new Service();
+    $service->data = ['service_id'=>$id];
+    $service->show();
   }
+
 
 
   // show tables @nipun.

@@ -13,18 +13,12 @@ class Admin extends Controller{
 
   public function show_busses(){
     // just a example is below.
-    foreach ($busses as $bus) {
-      //here some JQuery and html padding.
-      $bus->show();
-    }
+    displayplaintable($heads,$details);
   }
 
   public function show_labours(){
     // just a example is below.
-    foreach ($labours as $labour) {
-      //here some JQuery and html padding.
-      $labour->show();
-    }
+    displaylinkedtable($heads,$details,$links);
   }
 
   public function addNewBusAction(){  // this is call by button in the index page of Admin. @uda
