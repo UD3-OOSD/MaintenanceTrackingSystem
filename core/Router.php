@@ -17,11 +17,11 @@
 
       //acl check
 
-      #$grantAccess = self::hasAccess($controller_name, $action_name);
+      $grantAccess = self::hasAccess($controller_name, $action_name);
       #echo($grantAccess);
       #echo("   Router");
       #echo('<br>');
-      $grantAccess=true;
+      #$grantAccess=true;
       if (!$grantAccess) {
         $controller_name = $controller = ACCESS_RESTRICTED;
         $action = 'indexAction';
