@@ -34,6 +34,28 @@ class Forman extends Controller{
     //fetch data by model on $id @devin. => $data;
 
   }
+  public function addService(){
+      $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceStartDate' => '','Labourers' => '','ServiceDescription' => ''];
+      if (isset($_POST['ServiceType'])){
+          $posted_values=posted_values($_POST);
+          $validation = Service::validation($_POST);
+          if ($validation->passed()){
+              $bus = new Service($_POST);
+              Router::redirect('forman');
+          }
+      }else{
+          $validation = new Validate();
+      }
+
+      $this->view->post = $posted_values;
+      $this->view->displayErrors = $validation->displayErrors();
+      $this->view->render('forman/service_form');#check with @nip and @uda
+
+  }
+
+  public function editAction(){
+
+  }
 
 
 

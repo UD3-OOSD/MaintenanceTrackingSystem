@@ -3,7 +3,9 @@
 class NewService extends Controller implements ServiceState{
 
   public function __construct($service,$data){
-    $service->setAttrs($data);
+    $this->settingAttributes($service);
+    $this->fillAction($data);
+    $this->load_model('ServiceActive');
   }
 
   public function stateChange($service){
@@ -12,6 +14,16 @@ class NewService extends Controller implements ServiceState{
     }else{
       $service->setState(new InitService());
     }
+  }
+  public function settingAttributes($service){
+
+  }
+
+  public function fillAction($data){
+      $this->ServiceActiveModel->registerNewService($data);
+      #sets the data in table
+
+
   }
 
 
