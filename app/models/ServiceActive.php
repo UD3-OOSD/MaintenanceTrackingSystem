@@ -22,19 +22,18 @@ class ServiceActive extends Model{
         return $this->find(['conditions'=>'BusNumber = ?', 'bind'=>[$BusNumber]]);
     }
 
+    public function allServicesByState($state){
+        return $this->find(['conditions'=>'ServiceState = ?', 'bind'=>[$state]]);
+    }
 
-
-
-
-
-    public function registerNewService($params){
-
+    public function specificService($BusNumber,$ServiceType){
+        return $this->findFirst(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$ServiceType]]);
     }
 
 
+    public function registerNewService($params){
+        $this->assign($params);
+        $this->save();
 
-
-
-
-
+    }
 }

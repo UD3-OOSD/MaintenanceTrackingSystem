@@ -35,12 +35,12 @@ class Forman extends Controller{
 
   }
   public function addService(){
-      $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceStartDate' => '','Labourers' => '','ServiceDescription' => ''];
+      $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceInitiatedDate' => '','Labourers' => '','ServiceDescription' => ''];
       if (isset($_POST['ServiceType'])){
           $posted_values=posted_values($_POST);
           $validation = Service::validation($_POST);
           if ($validation->passed()){
-              $bus = new Service($_POST);
+              $service = new Service($_POST);
               Router::redirect('forman');
           }
       }else{

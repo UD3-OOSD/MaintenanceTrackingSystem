@@ -4,9 +4,16 @@ class Service extends Controller{
 
   //Attrs of service
   private $ss, $_if = false, $time_bool = false;
+  private static $count = 0;
+  private $ServiceId;
 
-  public function __construct($params){
-      $this->ss = new NewService($this,$params);
+  public function __construct($params,$condition=false){
+      if($condition){
+          $this->set_trigger();
+      }
+      $this->ServiceId = Service::$count;
+      $this->ss = new NewService($this,$params,$this->ServiceId);
+      Service::$count++;
   }
 
   public function stateChange(){
@@ -16,9 +23,13 @@ class Service extends Controller{
   public function setState($st){
       $this->ss = $st;
   }
-
-  public function setAttrs($data){
-    //ser values to attrs
+  public function setAttr($data){
+      $columns = ModelCommon::getColumnNames('activeservices');
+      foreach ($data as $key => $value){
+          if(in_array($key,$columns)){
+              $this->$key = $value;
+          }
+      }
   }
 
   public static function validation($params){
@@ -40,7 +51,7 @@ class Service extends Controller{
               'require' => true,
               'min' => 4,
           ],
-          'ServiceStartDate' => [
+          'ServiceInitiatedDate' => [
               'display' => 'Start Date',
               'require' => true
           ]
@@ -52,8 +63,16 @@ class Service extends Controller{
     return $this->_if;
   }
 
+  public function set_trigger(){
+      $this->_if= true;
+  }
+
+  public function reset_trigger(){
+      $this->_if= false;
+  }
+
   public function getState(){
-    return $this->ss;
+    return $this->ss->getState();
   }
 
   public function get_time_trigger(){
@@ -68,5 +87,13 @@ class Service extends Controller{
   public function show(){
     //gather some details to $data. @stats_absolute_deviation
     return $this->data;
+  }
+
+  public function allServicesByState($state){
+      $this->ss->allServicesByState($state);
+  }
+
+  public function edit($ServiceId){
+      $this->ss->edit($ServiceId);
   }
 }
