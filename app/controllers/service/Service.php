@@ -56,6 +56,7 @@ class Service extends Controller{
               'require' => true
           ]
       ]);
+      return($validation);
   }
 
 
@@ -89,9 +90,6 @@ class Service extends Controller{
     return $this->data;
   }
 
-  public function allServicesByState($state){
-      $this->ss->allServicesByState($state);
-  }
 
   public function edit($ServiceId){
       $this->ss->edit($ServiceId);
