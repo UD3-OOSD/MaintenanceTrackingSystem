@@ -11,9 +11,9 @@ class Bus extends Controller{
     //and some other attributes of bus .e.g. egine_numer, color....
 
 
-    public function __construct($params){
+    public function __construct(){
       #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-      $bs = new NewBus($params);
+      $bs = new NewBus();
 
     }
 
