@@ -1,7 +1,7 @@
 <?php
 
 class Model{
-  protected $_db, $_table, $_modelName, $_softDelete = false, $_columnNames = [];
+  protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
 
   public function __construct($table){
@@ -107,7 +107,7 @@ class Model{
     if($id == '' && $this->id = '') return false;
     $id = ($id == '' ) ? $this->id : $id;
     if($this->_softDelete){
-      $this->update($id, ['deleted' => 1]);
+      $this->UpdateRow($id, ['deleted' => 1]);
     }
     return $this->_db->delete($this->_table, $id);
   }
@@ -136,6 +136,22 @@ class Model{
     }
     return false;
   }
+
+  public function isValidKey($params = []){
+      $result = $this->find($params);
+      if (isset($result)){
+          return(true);
+      }
+      return (false);
+  }
+
+  public function addColumn($column_name,$data_type){
+    return $this->_db->addColumn($this->_table,$column_name,$data_type);
+  }
+
+    public function UpdateRow($unique,$params){
+        return $this->_db->UpdateRow($this->_table,$unique,$params);
+    }
 
   protected function populateObjectData($result){
     foreach ($result as $key => $val) {

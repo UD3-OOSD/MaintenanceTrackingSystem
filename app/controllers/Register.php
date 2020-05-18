@@ -42,8 +42,9 @@ class Register extends Controller{
         #echo($results->UserId);
         #echo(implode('    |||',$results));
         #echo($results);
-
-
+          #ModelCommon::addColumn('activeservices','test','VARCHAR(80)');
+          #ModelCommon::UpdateRow('users',['username'=>'test0005'],['email'=>'donthackmeplease1710@gmail.com','fname'=>'Devin']);
+        #$user->addColumn('test','VARCHAR(80)');
         #ModelCommon::find('bustable',['conditions'=>'BusId=?','bind'=>[2]]);
         #echo('<br>');
         #echo($user&& password_verify(Input::get('password'),$user->password ));

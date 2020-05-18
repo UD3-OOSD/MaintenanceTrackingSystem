@@ -1,11 +1,10 @@
 <?php
 #the bus model
 class BusME extends Model{
- private $table;
+
 
   public function __construct($bus=''){
     $table='busmileage';
-    $this->table = $table;
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
@@ -49,5 +48,17 @@ class BusME extends Model{
     #echo(implode('    |||',$params));
     #dnd('..............................');
     $this->insert($params);
+  }
+
+  public function updateRowByBusNumber($number,$params){
+      if(isset($number)){
+          $unique = ['BusNumber'=>$number];
+          return $this->UpdateRow($unique,$params);
+      }
+  }
+
+  public function  isBusNumberValid($id){
+      $params=['BusNumber'=>$id];
+      return $this->isValidKey($params);
   }
 }

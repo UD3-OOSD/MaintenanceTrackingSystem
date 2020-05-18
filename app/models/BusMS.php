@@ -27,7 +27,42 @@ class BusMS extends Model{
 
   public function registerNewBus($params){
     $this->assign($params);
+    $this->deleted=0;
     $this->save();
   }
+
+    public function  isBusNumberValid($id){
+        $params=['BusNumber'=>$id];
+        return $this->isValidKey($params);
+    }
+
+    public function edit($id,$params){
+        return $this->UpdateRow(['BusId'=>$id],$params);
+    }
+
+    public function edit_this($params){
+        return $this->edit(['BusId'=>$this->BusId],$params);
+    }
+
+    public function  isBusIdValid($id){
+        $params=['BusId'=>$id];
+        return $this->isValidKey($params);
+    }
+
+    public function stateChange_this($state){
+        return $this->stateChange($this->BusId,$state);
+    }
+
+    public function stateChange($id,$state){
+        if(isset($id)&&isset($state)){
+            if(is_int($id)){
+                $unique=['BusId'=>$id];
+            }else{
+                $unique=['BusNumber'=>$id];
+            }
+
+           return $this->UpdateRow($unique,$state);
+        }
+    }
 
 }

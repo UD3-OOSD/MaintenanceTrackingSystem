@@ -3,7 +3,7 @@
 require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 
-class EdittingBus extends Controller implements BusState{
+class EditingBus extends Controller implements BusState{
 
   private $ServiceCheckList;
 
@@ -22,34 +22,18 @@ class EdittingBus extends Controller implements BusState{
     $bus->setState(new LockedBus());  // turn into locked state.
   }
 
-  public function updateDistance(){
+  public function updateDistance($params){
     #check if post or get from nipun
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
-    $validation = new Validate();
-    if(isset($_POST['Distance']) && isset($_POST['BusNumber'])){
-      $validation->check($_POST,[
-          'BusNumber' => [
-            'display' => 'Vehicle Number',
-            'require' => true,
-            'unique' => 'bustable',
-            'min' => 8  #check
-        ],
-        'Distance' =>[
-          'display' => 'Distance',
-          'require' => true,
-          'is_numeric' => true
-        ]
-      ]);
 
-      if($validation->passed()){
-        $bus= $this->BusMEModel->findByBusNumber($_POST['BusNumber']);
-        if($bus){
+      $bus= $this->BusMEModel->findByBusNumber($params['BusNumber']);
+      if($bus){
             #add the implementation of the checking for service
           $this->populatechecklist($bus->id);
           $this->check($_POST['Distance'],$bus);
           $bus->save();
-        }
+
       }
     }
 
@@ -64,12 +48,18 @@ class EdittingBus extends Controller implements BusState{
     //if(!empty($arr)){
     // $this->addService($data);
     //}
-  }
+    public function show($id)
+    {
+        // TODO: Implement show() method.
+    }
 
-  public function show($id){
-    #what does show do
+    public function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
+    }
 
-  }
+
+
 
   public function check($distance,$bus){
     //check for availible all services - @devin , @avishka
