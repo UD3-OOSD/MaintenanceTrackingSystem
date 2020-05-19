@@ -14,25 +14,25 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="fname">Full Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters">
+                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="lname">Last Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters">
+                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="name_init">Name with Initials</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="Ex:- A.B.C.Xyyyy">
+                            <input type="text" class="form-control" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="address">Permanent Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx">
+                            <input type="text" class="form-control" id="xx" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="nic">NIC Number</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx">
+                            <input type="text" class="form-control" id="xx" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -103,13 +103,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dob">Date of Birth</label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
                             <div class="checkbox">
-                                <label><input type="checkbox" name="remember">I accept that this registration form is completed only by myself.</label>
+                                <label><input type="checkbox" name="remember" required>I accept that this registration form is completed only by myself.</label>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>
                         <div class="col-sm-offset-1 col-sm-2">
-                            <a href="RegFo.html"><button type="button" class="btn btn-default">Refresh</button></a>
+                            <a href="EmployeeRegistrationForm.html"><button type="button" class="btn btn-default">Refresh</button></a>
                         </div>
                     </div>
                 </form>
