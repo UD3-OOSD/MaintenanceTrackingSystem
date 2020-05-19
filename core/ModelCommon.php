@@ -33,6 +33,17 @@ class ModelCommon{
     return($values);
   }
 
+  public static function addColumn($table,$column_name,$data_type){
+      $db = DB::getInstance();
+      $db->addColumn($table,$column_name,$data_type);
+  }
+
+  public static function UpdateRow($table, $id, $fields){
+      $db = DB::getInstance();
+      $db->updateRow($table, $id, $fields);
+
+  }
+
 
 
   public static function ObjectTOArray($obj){

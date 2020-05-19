@@ -72,7 +72,8 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $bus = new bus($_POST);
+        $bus = new bus();
+        $bus->fillAction($_POST);
         Router::redirect('admin');
       }
 

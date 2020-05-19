@@ -257,7 +257,38 @@
     }
 
 
+    public function addColumn($table,$column_name,$data_type) {
+        if (isset($data_type)&&isset($column_name)&&isset($table)){
+            $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
+            if($this->query($sql)){
+                return(true);
+            }
 
+        }
+        return (false);
+    }
+
+
+    public function UpdateRow($table,$unique,$params){
+        $fieldString = '';
+        $values = [];
+        foreach ($params as $field => $value) {
+            $fieldString .= ' '.$field.' = ?,';
+            $values[] = $value;
+        }
+        $fieldString = trim($fieldString);
+        $fieldString = rtrim($fieldString, ',');
+        foreach ($unique as $key => $val){
+            $val="'{$val}'";
+            $sql = "UPDATE {$table} SET {$fieldString} WHERE {$key} = {$val}";
+            #echo($sql);
+            #echo('<br>');
+            if (!$this->query($sql, $values)->error()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

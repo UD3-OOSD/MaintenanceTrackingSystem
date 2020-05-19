@@ -23,11 +23,7 @@ class InitService extends Controller implements ServiceState{
         // TODO: Implement getState() method.
     }
 
-    public function allServicesByState($state)
-    {
-        $this->ServiceActiveModel->allServicesByState($state);
-        // TODO: Implement allServicesByState() method.
-    }
+
 
     public function TableUpdate(){
 

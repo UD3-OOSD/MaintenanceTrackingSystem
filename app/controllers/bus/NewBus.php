@@ -5,14 +5,13 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 
 class NewBus extends Controller implements BusState{
 
-  public function __construct($params){
+  public function __construct(){
     $this->load_model('BusMS');
     $this->load_model('BusME');
-    $this->fillAction($params);
   }
 
   public function stateChange($bus){
-    $bus->setState(new EdittingBus());
+    $bus->setState(new EditingBus());
   }
 
   public function fillAction($params){
@@ -25,7 +24,7 @@ class NewBus extends Controller implements BusState{
     //create a record and fill it.-> goto BusModel.
 
 
-  public function updateDistance(){
+  public function updateDistance($params){
     echo('Error');
   }
 

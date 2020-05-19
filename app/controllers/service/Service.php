@@ -7,12 +7,12 @@ class Service extends Controller{
   private static $count = 0;
   private $ServiceId;
 
-  public function __construct($params,$condition=false){
+  public function __construct($condition=false){
       if($condition){
           $this->set_trigger();
       }
       $this->ServiceId = Service::$count;
-      $this->ss = new NewService($this,$params,$this->ServiceId);
+      $this->ss = new NewService($this,$this->ServiceId);
       Service::$count++;
   }
 
@@ -56,6 +56,7 @@ class Service extends Controller{
               'require' => true
           ]
       ]);
+      return($validation);
   }
 
 
@@ -89,9 +90,6 @@ class Service extends Controller{
     return $this->data;
   }
 
-  public function allServicesByState($state){
-      $this->ss->allServicesByState($state);
-  }
 
   public function edit($ServiceId){
       $this->ss->edit($ServiceId);
