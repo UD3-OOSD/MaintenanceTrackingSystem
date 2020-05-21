@@ -14,7 +14,7 @@ class Bus extends Controller{
     public function __construct(){
 
       #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-      $bs = new NewBus();
+      $this->bs = new NewBus();
 
 
     }
