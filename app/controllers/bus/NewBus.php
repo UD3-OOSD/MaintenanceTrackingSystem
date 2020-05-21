@@ -5,7 +5,7 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 
 class NewBus extends Controller implements BusState{
 
-  private static $closedbus = NULL;
+  private static $newbus = NULL;
 
   private function __construct(){
     $this->load_model('BusMS');

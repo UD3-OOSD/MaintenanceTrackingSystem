@@ -5,12 +5,21 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
 
 class NewDeactiveLabour extends Controller implements LabourState{
 
-  public function __construct(){
+  private static $newdelab = NULL;
+
+  private function __construct(){
     $this->load_model('Labour');
   }
 
+  public static function getInstance(){
+    if(!isset(NewDeactiveLabour::$newdelab)){
+      NewDeactiveLabour::$newdelab = new NewDeactiveLabour();
+    }
+    return NewDeactiveLabour::$newdelab;
+  }
+
   public function stateChange($lab){
-    $lab->setState(new NewActiveLabour());
+    $lab->setState(NewActiveLabour::getInstance());
   }
 
   public function fill($data){

@@ -2,15 +2,28 @@
 
 class ApprovedService extends Controller implements ServiceState{
 
+  private static $appservice = NULL;
+
+  private function __construct(){
+
+  }
+
+  public static function getInstance(){
+    if(!isset(ApprovedService::$appservice)){
+      ApprovedService::$appservice = new ApprovedService();
+    }
+    return ApprovedService::$appservice;
+  }
+
   public function stateChange($service){
     if(!$service->get_time_trigger()){
       if($service->get_trigger){
-        $service->setState(new DeletedService());
+        $service->setState(DeletedService::getInstance());
       }else{
-        $service->setState(new StartedService());
+        $service->setState(StartedService::getInstance());
       }
     }else{
-      $service->setState(new ExpiredService());
+      $service->setState(ExpiredService::getInstance());
     }
   }
 

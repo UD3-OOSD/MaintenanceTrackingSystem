@@ -5,11 +5,24 @@ require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 class LockedBus extends Controller implements BusState{
 
+  private static $lockedbus = NULL;
+
+  private function __construct(){
+
+  }
+
+  public static function getInstance(){
+    if(!isset(LockedBus::$lockedbus)){
+      LockedBus::$lockedbus = new LockedBus();
+    }
+    return LockedBus::$lockedbus;
+  }
+
   public function stateChange($bus){
     if($bus->get_trigger()){
-      $bus->setState(new EditingBus());
+      $bus->setState(EditingBus::getInstance());
     }else{
-      $bus->setState(new ClosedBus());
+      $bus->setState(ClosedBus::getInstance());
     }
   }
 

@@ -38,6 +38,7 @@ class Clerk extends Controller{
           ]);
           if ($validation->passed()) {
             // there must be a creation pattern.
+            $bus = Bus::getInstance();
             $this->view->IdError = validationID('bustable','BusNumber',$_POST['BusNumber'],'BusNumber');
             $bus->updatedistance($_POST);
           }

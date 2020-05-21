@@ -8,10 +8,18 @@ class Labour extends Controller{
   private static $count = 0;
   private $ls, $_if = false;
 
+  private static $labour = NULL;
 
-  public function __construct(){
-    $ls = new NewDeactiveLabour();
+  private function __construct(){
+    $ls = NewDeactiveLabour::getInstance();
     Labour::$count++;
+  }
+
+  public static function getInstance(){
+    if(!isset(Labour::$lab)){
+      Labour::$lab = new Labour();
+    }
+    return Labour::$lab;
   }
 
   public function stateChange(){
