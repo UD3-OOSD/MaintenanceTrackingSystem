@@ -1,16 +1,17 @@
 <?php
 
-class Labour extends Model
-{
-    public function __construct($labour = '')
-    {
-        $table = '';
+class LabourActive extends Model{
+    public function __construct($labour = ''){
+
+        $table = 'labourdetails';
+
         parent::__construct($table);
+
         if ($labour != '') {
             if (is_int($labour)) {
-                $l = $this->_db->findFirst('', ['conditions' => 'LabourId = ?', 'bind' => [$labour]]);
+                $l = $this->_db->findFirst('labourdetails', ['conditions' => 'LabourId = ?', 'bind' => [$labour]]);
             }
-            if ($l) {
+            if (isset($l)) {
                 foreach ($l as $key => $value) {
                     $this->$key = $value;
                 }

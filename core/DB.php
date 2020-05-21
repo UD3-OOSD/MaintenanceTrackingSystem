@@ -236,6 +236,19 @@
       return false;
     }
 
+      public function deleteRow($table, $unique){
+          foreach ($unique as $key => $val) {
+              $sql = "DELETE FROM {$table} WHERE {$key} = {$val}";
+              #echo($sql);
+              #echo('<br>');
+              if (!$this->query($sql)->error()) {
+                  return true;
+              }
+          }
+          return false;
+
+      }
+
     public function results(){
       return $this->_result;
     }

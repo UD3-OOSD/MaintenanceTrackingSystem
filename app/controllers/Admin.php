@@ -30,7 +30,7 @@ class Admin extends Controller{
   public function addNewBusAction(){  // this is call by button in the index page of Admin. @uda
     $validation = new Validate();
     $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
-    if (isset($_POST['BusNumber'])){
+    if ($_POST){
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
         'BusNumber' => [
@@ -72,11 +72,8 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-<<<<<<< HEAD
-        $bus = new bus();
-=======
+
         $bus = new Bus();
->>>>>>> f243844229815864ea0b5b564467f66986779155
         $bus->fillAction($_POST);
         Router::redirect('admin');
       }
@@ -90,9 +87,12 @@ class Admin extends Controller{
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda
 
     $validation = new Validate();
-    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>''];
-    if (isset($_POST['BusNumber'])){
+    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>'' , 'acl'=>''];
+    if ($_POST){
+      #dnd($_POST);
       $posted_values = posted_values($_POST);
+      #echo(isset($_POST['gender']));
+      #dnd('-------');
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
@@ -118,7 +118,8 @@ class Admin extends Controller{
           'display' => 'National Identity Card Number',
           'require' => true,
           'min' => 10,
-          'max' => 12
+          'max' => 12,
+          'unique' => 'labourdetails'
         ],
         'email' => [
           'display' => 'Email Address',
@@ -128,7 +129,8 @@ class Admin extends Controller{
         'tel' => [
           'display' => 'Telephone Number',
           'require' => true,
-          'is_numeric' => true
+          'is_numeric' => true,
+          'min' => 10
         ],
           'gender' => [
               'display' => 'Gender',
@@ -144,18 +146,25 @@ class Admin extends Controller{
           ],
           'dob' => [
               'display' => 'Date Of Birth ',
-              'require' => true,
-              'is_numeric' => true
+              'require' => true
+          ],
+          'acl' => [
+              'display' => 'Rank ',
+              'require' => true
           ]
       ]);
+      #dnd($validation->passed());
       if ($validation->passed()){
         $labour = new Labour();
         $labour->fillAction($_POST);
-        Router::redirect('admin');
+        Router::redirect('admin/index');
       }
-    $this->view->render('admin/user_form');
-    $lab = new Labour();
+
+
   }
+  $this->view->post = $posted_values;
+  $this->view->displayErrors = $validation->displayErrors();
+  $this->view->render('admin/user_form');
 }
 
   public function editBusAction($bus,$data){  // call by button press @uda
