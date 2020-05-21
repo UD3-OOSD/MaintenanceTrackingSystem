@@ -48,6 +48,7 @@ class Register extends Controller{
         #ModelCommon::find('bustable',['conditions'=>'BusId=?','bind'=>[2]]);
         #echo('<br>');
         #echo($user&& password_verify(Input::get('password'),$user->password ));
+        #echo validationID('bustable','BusNumber','PQR-6234');
         #dnd('..............................');
         if ($user&& password_verify(Input::get('password'),$user->password )) {
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;

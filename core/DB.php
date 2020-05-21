@@ -89,7 +89,11 @@
       if(array_key_exists('limit', $params)){
         $limit = ' LIMIT '.$params['limit'];
       }
+      #echo($conditionString);
       $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
+      #echo('<br>');
+      #echo($sql);
+      #echo('<br>');
       if($this->query($sql, $bind)){
           if(!count($this->_result)) return false;
           return true;
