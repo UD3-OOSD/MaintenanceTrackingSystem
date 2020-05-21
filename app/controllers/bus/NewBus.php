@@ -5,13 +5,22 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 
 class NewBus extends Controller implements BusState{
 
-  public function __construct(){
+  private static $closedbus = NULL;
+
+  private function __construct(){
     $this->load_model('BusMS');
     $this->load_model('BusME');
   }
 
+  public static function getInstance(){
+    if(!isset(NewBus::$newbus)){
+      NewBus::$newbus = new NewBus();
+    }
+    return NewBus::$newbus;
+  }
+
   public function stateChange($bus){
-    $bus->setState(new EditingBus());
+    $bus->setState(LockedBus::getInstance());
   }
 
   public function fillAction($params){

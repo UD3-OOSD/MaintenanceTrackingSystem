@@ -15,16 +15,7 @@ class Bus extends Controller{
     public function __construct(){
         Bus::$count++;
         #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-        $bs = new NewBus();
-<<<<<<< HEAD
-=======
-=======
-      #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-      $this->bs = new NewBus();
-
->>>>>>> ad28b5d2ddba512b4c48cbcba277083e4438b20b
-
->>>>>>> f243844229815864ea0b5b564467f66986779155
+        $bs = NewBus::getInstance();
     }
 
     public function stateChange(){
@@ -32,7 +23,7 @@ class Bus extends Controller{
     }
 
     public function setState($st){
-      $bs = $st;
+      $this->bs = $st;
     }
 
     public function getState(){
@@ -44,7 +35,7 @@ class Bus extends Controller{
     }
 
     public function set_trigger($val){
-      $_if = $val;
+      $this->_if = $val;
     }
 
     public function showData(){
@@ -62,7 +53,7 @@ class Bus extends Controller{
 
     #function added by @devin for updating distance if wrong please rectify
     public function updatedistance($params){
-      $this->stateChange();
+      $this->bs->stateChange();
       $this->bs->updateDistance($params);
     }
 

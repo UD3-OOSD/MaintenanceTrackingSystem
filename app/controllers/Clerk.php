@@ -22,7 +22,7 @@ class Clerk extends Controller{
 
     //get data relate to bus_id and create $bus obj. and call it's action. @devin @avishka
       $validation = new Validate();
-      if(isset($_POST['Distance']) && isset($_POST['BusNumber'])) {
+      if($_POST) {
           $validation->check($_POST, [
               'BusNumber' => [
                   'display' => 'Vehicle Number',
@@ -37,8 +37,9 @@ class Clerk extends Controller{
               ]
           ]);
           if ($validation->passed()) {
-              $bus = new Bus();
-              $bus->updatedistance($_POST);
+            // there must be a creation pattern.
+            $this->view->IdError = validationID('bustable','BusNumber',$_POST['BusNumber'],'BusNumber');
+            $bus->updatedistance($_POST);
           }
       }
   }

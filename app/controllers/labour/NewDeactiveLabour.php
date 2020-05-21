@@ -18,7 +18,8 @@ class NewDeactiveLabour extends Controller implements LabourState{
     $this->send_mail($data['fullName'],$data['email']);
   }
 
-  public function send_mail($lab){
+  public function send_mail($name,$mail){
+    sendMail($mail,$header,$message,$link); // has to change.
     //send verification key in a email. @avishka
     //gerate it -> save it in the db
     // send url also.  @devin

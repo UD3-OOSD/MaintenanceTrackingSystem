@@ -108,3 +108,16 @@ function sendMail($to,$header,$mass,$link=''){
    }
 
 }
+
+function validationID($table , $column , $value ,$tag){
+
+   $html = '<ul class="id_danger">';
+   if(ModelCommon::validationID($table , $column , $value)){
+       $html .= '<li class="text-danger">'."The {$value} is not in {$column} in table {$table}".'</li>';
+       $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$tag.'").parent().closest("div").addClass("has-error");});</script>';
+   }else{
+       $html .= '<li class="text-danger">'."yayyyyy".'</li>';
+   }
+   $html .= '</ul>';
+   return $html;
+}
