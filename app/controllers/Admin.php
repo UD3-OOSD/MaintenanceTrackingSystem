@@ -72,7 +72,11 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
+<<<<<<< HEAD
         $bus = new bus();
+=======
+        $bus = new Bus();
+>>>>>>> f243844229815864ea0b5b564467f66986779155
         $bus->fillAction($_POST);
         Router::redirect('admin');
       }
@@ -86,43 +90,63 @@ class Admin extends Controller{
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda
 
     $validation = new Validate();
-    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>''];
     if (isset($_POST['BusNumber'])){
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
-          'require' => true,
+          'require' => true
         ],
         'lastName' => [
           'display' => 'Last Name',
-          'require' => true,
-        ],
-        'ManufacturedYear' => [
-          'display' => 'Manufactured Year',
-          'require' => true,
-          'min' => 4,
-        ],
-        'BusCategory' => [
-          'display' => 'Model',
-          'require' => true,
-        ],
-        'Colour' => [
-          'display' => 'Colour',
-          'require' => true,
-        ],
-        'Mileage' => [
-          'display' => 'Mileage',
-          'require' => true,
-        ],
-        'NumberOfSeats' => [
-          'display' => 'NumberOfSeats',
-          'require' => true,
-        ],
-        'RegistrationDate' => [
-          'display' => 'Registration Date',
           'require' => true
-        ]
+        ],
+        'nameWIn' => [
+          'display' => 'Name With Initials',
+          'require' => true
+        ],
+        'address' => [
+          'display' => 'Permanent Address',
+          'require' => true
+        ],
+        'title' => [
+          'display' => 'Title',
+          'require' => true
+        ],
+        'nic' => [
+          'display' => 'National Identity Card Number',
+          'require' => true,
+          'min' => 10,
+          'max' => 12
+        ],
+        'email' => [
+          'display' => 'Email Address',
+          'require' => true,
+          'valid_email' => true
+        ],
+        'tel' => [
+          'display' => 'Telephone Number',
+          'require' => true,
+          'is_numeric' => true
+        ],
+          'gender' => [
+              'display' => 'Gender',
+              'require' => true,
+          ],
+          'race' => [
+              'display' => 'Race',
+              'require' => true,
+          ],
+          'religion' => [
+              'display' => 'Religion',
+              'require' => true,
+          ],
+          'dob' => [
+              'display' => 'Date Of Birth ',
+              'require' => true,
+              'is_numeric' => true
+          ]
       ]);
       if ($validation->passed()){
         $labour = new Labour();

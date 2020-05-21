@@ -16,6 +16,15 @@ class Bus extends Controller{
         Bus::$count++;
         #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
         $bs = new NewBus();
+<<<<<<< HEAD
+=======
+=======
+      #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
+      $this->bs = new NewBus();
+
+>>>>>>> ad28b5d2ddba512b4c48cbcba277083e4438b20b
+
+>>>>>>> f243844229815864ea0b5b564467f66986779155
     }
 
     public function stateChange(){

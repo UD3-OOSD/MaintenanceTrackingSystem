@@ -2,7 +2,6 @@
 #the bus model
 class BusME extends Model{
 
-
   public function __construct($bus=''){
     $table='busmileage';
     parent::__construct($table);
@@ -36,7 +35,8 @@ class BusME extends Model{
   }
 
   public function NewDistanceTravelledRow($BusNumber,$Distance){
-    $columns = ModelCommon::getColumnNames($this->table);
+    #dnd($Distance);
+    $columns = ModelCommon::getColumnNames($this->_table);
     $params=['BusNumber'=>$BusNumber];
     #echo(implode('    |||',$columns));
     #dnd('..............................');
