@@ -8,7 +8,8 @@ class NewDeactiveLabour extends Controller implements LabourState{
   private static $newdelab = NULL;
 
   private function __construct(){
-    $this->load_model('Labour');
+    $this->load_model('LabourActive');
+    $this->load_model('Users');
   }
 
   public static function getInstance(){
@@ -23,8 +24,10 @@ class NewDeactiveLabour extends Controller implements LabourState{
   }
 
   public function fill($data){
-    $this->LabourModel->registerNewLabouror($data);
-    $this->send_mail($data['fullName'],$data['email']);
+    $this->LabourActiveModel->registerNewLabouror($data);
+   # $this->send_mail($data['fullName'],$data['email']);
+
+    $this->UsersModel->registerNewUser($data);
   }
 
   public function send_mail($name,$mail){

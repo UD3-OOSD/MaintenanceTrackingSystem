@@ -86,9 +86,12 @@ class Admin extends Controller{
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda
 
     $validation = new Validate();
-    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>'' , 'acl'=>''];
     if ($_POST){
+      #dnd($_POST);
       $posted_values = posted_values($_POST);
+      #echo(isset($_POST['gender']));
+      #dnd('-------');
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
@@ -110,6 +113,9 @@ class Admin extends Controller{
         'Colour' => [
           'display' => 'Colour',
           'require' => true,
+          'min' => 10,
+          'max' => 12,
+          'unique' => 'labourdetails'
         ],
         'Mileage' => [
           'display' => 'Mileage',
@@ -118,20 +124,42 @@ class Admin extends Controller{
         'NumberOfSeats' => [
           'display' => 'NumberOfSeats',
           'require' => true,
+          'is_numeric' => true,
+          'min' => 10
         ],
-        'RegistrationDate' => [
-          'display' => 'Registration Date',
-          'require' => true
-        ]
+          'gender' => [
+              'display' => 'Gender',
+              'require' => true,
+          ],
+          'race' => [
+              'display' => 'Race',
+              'require' => true,
+          ],
+          'religion' => [
+              'display' => 'Religion',
+              'require' => true,
+          ],
+          'dob' => [
+              'display' => 'Date Of Birth ',
+              'require' => true
+          ],
+          'acl' => [
+              'display' => 'Rank ',
+              'require' => true
+          ]
       ]);
+      #dnd($validation->passed());
       if ($validation->passed()){
         $labour = Labour::getInstance();
         $labour->fillAction($_POST);
-        Router::redirect('admin');
+        Router::redirect('admin/index');
       }
     $this->view->render('admin/user_form');
     $lab = Labour::getInstance();
   }
+  $this->view->post = $posted_values;
+  $this->view->displayErrors = $validation->displayErrors();
+  $this->view->render('admin/user_form');
 }
 
   public function editBusAction($bus,$data){  // call by button press @uda

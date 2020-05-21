@@ -5,7 +5,7 @@ require_once(ROOT.DS.'app/controllers/labour/NewDeactiveLabour.php');
 class Labour extends Controller{
 
   //here labour attributes
-  private static $count = 0;
+  private static $count;
   private $ls, $_if = false;
 
   private static $labour = NULL;
@@ -23,15 +23,15 @@ class Labour extends Controller{
   }
 
   public function stateChange(){
-    $ls->stateChange($this);
+    $this->ls->stateChange($this);
   }
 
   public function setState($st){
-    $ls = st;
+    $this->ls = st;
   }
 
   public function getState(){
-    return $ls;
+    return $this->ls;
   }
 
   public function fillAction($data){
@@ -44,7 +44,7 @@ class Labour extends Controller{
   }
 
   public function get_trigger(){
-    return $_if;
+    return $this->_if;
   }
 
 }
