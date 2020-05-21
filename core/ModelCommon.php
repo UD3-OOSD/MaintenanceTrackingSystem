@@ -44,6 +44,18 @@ class ModelCommon{
 
   }
 
+  public static function validationID($table , $column ,$value){
+      $db = DB::getInstance();
+      $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
+      #print_r($params);
+      #echo('<br>');
+      #echo("{$column} = ?");
+      #print_r($db->find($table,$params));
+      if ($db->find($table,$params)){
+          return(true);
+      }
+      return (false);
+  }
 
 
   public static function ObjectTOArray($obj){
