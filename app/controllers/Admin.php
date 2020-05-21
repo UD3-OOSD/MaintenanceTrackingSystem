@@ -105,4 +105,11 @@ class Admin extends Controller{
     $bus->stateChange();
 
   }
+
+  public function sendVarificationAction(){
+    $email = $_POST['mail'];
+    if(sendMail($email,"Verifycation mail ","You have registered in the Horana Deport",'https://www.google.com')){
+      Router::redirect('admin/addNewLabour');
+    }
+  }
 }

@@ -123,6 +123,15 @@
                     </div>
                 </form>
             </div>
+            <div class="col-sm-6 reg">
+              <h1>send verification:</h1>
+              <form class="form-horizontal hr" action="./sendVarification" method="post">
+                <label for="mail">Email :</label>
+                <input type="email" name="mail" class="form-control">
+                <button type="submit" name="send" class = "btn btn-default">send</button>
+              </form>
+
+            </div>
         </div>
     </div>
 <?php $this->end() ?>
