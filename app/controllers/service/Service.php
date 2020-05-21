@@ -7,10 +7,8 @@ class Service extends Controller{
   private static $count = 0;
   private $ServiceId;
 
-  public function __construct($condition=false){
-      if($condition){
-          $this->set_trigger();
-      }
+  public function __construct(){
+
       $this->ServiceId = Service::$count;
       $this->ss = new NewService($this,$this->ServiceId);
       Service::$count++;

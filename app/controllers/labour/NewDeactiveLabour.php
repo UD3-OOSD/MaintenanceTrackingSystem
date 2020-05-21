@@ -6,15 +6,16 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
 class NewDeactiveLabour extends Controller implements LabourState{
 
   public function __construct(){
-    $this->fill();
+    $this->load_model('Labour');
   }
 
   public function stateChange($lab){
     $lab->setState(new NewActiveLabour());
   }
 
-  public function fill(){
-    #$lab->setAttr($data);
+  public function fill($data){
+    $this->LabourModel->registerNewLabouror($data);
+    $this->send_mail($data['fullName'],$data['email']);
   }
 
   public function send_mail($lab){

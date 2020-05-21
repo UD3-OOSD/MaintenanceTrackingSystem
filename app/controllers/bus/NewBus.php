@@ -19,6 +19,7 @@ class NewBus extends Controller implements BusState{
     #echo($params['Mileage']);
     #dnd('_____________');
     $this->BusMEModel->NewDistanceTravelledRow($params['BusNumber'],$params['Mileage']);
+
         #Router::redirect('admin');  #will have to change
   }
     //create a record and fill it.-> goto BusModel.

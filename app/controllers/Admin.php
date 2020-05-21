@@ -73,7 +73,7 @@ class Admin extends Controller{
       ]);
       if ($validation->passed()){
         $bus = new bus();
-        #$bus->fillAction($_POST);
+        $bus->fillAction($_POST);
         Router::redirect('admin');
       }
 
@@ -125,12 +125,11 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $bus = new bus();
-        #$bus->fillAction($_POST);
+        $labour = new Labour();
+        $labour->fillAction($_POST);
         Router::redirect('admin');
       }
     $this->view->render('admin/user_form');
-
     $lab = new Labour();
   }
 }
