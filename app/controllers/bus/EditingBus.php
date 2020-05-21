@@ -7,12 +7,21 @@ class EditingBus extends Controller implements BusState{
 
   private $ServiceCheckList;
 
-  public function __construct(){
+  private static $editingbus = NULL;
+
+  private function __construct(){
     $this->load_model('BusME');
   }
 
+  public static function getInstance(){
+    if(!isset(EditingBus::$editingbus)){
+      EditingBus::$editingbus = new EditingBus();
+    }
+    return EditingBus::$editingbus;
+  }
+
   public function stateChange($bus){
-    $bus->setState(new LockedBus());
+    $bus->setState(LockedBus::getInstance());
   }
 
   public function fitAction($bus,$attr){
@@ -29,7 +38,7 @@ class EditingBus extends Controller implements BusState{
 
       $bus= $this->BusMEModel->findByBusNumber($params['BusNumber']);
       if($bus){
-            #add the implementation of the checking for service
+          #add the implementation of the checking for service
           $this->populatechecklist($bus->id);
           $this->check($_POST['Distance'],$bus);
           $bus->save();

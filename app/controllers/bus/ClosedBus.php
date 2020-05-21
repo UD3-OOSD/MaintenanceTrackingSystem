@@ -4,6 +4,20 @@ require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 
 class ClosedBus extends Controller implements BusState{
+
+  private static $closedbus = NULL;
+
+  private function __construct(){
+
+  }
+
+  public static function getInstance(){
+    if(!isset(ClosedBus::$closedbus)){
+      ClosedBus::$closedbus = new ClosedBus();
+    }
+    return ClosedBus::$closedbus;
+  }
+  
   public function stateChange($bus){
     //no idea about state change @devin
     $this->delete();  // like

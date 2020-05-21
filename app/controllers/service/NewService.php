@@ -2,22 +2,30 @@
 
 class NewService extends Controller implements ServiceState{
 
-  public function __construct($service,$data,$id){
-      $this->load_model('ServiceActive');
+  private static $newservice = NULL;
 
-      $data=mergeData(['ServiceId'=> $id],$data);
-      $service->setAttr($data);
+  private function __construct(){
+    $this->load_model('ServiceActive');
 
-      $service->stateChange();
-      $this->fillAction($data,$service->getState());
+    $data=mergeData(['ServiceId'=> $id],$data);
+    $service->setAttr($data);
 
+    $service->stateChange();
+    $this->fillAction($data,$service->getState());
+  }
+
+  public static function getInstance(){
+    if(!isset(NewService::$newservice)){
+      NewService::$newservice = new NewService();
+    }
+    return NewService::$newservice;
   }
 
   public function stateChange($service){
     if($service->get_trigger()){
-      $service->setState(new ApprovedService());
+      $service->setState(ApprovedService::getInstance());
     }else{
-      $service->setState(new InitService());
+      $service->setState(InitService::getInstance());
     }
   }
 

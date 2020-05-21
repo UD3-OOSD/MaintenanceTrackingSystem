@@ -5,15 +5,22 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
 
 class NewDeactiveLabour extends Controller implements LabourState{
 
-  public function __construct(){
+  private static $newdelab = NULL;
 
+  private function __construct(){
     $this->load_model('LabourActive');
     $this->load_model('Users');
+  }
 
+  public static function getInstance(){
+    if(!isset(NewDeactiveLabour::$newdelab)){
+      NewDeactiveLabour::$newdelab = new NewDeactiveLabour();
+    }
+    return NewDeactiveLabour::$newdelab;
   }
 
   public function stateChange($lab){
-    $lab->setState(new NewActiveLabour());
+    $lab->setState(NewActiveLabour::getInstance());
   }
 
   public function fill($data){
@@ -23,7 +30,8 @@ class NewDeactiveLabour extends Controller implements LabourState{
     $this->UsersModel->registerNewUser($data);
   }
 
-  public function send_mail($lab){
+  public function send_mail($name,$mail){
+    sendMail($mail,$header,$message,$link); // has to change.
     //send verification key in a email. @avishka
     //gerate it -> save it in the db
     // send url also.  @devin

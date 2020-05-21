@@ -2,11 +2,24 @@
 
 class ActiveLockLabour extends Controller implements LabourState{
 
+  private static $actlocklab = NULL;
+
+  private function __construct(){
+
+  }
+
+  public static function getInstance(){
+    if(!isset(ActiveLockLabour::$actlocklab)){
+      ActiveLockLabour::$actlocklab = new ActiveLockLabour();
+    }
+    return ActiveLockLabour::$actlocklab;
+  }
+
   public function stateChange($lab){
     if($lab->get_trigger()){
-      $lab->setState(new ClosedLabour());
+      $lab->setState(ClosedLabour::getInstance());
     }else{
-      $lab->setState(new ActiveLabour());
+      $lab->setState(ActiveLabour::getInstance());
     }
   }
 }

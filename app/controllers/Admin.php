@@ -72,8 +72,7 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-
-        $bus = new Bus();
+        $bus = Bus::getInstance();
         $bus->fillAction($_POST);
         Router::redirect('admin');
       }
@@ -96,38 +95,34 @@ class Admin extends Controller{
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
-          'require' => true
+          'require' => true,
         ],
         'lastName' => [
           'display' => 'Last Name',
-          'require' => true
+          'require' => true,
         ],
-        'nameWIn' => [
-          'display' => 'Name With Initials',
-          'require' => true
+        'ManufacturedYear' => [
+          'display' => 'Manufactured Year',
+          'require' => true,
+          'min' => 4,
         ],
-        'address' => [
-          'display' => 'Permanent Address',
-          'require' => true
+        'BusCategory' => [
+          'display' => 'Model',
+          'require' => true,
         ],
-        'title' => [
-          'display' => 'Title',
-          'require' => true
-        ],
-        'nic' => [
-          'display' => 'National Identity Card Number',
+        'Colour' => [
+          'display' => 'Colour',
           'require' => true,
           'min' => 10,
           'max' => 12,
           'unique' => 'labourdetails'
         ],
-        'email' => [
-          'display' => 'Email Address',
+        'Mileage' => [
+          'display' => 'Mileage',
           'require' => true,
-          'valid_email' => true
         ],
-        'tel' => [
-          'display' => 'Telephone Number',
+        'NumberOfSeats' => [
+          'display' => 'NumberOfSeats',
           'require' => true,
           'is_numeric' => true,
           'min' => 10
@@ -155,12 +150,12 @@ class Admin extends Controller{
       ]);
       #dnd($validation->passed());
       if ($validation->passed()){
-        $labour = new Labour();
+        $labour = Labour::getInstance();
         $labour->fillAction($_POST);
         Router::redirect('admin/index');
       }
-
-
+    $this->view->render('admin/user_form');
+    $lab = Labour::getInstance();
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
