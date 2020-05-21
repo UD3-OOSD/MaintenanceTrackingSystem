@@ -13,9 +13,15 @@ class Bus extends Controller{
 
     public function __construct(){
 
+<<<<<<< HEAD
+
+        #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
+        $bs = new NewBus();
+=======
       #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
       $this->bs = new NewBus();
 
+>>>>>>> ad28b5d2ddba512b4c48cbcba277083e4438b20b
 
     }
 

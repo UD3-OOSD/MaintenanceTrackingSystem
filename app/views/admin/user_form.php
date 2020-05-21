@@ -14,31 +14,31 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="fname">Full Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters" required>
+                            <input type="text" class="form-control" name="fullName" id="xx" placeholder="In block capital letters" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="lname">Last Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="In block capital letters" required>
+                            <input type="text" class="form-control" name="lastName" id="xx" placeholder="In block capital letters" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="name_init">Name with Initials</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required>
+                            <input type="text" class="form-control" name="nameWIn" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="address">Permanent Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" required>
+                            <input type="text" class="form-control" name="address" id="xx" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="lname">Title</label>
                         <div class="col-sm-3">
-                            <select clid="list" class="form-control">
+                            <select clid="list" name="title" class="form-control">
                                 <option value="1">Mr.</option>
                                 <option value="2">Mrs.</option>
                                 <option value="3">Ms.</option>
@@ -49,37 +49,37 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="nic">NIC Number</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="xx" required>
+                            <input type="text" class="form-control" name="nic" id="xx" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="email">Email</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" id="xx" placeholder="Ex:- sam1658@gmail.com">
+                            <input type="email" class="form-control" name="email" id="xx" placeholder="Ex:- sam1658@gmail.com">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="contact">Phone Number</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="xx" placeholder="+94XX XXX XXXX">
+                            <input type="number" class="form-control" name="tel" id="xx" placeholder="+94XX XXX XXXX">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="gender">Gender</label>
                         <div class="col-sm-2">
-                            Male : <input type="radio" id="gen">
+                            Male : <input type="radio" name="gender" id="gen">
                         </div>
                         <div class="col-sm-3">
-                            Female : <input type="radio" id="gen">
+                            Female : <input type="radio" name="gender" id="gen">
                         </div>
                         <div class="col-sm-2">
-                            Other : <input type="radio" id="gen">
+                            Other : <input type="radio" name="gender" id="gen">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="race">Race</label>
                         <div class="col-sm-3">
-                            <select clid="list" class="form-control">
+                            <select clid="list" name="race" class="form-control">
                                 <option value="1">Sinhalese</option>
                                 <option value="2">Tamil</option>
                                 <option value="3">Muslim</option>
@@ -91,7 +91,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="religion">Religion</label>
                         <div class="col-sm-3">
-                            <select clid="list" class="form-control">
+                            <select clid="list" name="religion" class="form-control">
                                 <option value="1">Buddhism</option>
                                 <option value="2">Hinduism</option>
                                 <option value="3">Christian</option>
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dob">Date of Birth</label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control" required>
+                            <input type="date" name="dob" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -122,6 +122,15 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="col-sm-6 reg">
+              <h1>send verification:</h1>
+              <form class="form-horizontal hr" action="./sendVarification" method="post">
+                <label for="mail">Email :</label>
+                <input type="email" name="mail" class="form-control">
+                <button type="submit" name="send" class = "btn btn-default">send</button>
+              </form>
+
             </div>
         </div>
     </div>

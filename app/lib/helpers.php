@@ -82,6 +82,32 @@ function displaylinkedtable($heads,$list,$links){
   return $html;
 }
 
+<<<<<<< HEAD
+function sendMail($to,$header,$mass,$link=''){
+
+   //$to = "xyz@somedomain.com";
+   $subject = $header;
+
+   $message = "<b>".$mass.".</b>";
+   $message .= "<div style=\"background-color:#d7263d;text-align:center;color:#ffffff;border-radius:3px;width:180px;font-size:18px;text-decoration:none;font-weight:bold\">
+   <a style=\"margin:0;padding:0px 3px 0px 3px;display:block;color:#ffffff;font-size:14px;line-height:16px;font-family:Arial,Helvetica,sans-serif;text-align:center;font-weight:bold;text-align:center;text-decoration:none;border:12px solid #d7263d;border-radius:3px\" target=\"_blank\" href = ".$link." >Verify</a></div>";
+   //$massage = "<b> is message</b>";
+   //$massage .= "<a href = ".$link." >Verify</a>";
+
+   $header = "From:abc@somedomain.com \r\n";
+   $header .= "MIME-Version: 1.0\r\n";
+   $header .= "Content-type: text/html\r\n";
+
+   $retval = mail ($to,$subject,$message,$header);
+
+   if( $retval == true ) {
+      echo "Message sent successfully...";
+      return true;
+   }else {
+      echo "Message could not be sent...";
+      return false;
+   }
+=======
 function validationID($table , $column , $value ,$tag){
 
    $html = '<ul class="id_danger">';
@@ -95,5 +121,6 @@ function validationID($table , $column , $value ,$tag){
    return $html;
 
 
+>>>>>>> ad28b5d2ddba512b4c48cbcba277083e4438b20b
 
 }

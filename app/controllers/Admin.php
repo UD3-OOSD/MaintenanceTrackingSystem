@@ -84,10 +84,56 @@ class Admin extends Controller{
   }
 
   public function addNewLabourAction(){  // this is call by button in the index page of Admin. @uda
+
+    $validation = new Validate();
+    $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    if (isset($_POST['BusNumber'])){
+      $posted_values = posted_values($_POST);
+      $validation->check($_POST,[
+        'fullName' => [
+          'display' => 'Full name',
+          'require' => true,
+        ],
+        'lastName' => [
+          'display' => 'Last Name',
+          'require' => true,
+        ],
+        'ManufacturedYear' => [
+          'display' => 'Manufactured Year',
+          'require' => true,
+          'min' => 4,
+        ],
+        'BusCategory' => [
+          'display' => 'Model',
+          'require' => true,
+        ],
+        'Colour' => [
+          'display' => 'Colour',
+          'require' => true,
+        ],
+        'Mileage' => [
+          'display' => 'Mileage',
+          'require' => true,
+        ],
+        'NumberOfSeats' => [
+          'display' => 'NumberOfSeats',
+          'require' => true,
+        ],
+        'RegistrationDate' => [
+          'display' => 'Registration Date',
+          'require' => true
+        ]
+      ]);
+      if ($validation->passed()){
+        $bus = new bus();
+        #$bus->fillAction($_POST);
+        Router::redirect('admin');
+      }
     $this->view->render('admin/user_form');
 
     $lab = new Labour();
   }
+}
 
   public function editBusAction($bus,$data){  // call by button press @uda
     $bus->stateChange();
@@ -104,5 +150,12 @@ class Admin extends Controller{
     $bus->set_trigger(true);
     $bus->stateChange();
 
+  }
+
+  public function sendVarificationAction(){
+    $email = $_POST['mail'];
+    if(sendMail($email,"Verifycation mail ","You have registered in the Horana Deport",'https://www.google.com')){
+      Router::redirect('admin/addNewLabour');
+    }
   }
 }
