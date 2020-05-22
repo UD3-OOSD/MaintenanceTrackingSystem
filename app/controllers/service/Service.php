@@ -7,11 +7,19 @@ class Service{
   private static $count = 0;
   private $ServiceId;
 
-  public function __construct(){
+  private static $service = NULL;
 
-      $this->ServiceId = self::$count;
-      #$this->ss = new NewService($this,$this->ServiceId);
-      self::$count++;
+  private function __construct(){
+    $this->ServiceId = Service::$count;
+    $this->ss = new NewService($this,$this->ServiceId);
+    Service::$count++;
+  }
+
+  public static function getInstance(){
+    if(!isset(Service::$service)){
+      Service::$service = new Service();
+    }
+    return Service::$service;
   }
 
   public function stateChange(){
