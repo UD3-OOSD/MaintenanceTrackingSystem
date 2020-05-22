@@ -1,14 +1,11 @@
 <?php
 
-class NewService extends Controller implements ServiceState{
+class NewService implements ServiceState{
 
   private static $newservice = NULL;
 
   private function __construct(){
-    $this->load_model('ServiceActive');
-
-    $data=mergeData(['ServiceId'=> $id],$data);
-    $service->setAttr($data);
+      $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
 
     $service->stateChange();
     $this->fillAction($data,$service->getState());

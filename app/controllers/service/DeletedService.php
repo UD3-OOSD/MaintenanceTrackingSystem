@@ -1,18 +1,18 @@
 <?php
 
-class DeletedService extends Controller implements ServiceState{
+class DeletedService implements ServiceState{
 
-  private static $closedbus = NULL;
+  private static $delservice = NULL;
 
   private function __construct(){
 
   }
 
   public static function getInstance(){
-    if(!isset(ClosedBus::$closedbus)){
-      ClosedBus::$closedbus = new ClosedBus();
+    if(!isset(DeletedService::$delservice)){
+      DeletedService::$delservice = new DeletedService();
     }
-    return ClosedBus::$closedbus;
+    return DeletedService::$delservice;
   }
 
   public function stateChange($service){
@@ -22,4 +22,14 @@ class DeletedService extends Controller implements ServiceState{
   public function delete($service){
     //delete relavent record in db @avishka
   }
+
+    public function getState()
+    {
+        // TODO: Implement getState() method.
+    }
+
+    public function edit($service, $data)
+    {
+        // TODO: Implement edit() method.
+    }
 }

@@ -57,6 +57,13 @@ class ModelCommon{
       return (false);
   }
 
+  public static function loading_model( $model){
+      if (class_exists($model)) {
+          return (new $model());
+      }
+  }
+
+
 
   public static function ObjectTOArray($obj){
     if (is_object($obj)) {

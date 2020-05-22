@@ -2,17 +2,17 @@
 
 require_once(ROOT.DS.'app/controllers/labour/NewDeactiveLabour.php');
 
-class Labour extends Controller{
+class Labour{
 
   //here labour attributes
   private static $count;
   private $ls, $_if = false;
 
-  private static $labour = NULL;
+  private static $lab = NULL;
 
   private function __construct(){
-    $ls = NewDeactiveLabour::getInstance();
-    Labour::$count++;
+    $this->ls = NewDeactiveLabour::getInstance();
+    self::$count++;
   }
 
   public static function getInstance(){

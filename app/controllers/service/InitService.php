@@ -1,11 +1,11 @@
 <?php
 
-class InitService extends Controller implements ServiceState{
+class InitService implements ServiceState{
 
   private static $initservice = NULL;
 
   private function __construct(){
-    $this->load_model('ServiceActive');
+      $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){

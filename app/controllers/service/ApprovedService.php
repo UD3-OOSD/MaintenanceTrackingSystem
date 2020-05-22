@@ -1,6 +1,6 @@
 <?php
 
-class ApprovedService extends Controller implements ServiceState{
+class ApprovedService implements ServiceState{
 
   private static $appservice = NULL;
 
@@ -28,4 +28,13 @@ class ApprovedService extends Controller implements ServiceState{
   }
 
 
+    public function getState()
+    {
+        // TODO: Implement getState() method.
+    }
+
+    public function edit($service, $data)
+    {
+        // TODO: Implement edit() method.
+    }
 }

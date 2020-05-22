@@ -3,7 +3,7 @@
 require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
 
 
-class Bus extends Controller{
+class Bus {
 
   //
   private $mtns ;
@@ -14,9 +14,9 @@ class Bus extends Controller{
   private static $bus = NULL;
 
   private function __construct(){
-    Bus::$count++;
+    self::$count++;
     #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-    $bs = NewBus::getInstance();
+    $this->bs = NewBus::getInstance();
   }
 
   public static function getInstance(){
@@ -52,6 +52,7 @@ class Bus extends Controller{
   }
   public function fillAction($params){
     $params['BusId'] = 'Bus'.Bus::$count;
+    #dnd($this->bs);
     $this->bs->fillAction($params);
   }
 

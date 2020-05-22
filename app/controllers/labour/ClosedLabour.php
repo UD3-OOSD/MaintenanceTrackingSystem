@@ -1,6 +1,6 @@
 <?php
 
-class ClosedLabour extends Controller implements LabourState{
+class ClosedLabour implements LabourState{
 
   private static $closelab = NULL;
 
@@ -23,4 +23,9 @@ class ClosedLabour extends Controller implements LabourState{
   public function delete($lab){
     //delete particular records @avishka
   }
+
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }

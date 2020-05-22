@@ -1,6 +1,6 @@
 <?php
 
-class Service extends Controller{
+class Service{
 
   //Attrs of service
   private $ss, $_if = false, $time_bool = false;
@@ -9,9 +9,9 @@ class Service extends Controller{
 
   public function __construct(){
 
-      $this->ServiceId = Service::$count;
-      $this->ss = new NewService($this,$this->ServiceId);
-      Service::$count++;
+      $this->ServiceId = self::$count;
+      #$this->ss = new NewService($this,$this->ServiceId);
+      self::$count++;
   }
 
   public function stateChange(){

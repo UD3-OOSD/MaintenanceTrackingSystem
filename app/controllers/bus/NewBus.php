@@ -3,13 +3,13 @@
 require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 
 
-class NewBus extends Controller implements BusState{
+class NewBus  implements BusState{
 
   private static $newbus = NULL;
 
   private function __construct(){
-    $this->load_model('BusMS');
-    $this->load_model('BusME');
+      $this->BusMSModel = ModelCommon::loading_model('BusMS');
+      $this->BusMEModel = ModelCommon::loading_model('BusME');
   }
 
   public static function getInstance(){

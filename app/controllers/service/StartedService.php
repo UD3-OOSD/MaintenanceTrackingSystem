@@ -1,6 +1,6 @@
 <?php
 
-class StartedService extends Controller implements ServiceState{
+class StartedService implements ServiceState{
 
   private static $stservice = NULL;
 
@@ -19,4 +19,13 @@ class StartedService extends Controller implements ServiceState{
     $service->setState(FinishedService::getInstance());
   }
 
+    public function getState()
+    {
+        // TODO: Implement getState() method.
+    }
+
+    public function edit($service, $data)
+    {
+        // TODO: Implement edit() method.
+    }
 }

@@ -95,34 +95,39 @@ class Admin extends Controller{
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
-          'require' => true,
+          'require' => true
         ],
         'lastName' => [
           'display' => 'Last Name',
-          'require' => true,
+          'require' => true
         ],
-        'ManufacturedYear' => [
-          'display' => 'Manufactured Year',
+        'nameWIn' => [
+          'display' => 'Name with Initial',
           'require' => true,
           'min' => 4,
         ],
-        'BusCategory' => [
-          'display' => 'Model',
-          'require' => true,
+        'address' => [
+          'display' => 'Address',
+          'require' => true
         ],
-        'Colour' => [
-          'display' => 'Colour',
+          'title' => [
+              'display' => 'Address',
+              'require' => true
+          ],
+        'nic' => [
+          'display' => 'NIC Number',
           'require' => true,
           'min' => 10,
           'max' => 12,
           'unique' => 'labourdetails'
         ],
-        'Mileage' => [
-          'display' => 'Mileage',
+        'email' => [
+          'display' => 'Email Address',
           'require' => true,
+          'valid_email' => true
         ],
-        'NumberOfSeats' => [
-          'display' => 'NumberOfSeats',
+        'tel' => [
+          'display' => 'Telephone Number',
           'require' => true,
           'is_numeric' => true,
           'min' => 10

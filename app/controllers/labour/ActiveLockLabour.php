@@ -1,6 +1,6 @@
 <?php
 
-class ActiveLockLabour extends Controller implements LabourState{
+class ActiveLockLabour  implements LabourState{
 
   private static $actlocklab = NULL;
 
@@ -22,4 +22,9 @@ class ActiveLockLabour extends Controller implements LabourState{
       $lab->setState(ActiveLabour::getInstance());
     }
   }
+
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }

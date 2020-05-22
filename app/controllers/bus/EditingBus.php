@@ -3,14 +3,14 @@
 require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 
-class EditingBus extends Controller implements BusState{
+class EditingBus  implements BusState{
 
   private $ServiceCheckList;
 
   private static $editingbus = NULL;
 
   private function __construct(){
-    $this->load_model('BusME');
+      $this->BusMEModel = ModelCommon::loading_model('BusME');;
   }
 
   public static function getInstance(){
@@ -28,7 +28,7 @@ class EditingBus extends Controller implements BusState{
     //edit the bus data field -> goto BusModel.
 
     // at the end
-    $bus->setState(new LockedBus());  // turn into locked state.
+    $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }
 
   public function updateDistance($params){

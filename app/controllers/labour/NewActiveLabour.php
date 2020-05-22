@@ -1,6 +1,6 @@
 <?php
 
-class NewActiveLabour extends Controller implements LabourState{
+class NewActiveLabour implements LabourState{
 
   private static $newaclab = NULL;
 
@@ -33,4 +33,8 @@ class NewActiveLabour extends Controller implements LabourState{
   }
 
 
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }
