@@ -24,11 +24,11 @@ class EditingBus extends Controller implements BusState{
     $bus->setState(LockedBus::getInstance());
   }
 
-  public function fitAction($bus,$attr){
+  public function fitAction($bus_num){
     //edit the bus data field -> goto BusModel.
-
+    $this->BusMEModel->updateRowByBusNumber($bus_num,$_POST); // take a look @devin. 
     // at the end
-    $bus->setState(new LockedBus());  // turn into locked state.
+    $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }
 
   public function updateDistance($params){

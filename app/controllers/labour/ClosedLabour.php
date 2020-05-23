@@ -22,5 +22,6 @@ class ClosedLabour extends Controller implements LabourState{
 
   public function delete($lab){
     //delete particular records @avishka
+    // add softdelete function in here. @devin.
   }
 }

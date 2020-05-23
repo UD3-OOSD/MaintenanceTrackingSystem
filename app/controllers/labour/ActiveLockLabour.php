@@ -22,4 +22,9 @@ class ActiveLockLabour extends Controller implements LabourState{
       $lab->setState(ActiveLabour::getInstance());
     }
   }
+
+  public function fitAction($lab_id){
+    $lab_details = $this->Labour->findByUserName($lab_id);
+    
+  }
 }

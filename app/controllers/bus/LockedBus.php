@@ -26,6 +26,14 @@ class LockedBus extends Controller implements BusState{
     }
   }
 
+  public function fitAction($bus_num){
+    //edit the bus data field -> goto BusModel.
+    $bus_detail = $this->BusMEModel->findByBusNumber($bus_num);
+    // at the end
+    $this->stateChange($bus);  // turn into locked state.
+    return $bus_detail;
+  }
+
   //show method
   public function feed(){
 

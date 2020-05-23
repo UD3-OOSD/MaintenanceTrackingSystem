@@ -17,7 +17,7 @@ class ClosedBus extends Controller implements BusState{
     }
     return ClosedBus::$closedbus;
   }
-  
+
   public function stateChange($bus){
     //no idea about state change @devin
     $this->delete();  // like
@@ -25,6 +25,7 @@ class ClosedBus extends Controller implements BusState{
 
   public function delete(){ // or can call directly to Model @avishka.
     //delete from $bussess with related services but not all. @avishka
+    // add soft delete function to here. @devin
   }
 
     public function updateDistance($params)

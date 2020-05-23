@@ -162,14 +162,44 @@ class Admin extends Controller{
   $this->view->render('admin/user_form');
 }
 
-  public function editBusAction($bus,$data){  // call by button press @uda
-    $bus->stateChange();
-    $bus->getState()->fitAction($bus,$data);
+  public function editBusAction(){  // call by button press @uda
+    //add the validation @devin
+    $bus_num = $_POST['bus_num'];
+    $details = $bus->getState()->fitAction($bus_num);
+    $this->view->post = $details;
+    $this->view->render('admin/bus');
   }
 
-  public function editLabourAction($lab,$data){
-    $lab->stateChange();
-    $lab->getState()->edit($lab,$data);
+  public function editLabourAction(){
+    $lab_id = $_POST['lab_id'];
+    $details = $bus->getState()->fitAction($lab_id);
+    $this->view->post = $details;
+    $this->view->render('admin/labour');
+  }
+
+  public function saveBusAction(){
+
+    $validation = new Validate();
+    //$posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    if ($_POST){
+      $posted_values = posted_values($_POST);
+      $validation->check($_POST,[
+        // set the validation layer @Devin
+      ]);
+      if ($validation->passed()){
+        $bus_num = $_POST['bus_num'];
+        $details = $bus->getState()->fitAction($bus_num);
+        Router::redirect('admin');
+      }
+
+    }
+    $this->view->post = $posted_values;
+    $this->view->displayErrors = $validation->displayErrors();
+    $this->view->render('admin/bus_form');
+  }
+
+  public function saveLabourAction(){
+
   }
 
   public function deleteBus($bus){
