@@ -95,39 +95,34 @@ class Admin extends Controller{
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
-          'require' => true
+          'require' => true,
         ],
         'lastName' => [
           'display' => 'Last Name',
-          'require' => true
+          'require' => true,
         ],
-        'nameWIn' => [
-          'display' => 'Name with Initial',
+        'ManufacturedYear' => [
+          'display' => 'Manufactured Year',
           'require' => true,
           'min' => 4,
         ],
-        'address' => [
-          'display' => 'Address',
-          'require' => true
+        'BusCategory' => [
+          'display' => 'Model',
+          'require' => true,
         ],
-          'title' => [
-              'display' => 'Address',
-              'require' => true
-          ],
-        'nic' => [
-          'display' => 'NIC Number',
+        'Colour' => [
+          'display' => 'Colour',
           'require' => true,
           'min' => 10,
           'max' => 12,
           'unique' => 'labourdetails'
         ],
-        'email' => [
-          'display' => 'Email Address',
+        'Mileage' => [
+          'display' => 'Mileage',
           'require' => true,
-          'valid_email' => true
         ],
-        'tel' => [
-          'display' => 'Telephone Number',
+        'NumberOfSeats' => [
+          'display' => 'NumberOfSeats',
           'require' => true,
           'is_numeric' => true,
           'min' => 10
@@ -170,14 +165,14 @@ class Admin extends Controller{
   public function editBusAction(){  // call by button press @uda
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
-    $details = $bus->getState()->fitAction($bus_num);
+    $details = LockedBus::getInstance()->fitAction($bus_num);
     $this->view->post = $details;
     $this->view->render('admin/bus');
   }
 
   public function editLabourAction(){
     $lab_id = $_POST['lab_id'];
-    $details = $bus->getState()->fitAction($lab_id);
+    $details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->view->post = $details;
     $this->view->render('admin/labour');
   }
@@ -193,8 +188,13 @@ class Admin extends Controller{
       ]);
       if ($validation->passed()){
         $bus_num = $_POST['bus_num'];
-        $details = $bus->getState()->fitAction($bus_num);
-        Router::redirect('admin');
+        if(isset($_POST['save'])){
+          EditingBus::getInstance()->fitAction($bus_num);
+          Router::redirect('admin/index');
+        }
+        else if(isset($_POST['delete'])){
+          $this->deleteBus($bus_num);
+        }
       }
 
     }
@@ -204,14 +204,42 @@ class Admin extends Controller{
   }
 
   public function saveLabourAction(){
-
+    $validation = new Validate();
+    //$posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>'' , 'acl'=>''];
+    if ($_POST){
+      #dnd($_POST);
+      $posted_values = posted_values($_POST);
+      $validation->check($_POST,[
+      // add validation layer @devin.
+      ]);
+      if ($validation->passed()){
+        $nic = $_POST['nic'];
+        if(isset($_POST['save'])){
+          ActiveLabour::getInstance()->fitAction($nic);
+          Router::redirect('admin/index');
+        }
+        else if(isset($_POST['delete'])){
+          $this->deleteLabour($nic);
+        }
+      }
+    $this->view->render('admin/user_form');
+    $lab = Labour::getInstance();
+  }
+  $this->view->post = $posted_values;
+  $this->view->displayErrors = $validation->displayErrors();
+  $this->view->render('admin/user_form');
   }
 
   public function deleteBus($bus){
     // jQuery code in here to fade @devin.
-    $bus->set_trigger(true);
+    $bus = LockedBus::getInstance()->set_trigger(true);
     $bus->stateChange();
 
+  }
+
+  public function deleteLabour($id){
+    $lab = ActiveLabour::getInstance()->set_trigger(true);
+    $lab->stateChange();
   }
 
   public function sendVarificationAction(){

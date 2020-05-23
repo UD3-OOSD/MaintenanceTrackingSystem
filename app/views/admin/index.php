@@ -9,7 +9,7 @@
   <div class="row register">
     <div class="col-sm-6 reg">
       <h1 class="center">edit a bus entry</h1>
-      <form class="form-horizontal hr" action="" method="post">
+      <form class="form-horizontal hr" action="admin/editBus" method="post">
         <div class=""><?= $this->displayarr1?></div>
         <div class="form-group">
           <label for="" class="control-label col-sm-4">enter the bus number</label>
@@ -28,7 +28,7 @@
   <div class="row register">
     <div class="col-sm-6 reg">
       <h1 class="center">edit a bus entry</h1>
-      <form class="form-horizontal hr" action="" method="post">
+      <form class="form-horizontal hr" action="admin/editLabour" method="post">
         <div class=""><?= $this->displayarr2?></div>
         <div class="form-group">
           <label for="" class="control-label col-sm-4">enter the labour NIC</label>
@@ -44,6 +44,6 @@
       </form>
     </div>
   </div>
-  
+
 </div>
 <?php $this->end() ?>
