@@ -1,6 +1,6 @@
 <?php
 
-class ActiveLockLabour extends Controller implements LabourState{
+class ActiveLockLabour  implements LabourState{
 
   private static $actlocklab = NULL;
 
@@ -25,6 +25,6 @@ class ActiveLockLabour extends Controller implements LabourState{
 
   public function fitAction($lab_id){
     $lab_details = $this->Labour->findByUserName($lab_id);
-    
+
   }
 }

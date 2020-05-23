@@ -1,6 +1,6 @@
 <?php
 
-class Service extends Controller{
+class Service{
 
   //Attrs of service
   private $ss, $_if = false, $time_bool = false;

@@ -3,7 +3,7 @@
 require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 
-class LockedBus extends Controller implements BusState{
+class LockedBus  implements BusState{
 
   private static $lockedbus = NULL;
 

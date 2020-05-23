@@ -1,6 +1,6 @@
 <?php
 
-class FinishedService extends Controller implements ServiceState{
+class FinishedService implements ServiceState{
 
   private static $finservice = NULL;
 
@@ -21,4 +21,13 @@ class FinishedService extends Controller implements ServiceState{
     }// if service is not good then ? @nipun.
   }
 
+    public function getState()
+    {
+        // TODO: Implement getState() method.
+    }
+
+    public function edit($service, $data)
+    {
+        // TODO: Implement edit() method.
+    }
 }

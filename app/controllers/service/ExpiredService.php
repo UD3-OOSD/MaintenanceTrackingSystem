@@ -1,6 +1,6 @@
 <?php
 
-class ExpiredService extends Controller implements ServiceState{
+class ExpiredService implements ServiceState{
 
   private static $expservice = NULL;
 
@@ -27,4 +27,14 @@ class ExpiredService extends Controller implements ServiceState{
   public function delete_data($service){
     // delete date from form @devin @uda
   }
+
+    public function getState()
+    {
+        // TODO: Implement getState() method.
+    }
+
+    public function edit($service, $data)
+    {
+        // TODO: Implement edit() method.
+    }
 }

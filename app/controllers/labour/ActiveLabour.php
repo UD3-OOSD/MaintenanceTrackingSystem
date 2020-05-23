@@ -1,6 +1,6 @@
 <?php
 
-class ActiveLabour extends Controller implements LabourState{
+class ActiveLabour implements LabourState{
 
   private static $actlab = NULL;
 
@@ -23,4 +23,9 @@ class ActiveLabour extends Controller implements LabourState{
     $lab->setAttr($data);
     $this->stateChange($lab);
   }
+
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }
