@@ -32,29 +32,20 @@ class Register extends Controller{
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
 
-        #$tables=['user_sessions','users'];
-        #$keys = ['user_id','UserId'];
-        #$params = ['UserId','email','session','user_agent'];
-
-        #$results=ModelCommon::getColumnNames('bustable');
-        #$results=$user->getColumnNames('buscategory');
-        #$results=$user->LeftJoinSpecific($tables,$keys,$params,['UserId' => $user->UserId]);
-        #echo($results->UserId);
-        #echo(implode('    |||',$results));
-        #echo($results);
-          #ModelCommon::addColumn('activeservices','test','VARCHAR(80)');
-          #ModelCommon::UpdateRow('users',['username'=>'test0005'],['email'=>'donthackmeplease1710@gmail.com','fname'=>'Devin']);
+      #ModelCommon::UpdateRow('users',['username'=>'test0005'],['email'=>'donthackmeplease1710@gmail.com','fname'=>'Devin']);
         #$user->addColumn('test','VARCHAR(80)');
         #ModelCommon::find('bustable',['conditions'=>'BusId=?','bind'=>[2]]);
         #echo('<br>');
         #echo($user&& password_verify(Input::get('password'),$user->password ));
         #echo validationID('bustable','BusNumber','PQR-6234');
+        #echo ModelCommon::numOfRows('user_sessions');
         #dnd('..............................');
+        #  dnd($user->acls());
         if ($user&& password_verify(Input::get('password'),$user->password )) {
+
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
           $category = $user->login($remember);
-          # echo($category);
-          #dnd('...............');
+          #echo($category);
           Router::redirect(strtolower($category));
         }else{
           $validation->addError("There is an error with your username or password.");

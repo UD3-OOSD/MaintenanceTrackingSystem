@@ -3,7 +3,6 @@
   class Router{
 
     public static function route($url){
-
       //cpntroller
       $controller = (isset($url[0]) && $url[0] != '') ? ucwords($url[0]) : DEFAULT_CONTROLLER;
       $controller_name = $controller;
@@ -16,7 +15,7 @@
       array_shift($url);
 
       //acl check
-
+        #dnd($controller_name);
       $grantAccess = self::hasAccess($controller_name, $action_name);
       #echo($grantAccess);
       #echo("   Router");
@@ -60,6 +59,7 @@
      }
 
       public static function hasAccess($controller_name, $action_name='index'){
+
         $acl_file = file_get_contents(ROOT.DS.'app'.DS.'acl.json');
         $acl = json_decode($acl_file, true);
         #dnd($acl);
@@ -69,13 +69,19 @@
         if (Session::exists(CURRENT_USER_SESSION_NAME)) {
           $current_user_acls[] = "LoggedIn";
           $lis = currentUser()->acls();
+            #dnd(currentUser());
           #dnd($lis);
           $current_user_acls[] = $lis;
           #foreach ($lis as $a) {
           #  $current_user_acls[] = $a;
           #}
         }
+
+
+        #dnd(".................");
+
         foreach ($current_user_acls as $level) {
+
           if(array_key_exists($level,$acl) && array_key_exists($controller_name, $acl[$level])){
             if(in_array($action_name, $acl[$level][$controller_name]) || in_array("*", $acl[$level][$controller_name])){
               $grantAccess = true;
@@ -92,6 +98,7 @@
           }
 
         }
+
         #echo($grantAccess);
         #echo("   hasAccess");
         #echo('<br>');

@@ -28,7 +28,9 @@ class LabourActive extends Model{
     public function registerNewLabouror($params){
         $this->assign($params);
         $this->deleted=0;
+        $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
         $this->save();
+
     }
 
     public function stateChange_this($state){

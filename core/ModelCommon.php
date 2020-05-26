@@ -63,6 +63,14 @@ class ModelCommon{
       }
   }
 
+  public static function nextID($table){
+      $db= DB::getInstance();
+      $value = $db->numOfRows($table);
+      $count = $value[0]["COUNT(*)"];
+      $count++;
+      return "{$count}";
+  }
+
 
 
   public static function ObjectTOArray($obj){

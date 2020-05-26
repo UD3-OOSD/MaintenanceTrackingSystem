@@ -11,7 +11,7 @@ class Users extends Model{
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
     $this->_softDelete = true;
     if ($user != '') {
-      if (is_int($user)) {
+      if (substr($user,0,3)=='Lab') {
         $u = $this->_db->findFirst('users', ['conditions'=>'LabourId = ?', 'bind'=>[$user]]);
       }else{
         $u = $this->_db->findFirst('users', ['conditions'=>'username = ?', 'bind'=>[$user]]);
@@ -61,6 +61,7 @@ class Users extends Model{
   public function registerNewUser($params){
     $this->assign($params);
     $this->deleted = 0;
+    $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
     #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
     $this->save();
   }
@@ -73,7 +74,7 @@ class Users extends Model{
       'bind' => [Session::uagent_no_version(),Cookie::get(REMEMBER_ME_COOKIE_NAME)]
     ]);
     if ($userSession->user_id != '') {
-      $user = new self((int)$userSession->user_id);
+      $user = new self($userSession->user_id);  //// $user = new self((int)$userSession->user_id);
       $user->login();
       return $user;
     }
@@ -83,7 +84,9 @@ class Users extends Model{
 
   public static function currentLoggedInUser(){
     if(!isset(self::$currentLoggedInUser) && Session::exists(CURRENT_USER_SESSION_NAME)){
-        $u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
+        //echo(Session::get(CURRENT_USER_SESSION_NAME));
+        $u = new Users(Session::get(CURRENT_USER_SESSION_NAME)); ///$u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
+        //dnd($u);
         self::$currentLoggedInUser = $u;
     }
     return self::$currentLoggedInUser;

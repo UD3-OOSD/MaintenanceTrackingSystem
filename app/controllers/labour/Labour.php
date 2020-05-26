@@ -5,14 +5,14 @@ require_once(ROOT.DS.'app/controllers/labour/NewDeactiveLabour.php');
 class Labour{
 
   //here labour attributes
-  private static $count;
+  #private static $count;
   private $ls, $_if = false;
 
   private static $lab = NULL;
 
   private function __construct(){
     $this->ls = NewDeactiveLabour::getInstance();
-    self::$count++;
+    #self::$count++;
   }
 
   public static function getInstance(){
@@ -35,7 +35,7 @@ class Labour{
   }
 
   public function fillAction($data){
-    $data['LabourId'] = 'Lab'.Labour::$count;
+    #$data['LabourId'] = 'Lab'.Labour::$count;
     $this->ls->fill($data);
   }
 

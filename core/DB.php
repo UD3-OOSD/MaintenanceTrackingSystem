@@ -157,9 +157,12 @@
     }
 
     public function runSQL($sql){
-      $prepared=$this->_pdo->prepare($sql);
-      $prepared->execute();
-      $this->_result=$prepared->fetchALL(PDO::FETCH_ASSOC);
+        $prepared = $this->_pdo->prepare($sql);
+        if ($prepared->execute()) {
+            $this->_result = $prepared->fetchALL(PDO::FETCH_ASSOC);
+            return true;
+        }
+        return  false;
     }
 
     public function RightJoin($tables,$keys,$params){
@@ -307,7 +310,15 @@
         return false;
     }
 
-
+    public function numOfRows($table){
+        if(isset($table)){
+            $sql = "SELECT COUNT(*) FROM {$table}";
+            if ($this->runSQL($sql)) {
+                return $this->results();
+            }
+        }
+        return false;
+    }
 
 
 
