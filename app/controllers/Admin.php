@@ -179,16 +179,33 @@ class Admin extends Controller{
   public function saveBusAction(){
 
     $validation = new Validate();
-    //$posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+    $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
     if ($_POST){
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
-        // set the validation layer @Devin
+          'EngineNumber' => [
+              'display' => 'Engine number',
+              'require' => true,
+              'unique' => 'bustable',
+              'min' => 6,
+          ],
+          'Colour' => [
+              'display' => 'Colour',
+              'require' => true,
+          ],
+          'Mileage' => [
+              'display' => 'Mileage',
+              'require' => true,
+          ],
+          'NumberOfSeats' => [
+              'display' => 'NumberOfSeats',
+              'require' => true,
+          ]
       ]);
       if ($validation->passed()){
-        $bus_num = $_POST['bus_num'];
+        #$bus_num = $_POST['bus_num'];
         if(isset($_POST['save'])){
-          EditingBus::getInstance()->fitAction($bus_num);
+          (EditingBus::getInstance())->fitAction($_POST);
           Router::redirect('admin/index');
         }
         else if(isset($_POST['delete'])){

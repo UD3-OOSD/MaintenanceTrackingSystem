@@ -62,7 +62,8 @@ class Forman extends Controller{
           ]);
           if ($validation->passed()) {
               $service = Service::getInstance();
-              $service->fillAction($_POST);
+              $service->set_trigger();
+              $service->fillAction($_POST,'forman');
               Router::redirect('forman');
           }
       }

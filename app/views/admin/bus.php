@@ -9,7 +9,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
                 <h1>Edit bus data</h1>
-                <form class="form-horizontal hr" method="post" action="admin/saveLabour">
+                <form class="form-horizontal hr" method="post" action="admin/saveBus">
                   <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Registration No.</label>

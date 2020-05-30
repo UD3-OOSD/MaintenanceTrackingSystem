@@ -37,8 +37,8 @@ class Service{
           }
       }
   }
-  public function fillAction($params){
-      $this->ss->fillAction($params);
+  public function fillAction($params,$actor){
+      $this->ss->fillAction($params,$this);
       $this->setAttr($params);
   }
 
