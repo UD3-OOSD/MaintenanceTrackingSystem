@@ -6,6 +6,9 @@ class Labour{
 
   //here labour attributes
   #private static $count;
+  private $labours = [];
+  private $keys = ['admin','forman'];
+
   private $ls, $_if = false;
 
   private static $lab = NULL;
@@ -15,11 +18,15 @@ class Labour{
     #self::$count++;
   }
 
-  public static function getInstance(){
-    if(!isset(Labour::$lab)){
-      Labour::$lab = new Labour();
+  public static function getMultitance($key){
+    if(!isset($keys[$key])){
+      return null;
+    }else{
+      if(!isset($labours[$key])){
+        $labours[$key] = new Bus();
+      }
+      return $labours[key];
     }
-    return Labour::$lab;
   }
 
   public function stateChange(){

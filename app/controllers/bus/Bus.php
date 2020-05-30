@@ -5,6 +5,8 @@ require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
 
 class Bus {
 
+  private $busses = [];
+  private $keys = ['clerk','admin'];
   //
   private $mtns ;
   private $bs, $_if = false;
@@ -19,11 +21,15 @@ class Bus {
     $this->bs = NewBus::getInstance();
   }
 
-  public static function getInstance(){
-    if(!isset(Bus::$bus)){
-      Bus::$bus = new Bus();
+  public static function getMultitance($key){
+    if(!isset($keys[$key])){
+      return null;
+    }else{
+      if(!isset($busses[$key])){
+        $busses[$key] = new Bus();
+      }
+      return $busses[key];
     }
-    return Bus::$bus;
   }
 
   public function stateChange(){
