@@ -3,6 +3,9 @@
 class Service{
 
   //Attrs of service
+  private $services = [];
+  private $keys = ['admin','mechanics','forman'];
+
   private $ss, $_if = false, $time_bool = false;
   #private static $count = 0;
   private $ServiceId;
@@ -15,11 +18,15 @@ class Service{
     #Service::$count++;
   }
 
-  public static function getInstance(){
-    if(!isset(Service::$service)){
-      Service::$service = new Service();
+  public static function getMultitance($key){
+    if(!isset($keys[$key])){
+      return null;
+    }else{
+      if(!isset($services[$key])){
+        $services[$key] = new Bus();
+      }
+      return $services[key];
     }
-    return Service::$service;
   }
 
   public function stateChange(){
