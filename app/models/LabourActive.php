@@ -8,7 +8,7 @@ class LabourActive extends Model{
         parent::__construct($table);
 
         if ($labour != '') {
-            if (is_int($labour)) {
+            if (substr($labour,0,3)=='Lab') {
                 $l = $this->_db->findFirst('labourdetails', ['conditions' => 'LabourId = ?', 'bind' => [$labour]]);
             }
             if (isset($l)) {
@@ -29,6 +29,7 @@ class LabourActive extends Model{
         $this->assign($params);
         $this->deleted=0;
         $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+        $this->LabourState =0;
         $this->save();
 
     }

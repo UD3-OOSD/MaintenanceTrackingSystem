@@ -5,7 +5,7 @@ class ServiceActive extends Model{
         $table='activeservices';
         parent::__construct($table);
         if ($service != '') {
-            if (is_int($service)) {
+            if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst('activeservices', ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);
             }
             if ($s) {
@@ -34,6 +34,8 @@ class ServiceActive extends Model{
     public function registerNewService($params){
         $this->assign($params);
         $this->deleted = 0;
+        $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
+        $this->ServiceState =0;
         $this->save();
 
     }

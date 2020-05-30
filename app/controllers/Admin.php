@@ -101,27 +101,26 @@ class Admin extends Controller{
           'display' => 'Last Name',
           'require' => true,
         ],
-        'ManufacturedYear' => [
-          'display' => 'Manufactured Year',
-          'require' => true,
-          'min' => 4,
-        ],
-        'BusCategory' => [
-          'display' => 'Model',
+        'nameWIn' => [
+          'display' => 'Name with initials',
           'require' => true,
         ],
-        'Colour' => [
-          'display' => 'Colour',
+        'address' => [
+          'display' => 'Address',
+          'require' => true,
+        ],
+        'nic' => [
+          'display' => 'NIC Number',
           'require' => true,
           'min' => 10,
           'max' => 12,
           'unique' => 'labourdetails'
         ],
-        'Mileage' => [
-          'display' => 'Mileage',
+        'email' => [
+          'display' => 'Email',
           'require' => true,
         ],
-        'NumberOfSeats' => [
+        'tel' => [
           'display' => 'NumberOfSeats',
           'require' => true,
           'is_numeric' => true,

@@ -28,11 +28,6 @@ class InitService implements ServiceState{
     $this->TableUpdate($data);
   }
 
-    public function getState(){
-      return('InitService');
-        // TODO: Implement getState() method.
-    }
-
 
 
     public function TableUpdate(){

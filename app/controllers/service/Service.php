@@ -4,15 +4,15 @@ class Service{
 
   //Attrs of service
   private $ss, $_if = false, $time_bool = false;
-  private static $count = 0;
+  #private static $count = 0;
   private $ServiceId;
 
   private static $service = NULL;
 
   private function __construct(){
-    $this->ServiceId = Service::$count;
-    $this->ss = new NewService($this,$this->ServiceId);
-    Service::$count++;
+    #$this->ServiceId = Service::$count;
+    $this->ss = NewService::getInstance();
+    #Service::$count++;
   }
 
   public static function getInstance(){
@@ -37,34 +37,10 @@ class Service{
           }
       }
   }
-
-  public static function validation($params){
-      #validation for outside only returns validation object
-      $validation = new Validate();
-      $validation->check($params,[
-          'BusNumber' => [
-              'display' => 'BusNumber',
-              'require' => true,
-              'unique' => 'bustable',
-              'min' => 8  #check
-          ],
-          'ServiceType' => [
-              'display' => 'Service Type',
-              'require' => true,
-          ],
-          'Labourers' => [
-              'display' => 'Labourers',
-              'require' => true,
-              'min' => 4,
-          ],
-          'ServiceInitiatedDate' => [
-              'display' => 'Start Date',
-              'require' => true
-          ]
-      ]);
-      return($validation);
+  public function fillAction($params){
+      $this->ss->fillAction($params);
+      $this->setAttr($params);
   }
-
 
   public function get_trigger(){
     return $this->_if;

@@ -35,18 +35,37 @@ class Forman extends Controller{
 
   }
   public function addService(){
+      $validation = new Validate();
       $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceInitiatedDate' => '','Labourers' => '','ServiceDescription' => ''];
-      if (isset($_POST['ServiceType'])){
-          $posted_values=posted_values($_POST);
-          $validation = Service::validation($_POST);
-          if ($validation->passed()){
-              $service = new Service($_POST);
+      if ($_POST) {
+          $posted_values = posted_values($_POST);
+          $validation->check($_POST, [
+              'BusNumber' => [
+                  'display' => 'BusNumber',
+                  'require' => true,
+                  'unique' => 'bustable',
+                  'min' => 8  #check
+              ],
+              'ServiceType' => [
+                  'display' => 'Service Type',
+                  'require' => true,
+              ],
+              'Labourers' => [
+                  'display' => 'Labourers',
+                  'require' => true,
+                  'min' => 4,
+              ],
+              'ServiceInitiatedDate' => [
+                  'display' => 'Start Date',
+                  'require' => true
+              ]
+          ]);
+          if ($validation->passed()) {
+              $service = Service::getInstance();
+              $service->fillAction($_POST);
               Router::redirect('forman');
           }
-      }else{
-          $validation = new Validate();
       }
-
       $this->view->post = $posted_values;
       $this->view->displayErrors = $validation->displayErrors();
       $this->view->render('forman/service_form');#check with @nip and @uda

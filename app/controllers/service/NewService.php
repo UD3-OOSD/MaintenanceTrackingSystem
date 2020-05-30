@@ -3,12 +3,10 @@
 class NewService implements ServiceState{
 
   private static $newservice = NULL;
+  private $ServiceActiveModel;
 
   private function __construct(){
       $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
-
-    $service->stateChange();
-    $this->fillAction($data,$service->getState());
   }
 
   public static function getInstance(){
@@ -21,21 +19,15 @@ class NewService implements ServiceState{
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState(ApprovedService::getInstance());
+        $this->ServiceActiveModel->stateChange($service->ServiceId,2);
     }else{
       $service->setState(InitService::getInstance());
+      $this->ServiceActiveModel->stateChange($service->ServiceId,1);
     }
   }
 
 
-  public function getState()
-  {
-      // TODO: Implement getState() method.
-      return('NewService');
-  }
-
-
-  public function fillAction($data,$state){
-      $data=mergeData(['ServiceId'=> $state],$data);
+  public function fillAction($data){
       $this->ServiceActiveModel->registerNewService($data);
   }
 

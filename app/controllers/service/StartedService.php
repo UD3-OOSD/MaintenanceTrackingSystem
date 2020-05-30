@@ -28,4 +28,9 @@ class StartedService implements ServiceState{
     {
         // TODO: Implement edit() method.
     }
+
+    public function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
+    }
 }
