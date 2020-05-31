@@ -6,6 +6,11 @@ require_once(ROOT.DS.'app/controllers/labour/Labour.php');
 class Admin extends Controller{
 
   private $busses , $labours; // just assume or can to set seperate arrays to diff states. @avishka
+  private $bus , $lab;
+
+  public function __construct($controller_name,$action){
+    parent::__construct($controller_name, $action);
+  }
 
   public function indexAction(){
     $this->view->render('admin/index');
@@ -72,7 +77,7 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $bus = Bus::getInstance();
+        $bus = Bus::getMultitance($this->controller_name);
         $bus->fillAction($_POST);
         Router::redirect('admin');
       }
@@ -149,12 +154,12 @@ class Admin extends Controller{
       ]);
       #dnd($validation->passed());
       if ($validation->passed()){
-        $labour = Labour::getInstance();
-        $labour->fillAction($_POST);
+        $lab = Labour::getMultitance($this->controller_name);
+        $lab->fillAction($_POST);
         Router::redirect('admin/index');
       }
     $this->view->render('admin/user_form');
-    $lab = Labour::getInstance();
+    $lab = Labour::getMultitance($this->controller_name);           //is this usefull??
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();

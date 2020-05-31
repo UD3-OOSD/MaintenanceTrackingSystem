@@ -2,6 +2,10 @@
 
 class Clerk extends Controller{
 
+  public function __construct($controller_name,$action){
+    parent::__construct($controller_name, $action);
+  }
+
   public function indexAction(){
 
     $validation = new Validate();
