@@ -2,11 +2,10 @@
 
   class DB{
 
-    private $users = [];
-    private $locked = [];
-    private $restricted_users = ['admin','forman','clerk'];
+    private static $users = [];
+    private static $locked = [];
+    private static $restricted_users = ['admin','forman','clerk'];
 
-    private static $_instance = null;
     private $_pdo, $_query ,$_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
     private function __construct(){
@@ -23,21 +22,31 @@
 
     }
 
-    public static function getMultitance($key){
-      if(!isset($keys[$key])){
+    public static function getMultitance($key='system'){
+        #dnd(in_array($key,DB::$restricted_users));
+      if(!in_array($key,DB::$restricted_users)){
         if($key == 'mechanic'){
-          if(!isset($users['mechanic'])){
-            $users['mechanic'] = new BD();
+          if(!in_array('mechanic',DB::$users)){
+            DB::$users['mechanic'] = new DB();
           }
-          return $users['mechanic'];
+          return DB::$users['mechanic'];
+        }elseif ($key == 'system'){
+            if(!in_array('system',DB::$users)){
+                DB::$users['system'] = new DB();
+            }
+            return DB::$users['system'];
         }
         else{return null;}
       }else{
-        if(!isset($locked[$key])){
-          if(!isset($users[$key])){
-            $locked[$key] = new BD();
+        if(!in_array($key,DB::$locked)){
+          if(!in_array($key,DB::$users)){
+              //dnd(DB::$users);
+              DB::$locked[$key] = new DB();
+              return DB::$locked[$key];
+          }else{
+              return DB::$users[$key];
           }
-          return $users[$key];
+
         }else{
           return null;
         }  

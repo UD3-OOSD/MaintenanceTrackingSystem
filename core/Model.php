@@ -5,7 +5,7 @@ class Model{
   public $id;
 
   public function __construct($table){
-    $this->_db = DB::getInstance();
+    $this->_db = DB::getMultitance("admin");
     $this->_table = $table;
     $this->_setTableColumns();
     $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));
@@ -13,7 +13,7 @@ class Model{
 
   protected function _setTableColumns(){
     $columns = $this->get_columns();
-    foreach ($columns as $column) {
+    foreach($columns as $column) {
       $columnName = $column->Field;
       $this->_columnNames[] = $columnName;
       $this->{$columnName} = null;
@@ -21,6 +21,7 @@ class Model{
   }
 
   public function get_columns(){
+      #dnd($this->_db);
     return $this->_db->get_columns($this->_table);
   }
 

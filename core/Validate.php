@@ -4,7 +4,7 @@ class Validate{
   private $_passed = false, $_errors = [], $_db= null;
 
   public function __construct(){
-    $this->_db = DB::getInstance();
+    $this->_db = DB::getMultitance();
   }
 
   public function check($source, $items=[]){
