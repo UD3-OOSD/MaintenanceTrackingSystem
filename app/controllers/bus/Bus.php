@@ -58,7 +58,10 @@ class Bus {
     $this->_if = false;
   }
 
-  public function showData(){
+  public function showData($id){
+    $details = $this->bs->show($id);
+    $this->setState($details['BusState']);
+    return $details;
     //this will feed the bus data table accoring to it's bus_id. @uda
 
   }

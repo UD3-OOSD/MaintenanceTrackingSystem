@@ -39,7 +39,8 @@ class NewBus  implements BusState{
   }
 
   public function show($id){
-    echo('Error');
+    $details = ObjecttoArray($this->BusMSModel->findByBusNumber($id));
+    return $details;
   }
 
 }

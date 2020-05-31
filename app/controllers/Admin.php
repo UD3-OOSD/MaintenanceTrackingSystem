@@ -169,14 +169,14 @@ class Admin extends Controller{
   public function editBusAction(){  // call by button press @uda
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
-    $details = LockedBus::getInstance()->fitAction($bus_num);
+    //$details = LockedBus::getInstance()->fitAction($bus_num);
     $this->view->post = $details;
     $this->view->render('admin/bus');
   }
 
   public function editLabourAction(){
     $lab_id = $_POST['lab_id'];
-    $details = ActiveLockLabour::getInstance()->fitAction($lab_id);
+    //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->view->post = $details;
     $this->view->render('admin/labour');
   }
