@@ -77,15 +77,15 @@ class Model{
     return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
 
-  public function save(){
+  public function save($idtype){
     $fields = [];
     foreach ($this->_columnNames as $column) {
       #echo $this->$column;
       $fields[$column] = $this->$column;
     }
     // determine whether to update or INSERT
-    if(property_exists($this, 'id') && $this->id != ''){
-      return $this->update($this->id, $fields);
+    if(property_exists($this, $idtype) && $this->{$idtype} != ''){
+      return $this->update($this->{$idtype}, $fields);
     }else{
       #print_r($fields);
       return $this->insert($fields);

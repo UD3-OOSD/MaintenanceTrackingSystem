@@ -23,7 +23,7 @@ class Labour{
       return null;
     }else{
       if(!isset($labours[$key])){
-        $labours[$key] = new Bus();
+        $labours[$key] = new Labour();
       }
       return $labours[key];
     }
