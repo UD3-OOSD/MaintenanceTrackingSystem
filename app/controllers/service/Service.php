@@ -24,7 +24,7 @@ class Service{
       return null;
     }else{
       if(!isset($services[$key])){
-        $services[$key] = new Bus();
+        $services[$key] = new Service();
       }
       $caller = $key;
       return $services[key];

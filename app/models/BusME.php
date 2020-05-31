@@ -1,9 +1,11 @@
 <?php
 #the bus model
 class BusME extends Model{
+  private $idtype;
 
   public function __construct($bus=''){
     $table='busmileage';
+    $this->idtype = 'BusId';
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
@@ -60,5 +62,11 @@ class BusME extends Model{
   public function  isBusNumberValid($id){
       $params=['BusNumber'=>$id];
       return $this->isValidKey($params);
+  }
+
+
+  public function DistanceUpdate($params){
+      $this->assign($params);
+      $this->save($this->idtype);
   }
 }

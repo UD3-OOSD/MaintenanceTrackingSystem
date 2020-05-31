@@ -3,9 +3,11 @@
 class Users extends Model{
   private $_isLoggedIn, $_sessionName, $_cookieName;
   public static $currentLoggedInUser = null;
+  private $idtype;
 
   public function __construct($user = ''){
     $table = 'users';
+    $this->idtype = 'LabourId';
     parent::__construct($table);
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
@@ -63,7 +65,7 @@ class Users extends Model{
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
     #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
-    $this->save();
+    $this->save($this->idtype);
   }
 
   public static function loginUserFromCookie(){

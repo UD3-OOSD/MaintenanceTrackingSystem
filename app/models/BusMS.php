@@ -1,11 +1,11 @@
 <?php
 #the bus model
 class BusMS extends Model{
-
-
+  private $idtype;
 
   public function __construct($bus=''){
     $table='bustable';
+    $this->idtype = 'BusId';
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
@@ -28,12 +28,12 @@ class BusMS extends Model{
   public function registerNewBus($params){
     $this->assign($params);
     $this->deleted=0;
-    $this->save();
+      $this->save($this->idtype);
   }
 
   public function editEntry($params){
       $this->assign($params);
-      $this->save();
+      $this->save($this->idtype);
   }
 
     public function  isBusNumberValid($id){

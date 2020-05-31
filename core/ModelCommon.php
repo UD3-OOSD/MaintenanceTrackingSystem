@@ -3,7 +3,7 @@
 class ModelCommon{
 
   public static function  find($table,$params = []){
-    $db= DB::getInstance();
+    $db= DB::getMultitance();
     $results = [];
     $resultsQuery = $db->findArray($table, $params);
     /*
@@ -23,7 +23,7 @@ class ModelCommon{
   }
 
   public static function getColumnNames($table){
-    $db= DB::getInstance();
+    $db= DB::getMultitance();
     $db->getColumnNames($table);
     $rows = $db->results();
     $values=[];
@@ -34,18 +34,18 @@ class ModelCommon{
   }
 
   public static function addColumn($table,$column_name,$data_type){
-      $db = DB::getInstance();
+      $db = DB::getMultitance();
       $db->addColumn($table,$column_name,$data_type);
   }
 
   public static function UpdateRow($table, $id, $fields){
-      $db = DB::getInstance();
+      $db = DB::getMultitance();
       $db->updateRow($table, $id, $fields);
 
   }
 
   public static function validationID($table , $column ,$value){
-      $db = DB::getInstance();
+      $db = DB::getMultitance();
       $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
       #print_r($params);
       #echo('<br>');
@@ -64,7 +64,7 @@ class ModelCommon{
   }
 
   public static function nextID($table){
-      $db= DB::getInstance();
+      $db= DB::getMultitance();
       $value = $db->numOfRows($table);
       $count = $value[0]["COUNT(*)"];
       $count++;

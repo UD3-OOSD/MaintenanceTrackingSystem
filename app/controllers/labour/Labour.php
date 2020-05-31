@@ -6,9 +6,9 @@ class Labour{
 
   //here labour attributes
   #private static $count;
-  private $labours = [];
-  private $keys = ['admin','forman'];
-  private $caller = '';
+  private static $labours = [];
+  private static $keys = ['Admin','Forman'];
+  private static $caller = '';
 
   private $ls, $_if = false;
 
@@ -20,14 +20,15 @@ class Labour{
   }
 
   public static function getMultitance($key){
-    if(!isset($keys[$key])){
+      #dnd($key);
+    if(!in_array($key,Labour::$keys)){
       return null;
     }else{
-      if(!isset($labours[$key])){
-        $labours[$key] = new Labour();
+      if(!in_array($key,Labour::$labours)){
+          Labour::$labours[$key] = new Labour();
       }
-      $caller = $key;
-      return $labours[$key];
+      Labour::$caller = $key;
+      return Labour::$labours[$key];
     }
   }
 
@@ -45,7 +46,7 @@ class Labour{
 
   public function fillAction($params){
     #$data['LabourId'] = 'Lab'.Labour::$count;
-    $this->ls->fill($data);
+    $this->ls->fill($params);
   }
 
   public function setAttr($data){

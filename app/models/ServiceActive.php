@@ -1,8 +1,10 @@
 <?php
 
 class ServiceActive extends Model{
+    private $idtype;
     public function __construct($service=''){
         $table='activeservices';
+        $this->idtype ='ServiceId';
         parent::__construct($table);
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
@@ -36,7 +38,7 @@ class ServiceActive extends Model{
         $this->deleted = 0;
         $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
         $this->ServiceState =0;
-        $this->save();
+        $this->save($this->idtype);
 
     }
     public function stateChange_this($state){

@@ -137,3 +137,10 @@ function validationID($table , $column , $value ,$tag){
    $html .= '</ul>';
    return $html;
 }
+
+function ObjecttoArray($object){
+    $array=[];
+    foreach ($object as $key=>$value)
+        $array[$key] = $value;
+    return $array;
+}

@@ -31,7 +31,7 @@ class EditingBus  implements BusState{
     //edit the bus data field -> goto BusModel.
     $bus=$this->BusMSModel->findByBusNumber($params['BusNumber']);
     $bus->editEntry($params);
-    $this->BusMEModel->updateRowByBusNumber($bus_num,$_POST);
+    $this->BusMEModel->NewDistanceTravelledRow($params['BusNumber'],$params['Mileage']);
     // at the end
     $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }

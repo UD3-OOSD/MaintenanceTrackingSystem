@@ -5,7 +5,7 @@ class Model{
   public $id;
 
   public function __construct($table){
-    $this->_db = DB::getInstance();
+    $this->_db = DB::getMultitance("admin");
     $this->_table = $table;
     $this->_setTableColumns();
     $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));
@@ -13,7 +13,7 @@ class Model{
 
   protected function _setTableColumns(){
     $columns = $this->get_columns();
-    foreach ($columns as $column) {
+    foreach($columns as $column) {
       $columnName = $column->Field;
       $this->_columnNames[] = $columnName;
       $this->{$columnName} = null;
@@ -21,6 +21,7 @@ class Model{
   }
 
   public function get_columns(){
+      #dnd($this->_db);
     return $this->_db->get_columns($this->_table);
   }
 
@@ -77,15 +78,15 @@ class Model{
     return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
 
-  public function save(){
+  public function save($idtype){
     $fields = [];
     foreach ($this->_columnNames as $column) {
       #echo $this->$column;
       $fields[$column] = $this->$column;
     }
     // determine whether to update or INSERT
-    if(property_exists($this, 'id') && $this->id != ''){
-      return $this->update($this->id, $fields);
+    if(property_exists($this, $idtype) && $this->{$idtype} != ''){
+      return $this->update($this->{$idtype}, $fields);
     }else{
       #print_r($fields);
       return $this->insert($fields);
