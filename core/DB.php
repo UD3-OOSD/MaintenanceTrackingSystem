@@ -1,6 +1,11 @@
 <?php
 
   class DB{
+
+    private $users = [];
+    private $locked = [];
+    private $restricted_users = ['admin','forman','clerk'];
+
     private static $_instance = null;
     private $_pdo, $_query ,$_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
@@ -18,11 +23,32 @@
 
     }
 
-    public static function getInstance(){
-      if(!isset(self::$_instance)){
-        self::$_instance = new DB();
+    public static function getMultitance($key){
+      if(!isset($keys[$key])){
+        if($key == 'mechanic'){
+          if(!isset($users['mechanic'])){
+            $users['mechanic'] = new BD();
+          }
+          return $users['mechanic'];
+        }
+        else{return null;}
+      }else{
+        if(!isset($locked[$key])){
+          if(!isset($users[$key])){
+            $locked[$key] = new BD();
+          }
+          return $users[$key];
+        }else{
+          return null;
+        }  
       }
-      return self::$_instance;
+    }
+
+    public static function reset_lock($key){
+      if(isset($locked[$key])){
+        $users[$key] = $locked[$key];
+        unset($locked[$key]);  ///can be error.
+      }
     }
 
 

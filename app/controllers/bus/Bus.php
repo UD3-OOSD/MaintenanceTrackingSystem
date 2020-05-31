@@ -7,6 +7,7 @@ class Bus {
 
   private $busses = [];
   private $keys = ['clerk','admin'];
+  private $caller = '';
   //
   private $mtns ;
   private $bs, $_if = false;
@@ -28,7 +29,8 @@ class Bus {
       if(!isset($busses[$key])){
         $busses[$key] = new Bus();
       }
-      return $busses[key];
+      $caller = $key;
+      return $busses[$key];
     }
   }
 
@@ -48,8 +50,12 @@ class Bus {
     return $this->_if;
   }
 
-  public function set_trigger($val){
-    $this->_if = $val;
+  public function set_trigger(){
+    $this->_if = true;
+  }
+
+  public function reset_trigger(){
+    $this->_if = false;
   }
 
   public function showData(){
@@ -62,7 +68,7 @@ class Bus {
     $this->bs->fillAction($params);
   }
 
-  public function showMtns(){
+  public function setAttr($params){
     // here feeds $mtns to page @uda.
   }
 

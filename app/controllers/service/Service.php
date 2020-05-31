@@ -4,6 +4,7 @@ class Service{
 
   //Attrs of service
   private $services = [];
+  private $caller = '';
   private $keys = ['admin','mechanics','forman'];
 
   private $ss, $_if = false, $time_bool = false;
@@ -25,6 +26,7 @@ class Service{
       if(!isset($services[$key])){
         $services[$key] = new Bus();
       }
+      $caller = $key;
       return $services[key];
     }
   }

@@ -2,6 +2,18 @@
 
 class Forman extends Controller{
 
+  private $service;
+
+  public function __construct($controller_name,$action){
+    parent::__construct($controller_name, $action);
+  }
+
+  public function setOnService($service){
+    $this->service = $service;
+  }
+
+
+
   public function indexAction(){
 
     $this->view->render('forman/index');

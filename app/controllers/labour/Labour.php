@@ -8,6 +8,7 @@ class Labour{
   #private static $count;
   private $labours = [];
   private $keys = ['admin','forman'];
+  private $caller = '';
 
   private $ls, $_if = false;
 
@@ -23,9 +24,10 @@ class Labour{
       return null;
     }else{
       if(!isset($labours[$key])){
-        $labours[$key] = new Bus();
+        $labours[$key] = new Labour();
       }
-      return $labours[key];
+      $caller = $key;
+      return $labours[$key];
     }
   }
 
@@ -41,7 +43,7 @@ class Labour{
     return $this->ls;
   }
 
-  public function fillAction($data){
+  public function fillAction($params){
     #$data['LabourId'] = 'Lab'.Labour::$count;
     $this->ls->fill($data);
   }
