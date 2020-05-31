@@ -8,7 +8,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
                 <h1><? $this->post['fullname']?>.s\' detail sheet</h1>
-                <form class="form-horizontal hr" method="post" action="admin/saveBus">
+                <form class="form-horizontal hr" method="post" action="admin/saveLabour">
                     <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="fname">Full Name</label>

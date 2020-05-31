@@ -27,8 +27,10 @@ class NewService implements ServiceState{
   }
 
 
-  public function fillAction($data){
+  public function fillAction($data,$obj){
       $this->ServiceActiveModel->registerNewService($data);
+      $this->stateChange($obj);
+
   }
 
   public function allServicesByState($state)

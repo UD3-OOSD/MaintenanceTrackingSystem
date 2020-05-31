@@ -8,9 +8,12 @@ class EditingBus  implements BusState{
   private $ServiceCheckList;
 
   private static $editingbus = NULL;
+    private $BusMEModel;
+    private $BusMSModel;
 
-  private function __construct(){
+    private function __construct(){
       $this->BusMEModel = ModelCommon::loading_model('BusME');;
+      $this->BusMSModel = ModelCommon::loading_model('BusMs');
   }
 
   public static function getInstance(){
@@ -24,9 +27,11 @@ class EditingBus  implements BusState{
     $bus->setState(LockedBus::getInstance());
   }
 
-  public function fitAction($bus_num){
+  public function fitAction($params){
     //edit the bus data field -> goto BusModel.
-    $this->BusMEModel->updateRowByBusNumber($bus_num,$_POST); // take a look @devin. 
+    $bus=$this->BusMSModel->findByBusNumber($params['BusNumber']);
+    $bus->editEntry($params);
+    $this->BusMEModel->updateRowByBusNumber($bus_num,$_POST);
     // at the end
     $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }

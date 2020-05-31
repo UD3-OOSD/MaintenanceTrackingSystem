@@ -31,6 +31,11 @@ class BusMS extends Model{
     $this->save();
   }
 
+  public function editEntry($params){
+      $this->assign($params);
+      $this->save();
+  }
+
     public function  isBusNumberValid($id){
         $params=['BusNumber'=>$id];
         return $this->isValidKey($params);
