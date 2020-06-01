@@ -28,6 +28,7 @@ class NewDeactiveLabour implements LabourState{
   public function fill($data){
         #dnd($data);
     $this->LabourActiveModel->registerNewLabouror($data);
+    #dnd('works');
     #dnd('0i0ifhjfioehiohgreirhjgieprhjiep0jhri');
    # $this->send_mail($data['fullName'],$data['email']);
 

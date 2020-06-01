@@ -87,11 +87,13 @@ class Model{
     }
     // determine whether to update or INSERT
      #dnd($idtype);
-    dnd($this->{$idtype});
-     dnd(property_exists($this, $idtype) && $this->{$idtype} != '');
-    if(property_exists($this, $idtype) && $this->{$idtype} != ''){
-      return $this->update($this->{$idtype}, $fields);
+    #dnd(property_exists($this, $idtype));
+     #dnd(ModelCommon::validationID($this->_table,$idtype,$this->{$idtype}));
+    if(property_exists($this, $idtype) && ModelCommon::validationID($this->_table,$idtype,$this->{$idtype})){
+      #dnd('doesnt work');
+      return $this->update($idtype ,$this->{$idtype}, $fields);
     }else{
+        #dnd('correct');
       #print_r($fields);
       #dnd('.......................................');
       return $this->insert($fields);
@@ -99,6 +101,7 @@ class Model{
   }
 
   public function insert($fields){
+      #dnd($fields);
     if(empty($fields))  return false;
     #echo "insert";
       #print_r($fields);
@@ -106,9 +109,9 @@ class Model{
     return $this->_db->insert($this->_table, $fields);
   }
 
-  public function update($id, $fields){
-    if(empty($fields) || $id = '') return false;
-    return $this->_db->update($this->_table, $fields);
+  public function update($idtype , $id, $fields){
+    if(empty($fields) || $id == '') return false;
+    return $this->_db->UpdateRow($this->_table,[$idtype=>$id],$fields);
   }
 
   public function delete($id){
