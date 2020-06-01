@@ -32,7 +32,8 @@ class Register extends Controller{
         #echo Input::get('password') . ' '. $user->password;
         #echo $user->password;
         #dnd(ObjecttoArray($user));
-
+        #$user->email = 'devin.18@cse.mrt.ac.lk';
+        #$user->save('LabourId');
         if ($user&& password_verify(Input::get('password'),$user->password )) {
 
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
