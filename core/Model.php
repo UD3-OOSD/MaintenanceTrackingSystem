@@ -80,15 +80,20 @@ class Model{
 
   public function save($idtype){
     $fields = [];
+    #echo($idtype);
     foreach ($this->_columnNames as $column) {
       #echo $this->$column;
       $fields[$column] = $this->$column;
     }
     // determine whether to update or INSERT
+     #dnd($idtype);
+    dnd($this->{$idtype});
+     dnd(property_exists($this, $idtype) && $this->{$idtype} != '');
     if(property_exists($this, $idtype) && $this->{$idtype} != ''){
       return $this->update($this->{$idtype}, $fields);
     }else{
       #print_r($fields);
+      #dnd('.......................................');
       return $this->insert($fields);
     }
   }
@@ -96,6 +101,8 @@ class Model{
   public function insert($fields){
     if(empty($fields))  return false;
     #echo "insert";
+      #print_r($fields);
+      #dnd('..........$$$...........................');
     return $this->_db->insert($this->_table, $fields);
   }
 

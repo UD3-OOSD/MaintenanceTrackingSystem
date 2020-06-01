@@ -154,12 +154,12 @@ class Admin extends Controller{
       ]);
       #dnd($validation->passed());
       if ($validation->passed()){
-        $lab = Labour::getMultitance($this->_controller);
-        $lab->fillAction($_POST);
+        $this->lab = Labour::getMultitance($this->_controller);
+        $this->lab->fillAction($_POST);
         Router::redirect('admin/index');
       }
     $this->view->render('admin/user_form');
-    $lab = Labour::getMultitance($this->_controller);           //is this usefull??
+    $this->lab = Labour::getMultitance($this->_controller);           //is this usefull??
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
