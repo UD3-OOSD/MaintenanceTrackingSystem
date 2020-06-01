@@ -6,31 +6,32 @@ require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
 class Bus {
 
   private static $busses = [];
-  private static $keys = ['clerk','admin'];
-  private $caller = '';
+  private static $keys = ['Clerk','Admin'];
+  private static $caller = '';
   //
   private $mtns ;
   private $bs, $_if = false;
-  private static $count = 0;
+  #private static $count = 0;
   //and some other attributes of bus .e.g. egine_numer, color....
 
   private static $bus = NULL;
 
   private function __construct(){
-    self::$count++;
+    #self::$count++;
     #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
     $this->bs = NewBus::getInstance();
   }
 
   public static function getMultitance($key){
-    if(!in_array($key,Bus::keys)){
+      #dnd(!in_array($key,Bus::$keys));
+    if(!in_array($key,Bus::$keys)){
       return null;
     }else{
-      if(!in_array($key,Bus::busses)){
+      if(!in_array($key,Bus::$busses)){
         Bus::$busses[$key] = new Bus();
       }
-      $caller = $key;
-      return $busses[$key];
+      Bus::$caller = $key;
+      return Bus::$busses[$key];
     }
   }
 
@@ -66,7 +67,7 @@ class Bus {
 
   }
   public function fillAction($params){
-    $params['BusId'] = 'Bus'.Bus::$count;
+    #$params['BusId'] = 'Bus'.Bus::$count;
     #dnd($this->bs);
     $this->bs->fillAction($params);
   }

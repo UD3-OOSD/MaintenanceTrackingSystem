@@ -78,6 +78,7 @@ class Admin extends Controller{
       ]);
       if ($validation->passed()){
         $bus = Bus::getMultitance($this->_controller);
+        #dnd($_POST);
         $bus->fillAction($_POST);
         Router::redirect('admin');
       }

@@ -6,8 +6,10 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 class NewBus  implements BusState{
 
   private static $newbus = NULL;
+    private $BusMSModel;
+    private $BusMEModel;
 
-  private function __construct(){
+    private function __construct(){
       $this->BusMSModel = ModelCommon::loading_model('BusMS');
       $this->BusMEModel = ModelCommon::loading_model('BusME');
   }
@@ -27,7 +29,7 @@ class NewBus  implements BusState{
     $this->BusMSModel->registerNewBus($params);
     #echo($params['Mileage']);
     #dnd('_____________');
-    $this->BusMEModel->NewDistanceTravelledRow($params['BusNumber'],$params['Mileage']);
+    $this->BusMEModel->NewBusDistanceUpdate($params['BusNumber'],$params['Mileage']);
 
         #Router::redirect('admin');  #will have to change
   }
@@ -39,8 +41,7 @@ class NewBus  implements BusState{
   }
 
   public function show($id){
-    $details = ObjecttoArray($this->BusMSModel->findByBusNumber($id));
-    return $details;
+      return ObjecttoArray($this->BusMSModel->findByBusNumber($id));
   }
 
 }
