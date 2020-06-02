@@ -26,9 +26,12 @@ class BusMS extends Model{
   }
 
   public function registerNewBus($params){
+      #dnd($params);
     $this->assign($params);
     $this->deleted=0;
-      $this->save($this->idtype);
+    $this->BusId = 'Bus' . ModelCommon::nextID($this->_table);
+    $this->BusState = 0;
+    $this->save($this->idtype);
   }
 
   public function editEntry($params){

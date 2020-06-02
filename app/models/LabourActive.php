@@ -5,7 +5,7 @@ class LabourActive extends Model{
     public function __construct($labour = ''){
 
         $table = 'labourdetails';
-        $this->idtype = 'LaboutId';
+        $this->idtype = 'LabourId';
         parent::__construct($table);
 
         if ($labour != '') {
@@ -30,6 +30,7 @@ class LabourActive extends Model{
         $this->assign($params);
         $this->deleted=0;
         $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+        #dnd($this);
         $this->LabourState =0;
         $this->save($this->idtype);
 

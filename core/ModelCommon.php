@@ -67,7 +67,7 @@ class ModelCommon{
       $db= DB::getMultitance();
       $value = $db->numOfRows($table);
       $count = $value[0]["COUNT(*)"];
-      $count++;
+      $count+=1;
       return "{$count}";
   }
 

@@ -6,8 +6,10 @@ require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
 class NewDeactiveLabour implements LabourState{
 
   private static $newdelab = NULL;
+    private $LabourActiveModel;
+    private $UsersModel;
 
-  private function __construct(){
+    private function __construct(){
     $this->LabourActiveModel = ModelCommon::loading_model('LabourActive');
     $this->UsersModel = ModelCommon::loading_model('Users');
   }
@@ -24,7 +26,10 @@ class NewDeactiveLabour implements LabourState{
   }
 
   public function fill($data){
+        #dnd($data);
     $this->LabourActiveModel->registerNewLabouror($data);
+    #dnd('works');
+    #dnd('0i0ifhjfioehiohgreirhjgieprhjiep0jhri');
    # $this->send_mail($data['fullName'],$data['email']);
 
     $this->UsersModel->registerNewUser($data);

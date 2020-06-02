@@ -5,7 +5,7 @@ class BusME extends Model{
 
   public function __construct($bus=''){
     $table='busmileage';
-    $this->idtype = 'BusId';
+    $this->idtype = 'BusNumber';
     parent::__construct($table);
     if ($bus != '') {
       if (is_int($bus)) {
@@ -36,7 +36,7 @@ class BusME extends Model{
     return($result);
   }
 
-  public function NewDistanceTravelledRow($BusNumber,$Distance){
+  public function NewBusDistanceUpdate($BusNumber,$Distance){
     #dnd($Distance);
     $columns = ModelCommon::getColumnNames($this->_table);
     $params=['BusNumber'=>$BusNumber];
@@ -48,8 +48,10 @@ class BusME extends Model{
       }
     }
     #echo(implode('    |||',$params));
-    #dnd('..............................');
-    $this->insert($params);
+    #dnd($params);
+
+    $this->assign($params);
+    $this->save($this->idtype);
   }
 
   public function updateRowByBusNumber($number,$params){

@@ -64,7 +64,9 @@ class Users extends Model{
     $this->assign($params);
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+    #dnd($this);
     #$this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
+      #dnd($this->LabourId);
     $this->save($this->idtype);
   }
 
