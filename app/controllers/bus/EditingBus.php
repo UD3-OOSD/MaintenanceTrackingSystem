@@ -51,7 +51,17 @@ class EditingBus  implements BusState{
       }
     }
 
+    public function updateDetails($data){
+        //@devin.
+    }
 
+    public function checkId($id){
+        //@devin
+    }
+
+    public function delete($id){
+        //@devin
+    }
 
     //update attribute and deal with db @avishka.
 
@@ -62,17 +72,14 @@ class EditingBus  implements BusState{
     //if(!empty($arr)){
     // $this->addService($data);
     //}
-    public function show($id)
-    {
-        // TODO: Implement show() method.
+    public function show($id){
+        return ObjecttoArray($this->BusMSModel->findByBusNumber($id));
     }
 
     public function fillAction($params)
     {
         // TODO: Implement fillAction() method.
     }
-
-
 
 
   public function check($distance,$bus){

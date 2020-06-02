@@ -10,7 +10,7 @@ class Bus {
   private static $caller = '';
   //
   private $mtns ;
-  private $bs, $_if = false;
+  private static $bs, $_if = false;
   #private static $count = 0;
   //and some other attributes of bus .e.g. egine_numer, color....
 
@@ -19,10 +19,9 @@ class Bus {
   private function __construct(){
     #self::$count++;
     #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-    $this->bs = NewBus::getInstance();
   }
 
-  public static function getMultitance($key){
+  public static function getMultitance($key,$state){
       #dnd(!in_array($key,Bus::$keys));
     if(!in_array($key,Bus::$keys)){
       return null;
@@ -31,6 +30,7 @@ class Bus {
         Bus::$busses[$key] = new Bus();
       }
       Bus::$caller = $key;
+      Bus::setState($state);
       return Bus::$busses[$key];
     }
   }
@@ -39,8 +39,17 @@ class Bus {
     $this->bs->stateChange($this);
   }
 
-  public function setState($st){
-    $this->bs = $st;
+  private static function setState($st){
+    switch ($st){
+        case $st == '0':
+            Bus::$bs = NewBus::getInstance();
+        case $st == '1':
+            Bus::$bs = LockedBus::getInstance();
+        case $st == '2':
+            Bus::$bs = EditingBus::getInstance();
+        case $st == '3':
+            Bus::$bs = ClosedBus::getInstance();
+    }
   }
 
   public function getState(){
@@ -66,11 +75,7 @@ class Bus {
     //this will feed the bus data table accoring to it's bus_id. @uda
 
   }
-  public function fillAction($params){
-    #$params['BusId'] = 'Bus'.Bus::$count;
-    #dnd($this->bs);
-    $this->bs->fillAction($params);
-  }
+
 
   public function setAttr($params){
     // here feeds $mtns to page @uda.

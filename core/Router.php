@@ -7,7 +7,7 @@
 
 
     public static function route($url){
-      //cpntroller
+      //controller
       $controller = (isset($url[0]) && $url[0] != '') ? ucwords($url[0]) : DEFAULT_CONTROLLER;
       $controller_name = $controller;
       array_shift($url);
