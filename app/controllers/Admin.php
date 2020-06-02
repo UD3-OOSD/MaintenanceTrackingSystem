@@ -13,6 +13,7 @@ class Admin extends Controller{
   }
 
   public function indexAction(){
+
     $this->view->render('admin/index');
   }
 
@@ -20,7 +21,7 @@ class Admin extends Controller{
     // just a example is below.
     foreach ($busses as $bus) {
       //here some JQuery and html padding.
-      $bus->show();
+      //$this->bus->show();
     }
   }
 
@@ -28,7 +29,7 @@ class Admin extends Controller{
     // just a example is below.
     foreach ($labours as $labour) {
       //here some JQuery and html padding.
-      $labour->show();
+      //$this->labour->show();
     }
   }
 
@@ -77,8 +78,8 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $bus = Bus::getMultitance($this->_controller);
-        $bus->fillAction($_POST);
+        $this->bus = Bus::getMultitance($this->controller_name);
+        $this->bus->fillAction($_POST);
         Router::redirect('admin');
       }
 
@@ -154,12 +155,12 @@ class Admin extends Controller{
       ]);
       #dnd($validation->passed());
       if ($validation->passed()){
-        $lab = Labour::getMultitance($this->_controller);
-        $lab->fillAction($_POST);
+        $this->lab = Labour::getMultitance($this->controller_name);
+        $this->lab->fillAction($_POST);
         Router::redirect('admin/index');
       }
     $this->view->render('admin/user_form');
-    $lab = Labour::getMultitance($this->_controller);           //is this usefull??
+    $thislab = Labour::getMultitance($this->controller_name);           //is this usefull??
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
@@ -170,6 +171,7 @@ class Admin extends Controller{
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
+
     $this->view->post = $details;
     $this->view->render('admin/bus');
   }
@@ -244,7 +246,7 @@ class Admin extends Controller{
         }
       }
     $this->view->render('admin/user_form');
-    $lab = Labour::getInstance();
+    $this->lab = Labour::getInstance();
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
@@ -253,14 +255,14 @@ class Admin extends Controller{
 
   public function deleteBus($bus){
     // jQuery code in here to fade @devin.
-    $bus = LockedBus::getInstance()->set_trigger(true);
-    $bus->stateChange();
+    $this->bus = LockedBus::getInstance()->set_trigger(true);
+    $this->bus->stateChange();
 
   }
 
   public function deleteLabour($id){
-    $lab = ActiveLabour::getInstance()->set_trigger(true);
-    $lab->stateChange();
+    $this->lab = ActiveLabour::getInstance()->set_trigger(true);
+    $this->lab->stateChange();
   }
 
   public function sendVarificationAction(){

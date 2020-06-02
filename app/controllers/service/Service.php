@@ -3,9 +3,9 @@
 class Service{
 
   //Attrs of service
-  private $services = [];
-  private $caller = '';
-  private $keys = ['admin','mechanics','forman'];
+  private static $services = [];
+  private static $caller = '';
+  private static $keys = ['Admin','Mechanics','Forman'];
 
   private $ss, $_if = false, $time_bool = false;
   #private static $count = 0;
@@ -20,14 +20,14 @@ class Service{
   }
 
   public static function getMultitance($key){
-    if(!isset($keys[$key])){
+    if(!in_array($key,Service::$keys)){
       return null;
     }else{
-      if(!isset($services[$key])){
-        $services[$key] = new Service();
+      if(!in_array($key,Labour::$services)){
+        Labour::$services[$key] = new Service();
       }
-      $caller = $key;
-      return $services[key];
+      Labour::$caller = $key;
+      return Labour::$services[key];
     }
   }
 

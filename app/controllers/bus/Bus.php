@@ -7,7 +7,7 @@ class Bus {
 
   private static $busses = [];
   private static $keys = ['clerk','admin'];
-  private $caller = '';
+  private static $caller = '';
   //
   private $mtns ;
   private $bs, $_if = false;
@@ -29,8 +29,8 @@ class Bus {
       if(!in_array($key,Bus::busses)){
         Bus::$busses[$key] = new Bus();
       }
-      $caller = $key;
-      return $busses[$key];
+      Bus::$caller = $key;
+      return Bus::$busses[$key];
     }
   }
 
