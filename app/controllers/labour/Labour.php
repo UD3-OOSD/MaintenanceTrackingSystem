@@ -8,7 +8,7 @@ class Labour{
   #private static $count;
   private static $labours = [];
   private static $keys = ['Admin','Forman'];
-  private static $caller = '';
+  public static $caller = '';
 
   private $ls, $_if = false;
 

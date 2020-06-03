@@ -22,14 +22,14 @@ class Forman extends Controller{
   public function approveAction(){
     //get service_id from url and fetch its' service obj. @avishka, @devin
     // $data by url.
-    $service->getState()->edit($service,$data);
+      $this->service->getState()->edit($service,$data);
     $this->view->render('forman/index');
   }
 
   public function deleteAction(){
     //get service_id from url and fetch its' service obj. @avishka, @devin
     // $data by url.
-    $service->stateChange();
+    $this->service->stateChange();
     $this->view->render('forman/index');
   }
 
@@ -73,9 +73,9 @@ class Forman extends Controller{
               ]
           ]);
           if ($validation->passed()) {
-              $service = Service::getInstance();
-              $service->set_trigger();
-              $service->fillAction($_POST,'forman');
+              $this->service = Service::getInstance();
+              $this->service->set_trigger();
+              $this->service->fillAction($_POST,'forman');
               Router::redirect('forman');
           }
       }

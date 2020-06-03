@@ -14,6 +14,8 @@ class Admin extends Controller{
 
   public function indexAction(){
     $this->view->render('admin/index');
+    $this->view->displayarr1 = '';
+    $this->view->displayarr2 = '';
   }
 
   public function show_busses(){
@@ -77,9 +79,8 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $bus = Bus::getMultitance($this->_controller);
-        #dnd($_POST);
-        $bus->fillAction($_POST);
+        $this->bus = Bus::getMultitance($this->_controller);
+        $this->bus->getState()->fillAction($_POST);
         Router::redirect('admin');
       }
 
@@ -155,12 +156,12 @@ class Admin extends Controller{
       ]);
       #dnd($validation->passed());
       if ($validation->passed()){
-        $this->lab = Labour::getMultitance($this->_controller);
-        $this->lab->fillAction($_POST);
+        $this->lab = Labour::getMultitance($this->_controller,'0');
+        $this->lab->getState()->fillAction($_POST);
         Router::redirect('admin/index');
       }
-    $this->view->render('admin/user_form');
-    $this->lab = Labour::getMultitance($this->_controller);           //is this usefull??
+    //$this->view->render('admin/user_form');
+    //$this->lab = Labour::getMultitance($this->_controller);           //is this usefull??
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
@@ -171,8 +172,15 @@ class Admin extends Controller{
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
-    $this->view->post = $details;
-    $this->view->render('admin/bus');
+    $this->bus = Bus::getMultitance($this->_controller,'2');
+    if($this->bus->getState()->check($bus_num)){
+        $details = $this->bus->getState()->show($bus_num);
+        $this->view->post = $details;
+        $this->view->render('admin/bus');
+    }else{
+        $this->view->displayarr1 = 'the entered Bus Number not in the system.';
+        $this->view->render('admin/index');
+    }
   }
 
   public function editLabourAction(){
@@ -210,12 +218,14 @@ class Admin extends Controller{
       ]);
       if ($validation->passed()){
         #$bus_num = $_POST['bus_num'];
+        $this->bus = Bus::getMultitance($this->_controller,'2');
         if(isset($_POST['save'])){
-          (EditingBus::getInstance())->fitAction($_POST);
+          $this->bus->getState()->updateDetails($_POST);
           Router::redirect('admin/index');
         }
-        else if(isset($_POST['delete'])){
-          $this->deleteBus($bus_num);
+        elseif(sset($_POST['delete'])){
+          $this->bus->getState()->delete($_POST['BusNumber']);
+          $this->view->render('admin/index');
         }
       }
 

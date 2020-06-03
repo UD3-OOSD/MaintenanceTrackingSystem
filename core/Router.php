@@ -2,8 +2,12 @@
 
   class Router{
 
+      private static $user;
+      private static $user_name = '';
+
+
     public static function route($url){
-      //cpntroller
+      //controller
       $controller = (isset($url[0]) && $url[0] != '') ? ucwords($url[0]) : DEFAULT_CONTROLLER;
       $controller_name = $controller;
       array_shift($url);
@@ -30,8 +34,13 @@
       //params
       $queryParams = $url;
 
-      $dispatch = new $controller($controller_name, $action);
-
+      if (Router::$user_name != $controller_name) {
+          $dispatch = new $controller($controller_name, $action);
+          Router::$user_name = $controller_name;
+          Router::$user = $dispatch;
+      }else{
+          $dispatch = Router::$user;
+      }
 
       if(method_exists($controller, $action)){
         call_user_func_array([$dispatch, $action], $queryParams);
