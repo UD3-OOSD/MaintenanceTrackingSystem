@@ -6,8 +6,9 @@ require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 class LockedBus  implements BusState{
 
   private static $lockedbus = NULL;
+    private $BusMEModel;
 
-  private function __construct(){
+    private function __construct(){
       $this->BusMEModel = ModelCommon::loading_model('BusME');
 
   }
@@ -20,10 +21,11 @@ class LockedBus  implements BusState{
   }
 
   public function stateChange($bus){
+       # dnd($bus);
     if($bus->get_trigger()){
-      $bus->setState(EditingBus::getInstance());
+      $bus->setState('2');
     }else{
-      $bus->setState(ClosedBus::getInstance());
+      $bus->setState('3');
     }
   }
 
@@ -42,8 +44,7 @@ class LockedBus  implements BusState{
 
     public function checkId($id){
         //@devin
-        $bool = $this->BusMEModel->isBusNumberValid(   $id);
-        return $bool;
+        return $this->BusMEModel->isBusNumberValid(   $id);
     }
 
   public function updateDistance($params)

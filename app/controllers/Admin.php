@@ -179,7 +179,8 @@ class Admin extends Controller{
     if($this->bus->getState()->checkId($bus_num)){
         //dnd('true');
         $this->bus->set_trigger();
-        $this->bus->stateChange($this->bus);
+        #dnd($this->bus->get_trigger());
+        $this->bus->stateChange($this);
         $details = $this->bus->getState()->show($bus_num);
         $this->view->post = $details;
         $this->view->render('admin/bus');
