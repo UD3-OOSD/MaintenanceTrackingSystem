@@ -4,12 +4,12 @@
 class NewDeactiveLabour implements LabourState{
 
   private static $newdelab = NULL;
-    private $LabourActiveModel;
-    private $UsersModel;
+  private static $LabourActiveModel;
+  private static $UsersModel;
 
-    private function __construct(){
-    $this->LabourActiveModel = ModelCommon::loading_model('LabourActive');
-    $this->UsersModel = ModelCommon::loading_model('Users');
+  private function __construct(){
+    NewDeactiveLabour::$LabourActiveModel = ModelCommon::loading_model('LabourActive');
+    NewDeactiveLabour::$UsersModel = ModelCommon::loading_model('Users');
   }
 
   public static function getInstance(){
@@ -20,17 +20,17 @@ class NewDeactiveLabour implements LabourState{
   }
 
   public function stateChange($lab){
-    $lab->setState(NewActiveLabour::getInstance());
+    $lab->setState('1');
   }
 
-  public function fill($data){
+  public function fillAction($data){
         #dnd($data);
-    $this->LabourActiveModel->registerNewLabouror($data);
+    NewDeactiveLabour::$LabourActiveModel->registerNewLabouror($data);
     #dnd('works');
     #dnd('0i0ifhjfioehiohgreirhjgieprhjiep0jhri');
    # $this->send_mail($data['fullName'],$data['email']);
 
-    $this->UsersModel->registerNewUser($data);
+    NewDeactiveLabour::$UsersModel->registerNewUser($data);
   }
 
   public function send_mail($name,$mail){
@@ -49,7 +49,6 @@ class NewDeactiveLabour implements LabourState{
     //else
     $this->stateChange($lab);
     $lab->getState()->edit();
-
   }
 
   public function checkValidation($id){
@@ -57,4 +56,8 @@ class NewDeactiveLabour implements LabourState{
   }
 
 
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }

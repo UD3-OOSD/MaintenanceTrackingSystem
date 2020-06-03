@@ -21,9 +21,9 @@ class LockedBus  implements BusState{
 
   public function stateChange($bus){
     if($bus->get_trigger()){
-      $bus->setState('2');
-    }else{
       $bus->setState('3');
+    }else{
+      $bus->setState('2');
     }
   }
 

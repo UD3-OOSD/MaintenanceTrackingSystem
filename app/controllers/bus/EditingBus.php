@@ -35,6 +35,7 @@ class EditingBus  implements BusState{
   }
 
   public function updateDistance($params){
+
     #check if post or get from nipun
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
