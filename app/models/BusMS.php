@@ -6,7 +6,7 @@ class BusMS extends Model{
   public function __construct($bus=''){
     $table='bustable';
     $this->idtype = 'BusId';
-    parent::__construct($table);
+    parent::__construct($table,'BusMS');
     if ($bus != '') {
       if (is_int($bus)) {
         $b = $this->_db->findFirst('bustable', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);

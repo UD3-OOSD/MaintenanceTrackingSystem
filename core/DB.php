@@ -63,11 +63,14 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
+      print_r($params);
+      echo $sql.'<\br>';
       #echo($sql);
       #echo('<br>');
       #echo(implode('    |||',$params));
       #echo('<br>');
       if ($this->_query = $this->_pdo->prepare($sql)) {
+        #dnd($params);
         $x =  1;
         if (count($params)) {
           foreach ($params as $param) {
@@ -96,6 +99,7 @@
       $limit = '';
 
       //conditions
+       // echo($params['conditions'].$table);
       if (isset($params['conditions'])) {
         if (is_array($params['conditions'])) {
           foreach ($params['conditions'] as $condition) {
@@ -111,6 +115,7 @@
         }
       }
     }
+      //echo($conditionString);
       //bind
       if(array_key_exists('bind', $params)){
         $bind = $params['bind'];
@@ -125,10 +130,13 @@
         $limit = ' LIMIT '.$params['limit'];
       }
       #echo($conditionString);
+        //print_r([$conditionString,$order,$limit]);
       $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
       #echo('<br>');
       #echo($sql);
       #echo('<br>');
+      #echo($sql);
+        //print_r($bind);
       if($this->query($sql, $bind)){
           if(!count($this->_result)) return false;
           return true;
@@ -138,6 +146,7 @@
 
 
     public function find($table, $params = []){
+        //dnd($params);
       if($this->_read($table, $params)){
         return $this->results();
       }

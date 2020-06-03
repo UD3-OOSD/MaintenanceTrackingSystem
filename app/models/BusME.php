@@ -4,9 +4,11 @@ class BusME extends Model{
   private $idtype;
 
   public function __construct($bus=''){
+
     $table='busmileage';
     $this->idtype = 'BusNumber';
-    parent::__construct($table);
+    parent::__construct($table,'BusME');
+
     if ($bus != '') {
       if (is_int($bus)) {
         $b = $this->_db->findFirst('busmileage', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);
@@ -38,6 +40,7 @@ class BusME extends Model{
 
   public function NewBusDistanceUpdate($BusNumber,$Distance){
     #dnd($Distance);
+
     $columns = ModelCommon::getColumnNames($this->_table);
     $params=['BusNumber'=>$BusNumber];
     #echo(implode('    |||',$columns));
@@ -62,6 +65,7 @@ class BusME extends Model{
   }
 
   public function  isBusNumberValid($id){
+      //dnd($id);
       $params=['BusNumber'=>$id];
       return $this->isValidKey($params);
   }

@@ -13,9 +13,10 @@ class Admin extends Controller{
   }
 
   public function indexAction(){
-    $this->view->render('admin/index');
     $this->view->displayarr1 = '';
     $this->view->displayarr2 = '';
+    $this->view->render('admin/index');
+
   }
 
   public function show_busses(){
@@ -79,7 +80,8 @@ class Admin extends Controller{
         ]
       ]);
       if ($validation->passed()){
-        $this->bus = Bus::getMultitance($this->_controller);
+        $this->bus = Bus::getMultitance($this->_controller,'0');
+        //dnd($this->bus->getState());
         $this->bus->getState()->fillAction($_POST);
         Router::redirect('admin');
       }
@@ -169,16 +171,19 @@ class Admin extends Controller{
 }
 
   public function editBusAction(){  // call by button press @uda
+      //dnd('exists');
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
     $this->bus = Bus::getMultitance($this->_controller,'2');
-    if($this->bus->getState()->check($bus_num)){
+    if($this->bus->getState()->checkId($bus_num)){
+        dnd('true');
         $details = $this->bus->getState()->show($bus_num);
         $this->view->post = $details;
         $this->view->render('admin/bus');
     }else{
         $this->view->displayarr1 = 'the entered Bus Number not in the system.';
+        $this->view->displayarr2 = '';
         $this->view->render('admin/index');
     }
   }

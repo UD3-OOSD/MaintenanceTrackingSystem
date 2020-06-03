@@ -1,6 +1,6 @@
 <?php
 
-require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
+#require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
 
 
 class Bus {
@@ -41,35 +41,40 @@ class Bus {
 
   private static function setState($st){
     switch ($st){
-        case $st == '0':
+        case "0":
             Bus::$bs = NewBus::getInstance();
-        case $st == '1':
+            break;
+        case '1':
             Bus::$bs = LockedBus::getInstance();
-        case $st == '2':
+            break;
+        case '2':
             Bus::$bs = EditingBus::getInstance();
-        case $st == '3':
+            break;
+        case '3':
             Bus::$bs = ClosedBus::getInstance();
+            break;
     }
+    //dnd(Bus::$bs);
   }
 
   public function getState(){
-    return $this->bs;
+    return Bus::$bs;
   }
 
   public function get_trigger(){
-    return $this->_if;
+    return Bus::$_if;
   }
 
   public function set_trigger(){
-    $this->_if = true;
+      Bus::$_if = true;
   }
 
   public function reset_trigger(){
-    $this->_if = false;
+      Bus::$_if = false;
   }
 
   public function showData($id){
-    $details = $this->bs->show($id);
+    $details = Bus::$bs->show($id);
     $this->setState($details['BusState']);
     return $details;
     //this will feed the bus data table accoring to it's bus_id. @uda
@@ -83,8 +88,8 @@ class Bus {
 
   #function added by @devin for updating distance if wrong please rectify
   public function updatedistance($params){
-    $this->bs->stateChange();
-    $this->bs->updateDistance($params);
+      Bus::$bs->stateChange();
+      Bus::$bs->updateDistance($params);
   }
 
 

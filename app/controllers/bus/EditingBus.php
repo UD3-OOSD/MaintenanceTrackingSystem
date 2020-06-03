@@ -11,7 +11,7 @@ class EditingBus  implements BusState{
 
     private function __construct(){
       $this->BusMEModel = ModelCommon::loading_model('BusME');;
-      $this->BusMSModel = ModelCommon::loading_model('BusMs');
+      $this->BusMSModel = ModelCommon::loading_model('BusMS');
   }
 
   public static function getInstance(){
@@ -50,15 +50,17 @@ class EditingBus  implements BusState{
     }
 
     public function updateDetails($data){
-        //@devin.
+        $this->BusMSModel->editEntry($data);
     }
 
     public function checkId($id){
         //@devin
+        $this->BusMEModel->isBusNumberValid(   $id);
     }
 
     public function delete($id){
         //@devin
+        #$this->BusMSModel
     }
 
     //update attribute and deal with db @avishka.

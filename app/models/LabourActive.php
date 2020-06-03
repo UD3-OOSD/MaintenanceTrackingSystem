@@ -6,7 +6,7 @@ class LabourActive extends Model{
 
         $table = 'labourdetails';
         $this->idtype = 'LabourId';
-        parent::__construct($table);
+        parent::__construct($table,'LabourActive');
 
         if ($labour != '') {
             if (substr($labour,0,3)=='Lab') {

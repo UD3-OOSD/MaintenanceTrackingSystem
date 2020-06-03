@@ -4,11 +4,14 @@ class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
 
-  public function __construct($table){
+  public function __construct($table,$name = ''){
     $this->_db = DB::getMultitance("admin");
     $this->_table = $table;
     $this->_setTableColumns();
-    $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));
+    if($name == ''){
+    $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));}
+    else{    $this->_modelName = $name;}
+
   }
 
   protected function _setTableColumns(){
@@ -26,10 +29,13 @@ class Model{
   }
 
   public function find($params = []){
-    $params = $this->_softDeleteParams($params);
+    #$params = $this->_softDeleteParams($params);
+      //dnd($this->_db);
     $results = [];
     $resultsQuery = $this->_db->find($this->_table, $params);
+
     foreach ($resultsQuery as $result) {
+        //dnd($this->_modelName);
       $obj = new $this->_modelName($this->_table);
       $obj->populateObjectData($result);
       $results[] = $obj;
@@ -116,8 +122,8 @@ class Model{
     return $this->_db->UpdateRow($this->_table,[$idtype=>$id],$fields);
   }
 
-  public function delete($id){
-    if($id == '' && $this->id = '') return false;
+  public function delete($idtype,$id){
+    if($id == '' && $this->{$idtype} = '') return false;
     $id = ($id == '' ) ? $this->id : $id;
     if($this->_softDelete){
       $this->UpdateRow($id, ['deleted' => 1]);
@@ -137,7 +143,7 @@ class Model{
                 $params['conditions'] = "deleted != 1";
             }
         }
-        return params;
+        return $params;
     }
 
   public function query($sql, $bind){
@@ -166,11 +172,18 @@ class Model{
   }
 
   public function isValidKey($params = []){
-      $result = $this->find($params);
-      if (isset($result)){
-          return(true);
+      if($params != []){
+          foreach ($params as $key => $value){
+              $statement=['conditions' => "{$key}",'bind'=>$value];
+              //dnd($statement);
+              $result = $this->find($statement);
+              if (isset($result)){
+                  return(true);
+              }
+          }
       }
       return (false);
+      #dnd($params);
   }
 
   public function addColumn($column_name,$data_type){

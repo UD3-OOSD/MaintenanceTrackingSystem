@@ -5,7 +5,7 @@ class ServiceActive extends Model{
     public function __construct($service=''){
         $table='activeservices';
         $this->idtype ='ServiceId';
-        parent::__construct($table);
+        parent::__construct($table,'ServiceActive');
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst('activeservices', ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);
