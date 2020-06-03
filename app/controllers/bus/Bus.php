@@ -70,7 +70,13 @@ class Bus {
     #$params['BusId'] = 'Bus'.Bus::$count;
     #dnd($this->bs);
     $this->bs->fillAction($params);
+    $this->setAttr($params);
   }
+
+    public function setAttributes($id){//devin made this if this is not necessary take down
+
+    }
+
 
   public function setAttr($params){
     // here feeds $mtns to page @uda.
