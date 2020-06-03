@@ -1,6 +1,6 @@
 <?php
 
-class Bus extends Command {
+class Bus {
 
   private static $busses = [];
   private static $keys = ['Clerk','Admin'];
@@ -28,10 +28,10 @@ class Bus extends Command {
   }
 
   public function stateChange(){
-    $this->bs->stateChange($this);
+    Bus::$bs->stateChange($this);
   }
 
-  private static function setState($st){
+  public static function setState($st){
     switch ($st){
         case "0":
             Bus::$bs = NewBus::getInstance();

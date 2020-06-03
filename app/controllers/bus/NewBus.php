@@ -1,17 +1,16 @@
 <?php
 
-require_once(ROOT.DS.'app'.DS.'controllers'.DS.'bus'.DS.'BusState.php');
 
 
 class NewBus  implements BusState{
 
   private static $newbus = NULL;
-    private $BusMSModel;
-    private $BusMEModel;
+  private static $BusMSModel;
+  private static $BusMEModel;
 
     private function __construct(){
-      $this->BusMSModel = ModelCommon::loading_model('BusMS');
-      $this->BusMEModel = ModelCommon::loading_model('BusME');
+      NewBus::$BusMSModel = ModelCommon::loading_model('BusMS');
+      NewBus::$BusMEModel = ModelCommon::loading_model('BusME');
   }
 
   public static function getInstance(){
@@ -22,15 +21,15 @@ class NewBus  implements BusState{
   }
 
   public function stateChange($bus){
-    $bus->setState(LockedBus::getInstance());
+    $bus->setState('1');
   }
 
   public function fillAction($params){
     //dnd($params);
-    $this->BusMSModel->registerNewBus($params);
+    NewBus::$BusMSModel->registerNewBus($params);
     #echo($params['Mileage']);
     #dnd('_____________');
-    $this->BusMEModel->NewBusDistanceUpdate($params['BusNumber'],$params['Mileage']);
+    NewBus::$BusMEModel->NewBusDistanceUpdate($params['BusNumber'],$params['Mileage']);
 
         #Router::redirect('admin');  #will have to change
   }
@@ -42,7 +41,7 @@ class NewBus  implements BusState{
   }
 
   public function show($id){
-      return ObjecttoArray($this->BusMSModel->findByBusNumber($id));
+      return ObjecttoArray(NewBus::$BusMSModel->findByBusNumber($id));
   }
 
 }

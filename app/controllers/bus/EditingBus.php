@@ -6,12 +6,12 @@ class EditingBus  implements BusState{
   private $ServiceCheckList;
 
   private static $editingbus = NULL;
-    private $BusMEModel;
-    private $BusMSModel;
+  private static $BusMEModel;
+  private static $BusMSModel;
 
-    private function __construct(){
-      $this->BusMEModel = ModelCommon::loading_model('BusME');;
-      $this->BusMSModel = ModelCommon::loading_model('BusMS');
+  private function __construct(){
+      EditingBus::$BusMEModel = ModelCommon::loading_model('BusME');;
+      EditingBus::$BusMSModel = ModelCommon::loading_model('BusMS');
   }
 
   public static function getInstance(){
@@ -22,14 +22,14 @@ class EditingBus  implements BusState{
   }
 
   public function stateChange($bus){
-    $bus->setState(LockedBus::getInstance());
+    $bus->setState('1');
   }
 
   public function fitAction($params){
     //edit the bus data field -> goto BusModel.
-    $bus=$this->BusMSModel->findByBusNumber($params['BusNumber']);
+    $bus=EditingBus::$BusMSModel->findByBusNumber($params['BusNumber']);
     $bus->editEntry($params);
-    $this->BusMEModel->NewDistanceTravelledRow($params['BusNumber'],$params['Mileage']);
+    EditingBus::$BusMEModel->NewDistanceTravelledRow($params['BusNumber'],$params['Mileage']);
     // at the end
     $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }
@@ -39,7 +39,7 @@ class EditingBus  implements BusState{
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
 
-      $bus= $this->BusMEModel->findByBusNumber($params['BusNumber']);
+      $bus= EditingBus::$BusMEModel->findByBusNumber($params['BusNumber']);
       if($bus){
           #add the implementation of the checking for service
           $this->populatechecklist($bus->id);
@@ -50,12 +50,12 @@ class EditingBus  implements BusState{
     }
 
     public function updateDetails($data){
-        $this->BusMSModel->editEntry($data);
+        EditingBus::$BusMSModel->editEntry($data);
     }
 
     public function checkId($id){
         //@devin
-        $this->BusMEModel->isBusNumberValid(   $id);
+        EditingBus::$BusMEModel->isBusNumberValid(   $id);
     }
 
     public function delete($id){
@@ -73,7 +73,7 @@ class EditingBus  implements BusState{
     // $this->addService($data);
     //}
     public function show($id){
-        return ObjecttoArray($this->BusMSModel->findByBusNumber($id));
+        return ObjecttoArray(EditingBus::$BusMSModel->findByBusNumber($id));
     }
 
     public function fillAction($params)
@@ -99,7 +99,7 @@ class EditingBus  implements BusState{
   }
 
   private function populatechecklist($id){
-    $this->ServiceCheckList= $this->BusMEModel->populatechecklist($id);
+    $this->ServiceCheckList= EditingBus::$BusMEModel->populatechecklist($id);
   }
 
   public function addService($data = []){

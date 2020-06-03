@@ -1,14 +1,14 @@
 <?php
 
-require_once(ROOT.DS.'app/controllers/bus/BusState.php');
-
 
 class LockedBus  implements BusState{
 
   private static $lockedbus = NULL;
 
-  private function __construct(){
-      $this->BusMEModel = ModelCommon::loading_model('BusME');
+  private static $BusMEModel;
+
+    private function __construct(){
+      LockedBus::$BusMEModel = ModelCommon::loading_model('BusME');
 
   }
 
@@ -21,15 +21,15 @@ class LockedBus  implements BusState{
 
   public function stateChange($bus){
     if($bus->get_trigger()){
-      $bus->setState(EditingBus::getInstance());
+      $bus->setState('2');
     }else{
-      $bus->setState(ClosedBus::getInstance());
+      $bus->setState('3');
     }
   }
 
   public function fitAction($bus_num){
     //edit the bus data field -> goto BusModel.
-    $bus_detail = $this->BusMEModel->findByBusNumber($bus_num);
+    $bus_detail = LockedBus::$BusMEModel->findByBusNumber($bus_num);
     // at the end
     //$this->stateChange($bus);  // turn into locked state.
     return $bus_detail;
@@ -42,7 +42,7 @@ class LockedBus  implements BusState{
 
     public function checkId($id){
         //@devin
-        $bool = $this->BusMEModel->isBusNumberValid(   $id);
+        $bool = LockedBus::$BusMEModel->isBusNumberValid(   $id);
         return $bool;
     }
 

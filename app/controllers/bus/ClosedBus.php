@@ -1,11 +1,11 @@
 <?php
 
-require_once(ROOT.DS.'app/controllers/bus/BusState.php');
 
 
 class ClosedBus  implements BusState{
 
   private static $closedbus = NULL;
+
 
   private function __construct(){
 
@@ -23,7 +23,7 @@ class ClosedBus  implements BusState{
     $this->delete();  // like
   }
 
-  public function delete(){ // or can call directly to Model @avishka.
+  public function delete($id){ // or can call directly to Model @avishka.
     //delete from $bussess with related services but not all. @avishka
     // add soft delete function to here. @devin
   }

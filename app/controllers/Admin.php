@@ -83,6 +83,7 @@ class Admin extends Controller{
         $this->bus = Bus::getMultitance($this->_controller,'0');
         //dnd($this->bus->getState());
         $this->bus->getState()->fillAction($_POST);
+        $this->bus->setState($this);
         Router::redirect('admin/index');
       }
 
@@ -179,8 +180,9 @@ class Admin extends Controller{
     if($this->bus->getState()->checkId($bus_num)){
         //dnd('true');
         $this->bus->set_trigger();
-        $this->bus->stateChange($this->bus);
+        $this->bus->stateChange($this);
         $details = $this->bus->getState()->show($bus_num);
+        $this->view->displayErrors = '';
         $this->view->post = $details;
         $this->view->render('admin/bus');
     }else{
@@ -237,14 +239,16 @@ class Admin extends Controller{
         $this->bus = Bus::getMultitance($this->_controller,'2');
         if(isset($_POST['save'])){
           $this->bus->getState()->updateDetails($_POST);
+
           Router::redirect('admin/index');
         }
-        elseif(sset($_POST['delete'])){
+        $this->bus->setState($this);
+        if(isset($_POST['delete'])){
+          $this->bus->setState($this);
           $this->bus->getState()->delete($_POST['BusNumber']);
           $this->view->render('admin/index');
         }
       }
-
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();

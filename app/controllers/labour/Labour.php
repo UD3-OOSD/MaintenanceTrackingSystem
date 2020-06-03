@@ -1,6 +1,6 @@
 <?php
 
-class Labour extends Command {
+class Labour {
 
   //here labour attributes
   #private static $count;
@@ -55,10 +55,6 @@ class Labour extends Command {
     return Labour::$ls;
   }
 
-  public function fillAction($params){
-    #$data['LabourId'] = 'Lab'.Labour::$count;
-    Labour::$ls->fill($params);
-  }
 
   public function setAttr($data){
     //here set primary details of labour filled by admin.. @devin

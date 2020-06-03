@@ -1,6 +1,6 @@
 <?php
 
-abstract class Command extends Conntroller{
+abstract class Command extends Controller{
 
   public function __construct($contrller,$action){
     parent::__construct($contrller, $action);

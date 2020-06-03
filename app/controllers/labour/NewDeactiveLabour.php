@@ -1,7 +1,5 @@
 <?php
 
-require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.'LabourState.php');
-
 
 class NewDeactiveLabour implements LabourState{
 
