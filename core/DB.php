@@ -63,8 +63,8 @@
 
     public function query($sql,$params=[]){
       $this->_error = false;
-      print_r($params);
-      echo $sql.'<\br>';
+      #print_r($params);
+      #echo $sql.'<\br>';
       #echo($sql);
       #echo('<br>');
       #echo(implode('    |||',$params));
@@ -72,7 +72,9 @@
       if ($this->_query = $this->_pdo->prepare($sql)) {
         #dnd($params);
         $x =  1;
-        if (count($params)) {
+        #print_r($params);
+        #echo('<br>');
+        if (is_array($params) && count($params)) {
           foreach ($params as $param) {
             $this->_query->bindValue($x, $param);
             $x++;

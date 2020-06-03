@@ -175,9 +175,11 @@ class Model{
       if($params != []){
           foreach ($params as $key => $value){
               $statement=['conditions' => "{$key}",'bind'=>$value];
-              //dnd($statement);
+              #dnd($statement);
               $result = $this->find($statement);
-              if (isset($result)){
+              #dnd($result);
+              if ($result){
+                  #dnd('trueeee');
                   return(true);
               }
           }
