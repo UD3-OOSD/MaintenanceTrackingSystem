@@ -83,7 +83,7 @@ class Admin extends Controller{
         $this->bus = Bus::getMultitance($this->_controller,'0');
         //dnd($this->bus->getState());
         $this->bus->getState()->fillAction($_POST);
-        Router::redirect('admin');
+        Router::redirect('admin/index');
       }
 
     }
@@ -175,9 +175,11 @@ class Admin extends Controller{
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
-    $this->bus = Bus::getMultitance($this->_controller,'2');
+    $this->bus = Bus::getMultitance($this->_controller,'1'); //set state to '1' and in the checkId method stateChange();
     if($this->bus->getState()->checkId($bus_num)){
-        dnd('true');
+        //dnd('true');
+        $this->bus->set_trigger();
+        $this->bus->stateChange($this->bus);
         $details = $this->bus->getState()->show($bus_num);
         $this->view->post = $details;
         $this->view->render('admin/bus');
@@ -191,8 +193,17 @@ class Admin extends Controller{
   public function editLabourAction(){
     $lab_id = $_POST['lab_id'];
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
-    $this->view->post = $details;
-    $this->view->render('admin/labour');
+    $this->lab = Labour::getMultitance($this->_controller,'3');
+    if($this->lab->getState()->checkId($lab_id)){
+        $details = $this->lab->getState()->show();
+        $this->view->post = $details;
+        $this->view->render('admin/labour');
+    }else{
+        $this->view->displayarr1 = '';
+        $this->view->displayarr2 = 'the entered Labour NIC number not in the system.';
+        $this->view->render('admin/index');
+    }
+
   }
 
   public function saveBusAction(){

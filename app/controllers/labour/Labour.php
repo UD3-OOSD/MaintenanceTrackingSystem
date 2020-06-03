@@ -1,8 +1,6 @@
 <?php
 
-require_once(ROOT.DS.'app/controllers/labour/NewDeactiveLabour.php');
-
-class Labour{
+class Labour extends Command {
 
   //here labour attributes
   #private static $count;
@@ -10,16 +8,12 @@ class Labour{
   private static $keys = ['Admin','Forman'];
   public static $caller = '';
 
-  private $ls, $_if = false;
+  private static $ls, $_if = false;
 
   private static $lab = NULL;
 
-  private function __construct(){
-    $this->ls = NewDeactiveLabour::getInstance();
-    #self::$count++;
-  }
 
-  public static function getMultitance($key){
+  public static function getMultitance($key,$state){
       #dnd($key);
     if(!in_array($key,Labour::$keys)){
       return null;
@@ -28,25 +22,42 @@ class Labour{
           Labour::$labours[$key] = new Labour();
       }
       Labour::$caller = $key;
+      Labour::setState($state);
       return Labour::$labours[$key];
     }
   }
 
   public function stateChange(){
-    $this->ls->stateChange($this);
+    Labour::$ls->stateChange($this);
   }
 
-  public function setState($st){
-    $this->ls = st;
+  public static function setState($st){
+    switch ($st){
+        case '0':
+            Labour::$ls = NewDeactiveLabour::getInstance();
+            break;
+        case '1':
+            Labour::$ls = NewActiveLabour::getInstance();
+            break;
+        case '2':
+            Labour::$ls = ActiveLockLabour::getInstance();
+            break;
+        case '3':
+            Labour::$ls = ActiveLabour::getInstance();
+            break;
+        case '4':
+            Labour::$ls = ClosedBus::getInstance();
+            break;
+    }
   }
 
   public function getState(){
-    return $this->ls;
+    return Labour::$ls;
   }
 
   public function fillAction($params){
     #$data['LabourId'] = 'Lab'.Labour::$count;
-    $this->ls->fill($params);
+    Labour::$ls->fill($params);
   }
 
   public function setAttr($data){
@@ -54,7 +65,21 @@ class Labour{
   }
 
   public function get_trigger(){
-    return $this->_if;
+    return Labour::$_if;
   }
 
+    function set_trigger()
+    {
+        Labour::$_if = true;
+    }
+
+    function reset_trigger()
+    {
+        Labour::$_if = false;
+    }
+
+    function showData($id)
+    {
+        // TODO: Implement showData() method.
+    }
 }

@@ -6,14 +6,13 @@ abstract class Command extends Conntroller{
     parent::__construct($contrller, $action);
   }
 
-  abstract function getMultitance($key);
+  abstract static function getMultitance($key,$state);
   abstract function stateChange();
-  abstract function setState($st);
   abstract function getState();
   abstract function get_trigger();
   abstract function set_trigger();
   abstract function reset_trigger();
-  abstract function showData();
+  abstract function showData($id);
   abstract function fillAction($params);
   abstract function setAttr($params);
 

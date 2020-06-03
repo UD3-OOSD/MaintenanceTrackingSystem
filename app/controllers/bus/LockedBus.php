@@ -8,6 +8,7 @@ class LockedBus  implements BusState{
   private static $lockedbus = NULL;
 
   private function __construct(){
+      $this->BusMEModel = ModelCommon::loading_model('BusME');
 
   }
 
@@ -30,7 +31,7 @@ class LockedBus  implements BusState{
     //edit the bus data field -> goto BusModel.
     $bus_detail = $this->BusMEModel->findByBusNumber($bus_num);
     // at the end
-    $this->stateChange($bus);  // turn into locked state.
+    //$this->stateChange($bus);  // turn into locked state.
     return $bus_detail;
   }
 
@@ -38,6 +39,12 @@ class LockedBus  implements BusState{
   public function feed(){
 
   }
+
+    public function checkId($id){
+        //@devin
+        $bool = $this->BusMEModel->isBusNumberValid(   $id);
+        return $bool;
+    }
 
   public function updateDistance($params)
   {

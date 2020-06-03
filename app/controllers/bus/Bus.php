@@ -1,25 +1,17 @@
 <?php
 
-#require_once(ROOT.DS.'app/controllers/bus/NewBus.php');
-
-
-class Bus {
+class Bus extends Command {
 
   private static $busses = [];
   private static $keys = ['Clerk','Admin'];
   private static $caller = '';
   //
-  private $mtns ;
   private static $bs, $_if = false;
   #private static $count = 0;
   //and some other attributes of bus .e.g. egine_numer, color....
 
   private static $bus = NULL;
 
-  private function __construct(){
-    #self::$count++;
-    #$this->load_model('BusM'); // 'bus' is not sure .its' Maintainance details as well @avishka.
-  }
 
   public static function getMultitance($key,$state){
       #dnd(!in_array($key,Bus::$keys));
@@ -93,6 +85,8 @@ class Bus {
   }
 
 
-
-
+    function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
+    }
 }
