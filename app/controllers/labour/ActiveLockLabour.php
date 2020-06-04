@@ -17,9 +17,9 @@ class ActiveLockLabour  implements LabourState{
 
   public function stateChange($lab){
     if($lab->get_trigger()){
-      $lab->setState(ClosedLabour::getInstance());
+      $lab->setState('4');
     }else{
-      $lab->setState(ActiveLabour::getInstance());
+      $lab->setState('3');
     }
   }
 
@@ -27,4 +27,13 @@ class ActiveLockLabour  implements LabourState{
     $lab_details = $this->Labour->findByUserName($lab_id);
 
   }
+
+  public function checkId($id){
+      //@devin
+  }
+
+    public function fill($data)
+    {
+        // TODO: Implement fill() method.
+    }
 }

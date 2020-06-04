@@ -9,7 +9,7 @@ class Clerk extends Controller{
   }
 
   public function indexAction(){
-
+    /*
     $validation = new Validate();
     $posted_values = [];
     if($_POST){
@@ -20,7 +20,7 @@ class Clerk extends Controller{
       }
     }
     $this->view->post = $posted_values;
-    $this->view->displayErrors = $validation->displayErrors();
+    $this->view->displayErrors = $validation->displayErrors();*/
     $this->view->render('clerk/index');
   }
 
@@ -44,9 +44,12 @@ class Clerk extends Controller{
           ]);
           if ($validation->passed()) {
             // there must be a creation pattern.
-            $this->bus = Bus::getInstance();
-            $this->view->IdError = validationID('bustable','BusNumber',$_POST['BusNumber'],'BusNumber');
-            $this->bus->updatedistance($_POST);
+            $this->bus = Bus::getMultitance($this->_controller,'1');
+            if($this->bus->getState()->checkId($_POST['BusNumber'])){
+                $this->bus->stateChange($this);
+                $this->bus->getState()->updateDistance($_POST['BusNumber']);
+                $this->bus->stateChange($this);
+            }
           }
       }
   }

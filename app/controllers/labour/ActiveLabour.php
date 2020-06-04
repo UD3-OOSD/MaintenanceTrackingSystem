@@ -29,5 +29,8 @@ class ActiveLabour implements LabourState{
         // TODO: Implement fill() method.
     }
 
+    public function updateDetails($params){
+      //@devin.
+    }
 
 }

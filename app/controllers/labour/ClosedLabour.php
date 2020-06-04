@@ -20,7 +20,7 @@ class ClosedLabour implements LabourState{
 
   }
 
-  public function delete($lab){
+  public function delete($id){
     //delete particular records @avishka
     // add softdelete function in here. @devin.
   }

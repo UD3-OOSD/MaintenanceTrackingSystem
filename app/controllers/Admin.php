@@ -98,10 +98,7 @@ class Admin extends Controller{
     $validation = new Validate();
     $posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>'' , 'acl'=>''];
     if ($_POST){
-      #dnd($_POST);
       $posted_values = posted_values($_POST);
-      #echo(isset($_POST['gender']));
-      #dnd('-------');
       $validation->check($_POST,[
         'fullName' => [
           'display' => 'Full name',
@@ -157,14 +154,11 @@ class Admin extends Controller{
               'require' => true
           ]
       ]);
-      #dnd($validation->passed());
       if ($validation->passed()){
         $this->lab = Labour::getMultitance($this->_controller,'0');
         $this->lab->getState()->fillAction($_POST);
         Router::redirect('admin/index');
       }
-    //$this->view->render('admin/user_form');
-    //$this->lab = Labour::getMultitance($this->_controller);           //is this usefull??
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
@@ -179,7 +173,7 @@ class Admin extends Controller{
     $this->bus = Bus::getMultitance($this->_controller,'1'); //set state to '1' and in the checkId method stateChange();
     if($this->bus->getState()->checkId($bus_num)){
         //dnd('true');
-        $this->bus->set_trigger();
+        //$this->bus->set_trigger();
         $this->bus->stateChange($this);
         $details = $this->bus->getState()->show($bus_num);
         $this->view->displayErrors = '';
@@ -195,9 +189,11 @@ class Admin extends Controller{
   public function editLabourAction(){
     $lab_id = $_POST['lab_id'];
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
-    $this->lab = Labour::getMultitance($this->_controller,'3');
+    $this->lab = Labour::getMultitance($this->_controller,'2');
     if($this->lab->getState()->checkId($lab_id)){
+        $this->lab->setState($this);
         $details = $this->lab->getState()->show();
+        $this->view->displayErrors = '';
         $this->view->post = $details;
         $this->view->render('admin/labour');
     }else{
@@ -244,8 +240,10 @@ class Admin extends Controller{
         }
         $this->bus->setState($this);
         if(isset($_POST['delete'])){
+            $this->bus->set_trigger();
           $this->bus->setState($this);
           $this->bus->getState()->delete($_POST['BusNumber']);
+          $this->view->displayarr1  = $this->view->displayarr2 = '';
           $this->view->render('admin/index');
         }
       }
@@ -265,17 +263,22 @@ class Admin extends Controller{
       // add validation layer @devin.
       ]);
       if ($validation->passed()){
-        $nic = $_POST['nic'];
+        //$nic = $_POST['nic'];
+          $this->lab = Labour::getMultitance($this->_controller,'3');
         if(isset($_POST['save'])){
-          ActiveLabour::getInstance()->fitAction($nic);
+          $this->lab->getState()->updateDetails($_POST);
+
           Router::redirect('admin/index');
         }
-        else if(isset($_POST['delete'])){
-          $this->deleteLabour($nic);
+        $this->lab->setState($this);
+        if(isset($_POST['delete'])){
+          $this->lab->set_trigger();
+          $this->lab->setState($this);
+          $this->lab->getState()->delete($_POST['nic']);
+          $this->view->displayarr1  = $this->view->displayarr2 = '';
+          $this->view->render('admin/index');
         }
       }
-    $this->view->render('admin/user_form');
-    $lab = Labour::getInstance();
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
