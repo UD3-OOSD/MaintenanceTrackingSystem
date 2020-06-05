@@ -18,18 +18,18 @@ class NewService implements ServiceState{
 
   public function stateChange($service){
     if($service->get_trigger()){
-      $service->setState(ApprovedService::getInstance());
-        $this->ServiceActiveModel->stateChange($service->ServiceId,2);
+      $service->setState('3');
+        $this->ServiceActiveModel->stateChange($service->ServiceId,3);
     }else{
-      $service->setState(InitService::getInstance());
+      $service->setState('1');
       $this->ServiceActiveModel->stateChange($service->ServiceId,1);
     }
   }
 
 
-  public function fillAction($data,$obj){
-      $this->ServiceActiveModel->registerNewService($data);
-      $this->stateChange($obj);
+  public function fillAction($params){
+      //@devin : check this out.
+      $this->ServiceActiveModel->registerNewService($params);
 
   }
 

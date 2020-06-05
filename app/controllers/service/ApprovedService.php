@@ -27,6 +27,11 @@ class ApprovedService implements ServiceState{
     }
   }
 
+  public function saveState($id){
+      //@devin.
+      //save the state as '3' in $id.
+  }
+
 
     public function getState()
     {
@@ -36,5 +41,10 @@ class ApprovedService implements ServiceState{
     public function edit($service, $data)
     {
         // TODO: Implement edit() method.
+    }
+
+    public function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
     }
 }

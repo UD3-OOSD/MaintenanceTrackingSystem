@@ -20,6 +20,8 @@
         require_once(ROOT.DS.'app'.DS.'controllers'.DS.'labour'.DS.$classname.'.php');
       }elseif (file_exists(ROOT.DS.'app'.DS.'controllers'.DS.'service'.DS.$classname.'.php')) {
         require_once(ROOT.DS.'app'.DS.'controllers'.DS.'service'.DS.$classname.'.php');
+      }elseif (file_exists(ROOT.DS.'app'.DS.'controllers'.DS.'system'.DS.$classname.'.php')) {
+          require_once(ROOT.DS.'app'.DS.'controllers'.DS.'system'.DS.$classname.'.php');
       }elseif(file_exists(ROOT.DS.'app'.DS.'models'.DS.$classname.'.php')){
         require_once(ROOT.DS.'app'.DS.'models'.DS.$classname.'.php');
       }

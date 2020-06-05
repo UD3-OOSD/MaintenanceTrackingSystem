@@ -15,12 +15,17 @@ class ClosedService implements ServiceState{
     return ClosedService::$closedservice;
   }
 
+  public function saveState($id){
+      //Devin
+      $this->delete($id);
+  }
+
   public function stateChange($service){
     $this->delete($service);
   }
 
   public function delete($service){
-    // delete relevent records @avishka, @devin
+    // @devin same soft delete function
   }
 
     public function getState()
@@ -31,5 +36,10 @@ class ClosedService implements ServiceState{
     public function edit($service, $data)
     {
         // TODO: Implement edit() method.
+    }
+
+    public function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
     }
 }

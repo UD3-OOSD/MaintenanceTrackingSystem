@@ -19,8 +19,14 @@ class DeletedService implements ServiceState{
     $this->delete($service);
   }
 
+  public function saveState($id){
+      //@devin
+      // save state as '8' in $id
+      $this->delete($id);
+  }
+
   public function delete($service){
-    //delete relavent record in db @avishka
+    //@devin soft delete.
   }
 
     public function getState()
