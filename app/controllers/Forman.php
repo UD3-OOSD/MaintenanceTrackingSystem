@@ -3,9 +3,11 @@
 class Forman extends Controller{
 
   private $service;
+  private static $serviceSystem;
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
+    self::$serviceSystem = SystemService::getInstance();
   }
 
 
@@ -15,7 +17,7 @@ class Forman extends Controller{
     $this->view->render('forman/index');
   }
 
-  public function CloseServiceAction($id){
+  public function CloseServiceAction($id=''){
       $this->service = Service::getMultitance($this->_controller,'2');
       if($this->service->getState()->checkId($id)){
           $this->service->setState('6');
@@ -24,7 +26,7 @@ class Forman extends Controller{
       $this->view->render('forman/index');
   }
 
-  public function deleteServiceAction($id){
+  public function deleteServiceAction($id=''){
     $this->service = Service::getMultitance($this->_controller,'2');
     if($this->service->getState()->checkId($id)){
         $this->service->setState('8');
@@ -33,13 +35,18 @@ class Forman extends Controller{
     $this->view->render('forman/index');
   }
 
-  public function acceptServiceAction($id){
+  public function acceptServiceAction($id=''){
     #fetch data from busdb for accepted services and their headers. @devin @avishka.
-    $this->service = Service::getMultitance($this->_controller,'2');
-    if($this->service->getState()->checkId($id)){
-        $this->service->setState('3');
-        $this->service->getState()->saveState($id);
+    if(isset($id)) {
+        $this->service = Service::getMultitance($this->_controller, '2');
+        if ($this->service->getState()->checkId($id)) {
+            $this->service->setState('3');
+            $this->service->getState()->saveState($id);
+        }
     }
+    $list = Forman::$serviceSystem->get('1');
+    $html = displaylinkedtable([],$list,[]);
+    $this->view->$html = $html;
     $this->view->render('forman/accepted');
   }
 
@@ -82,6 +89,8 @@ class Forman extends Controller{
       $this->view->render('forman/service_form');#check with @nip and @uda
 
   }
+
+
 
   public function editServiceAction(){
 
