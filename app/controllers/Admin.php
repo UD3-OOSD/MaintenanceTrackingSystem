@@ -170,7 +170,8 @@ class Admin extends Controller{
     //add the validation @devin
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
-    $this->bus = Bus::getMultitance($this->_controller,'1'); //set state to '1' and in the checkId method stateChange();
+    $this->bus = Bus::getMultitance($this->_controller,'1');
+    #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
     if($this->bus->getState()->checkId($bus_num)){
         //dnd('true');
         //$this->bus->set_trigger();

@@ -3,7 +3,7 @@
 class Users extends Model{
   private $_isLoggedIn, $_sessionName, $_cookieName;
   public static $currentLoggedInUser = null;
-  private $idtype;
+  public $idtype;
 
   public function __construct($user = ''){
     $table = 'users';

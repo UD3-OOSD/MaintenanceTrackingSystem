@@ -32,16 +32,42 @@ class Model{
     #$params = $this->_softDeleteParams($params);
       //dnd($this->_db);
     $results = [];
+    #dnd($params);
+    $this->_db->clear_results();
+    #dnd($params);
     $resultsQuery = $this->_db->find($this->_table, $params);
-
-    foreach ($resultsQuery as $result) {
-        //dnd($this->_modelName);
-      $obj = new $this->_modelName($this->_table);
-      $obj->populateObjectData($result);
-      $results[] = $obj;
+    #dnd($this->_db->results());
+    if(!empty($resultsQuery)){
+        foreach ($resultsQuery as $result) {
+            //dnd($this->_modelName);
+            $obj = new $this->_modelName($this->_table);
+            $obj->populateObjectData($result);
+            $results[] = $obj;
+        }
     }
     return $results;
   }
+
+  public function setTableStateID($id,$state=''){
+      $type=['BusId'=>'BusState','LabourId'=>'LabourState','ServiceId'=>'ServiceState'];
+      if (!($state=='')){
+          #dnd('breubve');
+          $unique=[$this->idtype =>$id];
+          $params=[$type[$this->idtype]=>$state];
+          #dnd($params);
+          return $this->UpdateRow($unique,$params);
+      }
+      return false;
+  }
+
+  public function setTableState($state){
+      #dnd(isset($this->{$this->idtype}));
+      if (isset($this->{$this->idtype})){
+          return $this->setTableStateID($this->{$this->idtype},$state);
+      }
+      return false;
+  }
+
   public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
     $rows = $this->LeftJoin($tables,$keys,$params);
     $ObjectArray = [];
@@ -174,11 +200,11 @@ class Model{
   public function isValidKey($params = []){
       if($params != []){
           foreach ($params as $key => $value){
-              $statement=['conditions' => "{$key}",'bind'=>$value];
-              #dnd($statement);
+              $statement=['conditions' => $key."= ?" , 'bind'=>[$value]];
+              #dnd($key."= ?");
               $result = $this->find($statement);
               #dnd($result);
-              if ($result){
+              if (is_array($result) && !(empty($result))){
                   #dnd('trueeee');
                   return(true);
               }

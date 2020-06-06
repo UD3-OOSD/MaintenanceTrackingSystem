@@ -1,7 +1,7 @@
 <?php
 
 class LabourActive extends Model{
-    private $idtype;
+    public $idtype;
     public function __construct($labour = ''){
 
         $table = 'labourdetails';

@@ -83,6 +83,8 @@
 
 
         #dnd('..............................');
+          #print_r($this->_query);
+            #echo('<br>');
         if ($this->_query->execute()) {
           $this->_result = $this->_query->fetchAll(PDO::FETCH_OBJ);
           $this->_count = $this->_query->rowCount();
@@ -102,6 +104,7 @@
 
       //conditions
        // echo($params['conditions'].$table);
+        #print_r($params);
       if (isset($params['conditions'])) {
         if (is_array($params['conditions'])) {
           foreach ($params['conditions'] as $condition) {
@@ -132,7 +135,12 @@
         $limit = ' LIMIT '.$params['limit'];
       }
       #echo($conditionString);
-        //print_r([$conditionString,$order,$limit]);
+        #print_r($conditionString);
+        #echo('<br>');
+      #print_r($order);
+        #echo('<br>');
+        #print_r($limit);
+        #echo('<br>');
       $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
       #echo('<br>');
       #echo($sql);
@@ -148,7 +156,7 @@
 
 
     public function find($table, $params = []){
-        //dnd($params);
+        #dnd($params);
       if($this->_read($table, $params)){
         return $this->results();
       }
@@ -225,7 +233,7 @@
       #echo '<br>';
       if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
         $sql =  "SELECT {$paramstring}  FROM {$tables[0]} Right JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
-        echo($sql);
+        #echo($sql);
         #echo('<br>');
         $prepared=$this->_pdo->prepare($sql);
         $prepared->execute();
@@ -301,6 +309,10 @@
 
     public function results(){
       return $this->_result;
+    }
+
+    public function clear_results(){
+        return $this->_result = null;
     }
 
     public function first(){

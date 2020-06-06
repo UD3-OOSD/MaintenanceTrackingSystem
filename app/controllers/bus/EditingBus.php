@@ -22,7 +22,7 @@ class EditingBus  implements BusState{
   }
 
   public function stateChange($bus){
-    $bus->setState('1');
+    $bus->setState('1'); 
   }
 
   public function fitAction($params){

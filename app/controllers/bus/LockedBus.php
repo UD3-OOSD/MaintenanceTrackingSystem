@@ -42,7 +42,7 @@ class LockedBus  implements BusState{
 
     public function checkId($id){
         //@devin
-        dnd(LockedBus::$BusMEModel->isBusNumberValid(   $id));
+        #dnd(LockedBus::$BusMEModel->isBusNumberValid(   $id));
         return LockedBus::$BusMEModel->isBusNumberValid(   $id);
     }
 

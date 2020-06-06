@@ -1,7 +1,7 @@
 <?php
 #the bus model
 class BusMS extends Model{
-  private $idtype;
+  public $idtype;
 
   public function __construct($bus=''){
     $table='bustable';
