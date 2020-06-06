@@ -1,7 +1,7 @@
 <?php
 #the bus model
 class BusME extends Model{
-  private $idtype;
+  public $idtype;
 
   public function __construct($bus=''){
 
@@ -54,6 +54,7 @@ class BusME extends Model{
     #dnd($params);
 
     $this->assign($params);
+    $this->deleted = 0;
     $this->save($this->idtype);
   }
 

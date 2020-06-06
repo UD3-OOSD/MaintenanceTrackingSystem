@@ -1,7 +1,7 @@
 <?php
 
 class ServiceActive extends Model{
-    private $idtype;
+    public $idtype;
     public function __construct($service=''){
         $table='activeservices';
         $this->idtype ='ServiceId';
