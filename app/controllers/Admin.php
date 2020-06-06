@@ -290,6 +290,7 @@ class Admin extends Controller{
     $bus = LockedBus::getInstance()->set_trigger(true);
     $bus->stateChange();
 
+
   }
 
   public function deleteLabour($id){
