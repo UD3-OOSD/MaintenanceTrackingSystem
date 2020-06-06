@@ -5,10 +5,10 @@
 class ClosedBus  implements BusState{
 
   private static $closedbus = NULL;
-
+  private static $BusMSModel;
 
   private function __construct(){
-
+      ClosedBus::$BusMSModel = ModelCommon::loading_model('BusMS');
   }
 
   public static function getInstance(){
@@ -20,12 +20,13 @@ class ClosedBus  implements BusState{
 
   public function stateChange($bus){
     //no idea about state change @devin
-    $this->delete();  // like
+    //$this->delete();  // like
   }
 
   public function delete($id){ // or can call directly to Model @avishka.
     //delete from $bussess with related services but not all. @avishka
     // add soft delete function to here. @devin
+    ClosedBus::$BusMSModel->delete($id);
   }
 
     public function updateDistance($params)

@@ -59,19 +59,8 @@ class EditingBus  implements BusState{
         EditingBus::$BusMEModel->isBusNumberValid(   $id);
     }
 
-    public function delete($id){
-        //@devin
-        #$this->BusMSModel
-    }
 
-    //update attribute and deal with db @avishka.
 
-    //check for service.@avishka
-
-    //$arr = $this->check($dis);
-
-    //if(!empty($arr)){
-    // $this->addService($data);
     //}
     public function show($id){
         return ObjecttoArray(EditingBus::$BusMSModel->findByBusNumber($id));
