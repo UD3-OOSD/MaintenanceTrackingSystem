@@ -267,7 +267,54 @@ class Admin extends Controller{
       #dnd($_POST);
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
-      // add validation layer @devin.
+          'fullName' => [
+              'display' => 'Full name',
+              'require' => true,
+          ],
+          'lastName' => [
+              'display' => 'Last Name',
+              'require' => true,
+          ],
+          'nameWIn' => [
+              'display' => 'Name with initials',
+              'require' => true,
+          ],
+          'nic' => [
+              'display' => 'NIC Number',
+              'require' => true,
+              'min' => 10,
+              'max' => 12,
+          ],
+          'email' => [
+              'display' => 'Email',
+              'require' => true,
+          ],
+          'tel' => [
+              'display' => 'NumberOfSeats',
+              'require' => true,
+              'is_numeric' => true,
+              'min' => 10
+          ],
+          'gender' => [
+              'display' => 'Gender',
+              'require' => true,
+          ],
+          'race' => [
+              'display' => 'Race',
+              'require' => true,
+          ],
+          'religion' => [
+              'display' => 'Religion',
+              'require' => true,
+          ],
+          'dob' => [
+              'display' => 'Date Of Birth ',
+              'require' => true
+          ],
+          'acl' => [
+              'display' => 'Rank ',
+              'require' => true
+          ]
       ]);
       if ($validation->passed()){
         //$nic = $_POST['nic'];
@@ -297,6 +344,7 @@ class Admin extends Controller{
     // jQuery code in here to fade @devin.
     $bus = LockedBus::getInstance()->set_trigger(true);
     $bus->stateChange();
+
 
   }
 

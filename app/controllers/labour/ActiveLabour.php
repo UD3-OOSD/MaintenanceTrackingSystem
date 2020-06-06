@@ -3,9 +3,10 @@
 class ActiveLabour implements LabourState{
 
   private static $actlab = NULL;
+  private static $LabourActiveModel;
 
   private function __construct(){
-
+    ActiveLabour::$LabourActiveModel = ModelCommon::loading_model('LabourActive');
   }
 
   public static function getInstance(){
@@ -30,7 +31,10 @@ class ActiveLabour implements LabourState{
     }
 
     public function updateDetails($params){
-      //@devin.
+      $labour = ActiveLabour::$LabourActiveModel->findByNIC($params['nic']);
+      $labour->edit_this($params);
+
+      #return (ActiveLabour::$LabourActiveModel->edit($params['nic'],$params));
     }
 
 }

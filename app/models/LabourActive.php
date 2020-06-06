@@ -20,6 +20,14 @@ class LabourActive extends Model{
         }
     }
 
+    public function findByLabourId($LabourId){
+        return $this->findFirst(['conditions'=>'LabourId = ?', 'bind'=>[$LabourId]]);
+    }
+
+    public function findByNIC($nic){
+        return $this->findFirst(['conditions'=>'nic = ?', 'bind'=>[$nic]]);
+    }
+
 
     public function isLabourIdValid($id){
         $params = ['LabourId'=>$id];
@@ -48,4 +56,11 @@ class LabourActive extends Model{
         return(false);
     }
 
+    public function edit($id,$params){
+        return $this->UpdateRow(['LabourId'=>$id],$params);
+    }
+
+    public function edit_this($params){
+        return $this->edit(['LabourId'=>$this->LabourId],$params);
+    }
 }

@@ -147,11 +147,11 @@ class Model{
     return $this->_db->UpdateRow($this->_table,[$idtype=>$id],$fields);
   }
 
-  public function delete($idtype,$id){
+  public function delete($id){
     if($id == '' && $this->{$idtype} = '') return false;
     $id = ($id == '' ) ? $this->id : $id;
     if($this->_softDelete){
-      $this->UpdateRow($id, ['deleted' => 1]);
+      $this->UpdateRow([$this->{$idtype} => $id], ['deleted' => 1]);
     }
     return $this->_db->deleteRow($this->_table, $id);
   }
