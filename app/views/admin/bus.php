@@ -9,7 +9,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
                 <h1>Edit bus data</h1>
-                <form class="form-horizontal hr" method="post" action="admin/saveBus">
+                <form class="form-horizontal hr" method="post" action="saveBus">
                   <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Registration No.</label>
@@ -68,10 +68,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-2">
-                            <button type="submit" class="btn btn-default" value="save">SAVE</button>
+                            <button type="submit" class="btn btn-default" name="save" value="save">SAVE</button>
                         </div>
                         <div class="col-sm-offset-1 col-sm-2">
-                            <button type="button" class="btn btn-default" value="delete">DELETE</button></a>
+                            <button type="submit" class="btn btn-default" name="delete" value="delete">DELETE</button></a>
                         </div>
                     </div>
                 </form>

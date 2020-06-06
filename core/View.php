@@ -9,6 +9,7 @@
 
     public function render($viewName){
       $viewAry = explode('/', $viewName);
+      print_r($viewAry);
       $viewString = implode(DS, $viewAry);
 
       if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$viewString.'.php')){

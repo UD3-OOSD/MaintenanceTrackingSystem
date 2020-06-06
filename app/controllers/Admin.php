@@ -83,8 +83,8 @@ class Admin extends Controller{
         $this->bus = Bus::getMultitance($this->_controller,'0');
         //dnd($this->bus->getState());
         $this->bus->getState()->fillAction($_POST);
-        $this->bus->setState($this);
-        Router::redirect('admin/index');
+        $this->bus->stateChange($this);
+        Router::redirect('admin');
       }
 
     }
@@ -157,7 +157,7 @@ class Admin extends Controller{
       if ($validation->passed()){
         $this->lab = Labour::getMultitance($this->_controller,'0');
         $this->lab->getState()->fillAction($_POST);
-        Router::redirect('admin/index');
+        Router::redirect('admin');
       }
   }
   $this->view->post = $posted_values;
@@ -172,6 +172,7 @@ class Admin extends Controller{
     //$details = LockedBus::getInstance()->fitAction($bus_num);
     $this->bus = Bus::getMultitance($this->_controller,'1');
     #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
+      //dnd($this->bus->getState()->checkId($bus_num));
     if($this->bus->getState()->checkId($bus_num)){
         //dnd('true');
         //$this->bus->set_trigger();
@@ -183,7 +184,7 @@ class Admin extends Controller{
     }else{
         $this->view->displayarr1 = 'the entered Bus Number not in the system.';
         $this->view->displayarr2 = '';
-        $this->view->render('admin/index');
+        Router::redirect('admin');
     }
   }
 
@@ -192,7 +193,7 @@ class Admin extends Controller{
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->lab = Labour::getMultitance($this->_controller,'2');
     if($this->lab->getState()->checkId($lab_id)){
-        $this->lab->setState($this);
+        $this->lab->stateChange($this);
         $details = $this->lab->getState()->show();
         $this->view->displayErrors = '';
         $this->view->post = $details;
@@ -200,58 +201,63 @@ class Admin extends Controller{
     }else{
         $this->view->displayarr1 = '';
         $this->view->displayarr2 = 'the entered Labour NIC number not in the system.';
-        $this->view->render('admin/index');
+        Router::redirect('admin');
     }
 
   }
 
   public function saveBusAction(){
+      //dnd($_POST);
 
     $validation = new Validate();
     $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
-    if ($_POST){
-      $posted_values = posted_values($_POST);
-      $validation->check($_POST,[
-          'EngineNumber' => [
-              'display' => 'Engine number',
-              'require' => true,
-              'unique' => 'bustable',
-              'min' => 6,
-          ],
-          'Colour' => [
-              'display' => 'Colour',
-              'require' => true,
-          ],
-          'Mileage' => [
-              'display' => 'Mileage',
-              'require' => true,
-          ],
-          'NumberOfSeats' => [
-              'display' => 'NumberOfSeats',
-              'require' => true,
-          ]
-      ]);
-      if ($validation->passed()){
-        #$bus_num = $_POST['bus_num'];
-        $this->bus = Bus::getMultitance($this->_controller,'2');
-        if(isset($_POST['save'])){
-          $this->bus->getState()->updateDetails($_POST);
 
-          Router::redirect('admin/index');
+    if ($_POST){
+        if(isset($_POST['save'])) {
+            $posted_values = posted_values($_POST);
+            $validation->check($_POST, [
+                'EngineNumber' => [
+                    'display' => 'Engine number',
+                    'require' => true,
+                    'min' => 6,
+                ],
+                'Colour' => [
+                    'display' => 'Colour',
+                    'require' => true,
+                ],
+                'Mileage' => [
+                    'display' => 'Mileage',
+                    'require' => true,
+                ],
+                'NumberOfSeats' => [
+                    'display' => 'NumberOfSeats',
+                    'require' => true,
+                ]
+            ]);
+            if ($validation->passed()) {
+                #$bus_num = $_POST['bus_num'];
+                $this->bus = Bus::getMultitance($this->_controller, '2');
+
+                $this->bus->getState()->updateDetails($_POST);
+                $this->bus->stateChange($this);
+                Router::redirect('admin');
+            }
         }
-        $this->bus->setState($this);
+
         if(isset($_POST['delete'])){
+            $this->bus = Bus::getMultitance($this->_controller, '1');
             $this->bus->set_trigger();
-          $this->bus->setState($this);
+          $this->bus->stateChange($this);
+          //dnd($this->bus->getState());
           $this->bus->getState()->delete($_POST['BusNumber']);
           $this->view->displayarr1  = $this->view->displayarr2 = '';
-          $this->view->render('admin/index');
+          Router::redirect('admin');
         }
-      }
+
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();
-    $this->view->render('admin/bus_form');
+    $this->view->render('admin/bus');
   }
 
   public function saveLabourAction(){
@@ -273,6 +279,7 @@ class Admin extends Controller{
         }
         $this->lab->setState($this);
         if(isset($_POST['delete'])){
+            dnd($_POST);
           $this->lab->set_trigger();
           $this->lab->setState($this);
           $this->lab->getState()->delete($_POST['nic']);

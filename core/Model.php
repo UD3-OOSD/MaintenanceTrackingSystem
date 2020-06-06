@@ -33,7 +33,6 @@ class Model{
       //dnd($this->_db);
     $results = [];
     #dnd($params);
-    $this->_db->clear_results();
     #dnd($params);
     $resultsQuery = $this->_db->find($this->_table, $params);
     #dnd($this->_db->results());
@@ -203,7 +202,7 @@ class Model{
               $statement=['conditions' => $key."= ?" , 'bind'=>[$value]];
               #dnd($key."= ?");
               $result = $this->find($statement);
-              #dnd($result);
+              //dnd($statement);
               if (is_array($result) && !(empty($result))){
                   #dnd('trueeee');
                   return(true);

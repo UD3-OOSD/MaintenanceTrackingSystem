@@ -20,10 +20,13 @@ class LockedBus  implements BusState{
   }
 
   public function stateChange($bus){
+      //dnd($bus);
     if($bus->get_trigger()){
       $bus->setState('3');
+
     }else{
       $bus->setState('2');
+        //dnd($bus);
     }
   }
 
