@@ -20,19 +20,19 @@ class Forman extends Controller{
   public function CloseServiceAction($id=''){
       $this->service = Service::getMultitance($this->_controller,'2');
       if($this->service->getState()->checkId($id)){
-          $this->service->setState('6');
+          $this->service->stateChange('6');
           $this->service->getState()->saveState($id);
       }
-      $this->view->render('forman/index');
+      Router::redirect('forman');
   }
 
   public function deleteServiceAction($id=''){
     $this->service = Service::getMultitance($this->_controller,'2');
     if($this->service->getState()->checkId($id)){
-        $this->service->setState('8');
+        $this->service->stateChange('8');
         $this->service->getState()->saveState($id);
     }
-    $this->view->render('forman/index');
+    Router::redirect('forman');
   }
 
   public function acceptServiceAction($id=''){
@@ -40,7 +40,7 @@ class Forman extends Controller{
     if(isset($id)) {
         $this->service = Service::getMultitance($this->_controller, '2');
         if ($this->service->getState()->checkId($id)) {
-            $this->service->setState('3');
+            $this->service->stateChange('3');
             $this->service->getState()->saveState($id);
         }
     }

@@ -265,75 +265,77 @@ class Admin extends Controller{
     //$posted_values = ['fullName' => '', 'lastName' => '','nameWIn' => '','address' => '','title' => '', 'nic' => '' , 'email' => '','tel' => '',"gender" => '','race'=>'', 'religion'=>'' , 'dob'=>'' , 'acl'=>''];
     if ($_POST){
       #dnd($_POST);
-      $posted_values = posted_values($_POST);
-      $validation->check($_POST,[
-          'fullName' => [
-              'display' => 'Full name',
-              'require' => true,
-          ],
-          'lastName' => [
-              'display' => 'Last Name',
-              'require' => true,
-          ],
-          'nameWIn' => [
-              'display' => 'Name with initials',
-              'require' => true,
-          ],
-          'nic' => [
-              'display' => 'NIC Number',
-              'require' => true,
-              'min' => 10,
-              'max' => 12,
-          ],
-          'email' => [
-              'display' => 'Email',
-              'require' => true,
-          ],
-          'tel' => [
-              'display' => 'NumberOfSeats',
-              'require' => true,
-              'is_numeric' => true,
-              'min' => 10
-          ],
-          'gender' => [
-              'display' => 'Gender',
-              'require' => true,
-          ],
-          'race' => [
-              'display' => 'Race',
-              'require' => true,
-          ],
-          'religion' => [
-              'display' => 'Religion',
-              'require' => true,
-          ],
-          'dob' => [
-              'display' => 'Date Of Birth ',
-              'require' => true
-          ],
-          'acl' => [
-              'display' => 'Rank ',
-              'require' => true
-          ]
-      ]);
-      if ($validation->passed()){
-        //$nic = $_POST['nic'];
-          $this->lab = Labour::getMultitance($this->_controller,'3');
-        if(isset($_POST['save'])){
-          $this->lab->getState()->updateDetails($_POST);
+        if(isset($_POST['save'])) {
+            $posted_values = posted_values($_POST);
+            $validation->check($_POST, [
+                'fullName' => [
+                    'display' => 'Full name',
+                    'require' => true,
+                ],
+                'lastName' => [
+                    'display' => 'Last Name',
+                    'require' => true,
+                ],
+                'nameWIn' => [
+                    'display' => 'Name with initials',
+                    'require' => true,
+                ],
+                'nic' => [
+                    'display' => 'NIC Number',
+                    'require' => true,
+                    'min' => 10,
+                    'max' => 12,
+                ],
+                'email' => [
+                    'display' => 'Email',
+                    'require' => true,
+                ],
+                'tel' => [
+                    'display' => 'NumberOfSeats',
+                    'require' => true,
+                    'is_numeric' => true,
+                    'min' => 10
+                ],
+                'gender' => [
+                    'display' => 'Gender',
+                    'require' => true,
+                ],
+                'race' => [
+                    'display' => 'Race',
+                    'require' => true,
+                ],
+                'religion' => [
+                    'display' => 'Religion',
+                    'require' => true,
+                ],
+                'dob' => [
+                    'display' => 'Date Of Birth ',
+                    'require' => true
+                ],
+                'acl' => [
+                    'display' => 'Rank ',
+                    'require' => true
+                ]
+            ]);
+            if ($validation->passed()) {
+                //$nic = $_POST['nic'];
+                $this->lab = Labour::getMultitance($this->_controller, '3');
 
-          Router::redirect('admin/index');
+                $this->lab->getState()->updateDetails($_POST);
+                $this->lab->stateChange($this);
+                Router::redirect('admin');
+            }
         }
-        $this->lab->setState($this);
         if(isset($_POST['delete'])){
-            dnd($_POST);
+            //dnd($_POST);
+            $this->lab = Labour::getMultitance($this->_controller, '2');
           $this->lab->set_trigger();
-          $this->lab->setState($this);
+          $this->lab->stateChange($this);
           $this->lab->getState()->delete($_POST['nic']);
           $this->view->displayarr1  = $this->view->displayarr2 = '';
-          $this->view->render('admin/index');
+          Router::redirect('admin');
         }
-      }
+
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
