@@ -7,36 +7,60 @@ class Service{
   private static $caller = '';
   private static $keys = ['Admin','Mechanics','Forman'];
 
-  private $ss, $_if = false, $time_bool = false;
+  private static $ss, $_if = false, $time_bool = false;
   #private static $count = 0;
   private $ServiceId;
 
   private static $service = NULL;
 
-  private function __construct(){
-    #$this->ServiceId = Service::$count;
-    $this->ss = NewService::getInstance();
-    #Service::$count++;
-  }
 
-  public static function getMultitance($key){
+  public static function getMultitance($key,$state){
     if(!in_array($key,Service::$keys)){
       return null;
     }else{
       if(!in_array($key,Labour::$services)){
-        Labour::$services[$key] = new Service();
+        Service::$services[$key] = new Service();
       }
-      Labour::$caller = $key;
-      return Labour::$services[key];
+      Service::$caller = $key;
+      Bus::setState($state);
+      return Service::$services[key];
     }
   }
 
   public function stateChange(){
-    $this->ss->stateChange($this);
+    Service::$ss->stateChange($this);
   }
 
-  public function setState($st){
-      $this->ss = $st;
+  public static function setState($st){
+      switch ($st){
+          case '0':
+              Service::$ss = NewService::getInstance();
+              break;
+          case '1':
+              Service::$ss = InitService::getInstance();
+              break;
+          case '2':
+              Service::$ss = LockedService::getInstance();
+              break;
+          case '3':
+              Service::$ss = ApprovedService::getInstance();
+              break;
+          case '4':
+              Service::$ss = StartedService::getInstance();
+              break;
+          case '5':
+              Service::$ss = FinishedService::getInstance();
+              break;
+          case '6':
+              Service::$ss = ClosedService::getInstance();
+              break;
+          case '7':
+              Service::$ss = ExpiredService::getInstance();
+              break;
+          case '8':
+              Service::$ss = DeletedService::getInstance();
+              break;
+      }
   }
   public function setAttr($data){
       $columns = ModelCommon::getColumnNames('activeservices');
@@ -47,28 +71,28 @@ class Service{
       }
   }
   public function fillAction($params,$actor){
-      $this->ss->fillAction($params,$this);
+      Service::$ss->fillAction($params,$this);
       $this->setAttr($params);
   }
 
   public function get_trigger(){
-    return $this->_if;
+    return Service::$_if;
   }
 
   public function set_trigger(){
-      $this->_if= true;
+      Service::$_if= true;
   }
 
   public function reset_trigger(){
-      $this->_if= false;
+      Service::$_if= false;
   }
 
   public function getState(){
-    return $this->ss->getState();
+    return Service::$ss->getState();
   }
 
   public function get_time_trigger(){
-    return $this->time_bool;
+    return Service::$time_bool;
   }
 
   public function show_detail(){
@@ -83,6 +107,6 @@ class Service{
 
 
   public function edit($ServiceId){
-      $this->ss->edit($ServiceId);
+      Service::$ss->edit($ServiceId);
   }
 }

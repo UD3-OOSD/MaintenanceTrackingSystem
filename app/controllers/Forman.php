@@ -3,13 +3,11 @@
 class Forman extends Controller{
 
   private $service;
+  private static $serviceSystem;
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
-  }
-
-  public function setOnService($service){
-    $this->service = $service;
+    self::$serviceSystem = SystemService::getInstance();
   }
 
 
@@ -19,34 +17,40 @@ class Forman extends Controller{
     $this->view->render('forman/index');
   }
 
-  public function approveAction(){
-    //get service_id from url and fetch its' service obj. @avishka, @devin
-    // $data by url.
-      $this->service->getState()->edit($service,$data);
+  public function CloseServiceAction($id=''){
+      $this->service = Service::getMultitance($this->_controller,'2');
+      if($this->service->getState()->checkId($id)){
+          $this->service->setState('6');
+          $this->service->getState()->saveState($id);
+      }
+      $this->view->render('forman/index');
+  }
+
+  public function deleteServiceAction($id=''){
+    $this->service = Service::getMultitance($this->_controller,'2');
+    if($this->service->getState()->checkId($id)){
+        $this->service->setState('8');
+        $this->service->getState()->saveState($id);
+    }
     $this->view->render('forman/index');
   }
 
-  public function deleteAction(){
-    //get service_id from url and fetch its' service obj. @avishka, @devin
-    // $data by url.
-    $this->service->stateChange();
-    $this->view->render('forman/index');
-  }
-
-  public function acceptedAction(){
+  public function acceptServiceAction($id=''){
     #fetch data from busdb for accepted services and their headers. @devin @avishka.
-    $heads = ['bus id','service id','service category'];
-    $lis = [[001,156,'Engine'],[002,225,'tires'],[003,063,'Full service']];
-    $links = ['index','',''];
-    $this->view->table_1 = displaylinkedtable($heads,$lis,$links);
+    if(isset($id)) {
+        $this->service = Service::getMultitance($this->_controller, '2');
+        if ($this->service->getState()->checkId($id)) {
+            $this->service->setState('3');
+            $this->service->getState()->saveState($id);
+        }
+    }
+    $list = Forman::$serviceSystem->get('1');
+    $html = displaylinkedtable([],$list,[]);
+    $this->view->$html = $html;
     $this->view->render('forman/accepted');
   }
 
-  public function showAction($id){
-    //fetch data by model on $id @devin. => $data;
-
-  }
-  public function addService(){
+  public function addServiceAction(){
       $validation = new Validate();
       $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceInitiatedDate' => '','Labourers' => '','ServiceDescription' => ''];
       if ($_POST) {
@@ -73,7 +77,8 @@ class Forman extends Controller{
               ]
           ]);
           if ($validation->passed()) {
-              $this->service = Service::getInstance();
+              $this->service = Service::getMultitance($this->_controller,'0');
+              $this->service->getState()->fillAction($_POST);
               $this->service->set_trigger();
               $this->service->fillAction($_POST,'forman');
               Router::redirect('forman');
@@ -85,7 +90,9 @@ class Forman extends Controller{
 
   }
 
-  public function editAction(){
+
+
+  public function editServiceAction(){
 
   }
 
