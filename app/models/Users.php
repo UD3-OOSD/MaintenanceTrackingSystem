@@ -7,8 +7,7 @@ class Users extends Model{
 
   public function __construct($user = ''){
     $table = 'users';
-    $this->idtype = 'LabourId';
-    parent::__construct($table);
+    parent::__construct($table,$idtype='LabourId');
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
     $this->_softDelete = true;

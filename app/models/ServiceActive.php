@@ -1,11 +1,9 @@
 <?php
 
 class ServiceActive extends Model{
-    public $idtype;
     public function __construct($service=''){
         $table='activeservices';
-        $this->idtype ='ServiceId';
-        parent::__construct($table,'ServiceActive');
+        parent::__construct($table,'ServiceActive','ServiceId');
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst('activeservices', ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);

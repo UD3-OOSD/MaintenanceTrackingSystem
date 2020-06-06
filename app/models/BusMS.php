@@ -1,12 +1,10 @@
 <?php
 #the bus model
 class BusMS extends Model{
-  public $idtype;
 
   public function __construct($bus=''){
     $table='bustable';
-    $this->idtype = 'BusId';
-    parent::__construct($table,'BusMS');
+    parent::__construct($table,'BusMS','BusId');
     if ($bus != '') {
       if (is_int($bus)) {
         $b = $this->_db->findFirst('bustable', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);
@@ -34,10 +32,6 @@ class BusMS extends Model{
     $this->save($this->idtype);
   }
 
-  public function editEntry($params){
-      $this->assign($params);
-      $this->save($this->idtype);
-  }
 
     public function  isBusNumberValid($id){
         $params=['BusNumber'=>$id];
@@ -45,11 +39,11 @@ class BusMS extends Model{
     }
 
     public function edit($id,$params){
-        return $this->UpdateRow(['BusId'=>$id],$params);
+        return $this->UpdateRow(['BusNumber'=>$id],$params);
     }
 
     public function edit_this($params){
-        return $this->edit(['BusId'=>$this->BusId],$params);
+        return $this->edit(['BusNumber'=>$this->BusNumber],$params);
     }
 
     public function  isBusIdValid($id){

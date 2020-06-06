@@ -1,12 +1,10 @@
 <?php
 
 class LabourActive extends Model{
-    public $idtype;
     public function __construct($labour = ''){
 
         $table = 'labourdetails';
-        $this->idtype = 'LabourId';
-        parent::__construct($table,'LabourActive');
+        parent::__construct($table,'LabourActive','LabourId');
 
         if ($labour != '') {
             if (substr($labour,0,3)=='Lab') {

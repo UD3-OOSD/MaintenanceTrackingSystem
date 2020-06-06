@@ -1,13 +1,11 @@
 <?php
 #the bus model
 class BusME extends Model{
-  public $idtype;
 
   public function __construct($bus=''){
 
     $table='busmileage';
-    $this->idtype = 'BusNumber';
-    parent::__construct($table,'BusME');
+    parent::__construct($table,'BusME','BusNumber');
 
     if ($bus != '') {
       if (is_int($bus)) {

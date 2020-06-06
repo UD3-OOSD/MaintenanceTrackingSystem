@@ -51,7 +51,7 @@ class EditingBus  implements BusState{
     }
 
     public function updateDetails($data){
-        EditingBus::$BusMSModel->editEntry($data);
+        EditingBus::$BusMSModel->edit($data['BusNumber'],$data);
     }
 
     public function checkId($id){

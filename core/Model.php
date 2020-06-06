@@ -4,9 +4,10 @@ class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
 
-  public function __construct($table,$name = ''){
+  public function __construct($table,$name = '',$idtype=''){
     $this->_db = DB::getMultitance("admin");
     $this->_table = $table;
+    $this->idtype = $idtype;
     $this->_setTableColumns();
     if($name == ''){
     $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));}
@@ -217,7 +218,14 @@ class Model{
     return $this->_db->addColumn($this->_table,$column_name,$data_type);
   }
 
-    public function UpdateRow($unique,$params){
+    public function UpdateRow($unique,$data){
+      //dnd($data);
+      $params=[];
+        foreach ($data as $key=> $value){
+           if(in_array($key,$this->_columnNames)){
+               $params[$key] = $value;
+           }
+        }
         return $this->_db->UpdateRow($this->_table,$unique,$params);
     }
 
