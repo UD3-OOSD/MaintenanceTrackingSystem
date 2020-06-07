@@ -30,6 +30,10 @@ class ActiveLabour implements LabourState{
         // TODO: Implement fill() method.
     }
 
+    public function show($id){
+        return ObjecttoArray(ActiveLabour::$LabourActiveModel->findByNIC($id));
+    }
+
     public function updateDetails($params){
       $labour = ActiveLabour::$LabourActiveModel->findByNIC($params['nic']);
       $labour->edit_this($params);

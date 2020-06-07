@@ -3,8 +3,9 @@
 class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
+    private $idtype;
 
-  public function __construct($table,$name = '',$idtype=''){
+    public function __construct($table,$name = '',$idtype=''){
     $this->_db = DB::getMultitance("admin");
     $this->_table = $table;
     $this->idtype = $idtype;
@@ -99,8 +100,9 @@ class Model{
   }
 
   public function findFirst($params = []){
-    $params = $this->_softDeleteParams($params);
+    #$params = $this->_softDeleteParams($params);
     $resultsQuery = $this->_db->findFirst($this->_table, $params);
+    //dnd($this->_modelName);
     $results = new $this->_modelName($this->_table);
     if($resultsQuery){
       $results->populateObjectData($resultsQuery);
@@ -112,7 +114,8 @@ class Model{
     return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
 
-  public function save($idtype){
+  public function save(){
+    $idtype=$this->idtype;
     $fields = [];
     #echo($idtype);
     foreach ($this->_columnNames as $column) {
@@ -148,11 +151,14 @@ class Model{
     return $this->_db->UpdateRow($this->_table,[$idtype=>$id],$fields);
   }
 
-  public function delete($id){
-    if($id == '' && $this->{$idtype} = '') return false;
-    $id = ($id == '' ) ? $this->id : $id;
+  public function delete($id='',$idname=''){
+        //dnd('ojhaeuhbfyr3w');
+    if($id == '' && $idname = '') return false;
+
+    $id = ($id == '' ) ? $this->{$idname} : $id;
+
     if($this->_softDelete){
-      $this->UpdateRow([$this->{$idtype} => $id], ['deleted' => 1]);
+      $this->UpdateRow([$idname=> $id], ['deleted' => 1]);
     }
     return $this->_db->deleteRow($this->_table, $id);
   }
@@ -197,13 +203,21 @@ class Model{
     return false;
   }
 
+  public function isDeleted($unique){
+        foreach ($unique as $key=>$value){
+            $sql =  "SELECT deleted  FROM {$this->_table} WHERE {$key} = {$value}";
+            $this->query($sql);
+            
+        }
+  }
+
   public function isValidKey($params = []){
       if($params != []){
           foreach ($params as $key => $value){
               $statement=['conditions' => $key."= ?" , 'bind'=>[$value]];
               #dnd($key."= ?");
               $result = $this->find($statement);
-              //dnd($statement);
+              //dnd($result);
               if (is_array($result) && !(empty($result))){
                   #dnd('trueeee');
                   return(true);

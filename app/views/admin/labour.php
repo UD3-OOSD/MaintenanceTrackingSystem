@@ -3,29 +3,30 @@
 
 <?php $this->end(); ?>
 <?php $this->start('body') ?>
+<?php $name =  $this->post['fullName']?>
 <div class="container">
         <div class="row register">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
-                <h1><? $this->post['fullname']?>.s\' detail sheet</h1>
-                <form class="form-horizontal hr" method="post" action="admin/saveLabour">
+                <h1><?="{$name}"?></h1>
+                <form class="form-horizontal hr" method="post" action="saveLabour" >
                     <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="fname">Full Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="fullName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['fullName']?>">
+                            <input type="text" class="form-control" name="fullName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['fullName']?>" locked>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="lname">Last Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="lastName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['lastName']?>">
+                            <input type="text" class="form-control" name="lastName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['lastName']?>" locked>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="name_init">Name with Initials</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="nameWIn" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required value="<?=$this->post['nameWIn']?>">
+                            <input type="text" class="form-control" name="nameWIn" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required value="<?=$this->post['nameWIn']?>" locked>
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,12 +50,6 @@
                         <label class="control-label col-sm-4" for="nic">NIC Number</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="nic" id="xx" required value="<?=$this->post['nic']?>" locked>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="email">Email</label>
-                        <div class="col-sm-8">
-                            <input type="email" class="form-control"  name="email" id="xx" required placeholder="Ex:- sam1658@gmail.com" value="<?=$this->post['email']?>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -126,10 +121,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-2">
-                            <button type="submit" class="btn btn-default" value="save">SAVE</button>
+                            <button type="submit" class="btn btn-default" name="save" value="save">SAVE</button>
                         </div>
                         <div class="col-sm-offset-1 col-sm-2">
-                            <button type="submit" class="btn btn-default" value="delete">DELETE</button></a>
+                            <button type="submit" class="btn btn-default" name="delete" value="delete">DELETE</button></a>
                         </div>
                     </div>
                 </form>

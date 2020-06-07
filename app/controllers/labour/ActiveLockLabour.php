@@ -3,9 +3,10 @@
 class ActiveLockLabour  implements LabourState{
 
   private static $actlocklab = NULL;
+  private static $LabourActiveModel;
 
   private function __construct(){
-
+      ActiveLockLabour::$LabourActiveModel = ModelCommon::loading_model('LabourActive');
   }
 
   public static function getInstance(){
@@ -29,7 +30,8 @@ class ActiveLockLabour  implements LabourState{
   }
 
   public function checkId($id){
-      //@devin
+     // dnd(ActiveLockLabour::$LabourActiveModel);
+    return ActiveLockLabour::$LabourActiveModel->isLabourNICValid($id);
   }
 
     public function fill($data)

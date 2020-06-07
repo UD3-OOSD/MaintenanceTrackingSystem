@@ -180,6 +180,7 @@ class Admin extends Controller{
         $details = $this->bus->getState()->show($bus_num);
         $this->view->displayErrors = '';
         $this->view->post = $details;
+        dnd($details);
         $this->view->render('admin/bus');
     }else{
         $this->view->displayarr1 = 'the entered Bus Number not in the system.';
@@ -194,7 +195,7 @@ class Admin extends Controller{
     $this->lab = Labour::getMultitance($this->_controller,'2');
     if($this->lab->getState()->checkId($lab_id)){
         $this->lab->stateChange($this);
-        $details = $this->lab->getState()->show();
+        $details = $this->lab->getState()->show($lab_id);
         $this->view->displayErrors = '';
         $this->view->post = $details;
         $this->view->render('admin/labour');
@@ -339,7 +340,7 @@ class Admin extends Controller{
   }
   $this->view->post = $posted_values;
   $this->view->displayErrors = $validation->displayErrors();
-  $this->view->render('admin/user_form');
+  $this->view->render('admin/labour');
   }
 
   public function deleteBus($bus){

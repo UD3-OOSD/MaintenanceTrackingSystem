@@ -53,7 +53,7 @@ class BusME extends Model{
 
     $this->assign($params);
     $this->deleted = 0;
-    $this->save($this->idtype);
+    $this->save();
   }
 
   public function updateRowByBusNumber($number,$params){
@@ -72,6 +72,6 @@ class BusME extends Model{
 
   public function DistanceUpdate($params){
       $this->assign($params);
-      $this->save($this->idtype);
+      $this->save();
   }
 }

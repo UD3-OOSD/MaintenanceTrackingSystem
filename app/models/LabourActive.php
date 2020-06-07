@@ -2,7 +2,6 @@
 
 class LabourActive extends Model{
     public function __construct($labour = ''){
-
         $table = 'labourdetails';
         parent::__construct($table,'LabourActive','LabourId');
 
@@ -27,8 +26,10 @@ class LabourActive extends Model{
     }
 
 
-    public function isLabourIdValid($id){
-        $params = ['LabourId'=>$id];
+    public function  isLabourNICValid($id){
+        //dnd($id);
+        $params=['nic'=>$id];
+        //dnd($this->isValidKey($params));
         return $this->isValidKey($params);
     }
 
@@ -38,7 +39,7 @@ class LabourActive extends Model{
         $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
         #dnd($this);
         $this->LabourState =0;
-        $this->save($this->idtype);
+        $this->save();
 
     }
 

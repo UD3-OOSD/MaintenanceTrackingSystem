@@ -26,7 +26,7 @@ class ClosedBus  implements BusState{
   public function delete($id){ // or can call directly to Model @avishka.
     //delete from $bussess with related services but not all. @avishka
     // add soft delete function to here. @devin
-    ClosedBus::$BusMSModel->delete($id);
+    ClosedBus::$BusMSModel->delete($id,'BusNumber');
   }
 
     public function updateDistance($params)
