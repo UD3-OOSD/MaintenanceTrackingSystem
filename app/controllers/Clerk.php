@@ -27,13 +27,13 @@ class Clerk extends Controller{
   public function updateAction($data){  // connect to update button @uda
 
     //get data relate to bus_id and create $bus obj. and call it's action. @devin @avishka
+      $posted_values = ['Bus'];
       $validation = new Validate();
       if($_POST) {
           $validation->check($_POST, [
               'BusNumber' => [
                   'display' => 'Vehicle Number',
                   'require' => true,
-                  'unique' => 'bustable',
                   'min' => 8  #check
               ],
               'Distance' => [
@@ -45,7 +45,7 @@ class Clerk extends Controller{
           if ($validation->passed()) {
             // there must be a creation pattern.
             $this->bus = Bus::getMultitance($this->_controller,'1');
-            if($this->bus->getState()->checkId($_POST['BusNumber'])){
+            if($this->bus->getState()->checkId($_POST['BusNumber']) && ModelCommon::selectAllArray('bustable','BusNumber',$_POST['BusNumber'])[0]['deleted']==0){
                 $this->bus->stateChange($this);
                 $this->bus->getState()->updateDistance($_POST['BusNumber']);
                 $this->bus->stateChange($this);

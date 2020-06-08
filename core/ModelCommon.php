@@ -94,4 +94,22 @@ class ModelCommon{
         return $obj;
     }
   }
+
+  public static function selectAll($table,$column,$key){
+      $db = DB::getMultitance();
+      if($db->selectAll($table,$column,$key)){
+          //dnd($db->results());
+          return($db->results());
+      }
+      return(false);
+  }
+
+    public static function selectAllArray($table,$column,$key){
+        $db = DB::getMultitance();
+        if($db->selectAllArray($table,$column,$key)){
+            //dnd($db->results());
+            return($db->results());
+        }
+        return(false);
+    }
 }

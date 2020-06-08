@@ -249,4 +249,18 @@ class Model{
     }
   }
 
+  public function selectAll($column,$key){
+        if($this->_db->selectAll($this->_table,$column,$key)){
+            return($this->_db->results());
+        }
+        return false;
+  }
+
+    public function selectAllArray($column,$key){
+        if($this->_db->selectAllArray($this->_table,$column,$key)){
+            return($this->_db->results());
+        }
+        return false;
+    }
+
 }

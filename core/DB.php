@@ -463,6 +463,30 @@
       return false;
     }
 
-    public function
+    public function selectAll($table,$column,$key){
+        //dnd('enters');
+        if( ($table!='') && ($column!='') && ($key!='') ){
+            $sql="SELECT * FROM {$table} WHERE {$column} = ? ";
+            $bind=[$key];
+            //dnd($sql);
+            if($this->query($sql,$bind)){
+                return(true);
+            }
+        }
+        return(false);
+    }
+
+      public function selectAllArray($table,$column,$key){
+          //dnd('enters');
+          if( ($table!='') && ($column!='') && ($key!='') ){
+              $key="'".$key."'";
+              $sql="SELECT * FROM {$table} WHERE {$column} = {$key}";
+              //dnd($sql);
+              if($this->runSQL($sql)){
+                  return(true);
+              }
+          }
+          return(false);
+      }
 
   }
