@@ -46,10 +46,10 @@ class LockedBus  implements BusState{
     public function checkId($id){
         //@devin
         #dnd(LockedBus::$BusMEModel->isBusNumberValid(   $id));
-        return LockedBus::$BusMEModel->isBusNumberValid(   $id);
+        return LockedBus::$BusMEModel->isBusNumberValid($id);
     }
 
-  public function updateDistance($params)
+  public function updateDistance($BusNumber,$Distance)
   {
       // TODO: Implement updateDistance() method.
   }

@@ -71,22 +71,27 @@ class Model{
 
   public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
     $rows = $this->LeftJoin($tables,$keys,$params);
+
     $ObjectArray = [];
     foreach($rows as $row){
-      #echo($row['UserId']);
+      #print_r($id);
       if(!($id==[])){
+
         foreach($id as $key_id => $value_id){
-          $key_id = "{$key_id}";
+          //$key_id = "{$key_id}";
           #echo($key_id);
           #echo($value_id);
-          #echo($row[$key_id]);
+            //echo('x');
+          //echo($row[$key_id]);
+          //echo('<br>');
+          //echo($value_id);
           #echo($row['UserId']);
           if($row[$key_id]==$value_id){
+              //dnd($row);
             return($row);
           }
         }
       }
-      return($rows);
     }
     return false;
   }
@@ -102,11 +107,12 @@ class Model{
   public function findFirst($params = []){
     #$params = $this->_softDeleteParams($params);
     $resultsQuery = $this->_db->findFirst($this->_table, $params);
-    //dnd($this->_modelName);
+    //dnd($params);
     $results = new $this->_modelName($this->_table);
     if($resultsQuery){
       $results->populateObjectData($resultsQuery);
     }
+    //($results);
     return $results;
   }
 
@@ -251,14 +257,22 @@ class Model{
 
   public function selectAll($column,$key){
         if($this->_db->selectAll($this->_table,$column,$key)){
-            return($this->_db->results());
+            if (count($this->_db->results())==1){
+                return ($this->_db->results()[0]);
+            }else{
+                return ($this->_db->results());
+            }
         }
         return false;
   }
 
     public function selectAllArray($column,$key){
         if($this->_db->selectAllArray($this->_table,$column,$key)){
-            return($this->_db->results());
+            if (count($this->_db->results())==1){
+                return ($this->_db->results()[0]);
+            }else{
+                return ($this->_db->results());
+            }
         }
         return false;
     }

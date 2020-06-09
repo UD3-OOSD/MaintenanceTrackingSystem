@@ -198,11 +198,11 @@
       else{
           $paramstring=$params;
       }
-      #echo($paramstring);
+      //dnd($paramstring);
       #echo '<br>';
       if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
         $sql =  "SELECT {$paramstring}  FROM {$tables[0]} LEFT JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";
-        #echo($sql);
+        //dnd($sql);
         #echo('<br>');
         $this->runSQL($sql);
         return true;
@@ -229,7 +229,7 @@
         }
         $paramstring = substr($paramstring,0,strlen($paramstring)-2);
       }
-      #echo($paramstring);
+      //dnd($paramstring);
       #echo '<br>';
       if(isset($tables) && isset($keys) && isset($params) && (count($tables)==2) && (count($keys)==2)){
         $sql =  "SELECT {$paramstring}  FROM {$tables[0]} Right JOIN {$tables[1]} ON {$tables[0]}.{$keys[0]} = {$tables[1]}.{$keys[1]}";

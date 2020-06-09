@@ -175,7 +175,7 @@ class Admin extends Controller{
       //dnd($this->bus->getState()->checkId($bus_num));
 
       //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)[0]['deleted']);
-    if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)[0]['deleted']==0){
+    if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)['deleted']==0){
         //dnd('true');
         //$this->bus->set_trigger();
         $this->bus->stateChange($this);
@@ -196,7 +196,7 @@ class Admin extends Controller{
     $lab_id = $_POST['lab_id'];
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->lab = Labour::getMultitance($this->_controller,'2');
-    if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','nic',$lab_id)[0]['deleted']==0){
+    if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','nic',$lab_id)['deleted']==0){
         $this->lab->stateChange($this);
         $details = $this->lab->getState()->show($lab_id);
         $this->view->displayErrors = '';

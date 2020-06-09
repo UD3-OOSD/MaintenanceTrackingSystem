@@ -29,13 +29,14 @@ class Register extends Controller{
         #echo($_POST['username']);
         $user = $this->UsersModel->findByUserName($_POST['username']);
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
-        #echo Input::get('password') . ' '. $user->password;
-        #echo $user->password;
+        //echo Input::get('password') . ' '. $user->password;
+        //dnd($user);
         #dnd(ObjecttoArray($user));
         #$user->email = 'devin.18@cse.mrt.ac.lk';
         #$user->save('LabourId');
-        //  ModelCommon::selectAllArray('bustable','BusCategory','Demo');
+          //ModelCommon::selectAllArray('busmileage','BusCategory','Demo');
         #$user->setTableState(3);
+          //ModelCommon::addColumn('busmileage','OilService',"int(11)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {
 
           $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;

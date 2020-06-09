@@ -99,7 +99,11 @@ class ModelCommon{
       $db = DB::getMultitance();
       if($db->selectAll($table,$column,$key)){
           //dnd($db->results());
-          return($db->results());
+          if (count($db->results())==1){
+              return ($db->results()[0]);
+          }else{
+              return ($db->results());
+          }
       }
       return(false);
   }
@@ -108,7 +112,11 @@ class ModelCommon{
         $db = DB::getMultitance();
         if($db->selectAllArray($table,$column,$key)){
             //dnd($db->results());
-            return($db->results());
+            if (count($db->results())==1){
+                return ($db->results()[0]);
+            }else{
+                return ($db->results());
+            }
         }
         return(false);
     }

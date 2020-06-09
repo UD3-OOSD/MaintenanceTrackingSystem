@@ -34,17 +34,19 @@ class EditingBus  implements BusState{
     $bus->setState(LockedBus::getInstance());  // turn into locked state.
   }
 
-  public function updateDistance($params){
+  public function updateDistance($BusNumber,$Distance){
 
     #check if post or get from nipun
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
 
-      $bus= EditingBus::$BusMEModel->findByBusNumber($params['BusNumber']);
+      $bus= EditingBus::$BusMEModel->findByBusNumber($BusNumber);
+      //dnd($bus);
+      $bus->BusId = EditingBus::$BusMEModel->findIDbyBusNumber($BusNumber);
       if($bus){
           #add the implementation of the checking for service
-          $this->populatechecklist($bus->id);
-          $this->check($_POST['Distance'],$bus);
+          $this->populatechecklist($bus->BusId);
+          $bus->DistanceIncrement($this->ServiceCheckList,$Distance);
           $bus->save();
 
       }

@@ -10,7 +10,8 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-5 reg">
                 <h1>Mileage Update Form</h1>
-                <form class="form-horizontal hr" method="post" action=".php">
+                <form class="form-horizontal hr" method="post" action="clerk/update">
+                    <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-5">Registration No.</label>
                         <div class="col-sm-5">
@@ -26,7 +27,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-5">Previous Mileage (km)</label>
                         <div class="col-sm-3">
-                            <input type="number" class="form-control" id="xx" value="50560" disabled>
+                            <input type="number" class="form-control" id="xx" value="" disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,7 +41,7 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>
                         <div class="col-sm-offset-1 col-sm-2">
-                            <a href="MileageUpdateForm.html"><button type="button" class="btn btn-default">Refresh</button></a>
+                            <button type="button" class="btn btn-default">Refresh</button>
                         </div>
                     </div>
                 </form>

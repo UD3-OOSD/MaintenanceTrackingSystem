@@ -36,7 +36,7 @@ class NewBus  implements BusState{
     //create a record and fill it.-> goto BusModel.
 
 
-  public function updateDistance($params){
+  public function updateDistance($BusNumber,$Distance){
     echo('Error');
   }
 

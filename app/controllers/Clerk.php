@@ -21,23 +21,24 @@ class Clerk extends Controller{
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();*/
+      $this->view->displayErrors = '';
     $this->view->render('clerk/index');
   }
 
-  public function updateAction($data){  // connect to update button @uda
+  public function updateAction(){  // connect to update button @uda
 
     //get data relate to bus_id and create $bus obj. and call it's action. @devin @avishka
-      $posted_values = ['Bus'];
       $validation = new Validate();
+      //dnd($_POST);
       if($_POST) {
           $validation->check($_POST, [
-              'BusNumber' => [
-                  'display' => 'Vehicle Number',
+              'reg_no' => [
+                  'display' => 'Registration No.',
                   'require' => true,
                   'min' => 8  #check
               ],
-              'Distance' => [
-                  'display' => 'Distance',
+              'mileage' => [
+                  'display' => 'Mileage',
                   'require' => true,
                   'is_numeric' => true
               ]
@@ -45,9 +46,12 @@ class Clerk extends Controller{
           if ($validation->passed()) {
             // there must be a creation pattern.
             $this->bus = Bus::getMultitance($this->_controller,'1');
-            if($this->bus->getState()->checkId($_POST['BusNumber']) && ModelCommon::selectAllArray('bustable','BusNumber',$_POST['BusNumber'])[0]['deleted']==0){
+             // dnd($this->bus->getState());
+            //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no']));
+            if($this->bus->getState()->checkId($_POST['reg_no']) && ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no'])['deleted']==0) {
                 $this->bus->stateChange($this);
-                $this->bus->getState()->updateDistance($_POST['BusNumber']);
+                //dnd($this->bus->getState());
+                $this->bus->getState()->updateDistance($_POST['reg_no'], $_POST['mileage']);
                 $this->bus->stateChange($this);
             }
           }

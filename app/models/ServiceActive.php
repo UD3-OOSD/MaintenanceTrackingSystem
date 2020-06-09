@@ -36,7 +36,7 @@ class ServiceActive extends Model{
         $this->deleted = 0;
         $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
         $this->ServiceState =0;
-        $this->save($this->idtype);
+        $this->save();
 
     }
     public function stateChange_this($state){
@@ -62,8 +62,4 @@ class ServiceActive extends Model{
     public function edit_this($params){
         return $this->edit(['ServiceId'=>$this->ServiceId],$params);
     }
-    public function delete(){
-        $this->delete(['ServiceId'=>$this->ServiceId]);
-    }
-
 }

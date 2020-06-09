@@ -26,14 +26,24 @@ class BusME extends Model{
   }
 
   public function populatechecklist($id){
+      //dnd($id);
     $tables=['bustable','buscategory'];
     $keys = ['BusCategory','BusType'];
-    $params = ['BusId','*'];
+    $params = ['bustable.BusId','buscategory.*'];
     $id = ['BusId' => $id];
+    //dnd($id);
     $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
+    //dnd('here');
     unset($result['BusId']);
     unset($result['BusType']);
-    return($result);
+    $filtered=[];
+    foreach ($result as $service => $value){
+        if ($value!=null){
+            $filtered[$service]=$value;
+        }
+    }
+    //dnd($filtered);
+    return($filtered);
   }
 
   public function NewBusDistanceUpdate($BusNumber,$Distance){
@@ -74,4 +84,23 @@ class BusME extends Model{
       $this->assign($params);
       $this->save();
   }
+
+  public function findIDbyBusNumber($BusNumber){
+      return (ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)['BusId']);
+  }
+
+  public function DistanceIncrement($checklist,$distance){
+      if (!empty($checklist) && isset($distance)){
+          foreach ($checklist as $key => $value){
+            if (isset($this->{$key})){
+                $this->{$key} = $this->{$key}+$distance;
+            }else{
+                $this->{$key}=$distance;
+            }
+          }
+          $this->TotalDistaceTravelled=$this->TotalDistaceTravelled+$distance;
+      }
+  }
 }
+
+

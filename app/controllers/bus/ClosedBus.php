@@ -29,7 +29,7 @@ class ClosedBus  implements BusState{
     ClosedBus::$BusMSModel->delete($id,'BusNumber');
   }
 
-    public function updateDistance($params)
+    public function updateDistance($BusNumber,$Distance)
     {
         // TODO: Implement updateDistance() method.
     }
