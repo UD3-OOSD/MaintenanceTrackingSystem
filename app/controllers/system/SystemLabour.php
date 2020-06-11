@@ -19,14 +19,20 @@ class SystemLabour implements System
         return SystemLabour::$systemlab;
     }
 
-    public function get($state='')
-    {
+    public function get($state=''){
         //return all labours on  @devin
+        if (is_int($state)){
+            #return ModelCommon::selectAllArray('bustable','BusState',$state);
+            return SystemLabour::$LabourActiveModel->selectAll('LabourState',$state);
+        }
+        return false;
     }
 
-    public function updateState($id,$state)
-    {
-        // TODO: Implement updateState() method.
+    public function updateState($id,$state){
+        #assuming nic this could lead to error check whether labourId or nic
+        $unique=['nic'=>$id];
+        $params = ['LabourState'=>$state];
+        return SystemLabour::$LabourActiveModel->UpdateRow($unique,$params);
     }
 
     public function check($id)
