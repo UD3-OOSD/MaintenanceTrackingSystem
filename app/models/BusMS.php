@@ -29,7 +29,7 @@ class BusMS extends Model{
     $this->deleted=0;
     $this->BusId = 'Bus' . ModelCommon::nextID($this->_table);
     $this->BusState = 0;
-    $this->save($this->idtype);
+    $this->save();
   }
 
 
@@ -65,6 +65,7 @@ class BusMS extends Model{
 
            return $this->UpdateRow($unique,$state);
         }
+        return(false);
     }
 
 }

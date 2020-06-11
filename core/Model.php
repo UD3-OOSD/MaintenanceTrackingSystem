@@ -49,17 +49,7 @@ class Model{
     return $results;
   }
 
-  public function setTableStateID($id,$state=''){
-      $type=['BusId'=>'BusState','LabourId'=>'LabourState','ServiceId'=>'ServiceState'];
-      if (!($state=='')){
-          #dnd('breubve');
-          $unique=[$this->idtype =>$id];
-          $params=[$type[$this->idtype]=>$state];
-          #dnd($params);
-          return $this->UpdateRow($unique,$params);
-      }
-      return false;
-  }
+
 
   public function setTableState($state){
       #dnd(isset($this->{$this->idtype}));

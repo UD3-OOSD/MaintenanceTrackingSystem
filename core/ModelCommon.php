@@ -22,6 +22,11 @@ class ModelCommon{
     return $resultsQuery;
   }
 
+  public static function insert($table, $fields){
+      $db=DB::getMultitance();
+      return ($db->insert($table,$fields));
+  }
+
   public static function getColumnNames($table){
     $db= DB::getMultitance();
     $db->getColumnNames($table);
@@ -38,11 +43,28 @@ class ModelCommon{
       $db->addColumn($table,$column_name,$data_type);
   }
 
-  public static function UpdateRow($table, $id, $fields){
+  public static function UpdateRow($table, $unique, $fields){
       $db = DB::getMultitance();
-      $db->updateRow($table, $id, $fields);
+      return $db->updateRow($table, $unique, $fields);
 
   }
+
+  public static function KeyExist($table, $unique=[]){
+      $db= DB::getMultitance();
+      if($unique != []){
+          foreach ($unique as $key => $value){
+              $statement=['conditions' => $key."= ?" , 'bind'=>[$value]];
+              #dnd($key."= ?");
+              $result = $db->find($table,$statement);
+              //dnd($result);
+              if (is_array($result) && !(empty($result))){
+                  #dnd('trueeee');
+                  return(true);
+              }
+          }
+      }
+      return (false);
+}
 
   public static function validationID($table , $column ,$value){
       $db = DB::getMultitance();
