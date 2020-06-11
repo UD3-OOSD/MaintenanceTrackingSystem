@@ -4,7 +4,7 @@
 class SystemService implements System
 {
     private static $systemservice = NULL;
-    private $ServiceActiveModel;
+    private static $ServiceActiveModel;
 
     private function __construct(){
         $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
@@ -19,16 +19,24 @@ class SystemService implements System
 
     public function get($state='')
     {
-        //get all services on given $state  @devin
+        if (is_int($state)){
+            #return ModelCommon::selectAllArray('bustable','BusState',$state);
+            return SystemService::$ServiceActiveModel->selectAll('ServiceState',$state);
+        }
+        return false;
     }
 
     public function updateState($id,$state)
     {
+        $unique=['ServiceId'=>$id];
+        $params = ['ServiceState'=>$state];
+        return SystemService::$ServiceActiveModel->UpdateRow($unique,$params);
         //save $state in $id @devin
     }
 
     public function check($id)
     {
+
         // get date of given $id @devin.
         // check is service expired @nipun.
     }

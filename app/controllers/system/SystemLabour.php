@@ -35,8 +35,7 @@ class SystemLabour implements System
         return SystemLabour::$LabourActiveModel->UpdateRow($unique,$params);
     }
 
-    public function check($id)
-    {
+    public function check($id){
         // TODO: Implement check() method.
     }
 }
