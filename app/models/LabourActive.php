@@ -8,6 +8,8 @@ class LabourActive extends Model{
         if ($labour != '') {
             if (substr($labour,0,3)=='Lab') {
                 $l = $this->_db->findFirst('labourdetails', ['conditions' => 'LabourId = ?', 'bind' => [$labour]]);
+            }else{
+                $l = $this->_db->findFirst('labourdetails', ['conditions'=>'nic = ?', 'bind'=>[$labour]]);
             }
             if (isset($l)) {
                 foreach ($l as $key => $value) {
@@ -28,7 +30,7 @@ class LabourActive extends Model{
 
     public function  isLabourNICValid($id){
         //dnd($id);
-        $params=['nic'=>$id];
+        $params=$this->createunique($id);
         //dnd($this->isValidKey($params));
         return $this->isValidKey($params);
     }
@@ -48,18 +50,32 @@ class LabourActive extends Model{
     }
 
     public function stateChange($id,$state){
-        if(isset($id)&&isset($state)){
-            $unique=['LabourId'=>$id];
+        if(isset($state) && $this->createunique($id)){
+            $unique=$this->createunique($id);
             return $this->UpdateRow($unique,['LabourState'=>$state]);
         }
         return(false);
     }
 
     public function edit($id,$params){
-        return $this->UpdateRow(['LabourId'=>$id],$params);
+        $unique = $this->createunique($id);
+        return $this->UpdateRow($unique,$params);
     }
 
     public function edit_this($params){
-        return $this->edit(['LabourId'=>$this->LabourId],$params);
+        return $this->edit($this->LabourId,$params);
+    }
+
+    public function createunique($id){
+        if(isset($id)){
+            if(substr($id,0,3)=='Lab'){
+                $unique=['LabourId'=>$id];
+            }else{
+                $unique=['BusNumber'=>$id];
+            }
+
+            return($unique);
+        }
+        return false;
     }
 }

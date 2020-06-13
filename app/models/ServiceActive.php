@@ -60,6 +60,6 @@ class ServiceActive extends Model{
         return $this->UpdateRow(['ServiceId'=>$id],$params);
     }
     public function edit_this($params){
-        return $this->edit(['ServiceId'=>$this->ServiceId],$params);
+        return $this->edit($this->ServiceId,$params);
     }
 }
