@@ -3,9 +3,10 @@
 class ClosedService implements ServiceState{
 
   private static $closedservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-
+      ClosedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -16,7 +17,7 @@ class ClosedService implements ServiceState{
   }
 
   public function saveState($id){
-      //Devin
+      //Devin               ????????????????????????????
       $this->delete($id);
   }
 
@@ -24,8 +25,9 @@ class ClosedService implements ServiceState{
     $this->delete($service);
   }
 
-  public function delete($service){
+  public function delete($id){
     // @devin same soft delete function
+    ClosedService::$ServiceActiveModel->delete($id,'ServiceId');
   }
 
     public function getState()

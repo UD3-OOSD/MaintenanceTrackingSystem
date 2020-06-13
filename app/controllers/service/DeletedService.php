@@ -3,9 +3,10 @@
 class DeletedService implements ServiceState{
 
   private static $delservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-
+      DeletedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -20,12 +21,14 @@ class DeletedService implements ServiceState{
   }
 
   public function saveState($id){
+      DeletedService::$ServiceActiveModel->stateChange($id,8);
       //@devin
       // save state as '8' in $id
       $this->delete($id);
   }
 
   public function delete($service){
+     DeletedService::$ServiceActiveModel->delete($service   ,'ServiceId');
     //@devin soft delete.
   }
 
@@ -37,5 +40,10 @@ class DeletedService implements ServiceState{
     public function edit($service, $data)
     {
         // TODO: Implement edit() method.
+    }
+
+    public function fillAction($params)
+    {
+        // TODO: Implement fillAction() method.
     }
 }
