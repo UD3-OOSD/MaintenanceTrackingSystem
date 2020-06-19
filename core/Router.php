@@ -35,6 +35,7 @@
       $queryParams = $url;
 
       if (Router::$user_name != $controller_name) {
+          //echo($controller_name);
           $dispatch = new $controller($controller_name, $action);
           Router::$user_name = $controller_name;
           Router::$user = $dispatch;

@@ -3,7 +3,7 @@
 
 class SystemBus implements System
 {
-    private static $bystembus = NULL;
+    private static $systembus = NULL;
     private static $BusMSModel;
     private static $BusMEModel;
 
@@ -13,10 +13,10 @@ class SystemBus implements System
     }
 
     public static function getInstance(){
-        if(!isset(SystemBus::$bystembus)){
-            SystemBus::$bystembus = new SystemBus();
+        if(!isset(SystemBus::$systembus)){
+            SystemBus::$systembus = new SystemBus();
         }
-        return SystemBus::$bystembus;
+        return SystemBus::$systembus;
     }
     public function get($state = ''){
         // return all busses on given  @devin

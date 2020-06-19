@@ -3,11 +3,12 @@
 class Forman extends Controller{
 
   private $service;
-  private static $serviceSystem;
+  private $serviceSystem;
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
-    self::$serviceSystem = SystemService::getInstance();
+    $this->serviceSystem = SystemService::getInstance();
+
   }
 
 
@@ -23,7 +24,7 @@ class Forman extends Controller{
           $this->service->stateChange('6');
           $this->service->getState()->saveState($id);
       }
-      Router::redirect('forman');
+      Router::redirect('forman/closed');
   }
 
   public function deleteServiceAction($id=''){

@@ -1,6 +1,7 @@
 <?php $this->setSiteTitle('Bus Registration Form') ?>
 
 <?php $this->start('head') ?>
+<script type="text/javascript" src="<?=PROOT?>js/tools.js"></script>
 <link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
 <?php $this->end() ?>
 
@@ -21,7 +22,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">Date of Registration</label>
                         <div class="col-sm-4">
-                            <input type="date" id="RegistrationDate" name='RegistrationDate' class="form-control" value="<?=$this->post['RegistrationDate']?>">
+                            <input type="date" id="date" name='RegistrationDate' class="form-control" onClick="checkDate()" value="<?=$this->post['RegistrationDate']?>">
+                            <div id="datewarn"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -33,7 +35,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">Manufactured Year</label>
                         <div class="col-sm-3">
-                            <input type="number" id="ManufacturedYear" name='ManufacturedYear' class="form-control" value="<?=$this->post['ManufacturedYear']?>">
+                            <input type="number" id="date" name='ManufacturedYear' class="form-control" onkeyup="checkDate()" value="<?=$this->post['ManufacturedYear']?>">
+                            <div id="datewarn"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,13 +54,15 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">Current Mileage (km)</label>
                         <div class="col-sm-3">
-                            <input type="number" id="Mileage" name='Mileage' class="form-control"  value="<?=$this->post['Mileage']?>">
+                            <input type="number" id="number" name='Mileage' class="form-control" onClick="checkNumber()" value="<?=$this->post['Mileage']?>">
+                            <div id="numberwarn"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">No of seats</label>
                         <div class="col-sm-2">
-                            <input type="number"  id="NumberOfSeats" name='NumberOfSeats' class="form-control" value="<?=$this->post['NumberOfSeats']?>">
+                            <input type="number"  id="number" name='NumberOfSeats' class="form-control" onkeyup="checkNumber()" value="<?=$this->post['NumberOfSeats']?>">
+                            <div id="numberwarn"></div>
                         </div>
                     </div>
                     <div class="form-group">
