@@ -18,11 +18,20 @@ class SystemBus implements System
         }
         return SystemBus::$bystembus;
     }
-    public function get($state = ''){
+    public function get($state = 'everything'){
         // return all busses on given  @devin
+        #echo($state);
+        #echo('<br>');
+        #echo('did i break php');
+        #dnd($state == '' && $state == 0);
         if (is_int($state)){
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
+            #echo('is int');
             return SystemBus::$BusMSModel->selectAll('BusState',$state);
+        }
+        elseif ($state == 'everything'){
+            #echo('is string');
+            return SystemBus::$BusMSModel->selectAllWithDelete('deleted',0);
         }
         return false;
     }

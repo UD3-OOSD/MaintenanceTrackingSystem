@@ -464,8 +464,9 @@
     }
 
     public function selectAll($table,$column,$key){
-        //dnd('enters');
-        if( ($table!='') && ($column!='') && ($key!='') ){
+        //dnd('enters'); ($table!='') && ($column!='') && ($key!='')
+        if(isset($table) && isset($column) && isset($key)){
+            //dnd('passed');
             $sql="SELECT * FROM {$table} WHERE {$column} = ? ";
             $bind=[$key];
             //dnd($sql);

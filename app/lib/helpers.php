@@ -144,3 +144,27 @@ function ObjecttoArray($object){
         $array[$key] = $value;
     return $array;
 }
+
+function filter($collection){
+    #print_r($collection);
+    $filtered=[];
+    if(count($collection)>0){
+        if(is_array($collection[0])){
+            foreach ($collection as $item) {
+                if (isset($item['deleted']) && $item['deleted']==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
+
+        if(is_object($collection[0])){
+            foreach ($collection as $item) {
+                if (isset($item->deleted) && $item->deleted==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
+    }
+    #dnd($filtered);
+    return $filtered;
+}

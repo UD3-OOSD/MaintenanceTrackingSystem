@@ -31,7 +31,7 @@ class ServiceActive extends Model{
     }
 
     public function findByServiceId($id){
-        return $this->findFirst(['conditions'=>'ServiceId = ?','bind'=>[$id]]);
+        return $this->findFirst(['conditions'=>'ServiceId  = ?','bind'=>[$id]]);
     }
 
 

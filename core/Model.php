@@ -246,17 +246,29 @@ class Model{
   }
 
   public function selectAll($column,$key){
+        //dnd('selectall');
+        $results = $this->selectAllWithDelete($column,$key);
+        $results = filter($results);
+        if (count($results)==1){
+            return($results[0]);
+        }
+        return ($results);
+
+   }
+
+    public function selectAllWithDelete($column,$key){
         if($this->_db->selectAll($this->_table,$column,$key)){
-            if (count($this->_db->results())==1){
-                return ($this->_db->results()[0]);
-            }else{
-                return ($this->_db->results());
-            }
+            return $this->_db->results();
         }
         return false;
-  }
+    }
 
     public function selectAllArray($column,$key){
+        $results = $this->selectAllArrayWithDelete($column,$key);
+        return filter($results);
+    }
+
+    public function selectAllArrayWithDelete($column,$key){
         if($this->_db->selectAllArray($this->_table,$column,$key)){
             if (count($this->_db->results())==1){
                 return ($this->_db->results()[0]);

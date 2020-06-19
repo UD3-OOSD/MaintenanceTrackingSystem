@@ -31,7 +31,7 @@ class LabourActive extends Model{
     public function  isLabourNICValid($id){
         //dnd($id);
         $params=$this->createunique($id);
-        //dnd($this->isValidKey($params));
+        //dnd($params);
         return $this->isValidKey($params);
     }
 
@@ -71,7 +71,7 @@ class LabourActive extends Model{
             if(substr($id,0,3)=='Lab'){
                 $unique=['LabourId'=>$id];
             }else{
-                $unique=['BusNumber'=>$id];
+                $unique=['nic'=>$id];
             }
 
             return($unique);
