@@ -62,6 +62,8 @@ class Users extends Model{
     $this->assign($params);
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+    $hash = md5(uniqid() + rand(0, 100));
+    $this->VerificationKey = substr($hash,0,50);
     #dnd($this);
     $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
       #dnd($this->LabourId);
@@ -100,5 +102,27 @@ class Users extends Model{
     #return json_decode($this->acl, true);
 
     return $this->acl;
+  }
+
+  public function resetVeriKeyById($id=''){
+      if($id!=''){
+          if (substr($id,0,3)=='Lab'){
+              $user = $this->findFirst(['conditions'=>'LabId = ?', 'bind'=>[$id]]);
+              $user->resetVerificationKey();
+          }
+          else{
+              $user = $this->findByUserName($id);
+              $user->resetVerificationKey();
+          }
+
+          return(true);
+      }
+      return false;
+  }
+
+
+  public function resetVerificationKey(){
+      $this->VerificationKey=0;
+      $this->save();
   }
 }

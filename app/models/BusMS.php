@@ -6,7 +6,7 @@ class BusMS extends Model{
     $table='bustable';
     parent::__construct($table,'BusMS','BusId');
     if ($bus != '') {
-      if (is_int($bus)) {
+      if (substr($bus,0,3)=='Bus') {
         $b = $this->_db->findFirst('bustable', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);
       }else{
         $b = $this->_db->findFirst('bustable', ['conditions'=>'BusNumber = ?', 'bind'=>[$bus]]);
@@ -34,36 +34,35 @@ class BusMS extends Model{
 
 
     public function  isBusNumberValid($id){
-        $params=['BusNumber'=>$id];
+        $params=$this->createunique($id);
         return $this->isValidKey($params);
     }
 
     public function edit($id,$params){
-        return $this->UpdateRow(['BusNumber'=>$id],$params);
+        $unique = $this->createunique($id);
+        return $this->UpdateRow($unique,$params);
     }
 
     public function edit_this($params){
-        return $this->edit(['BusNumber'=>$this->BusNumber],$params);
+        return $this->edit($this->BusNumber,$params);
     }
 
-    public function  isBusIdValid($id){
-        $params=['BusId'=>$id];
-        return $this->isValidKey($params);
-    }
-
-    public function stateChange_this($state){
-        return $this->stateChange($this->BusId,$state);
-    }
-
-    public function stateChange($id,$state){
-        if(isset($id)&&isset($state)){
-            if(is_int($id)){
+    public function createunique($id){
+        if(isset($id)){
+            if(substr($id,0,3)=='Bus'){
                 $unique=['BusId'=>$id];
             }else{
                 $unique=['BusNumber'=>$id];
             }
 
-           return $this->UpdateRow($unique,$state);
+            return($unique);
+        }
+        return false;
+    }
+
+    public function stateChange($id,$state){
+        if(isset($state) && $this->createunique($id)){
+           return $this->UpdateRow($this->createunique(),$state);
         }
         return(false);
     }

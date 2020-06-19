@@ -30,6 +30,12 @@ class ServiceActive extends Model{
         return $this->findFirst(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$ServiceType]]);
     }
 
+    public function findByServiceId($id){
+        return $this->findFirst(['conditions'=>'ServiceId  = ?','bind'=>[$id]]);
+    }
+
+
+
 
     public function registerNewService($params){
         $this->assign($params);
@@ -60,6 +66,6 @@ class ServiceActive extends Model{
         return $this->UpdateRow(['ServiceId'=>$id],$params);
     }
     public function edit_this($params){
-        return $this->edit(['ServiceId'=>$this->ServiceId],$params);
+        return $this->edit($this->ServiceId,$params);
     }
 }

@@ -275,7 +275,7 @@
       $fieldString = trim($fieldString);
       $fieldString = rtrim($fieldString, ',');
       $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
-      dnd( $sql);
+      //dnd( $sql);
       if (!$this->query($sql, $values)->error()) {
         return true;
       }
@@ -464,8 +464,9 @@
     }
 
     public function selectAll($table,$column,$key){
-        //dnd('enters');
-        if( ($table!='') && ($column!='') && ($key!='') ){
+        //dnd('enters'); ($table!='') && ($column!='') && ($key!='')
+        if(isset($table) && isset($column) && isset($key)){
+            //dnd('passed');
             $sql="SELECT * FROM {$table} WHERE {$column} = ? ";
             $bind=[$key];
             //dnd($sql);

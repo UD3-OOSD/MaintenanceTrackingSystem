@@ -3,9 +3,10 @@
 class ApprovedService implements ServiceState{
 
   private static $appservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-
+      ApprovedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -28,6 +29,7 @@ class ApprovedService implements ServiceState{
   }
 
   public function saveState($id){
+      return ApprovedService::$ServiceActiveModel->stateChange($id,3);
       //@devin.
       //save the state as '3' in $id.
   }
