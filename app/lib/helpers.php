@@ -146,8 +146,11 @@ function ObjecttoArray($object){
 }
 
 function filter($collection){
-    dnd($collection);
+    //dnd($collection);
     $filtered=[];
+    if (!isset($collection) || $collection==[]){
+        return $filtered;
+    }
     if(is_array($collection)){
         if(is_array($collection[0])){
             foreach ($collection as $item) {
@@ -158,6 +161,22 @@ function filter($collection){
         }
 
         if(is_object($collection[0])){
+            foreach ($collection as $item) {
+                if (isset($item->deleted) && $item->deleted==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
+    }else{
+        if(is_array($collection)){
+            foreach ($collection as $item) {
+                if (isset($item['deleted']) && $item['deleted']==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
+
+        if(is_object($collection)){
             foreach ($collection as $item) {
                 if (isset($item->deleted) && $item->deleted==0){
                     $filtered[] = $item;
