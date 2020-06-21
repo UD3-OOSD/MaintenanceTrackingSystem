@@ -30,9 +30,7 @@ class SystemLabour implements System
 
     public function updateState($id,$state){
         #assuming nic this could lead to error check whether labourId or nic
-        $unique=['nic'=>$id];
-        $params = ['LabourState'=>$state];
-        return SystemLabour::$LabourActiveModel->UpdateRow($unique,$params);
+           
     }
 
     public function check($id){

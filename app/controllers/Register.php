@@ -36,8 +36,8 @@ class Register extends Controller{
         #$user->save('LabourId');
           //ModelCommon::selectAllArray('busmileage','BusCategory','Demo');
         #$user->setTableState(3);
-        $test = SystemBus::getInstance();
-        dnd($test->updateState("erjtgrsjt123424",10   ));
+        //$test = SystemBus::getInstance();
+        //dnd($test->get(1));
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {

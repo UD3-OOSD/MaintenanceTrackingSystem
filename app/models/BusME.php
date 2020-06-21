@@ -1,18 +1,16 @@
 <?php
 #the bus model
 class BusME extends Model{
+  public $GrantedService ;
 
   public function __construct($bus=''){
-
+    $this->GrantedService = null ;
     $table='busmileage';
     parent::__construct($table,'BusME','BusNumber');
 
     if ($bus != '') {
-      if (is_int($bus)) {
-        $b = $this->_db->findFirst('busmileage', ['conditions'=>'BusId = ?', 'bind'=>[$bus]]);
-      }else{
         $b = $this->_db->findFirst('busmileage', ['conditions'=>'BusNumber = ?', 'bind'=>[$bus]]);
-      }
+
       if ($b) {
         foreach ($b as $key => $value) {
           $this->$key = $value;
@@ -21,16 +19,19 @@ class BusME extends Model{
     }
   }
 
+
+
   public function findByBusNumber($BusNumber){
     return $this->findFirst(['conditions'=>'BusNumber = ?', 'bind'=>[$BusNumber]]);
   }
 
-  public function populatechecklist($id){
+  public function populatechecklist(){
       //dnd($id);
     $tables=['bustable','buscategory'];
     $keys = ['BusCategory','BusType'];
     $params = ['bustable.BusId','buscategory.*'];
-    $id = ['BusId' => $id];
+    $id = ['BusNumber'=> $this->findIDbyBusNumber($this->BusNumber)];
+
     //dnd($id);
     $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
     //dnd('here');
@@ -43,7 +44,8 @@ class BusME extends Model{
         }
     }
     //dnd($filtered);
-    return($filtered);
+    $this->GrantedService = $filtered;
+    return $filtered;
   }
 
   public function NewBusDistanceUpdate($BusNumber,$Distance){
@@ -89,17 +91,58 @@ class BusME extends Model{
       return (ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)['BusId']);
   }
 
-  public function DistanceIncrement($checklist,$distance){
-      if (!empty($checklist) && isset($distance)){
-          foreach ($checklist as $key => $value){
-            if (isset($this->{$key})){
-                $this->{$key} = $this->{$key}+$distance;
-            }else{
-                $this->{$key}=$distance;
-            }
-          }
-          $this->TotalDistaceTravelled=$this->TotalDistaceTravelled+$distance;
+
+  public function UpdateTotalDistance($distance){
+      $this->TotalDistaceTravelled=$this->TotalDistaceTravelled+$distance;
+  }
+
+  public function LogDistance($key,$distance){ #can be used to make zero
+          $this->{$key}=$distance;
+          $this->save();
+  }
+
+  public function IncrementDistance($key,$distance){
+      if (isset($this->{$key})){
+          $value = $this->{$key}+$distance;
+          $this->LogDistance($key,$value);
+      }else{
+          $this->LogDistance($key,$distance);
       }
+  }
+
+  public function UpdateDistanceOfBus($id,$distance){
+      //dnd('comes');
+      $bus = $this->findByBusNumber($id);
+      //dnd($bus);
+      $bus->populatechecklist();
+      $bus->DistanceIncrement($distance);
+  }
+
+  public function DistanceIncrement($distance){
+      if (!($this->GrantedService == null) && isset($distance)){
+          foreach ($this->GrantedService as $key => $value){
+            $this->IncrementDistance($key,$distance);
+          }
+          //dnd('is there any errore');
+          $this->UpdateTotalDistance($distance);
+      }
+  }
+
+  public function CheckForService(){
+      $AvailableServices = [];
+      foreach ($this->GrantedService as $service=>$value){
+          if (isset($bus->{$service}) && $bus->{$service}>=$value){
+              array_push($AvailableServices,$service);
+          }
+      }
+      return $AvailableServices;
+  }
+
+
+  public function check($id){
+      $bus = $this->findByBusNumber($id);
+      $bus->populatechecklist();
+      return $bus->CheckForService();
   }
 }
 
