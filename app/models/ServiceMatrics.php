@@ -31,4 +31,67 @@ class ServiceMatrics extends Model{
         $this->assign($params);
         $this->save();
     }
+
+    public function getLabourersforService($ServiceId){
+        $service = $this->forselectedService($ServiceId);
+        $labourers=[];
+
+        foreach ($service as $key=>$value){
+            if($value == 1){
+                $labourers[]=$key;
+            }
+        }
+
+        return $labourers;
+    }
+    public function forselectedService($ServiceId){
+        if(isset($ServiceId)){
+            return $this->selectAllArrayWithDelete('ServiceId',$ServiceId);
+        }
+    }
+
+    public function forSelectedLabouror($Labour){
+        if (isset($Labour)){
+            return $this->selectAllArrayWithDelete(Nic2LabId($Labour),1);
+        }
+    }
+
+    public function getServicesforLabour($LabourId){
+        $services = $this->forSelectedLabouror($LabourId);
+        $serviceIds = [];
+
+        if(isset($services['ServiceId'])){
+            $services = [$services];
+        }
+
+        foreach($services as $service){
+            $serviceIds[]=$service['ServiceId'];
+        }
+
+        return $serviceIds;
+    }
+
+    public function checkLabourInvolved(){
+        $labours=[];
+        foreach ($this->_columnNames as $name){
+            if ($this->{$name} == 1){
+                $labours[]=$name;
+            }
+        }
+        return $labours;
+    }
+
+    public function LabourorsInService($Labourors){
+        #['ServiceId' => ['Lab12','Lab13']]
+        $params =[];
+        foreach ($Labourors as $ServiceId => $labourIds){
+            foreach ($labourIds as $LabourId){
+                $params[$LabourId]=1;
+            }
+
+            $params['ServiceId'] = $ServiceId;
+        }
+
+        $this->addService($params);
+    }
 }

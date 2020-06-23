@@ -187,3 +187,31 @@ function filter($collection){
     #dnd($filtered);
     return $filtered;
 }
+
+function NicToId($id){
+    if (substr($id,0,3)=='Lab'){
+        $column = 'LabourId';
+        $other = 'nic';
+    }else{
+        $column = 'nic';
+        $other = 'LabourId';
+    }
+
+    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
+}
+
+function Nic2LabId($NIC){
+    if ((substr($NIC,0,3)=='Lab')){
+        return $NIC;
+    }
+
+    return NicToId($NIC);
+}
+
+function LabId2Nic($LabId){
+    if (!(substr($LabId,0,3)=='Lab')){
+        return $LabId;
+    }
+
+    return NicToId($LabId);
+}
