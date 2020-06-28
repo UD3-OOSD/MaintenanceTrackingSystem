@@ -257,23 +257,37 @@ class Model{
    }
 
     public function selectAllWithDelete($column,$key){
+        $results=[];
         if($this->_db->selectAll($this->_table,$column,$key)){
-            return $this->_db->results();
+            //echo('hgbvuvdvu');
+            //dnd($this->_db->results()>0);
+            if($this->_db->results()>0){
+                foreach ($this->_db->results() as $item){
+                    $results[]=$item;
+                }
+                return $results;
+            }
         }
         return false;
     }
 
     public function selectAllArray($column,$key){
         $results = $this->selectAllArrayWithDelete($column,$key);
-        return filter($results);
+        $results = filter($results);
+        if (count($results)==1){
+            return($results[0]);
+        }
+        return ($results);
     }
 
     public function selectAllArrayWithDelete($column,$key){
+        $results=[];
         if($this->_db->selectAllArray($this->_table,$column,$key)){
-            if (count($this->_db->results())==1){
-                return ($this->_db->results()[0]);
-            }else{
-                return ($this->_db->results());
+            if($this->_db->results()>0){
+                foreach ($this->_db->results() as $item){
+                    $results[]=$item;
+                }
+                return $results;
             }
         }
         return false;

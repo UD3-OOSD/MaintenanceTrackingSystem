@@ -119,12 +119,14 @@ class ModelCommon{
 
   public static function selectAllWithDelete($table,$column,$key){
       $db = DB::getMultitance();
+      $results=[];
       if($db->selectAll($table,$column,$key)){
           //dnd($db->results());
-          if (count($db->results())==1){
-              return ($db->results()[0]);
-          }else{
-              return ($db->results());
+          if($db->results()>0){
+              foreach ($db->results() as $item){
+                  $results[]=$item;
+              }
+              return $results;
           }
       }
       return(false);
@@ -132,12 +134,14 @@ class ModelCommon{
 
     public static function selectAllArrayWithDelete($table,$column,$key){
         $db = DB::getMultitance();
-        if($db->selectAllArray($table,$column,$key)){
+        $results=[];
+        if($db->selectAll($table,$column,$key)){
             //dnd($db->results());
-            if (count($db->results())==1){
-                return ($db->results()[0]);
-            }else{
-                return ($db->results());
+            if($db->results()>0){
+                foreach ($db->results() as $item){
+                    $results[]=$item;
+                }
+                return $results;
             }
         }
         return(false);

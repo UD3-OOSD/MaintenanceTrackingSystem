@@ -40,16 +40,18 @@ class EditingBus  implements BusState{
     #update awasthawedi check karanne nane bus eka distance panalada kiyala
     #check if post doesnt work and have to do this like RegisterNewUser
 
-      $bus= EditingBus::$BusMEModel->findByBusNumber($BusNumber);
+      //$bus= EditingBus::$BusMEModel->findByBusNumber($BusNumber);
       //dnd($bus);
-      $bus->BusId = EditingBus::$BusMEModel->findIDbyBusNumber($BusNumber);
-      if($bus){
+     // $bus->BusId = EditingBus::$BusMEModel->findIDbyBusNumber($BusNumber);
+      //if($bus){
           #add the implementation of the checking for service
-          $this->populatechecklist($bus->BusId);
-          $bus->DistanceIncrement($this->ServiceCheckList,$Distance);
-          $bus->save();
+        //  $this->populatechecklist($bus->BusId);
+        //  $bus->DistanceIncrement($this->ServiceCheckList,$Distance);
+        //  $bus->save();
 
-      }
+     // }
+      #dnd('fsdiswebvhdwebrhig');
+       EditingBus::$BusMEModel->UpdateDistanceOfBus($BusNumber,$Distance);
     }
 
     public function updateDetails($data){

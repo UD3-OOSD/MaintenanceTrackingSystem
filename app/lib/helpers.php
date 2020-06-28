@@ -146,9 +146,12 @@ function ObjecttoArray($object){
 }
 
 function filter($collection){
-    #print_r($collection);
+    //dnd($collection);
     $filtered=[];
-    if(count($collection)>0){
+    if (!isset($collection) || $collection==[]){
+        return $filtered;
+    }
+    if(is_array($collection)){
         if(is_array($collection[0])){
             foreach ($collection as $item) {
                 if (isset($item['deleted']) && $item['deleted']==0){
@@ -164,7 +167,51 @@ function filter($collection){
                 }
             }
         }
+    }else{
+        if(is_array($collection)){
+            foreach ($collection as $item) {
+                if (isset($item['deleted']) && $item['deleted']==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
+
+        if(is_object($collection)){
+            foreach ($collection as $item) {
+                if (isset($item->deleted) && $item->deleted==0){
+                    $filtered[] = $item;
+                }
+            }
+        }
     }
     #dnd($filtered);
     return $filtered;
+}
+
+function NicToId($id){
+    if (substr($id,0,3)=='Lab'){
+        $column = 'LabourId';
+        $other = 'nic';
+    }else{
+        $column = 'nic';
+        $other = 'LabourId';
+    }
+
+    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
+}
+
+function Nic2LabId($NIC){
+    if ((substr($NIC,0,3)=='Lab')){
+        return $NIC;
+    }
+
+    return NicToId($NIC);
+}
+
+function LabId2Nic($LabId){
+    if (!(substr($LabId,0,3)=='Lab')){
+        return $LabId;
+    }
+
+    return NicToId($LabId);
 }

@@ -48,6 +48,7 @@ class Clerk extends Controller{
             $this->bus = Bus::getMultitance($this->_controller,'1');
              // dnd($this->bus->getState());
             //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no']));
+              //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no']));
             if($this->bus->getState()->checkId($_POST['reg_no']) && ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no'])['deleted']==0) {
                 $this->bus->stateChange($this);
                 //dnd($this->bus->getState());
