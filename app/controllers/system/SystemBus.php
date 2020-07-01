@@ -1,23 +1,18 @@
 <?php
 
 
-class SystemBus implements System
+class SystemBus extends System
 {
-    private static $systembus = NULL;
-    private static $BusMSModel;
-    private static $BusMEModel;
+    private  $BusMSModel;
+    private  $BusMEModel;
 
-    private function __construct(){
-        SystemBus::$BusMSModel = ModelCommon::loading_model('BusMS');
-        SystemBus::$BusMEModel = ModelCommon::loading_model('BusME');
+    public function __construct($name=''){
+        parent::__construct("Bus");
+        $this->BusMSModel = ModelCommon::loading_model('BusMS');
+        $this->BusMEModel = ModelCommon::loading_model('BusME');
     }
 
-    public static function getInstance(){
-        if(!isset(SystemBus::$systembus)){
-            SystemBus::$systembus = new SystemBus();
-        }
-        return SystemBus::$systembus;
-    }
+
     public function get($state = 'everything'){
         // return all busses on given  @devin
         #echo($state);
@@ -27,11 +22,11 @@ class SystemBus implements System
         if (is_int($state)){
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
             #echo('is int');
-            return SystemBus::$BusMSModel->selectAll('BusState',$state);
+            return $this->BusMSModel->selectAll('BusState',$state);
         }
         elseif ($state == 'everything'){
             #echo('is string');
-            return SystemBus::$BusMSModel->selectAllWithDelete('deleted',0);
+            return $this->BusMSModel->selectAllWithDelete('deleted',0);
         }
         return false;
     }
@@ -39,13 +34,14 @@ class SystemBus implements System
     public function updateState($id,$state){
         $unique=['BusNumber'=>$id];
         $params = ['BusState'=>$state];
-        return SystemBus::$BusMSModel->UpdateRow($unique,$params);
+        return $this->BusMSModel->UpdateRow($unique,$params);
     }
 
     public function check($id){
-        if(SystemBus::$BusMSModel->isBusNumberValid($id)){
-            $ServicesGranted = SystemBus::$BusMEModel->populatechecklist($id);
-            $bus = SystemBus::$BusMEModel->findByBusNumber($id);
+        if($this->BusMSModel->isBusNumberValid($id)){
+            $ServicesGranted = $this->BusMEModel->populatechecklist($id);
+            $bus =
+                $this->BusMEModel->findByBusNumber($id);
             $AvailableServices = [];
 
             foreach ($ServicesGranted as $service=>$value){

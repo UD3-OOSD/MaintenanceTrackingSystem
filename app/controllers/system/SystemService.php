@@ -1,27 +1,22 @@
 <?php
 
 
-class SystemService implements System
+class SystemService extends System
 {
-    private static $systemservice = NULL;
-    private static $ServiceActiveModel;
+    private  $systemservice = NULL;
+    private  $ServiceActiveModel;
 
-    private function __construct(){
+    public function __construct(){
         $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
     }
 
-    public static function getInstance(){
-        if(!isset(SystemService::$systemservice)){
-            SystemService::$systemservice = new SystemService();
-        }
-        return SystemService::$systemservice;
-    }
+
 
     public function get($state='')
     {
         if (is_int($state)){
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
-            return SystemService::$ServiceActiveModel->selectAll('ServiceState',$state);
+            return $this->ServiceActiveModel->selectAll('ServiceState',$state);
         }
         return false;
     }
@@ -30,7 +25,7 @@ class SystemService implements System
     {
         $unique=['ServiceId'=>$id];
         $params = ['ServiceState'=>$state];
-        return SystemService::$ServiceActiveModel->UpdateRow($unique,$params);
+        return $this->ServiceActiveModel->UpdateRow($unique,$params);
         //save $state in $id @devin
     }
 
@@ -39,4 +34,6 @@ class SystemService implements System
         // get date of given $id @devin.
         // check is service expired @nipun.
     }
+
+
 }

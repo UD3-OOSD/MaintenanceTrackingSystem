@@ -28,6 +28,15 @@ class Register extends Controller{
       if ($validation->passed()) {
         #echo($_POST['username']);
         $user = $this->UsersModel->findByUserName($_POST['username']);
+        #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
+        //echo Input::get('password') . ' '. $user->password;
+        //dnd($user);
+        #dnd(ObjecttoArray($user));
+        #$user->email = 'devin.18@cse.mrt.ac.lk';
+        #$user->save('LabourId');
+          //ModelCommon::selectAllArray('busmileage','BusCategory','Demo');
+        #$user->setTableState(3);
+
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {
 

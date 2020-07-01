@@ -2,7 +2,8 @@
 
 <?php $this->start('head') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table.js"></script>
+<script src="<?=PROOT?>js/table.js">
+</script>
 
 <?php $this->end() ?>
 
@@ -48,7 +49,6 @@
   </div>
     /////////////////////////////////
     <div class="table-wrapper">
-        <script>fetData = <?=$this->busData?></script>
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-8"><h2>Bus <b>Details</b></h2></div>
@@ -66,12 +66,11 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th >Name<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
-                <th>Address</th>
-                <th>City <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
-                <th>Pin Code</th>
-                <th>Country <i class="fa fa-sort th-sm"></i></th>
-                <th>Actions</th>
+                <th >BusId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>BusNumber</th>
+                <th>BusCategory <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>EngineNumber</th>
+                <th>RegistrationDate <i class="fa fa-sort th-sm"></i></th>
             </tr>
             </thead>
             <tbody id="tableData"></tbody>

@@ -1,7 +1,14 @@
 <?php
 
-interface System{
-    public function get($state='');
-    public function updateState($id,$state);
-    public function check($id);
+abstract class System{
+    protected $_systemName;
+
+    public function __construct($name)
+    {
+        $this->_systemName = $name;
+    }
+
+    public abstract function get($state='');
+    public abstract function updateState($id,$state);
+    public abstract function check($id);
 }

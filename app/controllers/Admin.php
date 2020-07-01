@@ -11,16 +11,18 @@ class Admin extends Controller{
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
-    $this->sysBus = SystemBus::getInstance();
-    $this->sysLab = SystemLabour::getInstance();
+    $this->load_system('SystemBus');
+    $this->load_system('SystemLabour');
   }
 
   public function indexAction(){
       //dnd($this->sysBus);
-    $busData = $this->sysBus->get();
-    $labData = $this->sysLab->get();
-    //dnd($busData);
-    $this->view->busData = $busData;
+    $busData = $this->SystemBus->get();
+    $labData = $this->SystemLabour->get();
+    $busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
+    //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
+    Cookie::set("headers",listToString($busHead),100);
+    Cookie::set("data",dataToString($busData),100);
     $this->view->labData = $labData;
     //$this->view->setLayout('option_1');
     //$this->view->table1 =

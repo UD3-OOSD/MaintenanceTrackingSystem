@@ -188,6 +188,18 @@ function filter($collection){
     return $filtered;
 }
 
+function filter_attr($collection, $attrs){
+    $res = [];
+    foreach ($collection as $obj){
+        $newobj = new stdClass();
+        foreach ($attrs as $attr){
+            $newobj->$attr = $obj->$attr;
+        }
+        $res[] = $newobj;
+    }
+    return $res;
+}
+
 function NicToId($id){
     if (substr($id,0,3)=='Lab'){
         $column = 'LabourId';
@@ -214,4 +226,16 @@ function LabId2Nic($LabId){
     }
 
     return NicToId($LabId);
+}
+
+function listToString($list){
+    return join(" ",$list);
+}
+
+function objToString($stdobj){
+    return listToString(ObjecttoArray($stdobj));
+}
+
+function dataToString($data){
+    return join(" ",array_map("objToString",$data));
 }

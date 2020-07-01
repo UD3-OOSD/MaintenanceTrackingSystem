@@ -18,4 +18,10 @@
 
       }
     }
+
+    protected function load_system($system){
+        if(class_exists($system)){
+            $this->{$system} = new $system(strtolower($system));
+        }
+    }
   }

@@ -2,52 +2,84 @@
 
 class Forman extends Controller{
 
-  private $service;
+  private $service,$_approved,$_closed,$_deleted,$_expired,$_finished,$_init,$_started;
   private $serviceSystem;
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
-    $this->serviceSystem = SystemService::getInstance();
+    $this->load_system('SystemService');
 
   }
 
 
 
   public function indexAction(){
-
+    [$this->_init,$this->_approved,$this->_started,$this->_finished,$this->_expired,$this->_closed,$this->_deleted] = $this->SystemService->get();
     $this->view->render('forman/index');
   }
 
-  public function CloseServiceAction($id=''){
-      $this->service = Service::getMultitance($this->_controller,'2');
-      if($this->service->getState()->checkId($id)){
-          $this->service->stateChange('6');
-          $this->service->getState()->saveState($id);
+  public function ApproveAction($id=''){
+      if($id!= ''){
+          $var = $this->SystemService->check($id);
+          if($var) {
+              $this->service = $var;
+              $this->service->stateChange($this);
+          }else{
+              echo $id." is invalid.";
+              Router::redirect('forman/required');
+          }
       }
-      Router::redirect('forman/closed');
+      //display resposive table ($_init)
+      $this->view->render('forman/required');
+  }
+
+  public function CloseServiceAction($id=''){
+
+      if($id!= ''){
+          $var = $this->SystemService->check($id);
+          if($var) {
+              $this->service = $var;
+              $this->service->stateChange($this);
+          }else{
+              echo $id." is invalid.";
+              Router::redirect('forman/closed');
+          }
+      }
+
+      //display resposive table ($_closed)
+      $this->view->render('forman/closed');
   }
 
   public function deleteServiceAction($id=''){
-    $this->service = Service::getMultitance($this->_controller,'2');
-    if($this->service->getState()->checkId($id)){
-        $this->service->stateChange('8');
-        $this->service->getState()->saveState($id);
-    }
-    Router::redirect('forman');
+      if($id!= ''){
+          $var = $this->SystemService->check($id);
+          if($var) {
+              $this->service = $var;
+              $this->service->stateChange($this);
+          }else{
+              echo $id." is invalid.";
+              Router::redirect('forman');
+          }
+      }
+
+      //display resposive table ($_deleted)
+      Router::redirect('forman');
   }
 
   public function acceptServiceAction($id=''){
     #fetch data from busdb for accepted services and their headers. @devin @avishka.
-    if(isset($id)) {
-        $this->service = Service::getMultitance($this->_controller, '2');
-        if ($this->service->getState()->checkId($id)) {
-            $this->service->stateChange('3');
-            $this->service->getState()->saveState($id);
-        }
-    }
-    $list = Forman::$serviceSystem->get('1');
-    $html = displaylinkedtable([],$list,[]);
-    $this->view->$html = $html;
+      if($id!= ''){
+          $var = $this->SystemService->check($id);
+          if($var) {
+              $this->service = $var;
+              $this->service->stateChange($this);
+          }else{
+              echo $id." is invalid.";
+              Router::redirect('forman/accepted');
+          }
+      }
+
+      //display resposive table ($_closed)
     $this->view->render('forman/accepted');
   }
 
@@ -82,6 +114,7 @@ class Forman extends Controller{
               $this->service->getState()->fillAction($_POST);
               $this->service->set_trigger();
               $this->service->fillAction($_POST,'forman');
+              $this->service->stateChange($this);
               Router::redirect('forman');
           }
       }
@@ -93,11 +126,21 @@ class Forman extends Controller{
 
 
 
-  public function editServiceAction(){
-
+  public function editServiceAction($id){
+      $var = $this->SystemService($id);
+      if($var){
+          $this->service = $var;
+          //show
+      }else{
+          echo $id." is not valid.";
+          Router::redirect(forman);
+      }
   }
 
-
+  public function saveServiceAction(){
+      //validation
+      //save in the DB -> look Admin saveBusAction();
+  }
 
   // show tables @nipun.
 
