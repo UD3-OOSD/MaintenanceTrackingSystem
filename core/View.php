@@ -21,10 +21,10 @@
 
     public function content($type){
       if($type == 'head'){
-        return $this->_head;
-      }elseif($type = 'body'){
+          return $this->_head;
+      }elseif($type == 'body'){
         return $this->_body;
-      }elseif($type = 'foot'){
+      }elseif($type == 'foot'){
           return $this->_foot;
       }
       return false;

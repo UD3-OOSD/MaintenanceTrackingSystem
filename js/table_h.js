@@ -1,29 +1,7 @@
 //var search_input = document.querySelector("#search_input");
 
 
-var search_input = document.getElementById('search_input');
-document.get
-console.log(search_input,"--------------");
-
-if(search_input!= null) {
-    search_input.addEventListener("keyup", function (e) {
-        var span_items = document.querySelectorAll(".table_body .name span");
-        var table_body = document.querySelector(".table_body ul");
-        var search_item = e.target.value.toLowerCase();
-
-        span_items.forEach(function (item) {
-            if (item.textContent.toLowerCase().indexOf(search_item) != -1) {
-                item.closest("li").style.display = "block";
-            } else {
-                item.closest("li").style.display = "none";
-            }
-        })
-
-    });
-}
-
 function lister(data,len){
-    console.log(data,len);
     var mega_list = [];
     const times = Math.floor(data.length/len);
     for(i=0;i<times;i++){
@@ -40,13 +18,25 @@ function reqListener () {
     console.log(this.responseText);
 }
 
+function listToStd(data,heads){
+    var ind = 0 , lis = [];
+    while(ind<data.length){
+        var obj = new Object();
+        for(let head of heads){
+            obj[head] = data[ind];
+            ind++;
+        }
+        lis.push(obj);
+    }
+    return lis;
+}
+
 var cookies = document.cookie.split(";").
 map(function(el){ return el.split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 
 var headers = cookies['headers'].split('+');
-console.log(cookies[" data"]);
-var fetData = lister(cookies[" data"].split('+'),headers.length);
+var fetData = listToStd(cookies[" data"].split('+'),headers);
 console.log(fetData);
 window.onload = () => {
     loadTableData(fetData);
@@ -55,9 +45,10 @@ window.onload = () => {
 function loadTableData(data){
     const tableBody = document.getElementById('tableData');
     let dataHtml = '';
-
+    var pos = 1;
     for(let elem of data){
-        dataHtml += `<tr><td>${elem[1]}</td><td>${elem[2]}</td><td>${elem[3]}</td><td>${elem[4]}</td><td>${elem[5]}</td></tr>`;
+        dataHtml += `<tr><td>${pos}</td><td>${elem.BusId}</td><td>${elem.BusNumber}</td><td>${elem.BusCategory}</td><td>${elem.EngineNumber}</td><td>${elem.RegistrationDate}</td></tr>`;
+        pos++;
     }
     tableBody.innerHTML = dataHtml;
 }
