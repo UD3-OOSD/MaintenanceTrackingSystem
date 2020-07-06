@@ -32,6 +32,7 @@ class SystemService extends System
     public function check($id){
 
         // get date of given $id @devin.
+        $date = $this->ServiceActiveModel->getDate($id);
         // check is service expired @nipun.
     }
 
