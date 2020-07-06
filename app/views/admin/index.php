@@ -1,13 +1,13 @@
-<?php $this->setSiteTitle('admin') ?>
+<?php $this->setSiteTitle('admin'); ?>
 
-<?php $this->start('head') ?>
-<link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table.js">
+<?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=PROOT?>css/table.css" media="screen" title="no title" charset="utf-8" >
+<script src="<?=PROOT?>js/table_h.js">
 </script>
 
-<?php $this->end() ?>
+<?php $this->end(); ?>
 
-<?php $this->start('body') ?>
+<?php $this->start('body'); ?>
 <div class="container">
   <div class="row register">
     <div class="col-sm-6 reg">
@@ -53,16 +53,13 @@
             <div class="row">
                 <div class="col-sm-8"><h2>Bus <b>Details</b></h2></div>
                 <div class="col-sm-4">
-                    <div class="search-box">
-                        <i class="material-icons">&#xE8B6;</i>
-                        <label>
-                            <input type="text" id="search_input" class="form-control" placeholder="Search&hellip;">
-                        </label>
+                    <div class="search_box">
+                        <input type="text" id="search_input"  placeholder="Fliter Table Using Names">
                     </div>
                 </div>
             </div>
         </div>
-        <table id="selectedColumn" class="table table-striped table-hover table-bordered table-sm">
+        <table id="selectedColumn" class="table table-body table-striped table-hover table-bordered table-sm">
             <thead>
             <tr>
                 <th>#</th>
@@ -89,4 +86,10 @@
         </div>
 
 </div>
-<?php $this->end() ?>
+<?php $this->end(); ?>
+
+<?php $this->start('foot');?>
+    <h2>designed by WD3</h2>
+    <script src="<?=PROOT?>js/table_f.js">
+    </script>
+<?php $this->end();?>

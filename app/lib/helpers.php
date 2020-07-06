@@ -239,3 +239,25 @@ function objToString($stdobj){
 function dataToString($data){
     return join(" ",array_map("objToString",$data));
 }
+
+function filterToObj($data,$heads){
+    $stdObjs = [];
+    foreach($data as $obj){
+        $stdObj = new stdClass();
+        foreach ($heads as $attr){
+            $stdObj->$attr = $obj->$attr;
+        }
+    }
+    return $stdObjs;
+}
+
+function filterToString($data,$heads){
+    $stdObjs = "";
+    foreach($data as $obj){
+        //$stdObj = new stdClass();
+        foreach ($heads as $attr){
+            $stdObjs .= " ".$obj->$attr;
+        }
+    }
+    return ltrim($stdObjs," ");
+}

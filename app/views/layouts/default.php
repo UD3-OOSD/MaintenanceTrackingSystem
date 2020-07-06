@@ -24,4 +24,9 @@
     </div>
 
   </body>
+  <body>
+  <div class="container-fluid" style="min-height:calc(100% - 125px);">
+      <?=$this->content('foot'); ?>
+  </div>
+  </body>
 </html>
