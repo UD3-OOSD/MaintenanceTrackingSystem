@@ -3,9 +3,10 @@
 class InitService implements ServiceState{
 
   private static $initservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-      $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
+      InitService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -30,7 +31,13 @@ class InitService implements ServiceState{
 
 
 
-    public function TableUpdate(){
+    public function TableUpdate($data){
+        InitService::$ServiceActiveModel->edit($data['ServiceId'],$data);
+    }
 
+    public function fillAction($params)
+    {
+        //not needed
+        // TODO: Implement fillAction() method.
     }
 }

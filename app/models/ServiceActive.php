@@ -69,7 +69,7 @@ class ServiceActive extends Model{
         return $this->edit($this->ServiceId,$params);
     }
 
-    public function getDate($id){
+public function getDate($id){
         $service = $this->selectAll('ServiceId',$id);
         return($service->ServiceInitiatedDate);
     }
