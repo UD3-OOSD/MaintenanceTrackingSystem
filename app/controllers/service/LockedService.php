@@ -4,9 +4,10 @@
 class LockedService implements ServiceState{
 
     private static $lockedservice;
+    private static $ServiceActiveModel;
 
     private function __construct(){
-
+        LockedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
     }
 
     public static function getInstance(){
@@ -26,14 +27,16 @@ class LockedService implements ServiceState{
 
     public function checkId($id){
         //@devin.
+        return LockedService::$ServiceActiveModel->isServiceIdValid($id);
     }
 
-    public function saveState($id){
+    public function saveState($id,$state){
         //@devin
+        return LockedService::$ServiceActiveModel->stateChange($id,$state);
     }
 
     public function fetchState($id){
-
+        return LockedService::$ServiceActiveModel->getState($id);
     }
 
     public function edit($service, $data)
@@ -41,7 +44,7 @@ class LockedService implements ServiceState{
         // TODO: Implement edit() method.
     }
 
-    public function fillAction($params, $obj)
+    public function fillAction($params)
     {
         // TODO: Implement fillAction() method.
     }
