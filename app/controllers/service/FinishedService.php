@@ -30,4 +30,10 @@ class FinishedService implements ServiceState{
     {
         // TODO: Implement edit() method.
     }
+
+    public function fillAction($params)
+    {   //not needed
+        
+        // TODO: Implement fillAction() method.
+    }
 }
