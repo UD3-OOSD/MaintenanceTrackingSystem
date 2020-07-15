@@ -2,7 +2,7 @@
   "Home" : "home",
   "Forman" :{
     "Home" : "forman",
-    "Required Maintances" : "forman/required",
+    "Required Maintances" : "forman/approve",
     "Accepted Maintances" : "forman/accepted",
     "Started Maintances" : "forman/started",
     "Finished Maintances" : "forman/finished",

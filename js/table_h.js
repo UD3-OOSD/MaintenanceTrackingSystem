@@ -44,14 +44,25 @@ window.onload = () => {
 
 function loadTableData(data){
     const tableBody = document.getElementById('tableData');
-    let dataHtml = '';
+    let dataHtml = ``;
     var pos = 1;
     for(let elem of data){
-        dataHtml += `<tr><td>${pos}</td><td>${elem.BusId}</td><td>${elem.BusNumber}</td><td>${elem.BusCategory}</td><td>${elem.EngineNumber}</td><td>${elem.RegistrationDate}</td></tr>`;
+        dataHtml +=`<tr class="item">` +
+            `<td class="index">` +
+            `<span>${pos}</span>`+
+            `</td>`;
+        for(let head of Object.keys(elem)){
+            dataHtml += `<td class=`+`"${head}"`+`>` +
+                `<span>${elem[head]}</span>`+
+                `</td>`;
+        }
+        dataHtml += `</tr>`;
         pos++;
     }
     tableBody.innerHTML = dataHtml;
 }
+
+
 
 function sortColumn(columnName) {
     const dataType = typeof  fetData[0][columnName];

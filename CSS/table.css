@@ -144,43 +144,43 @@ body {
   overflow: auto;
 }
 
-.table_body ul li .item {
+.table_body  .item {
   border-bottom: 1px solid #efefef;
 }
 
-.table_body ul li .item .status span {
+.table_body  .item .status span {
   padding: 5px 20px;
   border-radius: 25px;
   max-width: 115px;
   display: inline-block;
 }
 
-.table_body ul li .item .open {
+.table_body  .item .open {
   background: #e5edfa;
   color: #5a8ee4;
 }
 
-.table_body ul li .item .fixed {
+.table_body  .item .fixed {
   background: #cff1f0;
   color: #0dbeb6;
 }
 
-.table_body ul li .item .closed {
+.table_body  .item .closed {
   background: #fedfe5;
   color: #ff89a0;
 }
 
-.table_body ul li .item .hold {
+.table_body  .item .hold {
   background: #fff0db;
   color: #f59d39;
 }
 
-.table_body ul li .item .reopened {
+.table_body  .item .reopened {
   background: #d6f2ff;
   color: #29a5d8;
 }
 
-.table_body ul li .item .canceled {
+.table_body  .item .canceled {
   background: #ffdbd6;
   color: #e87060;
 }
