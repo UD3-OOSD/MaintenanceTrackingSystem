@@ -245,10 +245,12 @@ class Model{
     }
   }
 
-  public function selectAll($column,$key){
+  public function selectAll($column,$key, $filter=true ){
         //dnd('selectall');
         $results = $this->selectAllWithDelete($column,$key);
-        $results = filter($results);
+        if($filter){
+            $results = filter($results);
+        }
         if (count($results)==1){
             return($results[0]);
         }
@@ -271,9 +273,11 @@ class Model{
         return false;
     }
 
-    public function selectAllArray($column,$key){
+    public function selectAllArray($column,$key, $filter=true ){
         $results = $this->selectAllArrayWithDelete($column,$key);
-        $results = filter($results);
+        if($filter){
+            $results = filter($results);
+        }
         if (count($results)==1){
             return($results[0]);
         }

@@ -3,9 +3,20 @@
 class ServiceMatrics extends Model{
 
     public static $Instance;
+    public static $states;
 
     public function __construct($service=''){
         $table='servicematrics';
+        ServiceMatrics::$states = [0 => 'NewService',
+                                  1 => 'InitService',
+                                  2 => 'ApprovedService',
+                                  3 => 'StartedService',
+                                  4 => '',
+                                  5 => '',
+                                  6 => '',
+                                  7 => '',
+                                  8 => '' ];
+
         parent::__construct($table,'ServiceMatrics','ServiceId');
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
@@ -37,8 +48,8 @@ class ServiceMatrics extends Model{
         $labourers=[];
 
         foreach ($service as $key=>$value){
-            if($value == 1){
-                $labourers[]=$key;
+            if($value != null){
+                $labourers[$key]=$value;
             }
         }
 
@@ -46,18 +57,26 @@ class ServiceMatrics extends Model{
     }
     public function forselectedService($ServiceId){
         if(isset($ServiceId)){
-            return $this->selectAllArrayWithDelete('ServiceId',$ServiceId);
+            if($this->isValidKey(['ServiceId'=>$ServiceId])) {
+                return $this->selectAllArray('ServiceId', $ServiceId, false);
+            }
         }
     }
 
     public function forSelectedLabouror($Labour){
+        $services =[];
         if (isset($Labour)){
-            return $this->selectAllArrayWithDelete(Nic2LabId($Labour),1);
+            foreach(ServiceMatrics::$states as $state => $state_name){
+                $services = $services + $this->selectAllArray(Nic2LabId($Labour),$state, false);
+            }
         }
+
+        return($services);
     }
 
     public function getServicesforLabour($LabourId){
         $services = $this->forSelectedLabouror($LabourId);
+        dnd($services);
         $serviceIds = [];
 
         if(isset($services['ServiceId'])){
@@ -74,7 +93,7 @@ class ServiceMatrics extends Model{
     public function checkLabourInvolved(){
         $labours=[];
         foreach ($this->_columnNames as $name){
-            if ($this->{$name} == 1){
+            if ($this->{$name} != 1){
                 $labours[]=$name;
             }
         }

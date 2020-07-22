@@ -464,7 +464,7 @@
     }
 
     public function selectAll($table,$column,$key){
-        //dnd('enters'); ($table!='') && ($column!='') && ($key!='')
+        //dnd('enters');// ($table!='') && ($column!='') && ($key!='')
         if(isset($table) && isset($column) && isset($key)){
             //dnd('passed');
             $sql="SELECT * FROM {$table} WHERE {$column} = ? ";
@@ -478,8 +478,11 @@
     }
 
       public function selectAllArray($table,$column,$key){
-          //dnd('enters');
-          if( ($table!='') && ($column!='') && ($key!='') ){
+          #echo($key);
+          #echo($column);
+          #echo($table);
+          #dnd(($table!='') && ($column!=''));
+          if( ($table!='') && ($column!='')){
               $key="'".$key."'";
               $sql="SELECT * FROM {$table} WHERE {$column} = {$key}";
               //dnd($sql);

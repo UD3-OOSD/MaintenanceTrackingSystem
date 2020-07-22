@@ -201,6 +201,7 @@ function filter_attr($collection, $attrs){
 }
 
 function NicToId($id){
+    #dnd('arrived');
     if (substr($id,0,3)=='Lab'){
         $column = 'LabourId';
         $other = 'nic';
@@ -209,7 +210,7 @@ function NicToId($id){
         $other = 'LabourId';
     }
 
-    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
+    return ModelCommon::selectAllArray('labourdetails',$column,$id)[0][$other];
 }
 
 function Nic2LabId($NIC){
