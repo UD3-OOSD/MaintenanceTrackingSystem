@@ -38,9 +38,9 @@ class ModelCommon{
     return($values);
   }
 
-  public static function addColumn($table,$column_name,$data_type){
+  public static function addColumn($table,$column_name,$data_type,$default = null){
       $db = DB::getMultitance();
-      $db->addColumn($table,$column_name,$data_type);
+      $db->addColumn($table,$column_name,$data_type,$default);
   }
 
   public static function UpdateRow($table, $unique, $fields){

@@ -6,6 +6,7 @@ class ServiceMatrics extends Model{
     public static $states;
 
     public function __construct($service=''){
+        $this->idtype = 'ServiceId';
         $table='servicematrics';
         ServiceMatrics::$states = [0 => 'NewService',
                                   1 => 'InitService',
@@ -22,7 +23,7 @@ class ServiceMatrics extends Model{
             if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst('servicematrics', ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);
             }
-            if ($s) {
+            if (isset($s)) {
                 foreach ($s as $key => $value) {
                     $this->$key = $value;
                 }
@@ -32,17 +33,42 @@ class ServiceMatrics extends Model{
 
 
     public function addLabour($LabId){
-        if ($this->addColumn($LabId,'INT(11)')){
+        if ($this->addColumn($LabId,'INT(11)',-1)){
             return true;
         }
         return false;
     }
 
     public function addService($params){
-        $this->assign($params);
+        $this->assign($this->reformingParameters($params));
         $this->save();
     }
 
+    public function reformingParameters($params){
+        $reformed=[];
+        $columns = ($this->_columnNames);
+        #dnd($columns);
+        $reformed['ServiceId'] = $params['ServiceId'];
+        $reformed['deleted'] = 0;
+
+        #dnd($reformed);
+        foreach($columns as $column){
+            if($column != 'ServiceId' && $column != 'deleted'){
+                if(isset($params[$column])){
+                    $reformed[$column] = $params[$column];
+                }
+                else{
+                    $reformed[$column] = -1;
+                }
+            }
+        }
+        #dnd($reformed);
+        return $reformed;
+    }
+
+    public function deleteService($ServiceId){
+        return $this->delete($ServiceId,$this->idtype);
+    }
     public function getLabourersforService($ServiceId){
         $service = $this->forselectedService($ServiceId);
         $labourers=[];
@@ -58,7 +84,7 @@ class ServiceMatrics extends Model{
     public function forselectedService($ServiceId){
         if(isset($ServiceId)){
             if($this->isValidKey(['ServiceId'=>$ServiceId])) {
-                return $this->selectAllArray('ServiceId', $ServiceId, false);
+                return $this->selectAllArray('ServiceId', $ServiceId);
             }
         }
     }
@@ -67,7 +93,11 @@ class ServiceMatrics extends Model{
         $services =[];
         if (isset($Labour)){
             foreach(ServiceMatrics::$states as $state => $state_name){
-                $services = $services + $this->selectAllArray(Nic2LabId($Labour),$state, false);
+                $state_service = ($this->selectAllArray(Nic2LabId($Labour),$state));
+                if(isset($state_service['ServiceId'])){
+                    $state_service = [$state_service];
+                }
+                $services=array_merge($state_service,$services);
             }
         }
 
@@ -76,17 +106,13 @@ class ServiceMatrics extends Model{
 
     public function getServicesforLabour($LabourId){
         $services = $this->forSelectedLabouror($LabourId);
-        dnd($services);
+        #dnd($services);
         $serviceIds = [];
 
-        if(isset($services['ServiceId'])){
-            $services = [$services];
-        }
-
         foreach($services as $service){
-            $serviceIds[]=$service['ServiceId'];
+            $serviceIds[$service['ServiceId']]=$service[Nic2LabId($LabourId)];
         }
-
+        #dnd($serviceIds);
         return $serviceIds;
     }
 

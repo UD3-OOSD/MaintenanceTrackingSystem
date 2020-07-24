@@ -336,9 +336,14 @@
     }
 
 
-    public function addColumn($table,$column_name,$data_type) {
+    public function addColumn($table,$column_name,$data_type,$default) {
         if (isset($data_type)&&isset($column_name)&&isset($table)){
-            $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
+            if($default == null){
+                $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
+            }else{
+                $sql = "ALTER TABLE {$table} ADD {$column_name} {$data_type} NOT NULL DEFAULT {$default}";
+            }
+
             if($this->query($sql)){
                 return(true);
             }
