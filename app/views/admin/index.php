@@ -1,9 +1,9 @@
 <?php $this->setSiteTitle('admin'); ?>
 
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
 <link rel="stylesheet" href="<?=PROOT?>css/table.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table_h.js">
-</script>
+<script src="<?=PROOT?>js/table_h.js"></script>
 
 <?php $this->end(); ?>
 
@@ -61,16 +61,16 @@
         </div>
         <table id="selectedColumn" class="table table-body table-striped table-hover table-bordered table-sm">
             <thead>
-            <tr>
+            <tr class="table_header">
                 <th>#</th>
-                <th >BusId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>BusId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
                 <th>BusNumber</th>
                 <th>BusCategory <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
                 <th>EngineNumber</th>
                 <th>RegistrationDate <i class="fa fa-sort th-sm"></i></th>
             </tr>
             </thead>
-            <tbody id="tableData"></tbody>
+            <tbody class="table_body" id="tableData"></tbody>
         </table>
         <div class="clearfix">
             <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>

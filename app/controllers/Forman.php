@@ -18,7 +18,7 @@ class Forman extends Controller{
     $this->view->render('forman/index');
   }
 
-  public function ApproveAction($id=''){
+  public function approveAction($id=''){
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
@@ -30,6 +30,9 @@ class Forman extends Controller{
           }
       }
       //display resposive table ($_init)
+      $serviceData = $this->SystemService->get('1');
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
       $this->view->render('forman/required');
   }
 
