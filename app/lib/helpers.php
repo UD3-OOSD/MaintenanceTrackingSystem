@@ -229,6 +229,14 @@ function LabId2Nic($LabId){
     return NicToId($LabId);
 }
 
+function BusNumber2Id($BusNumber){
+    if(substr($BusNumber,0,3)=='Bus'){
+        return($BusNumber);
+    }
+
+    return ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)[0]['BusId'];
+}
+
 function listToString($list){
     return join(" ",$list);
 }
