@@ -49,10 +49,14 @@ function loadTableData(data){
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
             `<td class="index">` +
+            `<form action="admin/editBus">`+
+            `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
             `<span>${pos}</span>`+
+            `</button>`+
+            `</form>`+
             `</td>`;
         for(let head of Object.keys(elem)){
-            dataHtml += `<td class=`+`"${head}"`+`>` +
+            dataHtml += `<td class=`+`"${head.substring(head.length-2)==='Id'? 'id':'comman'}"`+`>` +
                 `<span>${elem[head]}</span>`+
                 `</td>`;
         }
@@ -62,7 +66,25 @@ function loadTableData(data){
     tableBody.innerHTML = dataHtml;
 }
 
-
+function loadTableData0(data){
+    const tableBody = document.getElementById('tableData');
+    let dataHtml = ``;
+    var pos = 1;
+    for(let elem of data){
+        dataHtml +=`<tr class="item">` +
+            `<td class="index">` +
+            `<span>${pos}</span>`+
+            `</td>`;
+        for(let head of Object.keys(elem)){
+            dataHtml += `<td class=`+`"${head.substring(head.length-2)==='Id'? 'id':'comman'}"`+`>` +
+                `<span>${elem[head]}</span>`+
+                `</td>`;
+        }
+        dataHtml += `</tr>`;
+        pos++;
+    }
+    tableBody.innerHTML = dataHtml;
+}
 
 function sortColumn(columnName) {
     const dataType = typeof  fetData[0][columnName];

@@ -166,6 +166,7 @@ class Admin extends Controller{
   public function editBusAction(){  // call by button press @uda
       //dnd('exists');
     //add the validation @devin
+      echo $_POST['bus_num'];
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
     $this->bus = Bus::getMultitance($this->_controller,'1');

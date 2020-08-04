@@ -253,6 +253,7 @@ function filterToObj($data,$heads){
 
 function filterToString($data,$heads){
     $stdObjs = "";
+    #dnd($data);
     foreach($data as $obj){
         //$stdObj = new stdClass();
         foreach ($heads as $attr){

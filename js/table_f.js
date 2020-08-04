@@ -2,16 +2,16 @@ var search_input = document.querySelector("#search_input");
 //console.log(document.querySelector('td.BusId'));
 search_input.addEventListener("keyup", function(e){
     //console.log("Run!",document);
-    var span_items = document.querySelectorAll(".table_body .BusId span");
+    var span_items = document.querySelectorAll(".table_body .id span");
     var table_body = document.querySelector(".table_body ul");
     var search_item = e.target.value.toLowerCase();
     console.log(span_items);
     span_items.forEach(function(item){
-        if(item.textContent.toLowerCase().indexOf(search_item) != -1){
-            item.closest("tr").style.display = "block";
+        if(item.textContent.toLowerCase().indexOf(search_item) == -1){
+            item.closest("tr").style.display = "none";
         }
         else{
-            item.closest("tr").style.display = "none";
+            item.closest("tr").style.display = "table-row";
         }
     })
 
