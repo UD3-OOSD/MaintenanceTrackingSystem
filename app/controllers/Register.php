@@ -36,6 +36,30 @@ class Register extends Controller{
         #$user->save('LabourId');
           //ModelCommon::selectAllArray('busmileage','BusCategory','Demo');
         #$user->setTableState(3);
+        #$servicematrics =  ModelCommon::loading_model('ServiceMatrics');
+        #$services = ModelCommon::selectAllArray('activeservices','deleted',0,$filter = false);
+        #print_r($services);
+        #print_r($servicematrics->getLabourersforService('Serv2'));
+        #$servicematrics->deleteService('Serv2');
+          #$servicematrics->addLabour('Labtest0');
+        #$servicematrics->addservice(['ServiceId'=>'Serv1','Labtest0'=>5]);
+        #print_r($servicematrics->getServicesforLabour('Labtest0'));
+        #print_r($servicematrics->getServicesforLabour('982910110v'));
+        #dnd('......');
+        #foreach($services as $ser ){
+         #   $ids = trim($ser['Labourers']);
+         #   $ids = explode(',',$ids);
+         #   $data = [];
+         #   $data['ServiceId']=$ser['ServiceId'];
+        #    foreach ($ids as $id){
+         #      $data[$id] = rand(0,8);
+         #   }
+            #dnd($data);
+         #   ($servicematrics->addservice($data));
+        #}
+        #dnd('done');
+            #$servicematrics->addservice($lab['LabourId']);
+        #}
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {

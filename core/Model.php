@@ -3,7 +3,7 @@
 class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
-    private $idtype;
+    protected $idtype;
 
     public function __construct($table,$name = '',$idtype=''){
     $this->_db = DB::getMultitance("admin");
@@ -154,9 +154,11 @@ class Model{
     $id = ($id == '' ) ? $this->{$idname} : $id;
 
     if($this->_softDelete){
-      $this->UpdateRow([$idname=> $id], ['deleted' => 1]);
+      return $this->UpdateRow([$idname=> $id], ['deleted' => 1]);
     }
-    return $this->_db->deleteRow($this->_table, $id);
+    else {
+        return $this->_db->deleteRow($this->_table, $id);
+    }
   }
 
     protected function _softDeleteParams($params){
@@ -224,8 +226,8 @@ class Model{
       #dnd($params);
   }
 
-  public function addColumn($column_name,$data_type){
-    return $this->_db->addColumn($this->_table,$column_name,$data_type);
+  public function addColumn($column_name,$data_type,$default = null){
+    return $this->_db->addColumn($this->_table,$column_name,$data_type,$default);
   }
 
     public function UpdateRow($unique,$data){
@@ -245,10 +247,12 @@ class Model{
     }
   }
 
-  public function selectAll($column,$key){
+  public function selectAll($column,$key, $filter=true ){
         //dnd('selectall');
         $results = $this->selectAllWithDelete($column,$key);
-        $results = filter($results);
+        if($filter){
+            $results = filter($results);
+        }
         if (count($results)==1){
             return($results[0]);
         }
@@ -271,9 +275,11 @@ class Model{
         return false;
     }
 
-    public function selectAllArray($column,$key){
+    public function selectAllArray($column,$key, $filter=true ){
         $results = $this->selectAllArrayWithDelete($column,$key);
-        $results = filter($results);
+        if($filter){
+            $results = filter($results);
+        }
         if (count($results)==1){
             return($results[0]);
         }

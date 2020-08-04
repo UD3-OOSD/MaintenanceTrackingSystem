@@ -336,9 +336,14 @@
     }
 
 
-    public function addColumn($table,$column_name,$data_type) {
+    public function addColumn($table,$column_name,$data_type,$default) {
         if (isset($data_type)&&isset($column_name)&&isset($table)){
-            $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
+            if($default == null){
+                $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
+            }else{
+                $sql = "ALTER TABLE {$table} ADD {$column_name} {$data_type} NOT NULL DEFAULT {$default}";
+            }
+
             if($this->query($sql)){
                 return(true);
             }
@@ -464,7 +469,7 @@
     }
 
     public function selectAll($table,$column,$key){
-        //dnd('enters'); ($table!='') && ($column!='') && ($key!='')
+        //dnd('enters');// ($table!='') && ($column!='') && ($key!='')
         if(isset($table) && isset($column) && isset($key)){
             //dnd('passed');
             $sql="SELECT * FROM {$table} WHERE {$column} = ? ";
@@ -478,8 +483,11 @@
     }
 
       public function selectAllArray($table,$column,$key){
-          //dnd('enters');
-          if( ($table!='') && ($column!='') && ($key!='') ){
+          #echo($key);
+          #echo($column);
+          #echo($table);
+          #dnd(($table!='') && ($column!=''));
+          if( ($table!='') && ($column!='')){
               $key="'".$key."'";
               $sql="SELECT * FROM {$table} WHERE {$column} = {$key}";
               //dnd($sql);

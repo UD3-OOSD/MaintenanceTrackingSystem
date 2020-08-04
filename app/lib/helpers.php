@@ -201,6 +201,7 @@ function filter_attr($collection, $attrs){
 }
 
 function NicToId($id){
+    #dnd('arrived');
     if (substr($id,0,3)=='Lab'){
         $column = 'LabourId';
         $other = 'nic';
@@ -209,7 +210,7 @@ function NicToId($id){
         $other = 'LabourId';
     }
 
-    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
+    return ModelCommon::selectAllArray('labourdetails',$column,$id)[0][$other];
 }
 
 function Nic2LabId($NIC){
@@ -226,6 +227,14 @@ function LabId2Nic($LabId){
     }
 
     return NicToId($LabId);
+}
+
+function BusNumber2Id($BusNumber){
+    if(substr($BusNumber,0,3)=='Bus'){
+        return($BusNumber);
+    }
+
+    return ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)[0]['BusId'];
 }
 
 function listToString($list){

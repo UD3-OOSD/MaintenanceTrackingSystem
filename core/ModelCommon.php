@@ -38,9 +38,9 @@ class ModelCommon{
     return($values);
   }
 
-  public static function addColumn($table,$column_name,$data_type){
+  public static function addColumn($table,$column_name,$data_type,$default = null){
       $db = DB::getMultitance();
-      $db->addColumn($table,$column_name,$data_type);
+      $db->addColumn($table,$column_name,$data_type,$default);
   }
 
   public static function UpdateRow($table, $unique, $fields){
@@ -135,7 +135,7 @@ class ModelCommon{
     public static function selectAllArrayWithDelete($table,$column,$key){
         $db = DB::getMultitance();
         $results=[];
-        if($db->selectAll($table,$column,$key)){
+        if($db->selectAllArray($table,$column,$key)){
             //dnd($db->results());
             if($db->results()>0){
                 foreach ($db->results() as $item){
@@ -147,15 +147,21 @@ class ModelCommon{
         return(false);
     }
 
-    public static function selectAll($table,$column,$key){
+    public static function selectAll($table,$column,$key,$filter=true){
         $results = ModelCommon::selectAllWithDelete($table,$column,$key);
-        return filter($results);
+        if($filter){
+            $results = filter($results);
+        }
+        return $results;
 
     }
 
-    public static function selectAllArray($table,$column,$key){
+    public static function selectAllArray($table,$column ='deleted',$key = 0,$filter=true){
         $results = ModelCommon::selectAllArrayWithDelete($table,$column,$key);
-        return filter($results);
+        if($filter){
+            $results = filter($results);
+        }
+        return $results;
     }
 
 }
