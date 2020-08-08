@@ -364,4 +364,6 @@ class Admin extends Controller{
       Router::redirect('admin/addNewLabour');
     }
   }
+
+  public function redirAction(){}
 }

@@ -49,7 +49,7 @@ function loadTableData(data){
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
             `<td class="index">` +
-            `<form action="admin/editBus">`+
+            `<form action="admin/editBus" method="post">`+
             `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
             `<span>${pos}</span>`+
             `</button>`+
