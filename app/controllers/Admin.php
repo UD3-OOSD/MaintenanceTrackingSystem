@@ -173,8 +173,8 @@ class Admin extends Controller{
     #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
       //dnd($this->bus->getState()->checkId($bus_num));
 
-      //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)[0]['deleted']);
-    if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)['deleted']==0){
+      #dnd($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num));
+    if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
         //dnd('true');
         //$this->bus->set_trigger();
         $this->bus->stateChange($this);

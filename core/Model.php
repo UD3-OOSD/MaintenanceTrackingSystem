@@ -212,11 +212,9 @@ class Model{
   public function isValidKey($params = []){
       if($params != []){
           foreach ($params as $key => $value){
-              $statement=['conditions' => $key."= ?" , 'bind'=>[$value]];
-              #dnd($key."= ?");
-              $result = $this->find($statement);
-              //dnd($result);
-              if (is_array($result) && !(empty($result))){
+              $result = $this->selectAllArray($key,$value);
+              #dnd($result);
+              if ($result){
                   #dnd('trueeee');
                   return(true);
               }
