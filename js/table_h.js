@@ -36,6 +36,7 @@ map(function(el){ return el.split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 
 var headers = cookies['headers'].split('+');
+var calller = cookies['action'];
 var fetData = listToStd(cookies[" data"].split('+'),headers);
 console.log(fetData);
 window.onload = () => {
@@ -49,7 +50,7 @@ function loadTableData(data){
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
             `<td class="index">` +
-            `<form action="admin/editBus" method="post">`+
+            `<form action="${calller}" method="post">`+
             `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
             `<span>${pos}</span>`+
             `</button>`+
