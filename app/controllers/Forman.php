@@ -155,7 +155,7 @@ class Forman extends Controller{
 
 
 
-  public function editServiceAction($id){
+  public function editServiceAction(){
       $service_num = $_POST['bus_num'];
       $this->service = Service::getMultitance($this->_controller,'2');
 
