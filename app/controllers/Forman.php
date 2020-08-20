@@ -34,6 +34,7 @@ class Forman extends Controller{
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::set("headers",listToString($serviceHeads),100);
       Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
+      Cookie::set('action','forman-editService',100);
       $this->view->render('forman/required');
   }
 
@@ -154,7 +155,7 @@ class Forman extends Controller{
 
 
 
-  public function editServiceAction($id){
+  public function editServiceAction(){
       $service_num = $_POST['bus_num'];
       $this->service = Service::getMultitance($this->_controller,'2');
 
