@@ -96,16 +96,16 @@ class Forman extends Controller{
   }
 
   public function finishedAction(){
-      $serviceData = $this->SystemService->get(1);
-      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      $serviceData = $this->SystemService->get(6);
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceStartDate ','ServiceFinishedDate','ServiceDetails'];
       Cookie::set("headers",listToString($serviceHeads),100);
       Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
       $this->view->render('forman/finished');
   }
 
   public function expiredAction(){
-      $serviceData = $this->SystemService->get(1);
-      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      $serviceData = $this->SystemService->get(7);
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceStartDate','ServiceExpiredDate'];
       Cookie::set("headers",listToString($serviceHeads),100);
       Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
       $this->view->render('forman/expired');
