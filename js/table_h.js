@@ -36,8 +36,8 @@ map(function(el){ return el.split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 
 var headers = cookies['headers'].split('+');
-//var caller = cookies['action'].replace('-','/');
-//console.log(caller,'ddddd');
+console.log(cookies,'ddd');
+var caller = cookies['action'].replace('-','/');
 var fetData = listToStd(cookies[" data"].split('+'),headers);
 console.log(fetData);
 window.onload = () => {
@@ -51,7 +51,7 @@ function loadTableData(data){
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
             `<td class="index">` +
-            `<form action="admin/editbus" method="post">`+
+            `<form action="${caller}" method="post">`+
             `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
             `<span>${pos}</span>`+
             `</button>`+
