@@ -37,7 +37,7 @@ reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 
 var headers = cookies['headers'].split('+');
 console.log(cookies,'ddd');
-var caller = cookies['action'].replace('-','/');
+var caller = cookies[' action'].replace('-','/');
 var fetData = listToStd(cookies[" data"].split('+'),headers);
 console.log(fetData);
 window.onload = () => {

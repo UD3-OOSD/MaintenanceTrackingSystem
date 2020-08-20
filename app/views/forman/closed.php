@@ -7,7 +7,6 @@
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
-<div class="col-md-6"><?=$this->table_1?></div>
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
@@ -26,8 +25,7 @@
             <th>ServiceId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
             <th>ServiceType</th>
             <th>BusNumber <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
-            <th>ServiceStartDate <i class="fa fa-sort th-sm"></i></th>
-            <th>ServiceClosedDate <i class="fa fa-sort th-sm"></i></th>
+            <th>ServiceDate <i class="fa fa-sort th-sm"></i></th>
         </tr>
         </thead>
         <tbody class="table_body" id="tableData"></tbody>

@@ -24,7 +24,7 @@ class Admin extends Controller{
     //Cookie::set('action','admin/editbus',100);
     Cookie::set('headers',listToString($busHead),100);
     Cookie::set("data",filterToString($busData,$busHead),100);
-    Cookie::set('action','admin-editbus',100);
+    Cookie::set('action','admin-editBus',100);
     $this->view->labData = $labData;
     //$this->view->setLayout('option_1');
     //$this->view->table1 =
