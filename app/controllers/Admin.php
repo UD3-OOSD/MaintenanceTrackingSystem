@@ -21,6 +21,7 @@ class Admin extends Controller{
     $labData = $this->SystemLabour->get();
     $busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
     //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
+    Cookie::set('action','admin/editbus');
     Cookie::set("headers",listToString($busHead),100);
     Cookie::set("data",filterToString($busData,$busHead),100);
     $this->view->labData = $labData;
@@ -166,7 +167,7 @@ class Admin extends Controller{
   public function editBusAction(){  // call by button press @uda
       //dnd('exists');
     //add the validation @devin
-      echo $_POST['bus_num'];
+      #echo $_POST['bus_num'];
     $bus_num = $_POST['bus_num'];
     //$details = LockedBus::getInstance()->fitAction($bus_num);
     $this->bus = Bus::getMultitance($this->_controller,'1');

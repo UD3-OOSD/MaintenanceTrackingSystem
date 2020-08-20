@@ -31,7 +31,6 @@ class Forman extends Controller{
       }
       //display resposive table ($_init)
       $serviceData = $this->SystemService->get(1);
-      echo $serviceData;
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::set("headers",listToString($serviceHeads),100);
       Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
@@ -89,17 +88,27 @@ class Forman extends Controller{
   }
 
   public function startedAction(){
-
+      $serviceData = $this->SystemService->get(1);
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      Cookie::set("headers",listToString($serviceHeads),100);
+      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
+      $this->view->render('forman/started');
   }
 
   public function finishedAction(){
-
-
+      $serviceData = $this->SystemService->get(1);
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      Cookie::set("headers",listToString($serviceHeads),100);
+      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
+      $this->view->render('forman/finished');
   }
 
   public function expiredAction(){
-
-
+      $serviceData = $this->SystemService->get(1);
+      $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      Cookie::set("headers",listToString($serviceHeads),100);
+      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
+      $this->view->render('forman/expired');
   }
 
   public function addServiceAction(){
@@ -146,14 +155,23 @@ class Forman extends Controller{
 
 
   public function editServiceAction($id){
-      $var = $this->SystemService($id);
-      if($var){
-          $this->service = $var;
-          //show
-      }else{
-          echo $id." is not valid.";
-          Router::redirect(forman);
+      $service_num = $_POST['bus_num'];
+      $this->service = Service::getMultitance($this->_controller,'2');
+
+      if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray()){
+          $this->service->stateChange($this);
+          $details = $this->service->getState()->show($service_num);
+          $this->view->displayErrors = '';
+          $this->view->post = $details;
+
+          $this->view->render('forman/service');
       }
+      else{
+          $this->view->displayarr1 = 'the entered Bus Number not in the system.';
+          $this->view->displayarr2 = '';
+          Router::redirect('admin');
+      }
+
   }
 
   public function saveServiceAction(){

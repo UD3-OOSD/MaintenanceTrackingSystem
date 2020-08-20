@@ -88,7 +88,7 @@ class Service{
   }
 
   public function getState(){
-    return Service::$ss->getState();
+    return Service::$ss;
   }
 
   public function get_time_trigger(){
