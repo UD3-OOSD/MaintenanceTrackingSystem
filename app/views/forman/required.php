@@ -46,5 +46,7 @@
 </div>
 <?php $this->end() ?>
 <?php $this->start('foot') ?>
-
+    <h2>designed by WD3</h2>
+    <script src="<?=PROOT?>js/table_f.js">
+    </script>
 <?php $this->end() ?>

@@ -15,6 +15,7 @@ class SystemService extends System
     public function get($state='')
     {
         if (is_int($state)){
+
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
             return $this->ServiceActiveModel->selectAll('ServiceState',$state);
         }
@@ -30,7 +31,6 @@ class SystemService extends System
     }
 
     public function check($id){
-
         // get date of given $id @devin.
         $date = $this->ServiceActiveModel->getDate($id);
         // check is service expired @nipun.

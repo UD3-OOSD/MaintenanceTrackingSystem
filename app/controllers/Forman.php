@@ -30,14 +30,15 @@ class Forman extends Controller{
           }
       }
       //display resposive table ($_init)
-      $serviceData = $this->SystemService->get('1');
+      $serviceData = $this->SystemService->get(1);
       echo $serviceData;
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
+      Cookie::set("headers",listToString($serviceHeads),100);
       Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
       $this->view->render('forman/required');
   }
 
-  public function CloseServiceAction($id=''){
+  public function closedAction($id=''){
 
       if($id!= ''){
           $var = $this->SystemService->check($id);
@@ -70,7 +71,7 @@ class Forman extends Controller{
       Router::redirect('forman');
   }
 
-  public function acceptServiceAction($id=''){
+  public function acceptedAction($id=''){
     #fetch data from busdb for accepted services and their headers. @devin @avishka.
       if($id!= ''){
           $var = $this->SystemService->check($id);
@@ -85,6 +86,20 @@ class Forman extends Controller{
 
       //display resposive table ($_closed)
     $this->view->render('forman/accepted');
+  }
+
+  public function startedAction(){
+
+  }
+
+  public function finishedAction(){
+
+
+  }
+
+  public function expiredAction(){
+
+
   }
 
   public function addServiceAction(){
