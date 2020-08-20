@@ -67,7 +67,10 @@ class EditingBus  implements BusState{
 
     //}
     public function show($id){
-        return ObjecttoArray(EditingBus::$BusMSModel->findByBusNumber($id));
+        $bus = ObjecttoArray(EditingBus::$BusMSModel->findByBusNumber($id));
+        #dnd(ObjecttoArray(EditingBus::$BusMEModel->findByBusNumber($id)));
+        $bus['Mileage'] = ObjecttoArray(EditingBus::$BusMEModel->findByBusNumber($id))["TotalDistanceTravelled"];
+        return $bus;
     }
 
     public function fillAction($params)
