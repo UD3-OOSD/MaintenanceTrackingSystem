@@ -3,18 +3,17 @@
 class Cookie {
 
   public static function set($name, $value, $expiry){
-    if(self::exists($name)){
-        $_COOKIE[$name] = $value;
-    }else{
     if(setCookie($name, $value, time()+$expiry)){
       return true;
     }
     return false;
-  }
+
   }
 
   public static function delete($name){
-    self::set($name, '', time()-36);
+      if(self::exists($name)){
+          self::set($name, '', time()-3600);
+      }
   }
 
   public static function get($name){

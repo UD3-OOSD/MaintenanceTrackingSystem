@@ -9,7 +9,7 @@ class Service{
 
   private static $ss, $_if = false, $time_bool = false;
   #private static $count = 0;
-  private $ServiceId;
+  #private $ServiceId;
 
   private static $service = NULL;
 
@@ -18,12 +18,12 @@ class Service{
     if(!in_array($key,Service::$keys)){
       return null;
     }else{
-      if(!in_array($key,Labour::$services)){
+      if(!in_array($key,Service::$services)){
         Service::$services[$key] = new Service();
       }
       Service::$caller = $key;
-      Bus::setState($state);
-      return Service::$services[key];
+      Service::setState($state);
+      return Service::$services[$key];
     }
   }
 

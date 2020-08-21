@@ -3,7 +3,7 @@
 <?php $this->start('head') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
 <link rel="stylesheet" href="<?=PROOT?>css/table.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table_h.js"></script>
+<script src="<?=PROOT?>js/table_sh.js"></script>
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
@@ -25,8 +25,7 @@
             <th>ServiceId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
             <th>ServiceType</th>
             <th>BusNumber <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
-            <th>ServiceStartDate <i class="fa fa-sort th-sm"></i></th>
-            <th>ServiceExpiredDate <i class="fa fa-sort th-sm"></i></th>
+            <th>ServiceDate <i class="fa fa-sort th-sm"></i></th>
         </tr>
         </thead>
         <tbody class="table_body" id="tableData"></tbody>

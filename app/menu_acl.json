@@ -5,7 +5,7 @@
     "Required Maintances" : "forman/approve",
     "Accepted Maintances" : "forman/accepted",
     "Started Maintances" : "forman/started",
-    "Finished Maintances" : "forman/finished",
+    "Finished Maintances" : "forman/close",
     "Closed Maintances" : "forman/closed",
     "Expired Maintances" : "forman/expired"
   },
