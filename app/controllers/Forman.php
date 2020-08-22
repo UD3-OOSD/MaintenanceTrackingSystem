@@ -12,14 +12,13 @@ class Forman extends Controller{
   }
 
 
-
   public function indexAction(){
     [$this->_init,$this->_approved,$this->_started,$this->_finished,$this->_expired,$this->_closed,$this->_deleted] = $this->SystemService->get();
     $this->view->render('forman/index');
   }
 
-  public function approveAction(){
-      $id = $_POST['service_num'];
+  public function approveAction($id = ''){
+      //$id = $_POST['service_num'];
       if($id!= ''){
           dnd($this->SystemService->check($id));
           $var = $this->SystemService->check($id);
@@ -34,17 +33,9 @@ class Forman extends Controller{
       //display resposive table ($_init)
       $serviceData = $this->SystemService->get(1);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
-      Cookie::set('buttonName','Accept',100);
-      Cookie::set('buttonAction','approve',100);
+      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Accept','approve']);
       $this->view->render('forman/required');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
-      Cookie::delete('buttonName');
-      Cookie::delete('buttonAction');
+
   }
 
   public function closedAction($id=''){
@@ -63,13 +54,9 @@ class Forman extends Controller{
       //display resposive table ($_closed)
       $serviceData = $this->SystemService->get(6);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
+      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
       $this->view->render('forman/closed');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
+
   }
 
   public function deleteServiceAction($id=''){
@@ -104,25 +91,17 @@ class Forman extends Controller{
       //display resposive table ($_closed)
       $serviceData = $this->SystemService->get(3);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
+      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
       $this->view->render('forman/accepted');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
+
   }
 
   public function startedAction(){
       $serviceData = $this->SystemService->get(4);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
+      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
       $this->view->render('forman/started');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
+
   }
 
   public function closeAction($id = ''){
@@ -138,29 +117,17 @@ class Forman extends Controller{
       }
       $serviceData = $this->SystemService->get(5);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
-      Cookie::set('buttonName','Close',100);
-      Cookie::set('buttonAction','close',100);
+      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Close','close']);
       $this->view->render('forman/finished');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
+
   }
 
   public function expiredAction(){
       $serviceData = $this->SystemService->get(7);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::set("headers",listToString($serviceHeads),100);
-      Cookie::set("data",filterToString($serviceData,$serviceHeads),100);
-      Cookie::set('action','editservice',100);
-      Cookie::set('buttonName','Renew',100);
-      Cookie::set('buttonAction','editservice',100);
+      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Renew','editService']);
       $this->view->render('forman/expired');
-      Cookie::delete('headers');
-      Cookie::delete('data');
-      Cookie::delete('action');
+
   }
 
   public function addServiceAction(){

@@ -30,16 +30,15 @@ function listToStd(data,heads){
     }
     return lis;
 }
-
-var cookies = document.cookie.split(";").
-map(function(el){ return el.split("="); }).
+var cookies = document.cookie.replace(' ','').split(";").
+map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-
+console.log(cookies)
 var headers = cookies['headers'].split('+');
-var caller = cookies[' action'].replace('-','/');
-var fetData = listToStd(cookies[" data"].split('+'),headers);
-var butName = cookies[' buttonName'];
-var butaction = cookies[' buttonAction'];
+var caller = cookies['action'].replace('-','/');
+var fetData = listToStd(cookies["data"].split('+'),headers);
+var butName = cookies['buttonName'];
+var butaction = cookies['buttonAction'];
 console.log(fetData);
 window.onload = () => {
     loadTableData(fetData);
@@ -64,7 +63,7 @@ function loadTableData(data){
                 `</td>`;
         }
         dataHtml += `<td class="index">` +
-                    `<form action="${butaction}" method="post">`+
+                    `<form action="${butaction}/${elem.ServiceId}" method="post">`+
                     `<button type="submit" name="service_num" class="btn"  value="${elem.ServiceId}" >`+
                     `<span>${butName}</span>`+
                     `</button>`+

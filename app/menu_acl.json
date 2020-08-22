@@ -2,12 +2,12 @@
   "Home" : "home",
   "Forman" :{
     "Home" : "forman",
-    "Required Maintances" : "forman/approve",
-    "Accepted Maintances" : "forman/accepted",
-    "Started Maintances" : "forman/started",
-    "Finished Maintances" : "forman/close",
-    "Closed Maintances" : "forman/closed",
-    "Expired Maintances" : "forman/expired"
+    "Required Maintains" : "forman/approve",
+    "Accepted Maintains" : "forman/accepted",
+    "Started Maintains" : "forman/started",
+    "Finished Maintains" : "forman/closed",
+    "Closed Maintains" : "forman/close",
+    "Expired Maintains" : "forman/expired"
   },
   "Admin" : {
     "Home" : "admin",
@@ -15,7 +15,11 @@
     "Add new Profile" : "admin/addNewLabour"
   },
   "Clerk" : "clerk",
-  "Mechanic" : "mechanic",
+  "Mechanic" : {
+    "Home" : "mechanic",
+    "Start Maintains" : "mechanic/start",
+    "Finish Maintains" : "mechanic/finish"
+  },
   "Google" : "https://www.google.com",
   "PHP Docs" : "http://php.net/manual/en",
   "Login" : "register/login",

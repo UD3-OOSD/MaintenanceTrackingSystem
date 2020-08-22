@@ -7,7 +7,6 @@
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
-<div class="col-md-6"><?=$this->table_1?></div>
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
