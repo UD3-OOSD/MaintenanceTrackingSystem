@@ -193,6 +193,55 @@ class Forman extends Controller{
   }
 
   public function saveServiceAction(){
+      $validation = new Validate();
+      $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+
+      if ($_POST){
+          if(isset($_POST['save'])) {
+              $posted_values = posted_values($_POST);
+              $validation->check($_POST, [
+                  'EngineNumber' => [
+                      'display' => 'Engine number',
+                      'require' => true,
+                      'min' => 6,
+                  ],
+                  'Colour' => [
+                      'display' => 'Colour',
+                      'require' => true,
+                  ],
+                  'Mileage' => [
+                      'display' => 'Mileage',
+                      'require' => true,
+                  ],
+                  'NumberOfSeats' => [
+                      'display' => 'NumberOfSeats',
+                      'require' => true,
+                  ]
+              ]);
+              if ($validation->passed()) {
+                  #$bus_num = $_POST['bus_num'];
+                  $this->service = Service::getMultitance($this->_controller, '2');
+
+                  $this->service->getState()->updateDetails($_POST);
+                  $this->service->stateChange($this);
+                  Router::redirect('admin');
+              }
+          }
+
+          if(isset($_POST['delete'])){
+              $this->service = Service::getMultitance($this->_controller, '1');
+              $this->service->set_trigger();
+              $this->service->stateChange($this);
+              //dnd($this->bus->getState());
+              $this->service->getState()->delete($_POST['BusNumber']);
+              $this->view->displayarr1  = $this->view->displayarr2 = '';
+              Router::redirect('admin');
+          }
+
+      }
+      $this->view->post = $posted_values;
+      $this->view->displayErrors = $validation->displayErrors();
+      $this->view->render('admin/bus');
       //validation
       //save in the DB -> look Admin saveBusAction();
   }
