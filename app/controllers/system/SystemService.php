@@ -34,6 +34,7 @@ class SystemService extends System
         // get date of given $id @devin.
         Service::setId($id);
         $state = $this->ServiceActiveModel->getState($id);
+        dnd($state);
         // check is service expired @nipun.
         if($state != ''){
             #dnd($state);

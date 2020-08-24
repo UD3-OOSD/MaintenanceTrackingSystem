@@ -5,7 +5,7 @@ class Service{
   //Attrs of service
   private static $services = [];
   private static $caller = '';
-  private static $keys = ['Admin','Mechanics','Forman'];
+  private static $keys = ['Admin','Mechanic','Forman'];
 
   private static $ss, $_if = true, $time_bool = true, $service_id = '';
   #private static $count = 0;

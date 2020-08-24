@@ -81,4 +81,6 @@ class ServiceActive extends Model{
         $service = $this->selectAll('ServiceId',$id);
         return($service->ServiceState);
     }
+
+
 }
