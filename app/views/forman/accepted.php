@@ -46,7 +46,6 @@
     </div>
 
 </div>
-<div class="col-md-6"><?=$this->table_1?></div>
 
 <?php $this->end() ?>
 <?php $this->start('foot') ?>
