@@ -199,8 +199,8 @@ class Forman extends Controller{
           if(isset($_POST['save'])) {
               $posted_values = posted_values($_POST);
               $validation->check($_POST, [
-                  'serviceId' => [
-                      'display' => 'serviceId',
+                  'ServiceId' => [
+                      'display' => 'ServiceId',
                       'require' => true,
                       'unique' => 'activeservice'
                   ],
@@ -217,8 +217,8 @@ class Forman extends Controller{
                       'display' => 'Labourers',
                       'require' => true,
                   ],
-                  'ServiceInitialDate' => [
-                      'display' => 'ServiceInitialDate',
+                  'ServiceDate' => [
+                      'display' => 'ServiceDate',
                       'require' => true,
                   ]
               ]);

@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">Model</label>
                     <div class="col-sm-6">
-                        <input type="text" id="ServiceId" name='serviceId' class="form-control" value="<?=$this->post['serviceId']?>" locked="">
+                        <input type="text" id="ServiceId" name='serviceId' class="form-control" value="<?=$this->post['ServiceId']?>" locked="">
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">Date : </label>
                     <div class="col-sm-4">
-                        <input type="date" id="servicedate" name='ServiceInitialDate' class="form-control" value="<?=$this->post['ServiceInitialDate']?>" >
+                        <input type="date" id="servicedate" name='ServiceInitialDate' class="form-control" value="<?=$this->post['ServiceDate']?>" >
                     </div>
                 </div>
             </form>
