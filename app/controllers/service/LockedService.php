@@ -19,6 +19,7 @@ class LockedService implements ServiceState{
 
     public function stateChange($service){
         $service->setState('0');
+        $this->ServiceActiveModel->stateChange($service->ServiceId,8);
     }
 /*
     public function stateChange($service,$state){

@@ -19,12 +19,15 @@ class ApprovedService implements ServiceState{
   public function stateChange($service){
     if(!$service->get_time_trigger()){
       if($service->get_trigger){
-        $service->setState(DeletedService::getInstance());
+        $service->setState('8');
+        $this->ServiceActiveModel->stateChange($service->ServiceId,8);
       }else{
-        $service->setState(StartedService::getInstance());
+        $service->setState('4');
+        $this->ServiceActiveModel->stateChange($service->ServiceId,4);
       }
     }else{
-      $service->setState(ExpiredService::getInstance());
+      $service->setState('7');
+      $this->ServiceActiveModel->stateChange($service->ServiceId,7);
     }
   }
 

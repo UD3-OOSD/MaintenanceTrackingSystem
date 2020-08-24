@@ -8,7 +8,7 @@ class Forman extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
-
+    $this->service = new Service();
   }
 
 
@@ -20,11 +20,10 @@ class Forman extends Controller{
   public function approveAction($id = ''){
       //$id = $_POST['service_num'];
       if($id!= ''){
-          dnd($this->SystemService->check($id));
+          #dnd($this->SystemService->check($id));
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/approve');
@@ -43,8 +42,7 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/closed');
@@ -63,8 +61,9 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->set_trigger(0);
+              $this->service->stateChange($this->service);
+              $this->service->set_trigger(1);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman');
@@ -80,8 +79,7 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/accepted');

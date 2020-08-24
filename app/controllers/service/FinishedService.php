@@ -17,7 +17,8 @@ class FinishedService implements ServiceState{
 
   public function stateChange($service){
     if(!$service->get_trigger){
-      $service->setState(ClosedService::getInstance());
+      $service->setState('6');
+      $this->ServiceActiveModel->stateChange($service->ServiceId,6);
     }// if service is not good then ? @nipun.
   }
 

@@ -7,7 +7,7 @@ class Service{
   private static $caller = '';
   private static $keys = ['Admin','Mechanics','Forman'];
 
-  private static $ss, $_if = false, $time_bool = false;
+  private static $ss, $_if = true, $time_bool = true;
   #private static $count = 0;
   #private $ServiceId;
 
@@ -61,6 +61,7 @@ class Service{
               Service::$ss = DeletedService::getInstance();
               break;
       }
+      #return Service::$ss;
   }
   public function setAttr($data){
       $columns = ModelCommon::getColumnNames('activeservices');
@@ -79,12 +80,16 @@ class Service{
     return Service::$_if;
   }
 
-  public function set_trigger(){
-      Service::$_if= true;
+  public function set_trigger($int){
+      if($int == 1){
+          Service::$_if= true;
+      }elseif( $int == 0) {
+          Service::$_if = false;
+      }
   }
 
   public function reset_trigger(){
-      Service::$_if= false;
+      Service::$_if= true;
   }
 
   public function getState(){

@@ -21,8 +21,7 @@ class Mechanic extends Controller{
       if($id != ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/accepted');
@@ -41,8 +40,7 @@ class Mechanic extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/accepted');

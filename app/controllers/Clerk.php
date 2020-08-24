@@ -21,7 +21,7 @@ class Clerk extends Controller{
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();*/
-      $this->view->displayErrors = '';
+    $this->view->displayErrors = '';
     $this->view->render('clerk/index');
   }
 
