@@ -20,14 +20,14 @@ class ApprovedService implements ServiceState{
     if(!$service->get_time_trigger()){
       if($service->get_trigger){
         $service->setState('8');
-        $this->ServiceActiveModel->stateChange($service->ServiceId,8);
+        ApprovedService::$ServiceActiveModel->stateChange(Service::getId(),8);
       }else{
         $service->setState('4');
-        $this->ServiceActiveModel->stateChange($service->ServiceId,4);
+        ApprovedService::$ServiceActiveModel->stateChange(Service::getId(),4);
       }
     }else{
       $service->setState('7');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,7);
+      ApprovedService::$ServiceActiveModel->stateChange(Service::getId(),7);
     }
   }
 

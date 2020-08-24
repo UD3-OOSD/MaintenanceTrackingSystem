@@ -7,6 +7,7 @@ class Mechanic extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
+    $this->service = new Service();
   }
 
   public function indexAction(){
@@ -24,7 +25,7 @@ class Mechanic extends Controller{
               $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
-              Router::redirect('forman/accepted');
+              Router::redirect('mechanic/start');
           }
       }
 
@@ -43,7 +44,7 @@ class Mechanic extends Controller{
               $this->service->stateChange($this->service);
           }else{
               echo $id." is invalid.";
-              Router::redirect('forman/accepted');
+              Router::redirect('mechanic/finish');
           }
       }
 
@@ -56,8 +57,9 @@ class Mechanic extends Controller{
 
     public function editServiceAction(){
         $service_num = $_POST['service_num'];
+        #dnd($this->_controller);
         $this->service = Service::getMultitance($this->_controller,'2');
-        #dnd($this->service->getState());
+        #dnd($this->service);
         if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
             $this->service->stateChange($this);
             $details = $this->service->getState()->show($service_num);
