@@ -1,7 +1,7 @@
 <?php $this->setSiteTitle('Started_Maintanance.') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
 <link rel="stylesheet" href="<?=PROOT?>css/table.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table_h.js"></script>
+<script src="<?=PROOT?>js/table_sh.js"></script>
 <?php $this->start('head') ?>
 
 <?php $this->end() ?>

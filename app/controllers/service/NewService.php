@@ -3,10 +3,10 @@
 class NewService implements ServiceState{
 
   private static $newservice = NULL;
-  private $ServiceActiveModel;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-      $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
+      NewService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -39,8 +39,11 @@ class NewService implements ServiceState{
       // TODO: Implement allServicesByState() method.
   }
 
-    public function edit($service, $data)
-    {
+  public function edit($service, $data){
         // TODO: Implement edit() method Add Error.
-    }
+  }
+
+  public function show($id){
+      return ObjecttoArray(NewService::$ServiceActiveModel->findByServiceId($id));
+  }
 }
