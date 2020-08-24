@@ -12,13 +12,19 @@
                 <form class="form-horizontal hr" method="post" action="saveService">
                     <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4">Serice ID :</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="ServiceId" name='serviceId' class="form-control" value="<?=$this->post['serviceId']?>" locked="">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4">Bus number : </label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="BusNumber" name='BusNumber' placeholder="Ex:- WP NA-XXXX" value="<?=$this->post['BusNumber']?>" locked>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Service type</label>
+                        <label class="control-label col-sm-4">Service type :</label>
                         <div class="col-sm-3">
                             <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" locked>
                                 <option value="Engine service">Engine service</option>

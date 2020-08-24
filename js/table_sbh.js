@@ -52,7 +52,7 @@ function loadTableData(data){
         dataHtml +=`<tr class="item">` +
             `<td class="index">` +
             `<form action="${caller}" method="post">`+
-            `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
+            `<button type="submit" name="service_num" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
             `<span>${pos}</span>`+
             `</button>`+
             `</form>`+
