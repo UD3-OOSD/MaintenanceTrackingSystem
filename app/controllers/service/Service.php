@@ -35,6 +35,10 @@ class Service{
       Service::$service_id = $id;
   }
 
+  public static function getId(){
+      return Service::$service_id;
+  }
+
   public static function setState($st){
       switch ($st){
           case '0':
