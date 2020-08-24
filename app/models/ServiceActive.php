@@ -51,7 +51,7 @@ class ServiceActive extends Model{
     }
 
     public function stateChange($id,$state){
-        dnd($id);
+        #dnd($id);
         if(isset($id)&&isset($state)){
             $unique=['ServiceId'=>$id];
             return $this->UpdateRow($unique,['ServiceState'=>$state]);
