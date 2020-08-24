@@ -16,7 +16,8 @@ class StartedService implements ServiceState{
   }
 
   public function stateChange($service){
-    $service->setState(FinishedService::getInstance());
+    $service->setState('5');
+    $this->ServiceActiveModel->stateChange($service->ServiceId,5);
   }
 
     public function getState()

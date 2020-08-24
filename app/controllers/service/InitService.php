@@ -18,9 +18,13 @@ class InitService implements ServiceState{
 
   public function stateChange($service){
       if($service->get_trigger()){
-          $service->setState(ApprovedService::getInstance());
+          $service->setState('3');
+          $this->ServiceActiveModel->stateChange($service->ServiceId,3);
+
       }else{
-          $service->setState(DeletedService::getInstance());
+          $service->setState('8');
+          $this->ServiceActiveModel->stateChange($service->ServiceId,8);
+
       }
   }
 

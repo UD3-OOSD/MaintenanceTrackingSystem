@@ -19,7 +19,7 @@ class NewService implements ServiceState{
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState('3');
-        $this->ServiceActiveModel->stateChange($service->ServiceId,3);
+      $this->ServiceActiveModel->stateChange($service->ServiceId,3);
     }else{
       $service->setState('1');
       $this->ServiceActiveModel->stateChange($service->ServiceId,1);
