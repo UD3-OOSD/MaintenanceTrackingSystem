@@ -31,6 +31,7 @@ class Forman extends Controller{
       }
       //display resposive table ($_init)
       $serviceData = $this->SystemService->get(1);
+      #dnd($serviceData);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Accept','approve']);
       $this->view->render('forman/required');

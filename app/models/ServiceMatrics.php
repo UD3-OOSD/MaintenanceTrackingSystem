@@ -10,13 +10,13 @@ class ServiceMatrics extends Model{
         $table='servicematrics';
         ServiceMatrics::$states = [0 => 'NewService',
                                   1 => 'InitService',
-                                  2 => 'ApprovedService',
-                                  3 => 'StartedService',
-                                  4 => '',
-                                  5 => '',
-                                  6 => '',
-                                  7 => '',
-                                  8 => '' ];
+                                  2 => 'LockedService',
+                                  3 => 'ApprovedService',
+                                  4 => 'StartedService',
+                                  5 => 'FinishedService',
+                                  6 => 'ClosedService',
+                                  7 => 'ExpiredService',
+                                  8 => 'DeletedService' ];
 
         parent::__construct($table,'ServiceMatrics','ServiceId');
         if ($service != '') {

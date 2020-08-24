@@ -262,12 +262,20 @@ function filterToObj($data,$heads){
 
 function filterToString($data,$heads){
     $stdObjs = "";
-    #dnd($data);
-
-    foreach($data as $obj){
-        //$stdObj = new stdClass();
-        foreach ($heads as $attr){
-            $stdObjs .= " ".$obj->$attr;
+    #dnd(gettype($data));
+    if(gettype($data) != "object") {
+        foreach ($data as $obj) {
+            #dnd($obj);
+            //$stdObj = new stdClass();
+            foreach ($heads as $attr) {
+                #dnd($attr);
+                $stdObjs .= " " . $obj->$attr;
+            }
+        }
+    }else{
+        foreach ($heads as $attr) {
+            #dnd($attr);
+            $stdObjs .= " " . $data->$attr;
         }
     }
     return ltrim($stdObjs," ");
