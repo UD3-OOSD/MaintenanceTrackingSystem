@@ -19,11 +19,11 @@ class InitService implements ServiceState{
   public function stateChange($service){
       if($service->get_trigger()){
           $service->setState('3');
-          $this->ServiceActiveModel->stateChange($service->ServiceId,3);
+          InitService::$ServiceActiveModel->stateChange($service->ServiceId,3);
 
       }else{
           $service->setState('8');
-          $this->ServiceActiveModel->stateChange($service->ServiceId,8);
+          InitService::$ServiceActiveModel->stateChange($service->ServiceId,8);
 
       }
   }
