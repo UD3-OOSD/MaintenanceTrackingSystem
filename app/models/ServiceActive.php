@@ -72,7 +72,8 @@ class ServiceActive extends Model{
 
     public function getDate($id){
         $service = $this->selectAll('ServiceId',$id);
-        return($service->ServiceInitiatedDate);
+        #dnd($service->ServiceDate);
+        return($service->ServiceDate);
     }
 
     public function getState($id){
