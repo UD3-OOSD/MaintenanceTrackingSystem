@@ -1,13 +1,19 @@
-
 <?php $this->setSiteTitle('Home'); ?>
 
 <?php $this->start('head'); ?>
-  <link rel="stylesheet" href="<?=PROOT?>css/home_index.css" media="screen" title="no title" charset="utf-8" >
-  <meta content="test /">
+<link rel="stylesheet" href="<?=PROOT?>css/home_index.css" media="screen" title="no title" charset="utf-8" >
+<style>
+    body {
+        background-image: "<?=PROOT?>app/views/images/Front.jpg";
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
-<div class="container-fluid">
+<div class="container-fluid" style="">
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3">
       <img id="c001" class="mx-auto d-block" width="90" src="<?=PROOT?>app/views/images/Emblem_of_Sri_Lanka.png">
@@ -27,25 +33,9 @@
     <h1>Welcome !</h1>
   </div>
   <div class="c005">
-    <a href="<?=PROOT?>register/login" id="c006">Log In</a>
-    <a href="https://www.facebook.com/horana.depot" id="c006">Visit us on fb</a>
+    <a class="c006" href="<?=PROOT?>register/login" >Log In</a>
+    <a class="c007" href="https://www.facebook.com/horana.depot" >Visit us on fb</a>
   </div>
 </div>
 <?php $this->end(); ?>
 
-
-
-<?php
-
-/*
-<?php $this->setSiteTitle('Home') ?>
-
-<?php $this->start('head') ?>
-
-<?php $this->end(); ?>
-
-<?php $this->start('body'); ?>
-
-<?php $this->end(); ?>
-*/
- ?>
