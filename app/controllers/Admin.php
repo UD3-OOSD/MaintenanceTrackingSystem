@@ -13,8 +13,8 @@ class Admin extends Controller{
     parent::__construct($controller_name, $action);
     $this->load_system('SystemBus');
     $this->load_system('SystemLabour');
-    $this->bus = Bus::getMultitance();
-    $this->lab = Labour::getMultitance();
+    $this->bus = Bus::getMultitance($this->_controller,'0');
+    $this->lab = Labour::getMultitance($this->_controller,'0');
   }
 
   public function indexAction(){

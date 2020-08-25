@@ -7,7 +7,7 @@ class Mechanic extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
-    $this->service = Service::getMultitance();
+    $this->service = Service::getMultitance($this->_controller,'0');
   }
 
   public function indexAction(){
