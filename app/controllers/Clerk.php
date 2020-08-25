@@ -6,6 +6,7 @@ class Clerk extends Controller{
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
+    $this->bus = Bus::getMultitance();
   }
 
   public function indexAction(){

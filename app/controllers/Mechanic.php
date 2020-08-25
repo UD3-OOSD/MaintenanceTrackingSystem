@@ -7,7 +7,7 @@ class Mechanic extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
-    $this->service = new Service();
+    $this->service = Service::getMultitance();
   }
 
   public function indexAction(){
@@ -65,7 +65,7 @@ class Mechanic extends Controller{
             $details = $this->service->getState()->show($service_num);
             $this->view->displayErrors = '';
             $this->view->post = $details;
-            $this->view->render('forman/service');
+            $this->view->render('mechanic/service');
         }
         else{
             $this->view->displayarr1 = 'the entered Bus Number not in the system.';

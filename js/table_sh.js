@@ -49,9 +49,9 @@ function loadTableData(data){
     var pos = 1;
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
-            `<td class="index">` +
+            `<td class="index index-i">` +
             `<form action="${caller}" method="post">`+
-            `<button type="submit" name="service_num" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
+            `<button type="submit" name="service_num" class="round-button" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
             `<span>${pos}</span>`+
             `</button>`+
             `</form>`+

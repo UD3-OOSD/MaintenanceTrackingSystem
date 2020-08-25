@@ -13,6 +13,8 @@ class Admin extends Controller{
     parent::__construct($controller_name, $action);
     $this->load_system('SystemBus');
     $this->load_system('SystemLabour');
+    $this->bus = Bus::getMultitance();
+    $this->lab = Labour::getMultitance();
   }
 
   public function indexAction(){
@@ -22,18 +24,14 @@ class Admin extends Controller{
     $busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
     //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
     //Cookie::set('action','admin/editbus',100);
-    Cookie::set('headers',listToString($busHead),100);
-    Cookie::set("data",filterToString($busData,$busHead),100);
-    Cookie::set('action','admin-editBus',100);
+    Cookie::setList(['headers','data','action'],[listToString($busHead),filterToString($busData,$busHead),'admin-editBus']);
     $this->view->labData = $labData;
     //$this->view->setLayout('option_1');
     //$this->view->table1 =
     $this->view->displayarr1 = '';
     $this->view->displayarr2 = '';
     $this->view->render('admin/index');
-    Cookie::delete('headers');
-    Cookie::delete('data');
-    Cookie::delete('action');
+
 
   }
 

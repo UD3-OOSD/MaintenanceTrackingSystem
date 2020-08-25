@@ -1,3 +1,61 @@
 .red{
   color: red;
 }
+nav.navbar {
+  border-bottom: 1px solid gray ;
+}
+.pr-name{
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 22px;
+  width: 100px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  background-color: aliceblue;
+  color: #566787;
+}
+.pr-name:hover{
+  background-color: #585858;
+}
+.name-tab{
+  border-color: #585858;
+  display : block;
+}
+.name-tab:hover {
+  background-color: aliceblue;
+  color: #566787;
+}
+.myButton {
+  color: white;
+  background-color: aliceblue;
+  border-radius:60px;
+  border:1px solid #566787;
+  display:inline-block;
+  cursor:pointer;
+  font-family:Arial;
+  font-size:17px;
+  text-decoration:none;
+}
+.myButton:hover {
+  background-color:aliceblue;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+.vert-sep{
+  margin-top: 10px;
+  height : 30px;
+  border-left:1px solid gray;
+}
+.watermark {
+  position:fixed;
+  bottom:5px;
+  right:5px;
+  opacity:0.5;
+  z-index:99;
+  color: black;
+}

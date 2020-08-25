@@ -1,27 +1,38 @@
 <?php $this->start('head'); ?>
+<link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
-<div class="col-md-6 col-md-offset-3 well">
-  <form class="form" action="<?=PROOT?>register/login" method="post">
-    <div class="bg-danger"><?=$this->displayErrors ?></div>
-    <h3 class="text-center">Log In</h3>
+
+<div class="minicontainer">
+    <div class="form-head">
+        <div class="col-sm-8"><h2> log <b> In</b></h2></div>
+    </div>
+  <div class="bg-danger"><?=$this->displayErrors ?></div>
+  <form class="form-horizontal hr" action="<?=PROOT?>register/login" method="post">
+      <div class="form-group">
+          <label class="control-label col-sm-4">Username</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" id="BusNumber" name='username' >
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label col-sm-4">password</label>
+          <div class="col-sm-4">
+              <input type="password" name='password' class="form-control" ">
+              <div id="datewarn"></div>
+          </div>
+      </div>
     <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" name="username" class="form-control">
+      <label for="remember_me" class="control-label col-sm-8">Remember me<input type="checkbox" id="remember_me" name="remember_me" value="on"></label>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" name="password" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="remember_me">Remember me<input type="checkbox" id="remember_me" name="remember_me" value="on"></label>
-    </div>
-    <div class="form-group">
-      <input type="submit" value="Login" class="btn btn-large btn-primary">
-    </div>
-    <div class="text-right">
-      <a href="<?=PROOT?>register/register" class="text-primary">Register</a>
-    </div>
-  </form>
+      <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-2">
+              <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+          <div class="col-sm-offset col-sm-2">
+              <a href="<?=PROOT?>register/register"><button type="button" class="btn btn-default">Register</button></a>
+          </div>
+      </div>
+
 </div>
 <?php $this->end(); ?>

@@ -4,11 +4,13 @@
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
-<div class="container">
-    <div class="row register">
+<div>
+    <div class="container">
         <div class="col-sm-3"></div>
         <div class="col-sm-6 reg">
-            <h1>Edit bus data</h1>
+            <div class="form-head">
+                <div class="col-sm-8"><h2><b> Edit </b>bus data</h2></div>
+            </div>
             <form class="form-horizontal hr" method="post" action="admin/saveBus">
                 <div class="dg-danger"><?= $this->displayErrors ?></div>
                 <div class="form-group">
@@ -45,4 +47,7 @@
         </div>
     </div>
 </div>
+<?php $this->end() ?>
+<?php $this->start('foot') ?>
+
 <?php $this->end() ?>

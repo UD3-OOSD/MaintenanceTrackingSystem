@@ -49,10 +49,10 @@ function loadTableData(data){
     let dataHtml = ``;
     var pos = 1;
     for(let elem of data){
-        dataHtml +=`<tr class="item">` +
-            `<td class="index">` +
+        dataHtml +=`<tr class="item center">` +
+            `<td class="index index-i ">` +
             `<form action="${caller}" method="post">`+
-            `<button type="submit" name="service_num" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
+            `<button type="submit" name="service_num" class="round-button" className="btn btn-indigo btn-sm m-0" value="${elem.ServiceId}" >`+
             `<span>${pos}</span>`+
             `</button>`+
             `</form>`+
@@ -62,9 +62,9 @@ function loadTableData(data){
                 `<span>${elem[head]}</span>`+
                 `</td>`;
         }
-        dataHtml += `<td class="index">` +
+        dataHtml += `<td class='index center'>` +
                     `<form action="${butaction}/${elem.ServiceId}" method="post">`+
-                    `<button type="submit" name="service_num" class="btn"  value="${elem.ServiceId}" >`+
+                    `<button type="submit" name="service_num" class="round-button"  value="${elem.ServiceId}" >`+
                     `<span>${butName}</span>`+
                     `</button>`+
                     `</form>`+
