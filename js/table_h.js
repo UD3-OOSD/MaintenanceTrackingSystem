@@ -32,13 +32,13 @@ function listToStd(data,heads){
 }
 
 var cookies = document.cookie.split(";").
-map(function(el){ return el.split("="); }).
+map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-
-var headers = cookies['headers'].split('+');
 console.log(cookies,'ddd');
-var caller = cookies[' action'].replace('-','/');
-var fetData = listToStd(cookies[" data"].split('+'),headers);
+var headers = cookies['headers'].split('+');
+
+var caller = cookies['action'].replace('-','/');
+var fetData = listToStd(cookies["data"].split('+'),headers);
 console.log(fetData);
 window.onload = () => {
     loadTableData(fetData);
@@ -50,9 +50,9 @@ function loadTableData(data){
     var pos = 1;
     for(let elem of data){
         dataHtml +=`<tr class="item">` +
-            `<td class="index">` +
+            `<td class="index index-i">` +
             `<form action="${caller}" method="post">`+
-            `<button type="submit" name="bus_num" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
+            `<button type="submit" name="bus_num" class="round-button" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
             `<span>${pos}</span>`+
             `</button>`+
             `</form>`+
