@@ -31,12 +31,11 @@ function listToStd(data,heads){
     return lis;
 }
 
-var cookies = document.cookie.split(";").
+var cookies = document.cookie.replace(' ','').split(";").
 map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
 console.log(cookies,'ddd');
 var headers = cookies['headers'].split('+');
-
 var caller = cookies['action'].replace('-','/');
 var fetData = listToStd(cookies["data"].split('+'),headers);
 console.log(fetData);

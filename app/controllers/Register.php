@@ -31,8 +31,8 @@ class Register extends Controller{
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         //echo Input::get('password') . ' '. $user->password;
         //dnd($user);
-        $servicemodel = new ServiceActive();
-        $servicemodel->checkAll();
+        #$servicemodel = new ServiceActive();
+        #$servicemodel->checkAll();
         #}
         #dnd('done');
             #$servicematrics->addservice($lab['LabourId']);

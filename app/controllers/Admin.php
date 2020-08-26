@@ -20,7 +20,7 @@ class Admin extends Controller{
   public function indexAction(){
       //dnd($this->sysBus);
     $busData = $this->SystemBus->get();
-    $labData = $this->SystemLabour->get();
+    #$labData = $this->SystemLabour->get();
     $busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
     //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
     //Cookie::set('action','admin/editbus',100);
@@ -28,8 +28,6 @@ class Admin extends Controller{
     //$this->view->labData = $labData;
     //$this->view->setLayout('option_1');
     //$this->view->table1 =
-    $this->view->displayarr1 = '';
-    $this->view->displayarr2 = '';
     $this->view->render('admin/index');
 
 
@@ -176,11 +174,9 @@ class Admin extends Controller{
     #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
       //dnd($this->bus->getState()->checkId($bus_num));
       #dnd($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num));
-      #dnd($this->bus->getState());
       if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
-        dnd('true');
         //$this->bus->set_trigger();
-        $this->bus->stateChange($this);
+        $this->bus->stateChange($this->bus);
         $details = $this->bus->getState()->show($bus_num);
         $this->view->displayErrors = '';
         $this->view->post = $details;

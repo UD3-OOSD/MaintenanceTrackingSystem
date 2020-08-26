@@ -1,12 +1,12 @@
-<?php $this->setSiteTitle('admin'); ?>
+<?php $this->setSiteTitle('admin') ?>
 
-<?php $this->start('head'); ?>
+<?php $this->start('head') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
 <script src="<?=PROOT?>js/table_h.js"></script>
 
-<?php $this->end(); ?>
+<?php $this->end() ?>
 
-<?php $this->start('body'); ?>
+<?php $this->start('body') ?>
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
@@ -35,9 +35,9 @@
     </table>
     </div>
 </div>
-<?php $this->end(); ?>
+<?php $this->end() ?>
 
 <?php $this->start('foot');?>
-    <script src="<?=PROOT?>js/table_f.js">
-    </script>
-<?php $this->end();?>
+<script src="<?=PROOT?>js/table_f.js">
+</script>
+<?php $this->end()?>
