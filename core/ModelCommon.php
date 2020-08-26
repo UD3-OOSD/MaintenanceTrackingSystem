@@ -147,19 +147,31 @@ class ModelCommon{
         return(false);
     }
 
-    public static function selectAll($table,$column,$key,$filter=true){
+    public static function selectAll($table,$column,$key,$filter=true , $single_lock = true){
         $results = ModelCommon::selectAllWithDelete($table,$column,$key);
         if($filter){
             $results = filter($results);
+        }
+
+        if($single_lock){
+            if (count($results)==1){
+                return($results[0]);
+            }
         }
         return $results;
 
     }
 
-    public static function selectAllArray($table,$column ='deleted',$key = 0,$filter=true){
+    public static function selectAllArray($table,$column ='deleted',$key = 0,$filter=true, $single_lock = true){
         $results = ModelCommon::selectAllArrayWithDelete($table,$column,$key);
         if($filter){
             $results = filter($results);
+        }
+
+        if($single_lock){
+            if (count($results)==1){
+                return($results[0]);
+            }
         }
         return $results;
     }

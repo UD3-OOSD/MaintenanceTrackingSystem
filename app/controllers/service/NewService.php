@@ -19,23 +19,23 @@ class NewService implements ServiceState{
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState('3');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,3);
+      NewService::$ServiceActiveModel->stateChange($service->ServiceId,3);
     }else{
       $service->setState('1');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,1);
+      NewService::$ServiceActiveModel->stateChange($service->ServiceId,1);
     }
   }
 
 
   public function fillAction($params){
       //@devin : check this out.
-      $this->ServiceActiveModel->registerNewService($params);
+      NewService::$ServiceActiveModel->registerNewService($params);
 
   }
 
   public function allServicesByState($state)
   {
-      $this->ServiceActiveModel->allServicesByState($state);
+      NewService::$ServiceActiveModel->allServicesByState($state);
       // TODO: Implement allServicesByState() method.
   }
 

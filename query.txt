@@ -26,3 +26,18 @@ WHERE TABLE_NAME = N'bustable'
 
 
  SELECT * FROM `bustable` WHERE BusCategory='Leyland'
+
+
+//for the checkALL in ServiceActive
+SELECT
+    bustable.BusId,bustable.BusNumber,busmileage.*
+FROM
+    busmileage
+LEFT JOIN bustable ON busmileage.BusNumber = bustable.BusNumber;
+
+
+SELECT
+    bustable.BusId,bustable.BusNumber,buscategory.*,bustable.deleted
+FROM
+    buscategory
+LEFT JOIN bustable ON bustable.BusCategory = buscategory.BusType;

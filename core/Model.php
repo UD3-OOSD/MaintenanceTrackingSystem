@@ -61,29 +61,20 @@ class Model{
 
   public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
     $rows = $this->LeftJoin($tables,$keys,$params);
-
-    $ObjectArray = [];
-    foreach($rows as $row){
+    #dnd($rows);
+    $result = [];
+    if(!($id==[])){
+        foreach($rows as $row){
       #print_r($id);
-      if(!($id==[])){
-
-        foreach($id as $key_id => $value_id){
-          //$key_id = "{$key_id}";
-          #echo($key_id);
-          #echo($value_id);
-            //echo('x');
-          //echo($row[$key_id]);
-          //echo('<br>');
-          //echo($value_id);
-          #echo($row['UserId']);
-          if($row[$key_id]==$value_id){
-              //dnd($row);
-            return($row);
-          }
+            foreach($id as $key_id => $value_id){
+                if($row[$key_id]==$value_id){
+                 $result[] = $row;
+                 }
+             }
         }
-      }
+        return $result;
     }
-    return false;
+    return $rows;
   }
 
   public function LeftJoin($tables,$keys,$params='*'){
@@ -245,15 +236,17 @@ class Model{
     }
   }
 
-  public function selectAll($column,$key, $filter=true ){
+  public function selectAll($column,$key, $filter=true,  $single_lock = true){
         //dnd('selectall');
         $results = $this->selectAllWithDelete($column,$key);
         if($filter){
             $results = filter($results);
         }
-        if (count($results)==1){
-            return($results[0]);
-        }
+      if($single_lock){
+          if (count($results)==1){
+              return($results[0]);
+          }
+      }
         return ($results);
 
    }
@@ -273,13 +266,15 @@ class Model{
         return false;
     }
 
-    public function selectAllArray($column,$key, $filter=true ){
+    public function selectAllArray($column,$key, $filter=true ,$single_lock = true){
         $results = $this->selectAllArrayWithDelete($column,$key);
         if($filter){
             $results = filter($results);
         }
-        if (count($results)==1){
-            return($results[0]);
+        if($single_lock){
+            if (count($results)==1){
+                return($results[0]);
+            }
         }
         return ($results);
     }
