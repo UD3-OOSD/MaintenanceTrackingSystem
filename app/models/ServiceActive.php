@@ -4,7 +4,7 @@ class ServiceActive extends Model{
 
     public function __construct($service=''){
         $table='activeservices';
-        parent::__construct($table,'ServiceActive','ServiceId');
+        parent::__construct($table,'ServiceActive');
         if ($service != '') {
             $s = null;
             if (substr($service,0,4)=='Serv') {

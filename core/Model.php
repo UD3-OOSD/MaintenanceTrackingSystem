@@ -5,10 +5,10 @@ class Model{
   public $id;
     protected $idtype;
 
-    public function __construct($table,$name = '',$idtype=''){
-    $this->_db = DB::getMultitance("admin");
+    public function __construct($table,$name = '',$acl='Other'){
+    $this->_db = DB::getMultitance($acl);
     $this->_table = $table;
-    $this->idtype = $idtype;
+    $this->acl = $acl;
     $this->_setTableColumns();
     if($name == ''){
     $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ',$this->_table)));}

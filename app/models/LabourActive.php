@@ -3,7 +3,7 @@
 class LabourActive extends Model{
     public function __construct($labour = ''){
         $table = 'labourdetails';
-        parent::__construct($table,'LabourActive','LabourId');
+        parent::__construct($table,'LabourActive');
 
         if ($labour != '') {
             if (substr($labour,0,3)=='Lab') {

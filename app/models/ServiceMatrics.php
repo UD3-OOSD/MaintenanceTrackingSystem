@@ -18,7 +18,7 @@ class ServiceMatrics extends Model{
                                   7 => 'ExpiredService',
                                   8 => 'DeletedService' ];
 
-        parent::__construct($table,'ServiceMatrics','ServiceId');
+        parent::__construct($table,'ServiceMatrics');
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst('servicematrics', ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);

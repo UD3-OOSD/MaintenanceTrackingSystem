@@ -28,6 +28,8 @@ class Register extends Controller{
       if ($validation->passed()) {
         #echo($_POST['username']);
         $user = $this->UsersModel->findByUserName($_POST['username']);
+        $acl = $user->acl;
+        $id = $user->LabourId;
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         //echo Input::get('password') . ' '. $user->password;
         //dnd($user);
@@ -40,11 +42,14 @@ class Register extends Controller{
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {
+            #dnd($acl);
+            $this->load_model('Users',$acl);
+            $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 
-          $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-          $category = $user->login($remember);
+            $this->UsersModel->login($id,$remember);
+          Session::set('user-id',$id);
           #echo($category);
-          Router::redirect(strtolower($category));
+          Router::redirect(strtolower($acl));
         }else{
           $validation->addError("There is an error with your username or password.");
         }
