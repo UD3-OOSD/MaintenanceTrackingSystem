@@ -30,7 +30,7 @@ class Mechanic extends Controller{
       }
 
       //display resposive table ($_closed)
-      $serviceData = $this->SystemService->get(3);
+      $serviceData = $this->SystemService->getWithId(Controller::$id,3);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Start','start']);
       $this->view->render('mechanic/approved');

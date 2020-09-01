@@ -24,6 +24,15 @@ class SystemService extends System
         return false;
     }
 
+    public function getWithId($id,$state=''){
+        if (is_int($state)){
+
+            #return ModelCommon::selectAllArray('bustable','BusState',$state);
+            return $this->ServiceActiveModel->selectAll('ServiceState',$state);
+        }
+        return false;
+    }
+
     public function updateState($id,$state)
     {
         $unique=['ServiceId'=>$id];

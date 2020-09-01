@@ -51,7 +51,7 @@ function loadTableData(data){
         dataHtml +=`<tr class="item">` +
             `<td class="index index-i">` +
             `<form action="${caller}" method="post">`+
-            `<button type="submit" name="bus_num" class="round-button" className="btn btn-indigo btn-sm m-0" value="${elem.BusNumber}" >`+
+            `<button type="submit" name="lab_id" class="round-button" className="btn btn-indigo btn-sm m-0" value="${elem.LabourId}" >`+
             `<span>${pos}</span>`+
             `</button>`+
             `</form>`+

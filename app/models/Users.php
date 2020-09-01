@@ -4,9 +4,9 @@ class Users extends Model{
   private $_isLoggedIn, $_sessionName, $_cookieName;
   public static $currentLoggedInUser = null;
 
-  public function __construct($user = ''){
+  public function __construct($user = '',$acl='Other'){
     $table = 'users';
-    parent::__construct($table,'Users','LabourId');
+    parent::__construct($table,'Users',$acl);
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
     $this->_softDelete = true;
@@ -30,17 +30,17 @@ class Users extends Model{
     return $this->findFirst(['conditions'=>'username = ?', 'bind'=>[$username]]);
   }
 
-  public function login($rememberMe = false){
-    Session::set($this->_sessionName, $this->LabourId);
+  public function login($id,$rememberMe = false){
+    Session::set($this->_sessionName, $id);
     if ($rememberMe) {
       $hash = md5(uniqid() + rand(0, 100));
       $user_agent = Session::uagent_no_version();
       Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
-      $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->LabourId];
-      $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->LabourId, $user_agent]);
+      $fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$id];
+      $this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$id, $user_agent]);
       $this->_db->insert('user_sessions', $fields);
+      #dnd($id.'awd');
     }
-    return $this->acl;
   }
 
   public function logout(){

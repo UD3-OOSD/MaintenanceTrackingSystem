@@ -23,7 +23,7 @@
         if(ini_get('register_globals')){
           $globalsAry = ['_SESSION','_COOKIE','_POST','_GET','REQUEST', '_SERVER', '_ENV', '_FILES'];
           foreach ($globalsAry as $g) {
-            foreach ($GOBALS[$G] as $key => $value) {
+            foreach ($GLOBALS[$g] as $key => $value) {
               if($GLOBALS[$key] == $value){
                 unset($GLOBALS[$key]);
               }

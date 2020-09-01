@@ -13,11 +13,13 @@ class SystemLabour extends System
     }
 
 
-    public function get($state=''){
+    public function get($state='everything'){
         //return all labours on  @devin
         if (is_int($state)){
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
             return $this->LabourActiveModel->selectAll('LabourState',$state);
+        }elseif ($state == 'everything'){
+            return $this->LabourActiveModel->selectAllWithDelete('deleted',0);
         }
         return false;
     }

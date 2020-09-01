@@ -4,7 +4,7 @@
 
     private static $users = [];
     private static $locked = [];
-    private static $restricted_users = ['admin','forman','clerk'];
+    private static $restricted_users = ['Admin','Forman','Clerk','Other'];
 
     private $_pdo, $_query ,$_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
@@ -23,6 +23,7 @@
     }
 
     public static function getMultitance($key='system'){
+        #dnd($key);
         #dnd(in_array($key,DB::$restricted_users));
       if(!in_array($key,DB::$restricted_users)){
         if($key == 'mechanic'){

@@ -4,7 +4,7 @@
 class BusService extends Model{
     public function __construct($service=''){
         $table='busservices';
-        parent::__construct($table,'BusService','ServiceId');
+        parent::__construct($table,'BusService');
         if ($service != '') {
             if (substr($service,0,4)=='Serv') {
                 $s = $this->_db->findFirst($table, ['conditions'=>'ServiceId = ?', 'bind'=>[$service]]);

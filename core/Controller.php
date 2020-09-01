@@ -5,16 +5,16 @@
     protected $_controller, $_action;
     public $view;
 
-    public function __construct($controller,$action){
+    public function __construct($controller,$action,$id=''){
       parent::__construct();
       $this->_controller = $controller;
       $this->_action = $action;
       $this->view = new View();
     }
 
-    protected function load_model($model){
+    protected function load_model($model,$acl='Other'){
       if (class_exists($model)) {
-        $this->{$model.'Model'} = new $model(strtolower($model));
+        $this->{$model.'Model'} = new $model(strtolower($model),$acl);
 
       }
     }

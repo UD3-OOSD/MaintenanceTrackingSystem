@@ -6,7 +6,7 @@ class BusME extends Model{
   public function __construct($bus=''){
     $this->GrantedService = null ;
     $table='busmileage';
-    parent::__construct($table,'BusME','BusNumber');
+    parent::__construct($table,'BusME');
 
     if ($bus != '') {
         $b = $this->_db->findFirst('busmileage', ['conditions'=>'BusNumber = ?', 'bind'=>[$bus]]);

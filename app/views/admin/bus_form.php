@@ -42,7 +42,11 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
-                <input type="text" id="BusCategory" name='BusCategory' class="form-control" value="<?=$this->post['BusCategory']?>">
+                <select clid="list" name="acl" class="form-control">
+                    <option value="Leyland">Leyland</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Demo">Demo</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

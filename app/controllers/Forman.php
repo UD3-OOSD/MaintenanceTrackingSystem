@@ -159,8 +159,8 @@ class Forman extends Controller{
               $this->service = Service::getMultitance($this->_controller,'0');
               $this->service->getState()->fillAction($_POST);
               $this->service->set_trigger();
-              $this->service->fillAction($_POST,'forman');
-              $this->service->stateChange($this);
+              #$this->service->fillAction($_POST,'forman');
+              $this->service->stateChange($this->service);
               Router::redirect('forman');
           }
       }
@@ -174,6 +174,7 @@ class Forman extends Controller{
 
   public function editServiceAction(){
       $service_num = $_POST['service_num'];
+      #dnd($_POST);
       $this->service = Service::getMultitance($this->_controller,'2');
       if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
           $this->service->stateChange($this);
@@ -199,7 +200,7 @@ class Forman extends Controller{
           if(isset($_POST['save'])) {
               $posted_values = posted_values($_POST);
               $validation->check($_POST, [
-                  'ServiceId' => [
+                  'serviceId' => [
                       'display' => 'ServiceId',
                       'require' => true,
                       'unique' => 'activeservice'
@@ -217,13 +218,14 @@ class Forman extends Controller{
                       'display' => 'Labourers',
                       'require' => true,
                   ],
-                  'ServiceDate' => [
+                  'ServiceInitialDate' => [
                       'display' => 'ServiceDate',
                       'require' => true,
                   ]
               ]);
               if ($validation->passed()) {
                   #$bus_num = $_POST['bus_num'];
+                  dnd('Proceeding Saving');
                   $this->service = Service::getMultitance($this->_controller, '2');
 
                   $this->service->getState()->updateDetails($_POST);
@@ -233,13 +235,13 @@ class Forman extends Controller{
           }
 
           if(isset($_POST['delete'])){
+              //dnd('Command To Delete');
               $this->service = Service::getMultitance($this->_controller, '1');
-              $this->service->set_trigger();
+              $this->service->set_trigger(0);
               $this->service->stateChange($this);
-              //dnd($this->bus->getState());
               $this->service->getState()->delete($_POST['serviceId']);
               $this->view->displayarr1  = $this->view->displayarr2 = '';
-              Router::redirect('admin');
+              Router::redirect('forman');
           }
 
       }
