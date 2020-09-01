@@ -178,7 +178,6 @@ class Admin extends Controller{
       #dnd($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num));
       #dnd($this->bus->getState());
       if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
-        dnd('true');
         //$this->bus->set_trigger();
         $this->bus->stateChange($this);
         $details = $this->bus->getState()->show($bus_num);

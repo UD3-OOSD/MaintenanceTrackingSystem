@@ -108,18 +108,23 @@
       if (isset($params['conditions'])) {
         if (is_array($params['conditions'])) {
           foreach ($params['conditions'] as $condition) {
-            $condition .= ' '.$condition.' AND';
+            $conditionString .= ' '.$condition.' AND';
           }
+
           $conditionString = trim($conditionString);
           $conditionString = rtrim($conditionString,' AND');
-        }else{
-          $conditionString = $params['conditions'];
+
+        }else {
+            $conditionString = $params['conditions'];
+        }
+
 
         if($conditionString != ''){
           $conditionString = ' Where '.$conditionString;
         }
+
       }
-    }
+      #echo($conditionString);
       //echo($conditionString);
       //bind
       if(array_key_exists('bind', $params)){
@@ -141,6 +146,7 @@
         #echo('<br>');
         #print_r($limit);
         #echo('<br>');
+
       $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
       #echo('<br>');
       #echo($sql);
@@ -155,6 +161,8 @@
     }
 
 
+
+
     public function find($table, $params = []){
         #dnd($params);
       if($this->_read($table, $params)){
@@ -163,12 +171,15 @@
       return false;
     }
 
+
     public function findFirst($table, $params=[]){
       if($this->_read($table, $params)){
         return $this->first();
       }
       return false;
     }
+
+
 
     public function getColumnNames($table){
       $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{$table}'";

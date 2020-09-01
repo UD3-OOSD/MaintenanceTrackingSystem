@@ -43,6 +43,7 @@ class ServiceActive extends Model{
         $this->deleted = 0;
         $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
         $this->ServiceState =$state;
+        #print_r($this);
         $this->save();
 
     }
@@ -69,6 +70,24 @@ class ServiceActive extends Model{
     }
     public function edit_this($params){
         return $this->edit($this->ServiceId,$params);
+    }
+
+    public function already_exist($BusNumber,$service){
+        #echo('<br>');
+        #print_r(($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]]))[0]);
+        #echo('<br>');
+        #dnd($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]]));
+        if($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]])){
+            #print_r(($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]]))[0]->ServiceId);
+            #echo('<br>');
+            #echo($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]])[0]->ServiceId);
+            #echo('   ');
+            #echo($this->find(['conditions'=>['BusNumber = ?','ServiceType = ?'],'bind'=>[$BusNumber,$service]])[0]->ServiceType);
+            #echo('<br>');
+            return true;
+        }
+        #echo($service);
+        return false;
     }
 
     public function getDate($id){
@@ -106,17 +125,53 @@ class ServiceActive extends Model{
             foreach ($currentDistances as $currentDistance){
                 if($currentDistance['BusId'] == $BusId){
                     $relaventDistances = $currentDistance;
+                    #print_r($relaventDistances);
+                    #echo('<br>');
                     break;
                 }
             }
-            foreach($bus as $header=>$value){
-                if(!($header=='BusId'|| $header=='BusNumber' || $header== 'BusType' || $header == 'deleted')){
-                    if($relaventDistances[$header]>=$value){
-                        $this->registerNewService(['ServiceType'=>$header,'ServiceDate'=>$date,'BusNumber'=>$BusNumber,'BusCategory'=>$bus['BusType']],1);
-                        ModelCommon::UpdateRow('busmileage',['BusNumber'=>$BusNumber],[$header=>0]);
+
+            #echo($BusNumber);
+            #echo('<br>');
+
+            if(isset($relaventDistances)){
+                foreach($bus as $header=>$value){
+                    if(!($header=='BusId'|| $header=='BusNumber' || $header== 'BusType' || $header == 'deleted')){
+                        if(($value)){
+                            #echo( $relaventDistances[$header]);
+                            #echo('   ');
+                            #echo($header);
+                            #echo('   ');
+                            #echo($value);
+                            #echo('   ');
+                            #echo('<br>');
+                            if(!($relaventDistances[$header]==0) && $relaventDistances[$header]>=$value){
+                                #echo($header);
+                                #echo('   ');
+                                #echo($this->already_exist($BusNumber,substr($header,0,strlen($header)-7)));
+                                #echo('<br>');
+                                if(!$this->already_exist($BusNumber,substr($header,0,strlen($header)-7))) {
+                                    #echo($header);
+                                    #echo('limit');
+                                    #echo($value);
+                                    #echo('current value');
+                                    #echo($relaventDistances[$header]);
+                                    #echo('<br>');
+                                    #echo($this->already_exist($BusNumber,substr($header,0,strlen($header)-7)));
+                                    #print_r(['ServiceType'=>substr($header,0,strlen($header)-7),'ServiceDate'=>$date,'BusNumber'=>$BusNumber,'BusCategory'=>$bus['BusType']]);
+                                    #echo('<br>');
+                                    $this->registerNewService(['ServiceType'=>substr($header,0,strlen($header)-7),'ServiceDate'=>$date,'BusNumber'=>$BusNumber,'BusCategory'=>$bus['BusType']],1);
+                                }#ModelCommon::UpdateRow('busmileage',['BusNumber'=>$BusNumber],[$header=>0]);
+                            }
+                        }
                     }
                 }
+                #echo('<br>');
+            }else{
+                return;
             }
+
         }
+        #dnd('welll');
     }
 }

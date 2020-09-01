@@ -49,6 +49,12 @@ class Model{
     return $results;
   }
 
+    public function exist($params = []){
+        foreach (($this->_db->exist($this->_table,$params))[0] as $index=>$value){
+            return($value);
+        }
+    }
+
 
 
   public function setTableState($state){

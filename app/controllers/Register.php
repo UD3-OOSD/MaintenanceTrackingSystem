@@ -33,6 +33,8 @@ class Register extends Controller{
         //dnd($user);
         $servicemodel = new ServiceActive();
         $servicemodel->checkAll();
+         $System = new SystemService();
+         $System->checkSpecificLab('Lab3',0);
         #}
         #dnd('done');
             #$servicematrics->addservice($lab['LabourId']);
