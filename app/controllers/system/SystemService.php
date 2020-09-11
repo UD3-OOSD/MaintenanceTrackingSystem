@@ -5,9 +5,11 @@ class SystemService extends System
 {
     private  $systemservice = NULL;
     private  $ServiceActiveModel;
+    private  $ServiceMatricsModel;
 
     public function __construct(){
         $this->ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
+        $this->ServiceMatricsModel = ModelCommon::loading_model('ServiceMatrics');
     }
 
 
@@ -54,6 +56,19 @@ class SystemService extends System
             echo("there is no such a ServiceId");
             return  null;
         }
+    }
+
+    public function checkSpecificLab($lab,$state){
+        $services = ($this->ServiceMatricsModel->getServicesforLabour($lab));
+        $result = [];
+        foreach ($services as $service=> $service_state){
+            if ($service_state==$state){
+                $result[]=$service;
+            }
+        }
+
+        #dnd($result);
+        return($result);
     }
 
 
