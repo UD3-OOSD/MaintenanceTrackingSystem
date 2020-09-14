@@ -20,7 +20,7 @@ class Mechanic extends Controller{
   public function startAction($id = ''){
       #fetch data from busdb for accepted services and their headers. @devin @avishka.
       if($id != ''){
-          $var = $this->SystemService->check($id);
+          $var = $this->SystemService->checkSpecificLab(Session::get('id'),$id);
           if($var) {
               $this->service->stateChange($this->service);
           }else{
