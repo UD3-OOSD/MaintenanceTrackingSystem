@@ -58,7 +58,7 @@ class SystemService extends System
         }
     }
 
-    public function checkSpecificLab($lab,$state){
+    public function checkSpecificLab($lab,$state=''){
         $services = ($this->ServiceMatricsModel->getServicesforLabour($lab));
         $result = [];
         foreach ($services as $service=> $service_state){
