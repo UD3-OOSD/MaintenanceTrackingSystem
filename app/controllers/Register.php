@@ -51,10 +51,15 @@ class Register extends Controller{
             $this->UsersModel->login($id,$remember);
           Session::set('user-id',$id);
           #echo($category);
+          #dnd($acl);
           Router::redirect(strtolower($acl));
+
         }else{
           $validation->addError("There is an error with your username or password.");
+          #dnd('  *****   ');
         }
+
+
       }
     }
       #$this->view->post = ['username'=> '', 'password'=> ''];

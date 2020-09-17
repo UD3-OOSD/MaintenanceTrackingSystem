@@ -3,9 +3,10 @@
 class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
-    protected $idtype;
+  protected $idtype;
 
     public function __construct($table,$name = '',$acl='Other'){
+    #echo('in model');
     $this->_db = DB::getMultitance($acl);
     $this->_table = $table;
     $this->acl = $acl;
@@ -26,7 +27,9 @@ class Model{
   }
 
   public function get_columns(){
-      #dnd($this->_db);
+    #print_r($this);
+    #echo('<br>');
+    #echo('<br>');
     return $this->_db->get_columns($this->_table);
   }
 
