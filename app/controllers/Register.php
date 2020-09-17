@@ -44,14 +44,12 @@ class Register extends Controller{
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {
-            #dnd($acl);
             $this->load_model('Users',$acl);
             $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 
             $this->UsersModel->login($id,$remember);
-           Session::set('user-id',$id);
+            Session::set('user-id',$id);
             #echo($category);
-            dnd('         ');
           Router::redirect(strtolower($acl));
         }else{
           $validation->addError("There is an error with your username or password.");

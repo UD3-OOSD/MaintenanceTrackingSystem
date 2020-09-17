@@ -30,7 +30,8 @@ class Mechanic extends Controller{
       }
 
       //display resposive table ($_closed)
-      $serviceData = $this->SystemService->getWithId(Controller::$id,3);
+      #dnd(Session::get('user-id'));
+      $serviceData = $this->SystemService->getWithId(Session::get('user-id'),3);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Start','start']);
       $this->view->render('mechanic/approved');
@@ -49,7 +50,7 @@ class Mechanic extends Controller{
       }
 
       //display resposive table ($_closed)
-      $serviceData = $this->SystemService->get(4);
+      $serviceData = $this->SystemService->getWithId(Session::get('user-id'),4);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Finish','finish']);
       $this->view->render('mechanic/started');

@@ -26,9 +26,9 @@ class Model{
   }
 
   public function get_columns(){
-      print_r($this->_db);
-      echo('<br>');
-      echo('<br>');
+      #print_r($this->_db);
+      #echo('<br>');
+      #echo('<br>');
     return $this->_db->get_columns($this->_table);
   }
 
