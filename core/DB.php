@@ -4,7 +4,7 @@
 
     private static $users = [];
     private static $locked = [];
-    private static $restricted_users = ['Admin','Forman','Clerk','Other'];
+    private static $restricted_users = ['Admin','Forman','Clerk','Mechanic','Other'];
 
     private $_pdo, $_query ,$_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
