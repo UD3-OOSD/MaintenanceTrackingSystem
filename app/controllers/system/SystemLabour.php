@@ -34,4 +34,12 @@ class SystemLabour extends System
     public function check($id){
         // TODO: Implement check() method.
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLabour($id)
+    {
+        return $this->LabourActiveModel->findByLabourId($id);
+    }
 }
