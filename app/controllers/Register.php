@@ -49,8 +49,9 @@ class Register extends Controller{
             $remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 
             $this->UsersModel->login($id,$remember);
-          Session::set('user-id',$id);
-          #echo($category);
+           Session::set('user-id',$id);
+            #echo($category);
+            dnd('         ');
           Router::redirect(strtolower($acl));
         }else{
           $validation->addError("There is an error with your username or password.");
