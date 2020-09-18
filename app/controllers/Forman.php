@@ -8,13 +8,15 @@ class Forman extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
+    $this->load_system('SystemLabour');
     $this->service = Service::getMultitance($this->_controller,'0');
   }
 
 
   public function indexAction(){
-    [$this->_init,$this->_approved,$this->_started,$this->_finished,$this->_expired,$this->_closed,$this->_deleted] = $this->SystemService->get();
-    $this->view->render('forman/index');
+      $data = $this->SystemLabour->getLabour(Session::get('user-id'));
+      $posting_list = ['img_path'=> $data->img_path, 'id'=> $data->LabourId, 'name'=> $data->fullName, 'telNo'=> $data->tel, 'Address'=> $data->address];
+      $this->view->post = $posting_list;    $this->view->render('forman/index');
   }
 
   public function approveAction($id = ''){
