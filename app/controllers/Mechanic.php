@@ -7,14 +7,16 @@ class Mechanic extends Controller{
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
     $this->load_system('SystemService');
+    $this->load_system('SystemLabour');
     $this->service = Service::getMultitance($this->_controller,'0');
   }
 
   public function indexAction(){
 
     //display tables
-    [$this->_init,$this->_started] = $this->SystemService->get();
-    $this->view->render('mechanic/index');
+      $data = $this->SystemLabour->getLabour(Session::get('user-id'));
+      $posting_list = ['img_path'=> $data->img_path, 'id'=> $data->LabourId, 'name'=> $data->fullName, 'telNo'=> $data->tel, 'Address'=> $data->address];
+      $this->view->post = $posting_list;    $this->view->render('mechanic/index');
   }
 
   public function startAction($id = ''){

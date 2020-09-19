@@ -119,6 +119,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-sm-4" for="img_path">Profile picture</label>
+            <div class="col-sm-4">
+                <input type="file" name="img_path" class="form-control" required value="<?=$this->post['img_path']?>">
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8">
                 <div class="checkbox">
                     <label><input type="checkbox" name="remember" required>I accept that this registration form is completed only by myself.</label>
