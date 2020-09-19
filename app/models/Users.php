@@ -92,6 +92,7 @@ class Users extends Model{
         $u = new Users(Session::get(CURRENT_USER_SESSION_NAME));
         ///$u = new Users((int)Session::get(CURRENT_USER_SESSION_NAME));
         //dnd($u);
+        $u->img_path = self::get_img_path($u->LabourId);
         self::$currentLoggedInUser = $u;
     }
     return self::$currentLoggedInUser;
@@ -127,8 +128,7 @@ class Users extends Model{
       $this->save();
   }
 
-  public function get_img_path(){
-      $user_id = currentUser()->LabourId;
+  public static function get_img_path($user_id){
       $user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
       return($user_img_path);
   }
