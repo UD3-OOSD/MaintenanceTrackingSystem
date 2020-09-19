@@ -126,4 +126,10 @@ class Users extends Model{
       $this->VerificationKey=0;
       $this->save();
   }
+
+  public function get_img_path(){
+      $user_id = currentUser()->LabourId;
+      $user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
+      return($user_img_path);
+  }
 }

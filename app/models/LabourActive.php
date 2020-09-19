@@ -11,7 +11,10 @@ class LabourActive extends Model{
             }else{
                 $l = $this->_db->findFirst('labourdetails', ['conditions'=>'nic = ?', 'bind'=>[$labour]]);
             }
-            if (isset($l)) {
+            if ($l) {
+                print_r($l);
+                echo('<br>');
+                echo('<br>');
                 foreach ($l as $key => $value) {
                     $this->$key = $value;
                 }

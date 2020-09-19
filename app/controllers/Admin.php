@@ -19,7 +19,9 @@ class Admin extends Controller{
 
   public function indexAction(){
       $data = $this->SystemLabour->getLabour(Session::get('user-id'));
-      $posting_list = ['img_path'=> $data->img_path, 'id'=> $data->LabourId, 'name'=> $data->fullName, 'telNo'=> $data->tel, 'Address'=> $data->address];
+      $data = ObjecttoArray($data);
+      #dnd($data['img_path']);
+      $posting_list = ['img_path'=> $data['img_path'], 'id'=> $data['LabourId'], 'name'=> $data['fullName'], 'telNo'=> $data['tel'], 'Address'=> $data['address']];
       $this->view->post = $posting_list;
       $this->view->render('admin/index');
       //dnd($this->sysBus);
@@ -167,15 +169,11 @@ class Admin extends Controller{
               'require' => true,
           ],
           'dob' => [
-              'display' => 'Date Of Birth',
+              'display' => 'Date Of Birth ',
               'require' => true
           ],
           'acl' => [
-              'display' => 'Rank',
-              'require' => true
-          ],
-          'img_path' =>[
-              'display' => 'Profile picture',
+              'display' => 'Rank ',
               'require' => true
           ]
       ]);

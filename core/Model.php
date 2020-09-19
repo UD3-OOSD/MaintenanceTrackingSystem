@@ -7,6 +7,7 @@ class Model{
 
     public function __construct($table,$name = '',$acl='Other'){
     $this->_db = DB::getMultitance($acl);
+    #echo($acl);
     $this->_table = $table;
     $this->acl = $acl;
     $this->_setTableColumns();
