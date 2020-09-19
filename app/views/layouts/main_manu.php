@@ -53,7 +53,7 @@
       <ul class="nav navbar-nav navbar-right user-bolck">
         <?php if(currentUser()): ?>
           <li class="vert-sep"></li>
-          <li class="name-tab"><a href="#"><?=currentUser()->username?></li>
+          <li class="name-tab"><a href="#"><?=dnd(currentUser());currentUser()->username?></li>
           <!--<li><img src="<?=PROOT?>app/views/images/profile/<?=currentUser()->img_path?>>"></li>-->
         <?php endif; ?>
 
