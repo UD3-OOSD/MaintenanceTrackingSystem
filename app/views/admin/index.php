@@ -6,7 +6,7 @@
 <?php $this->start('body') ?>
 <div class="container">
     <div class="form-head">
-        <div class="col-sm-8"><h2>Your <b> Info </b></h2></div>
+        <div class="col-sm-8 head-text"><h2>Your <b> Info </b></h2></div>
     </div>
     <div>
     <div style="padding: 10px 10px 10px 60px;float: left">

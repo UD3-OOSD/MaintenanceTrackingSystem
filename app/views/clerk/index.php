@@ -8,7 +8,7 @@
 
 <div class="minicontainer">
     <div class="form-head">
-        <div class="col-sm-8"><h2> Mileage <b> Update</b></h2></div>
+        <div class="col-sm-8 head-text"><h2> Mileage <b> Update</b></h2></div>
     </div>
     <form class="form-horizontal hr" method="post" action="clerk/update">
         <div class="dg-danger"><?= $this->displayErrors ?></div>

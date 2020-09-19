@@ -7,7 +7,9 @@
     <div class="row register" id="y2">
         <div class="col-sm-3"></div>
         <div class="col-sm-5 reg">
-            <h1>Service Request Form</h1>
+            <div class="form-head">
+                <div class="col-sm-8 head-text"><h2>Service <b> Form </b></h2></div>
+            </div>
             <form class="form-horizontal hr" method="post" action=".php">
                 <div class="form-group">
                     <label class="control-label col-sm-4">Bus ID</label>
