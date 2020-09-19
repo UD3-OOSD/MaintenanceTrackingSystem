@@ -45,9 +45,10 @@ class Admin extends Controller{
       #$busData = $this->SystemBus->get();
       $labData = $this->SystemLabour->get();
       #$busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
-      $labHead = ['LabourId','fullName','nic','address'];
+      $labHead = ['LabourId','fullName','nic'];
       //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
       //Cookie::set('action','admin/editbus',100);
+      #dnd(filterToString($labData,$labHead));
       Cookie::setList(['headers','data','action'],[listToString($labHead),filterToString($labData,$labHead),'editLabour']);
       //$this->view->labData = $labData;
       //$this->view->setLayout('option_1');

@@ -10,7 +10,7 @@
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
-            <div class="col-sm-8"><h2>Bus <b>Details</b></h2></div>
+            <div class="col-sm-8"><h2>Labour <b>Details</b></h2></div>
             <div class="table-filter">
                 <div class="search_box">
                     <label>Search:</label>
@@ -27,7 +27,6 @@
                 <th>LabourId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
                 <th>fullName</th>
                 <th>nic <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
-                <th>address</th>
             </tr>
             </thead>
             <tbody class="table_body" id="tableData"></tbody>

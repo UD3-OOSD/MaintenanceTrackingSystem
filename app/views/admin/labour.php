@@ -8,7 +8,9 @@
         <div class="row register">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
-                <h1><?="{$name}"?></h1>
+                <div class="form-head">
+                    <div class="col-sm-8"><h2>edit <b> Labour </b></h2></div>
+                </div>
                 <form class="form-horizontal hr" method="post" action="saveLabour" >
                     <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
