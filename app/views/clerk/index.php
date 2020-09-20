@@ -19,12 +19,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Bus ID</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="xx" name='bus_id'>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label col-sm-5">Previous Mileage (km)</label>
             <div class="col-sm-3">
                 <input type="number" class="form-control" id="xx" value="" disabled>

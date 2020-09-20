@@ -10,7 +10,7 @@
         <div class="col-sm-8 head-text"><h2>Employee <b> Registration </b></h2></div>
     </div>
     <form class="form-horizontal hr" method="post" action="">
-        <div class="dg-danger"><?= $this->displayErrors ?></div>
+        <div class="bg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="fname">Full Name</label>
             <div class="col-sm-4">
@@ -141,7 +141,7 @@
         </div>
     </form>
 </div>
-<div class="col-sm-6 reg">
+<div class="col-sm-6 reg minicontainer center">
   <h1>send verification:</h1>
   <form class="form-horizontal hr" action="./sendVarification" method="post">
     <label for="mail">Email :</label>

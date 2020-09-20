@@ -24,9 +24,9 @@
             <thead>
             <tr class="table_header">
                 <th class="index">#</th>
-                <th>LabourId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>LabourId</th>
                 <th>fullName</th>
-                <th>nic <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>nic</th>
             </tr>
             </thead>
             <tbody class="table_body" id="tableData"></tbody>

@@ -31,7 +31,7 @@ class ActiveLabour implements LabourState{
     }
 
     public function show($id){
-        return ObjecttoArray(ActiveLabour::$LabourActiveModel->findByNIC($id));
+        return ObjecttoArray(ActiveLabour::$LabourActiveModel->findByLabourId($id));
     }
 
     public function updateDetails($params){

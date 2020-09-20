@@ -24,11 +24,11 @@
             <thead>
             <tr class="table_header">
                 <th class="index">#</th>
-                <th>BusId<i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>BusId</th>
                 <th>BusNumber</th>
-                <th>BusCategory <i class="fa fa-sort th-sm" onclick="sortColumn()"></i></th>
+                <th>BusCategory </th>
                 <th>EngineNumber</th>
-                <th>RegistrationDate <i class="fa fa-sort th-sm"></i></th>
+                <th>RegistrationDate </th>
             </tr>
             </thead>
             <tbody class="table_body" id="tableData"></tbody>

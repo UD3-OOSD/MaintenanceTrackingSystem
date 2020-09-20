@@ -34,7 +34,7 @@ class Admin extends Controller{
       $busHead = ['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate'];
       //dnd(filter_attr($busData,['BusId','BusNumber','BusCategory','EngineNumber','RegistrationDate']));
       //Cookie::set('action','admin/editbus',100);
-      Cookie::setList(['headers','data','action'],[listToString($busHead),filterToString($busData,$busHead),'admin-editBus']);
+      Cookie::setList(['headers','data','action'],[listToString($busHead),filterToString($busData,$busHead),'editBus']);
       //$this->view->labData = $labData;
       //$this->view->setLayout('option_1');
       //$this->view->table1 =
@@ -223,8 +223,10 @@ class Admin extends Controller{
     $lab_id = $_POST['lab_id'];
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->lab = Labour::getMultitance($this->_controller,'2');
-    if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','nic',$lab_id)){
+    #dnd(ModelCommon::selectAllArray('labourdetails','LabourId',$lab_id));
+    if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','LabourId',$lab_id)){
         $this->lab->stateChange($this->lab);
+        #dnd($this->lab->getState()->show($lab_id));
         $details = $this->lab->getState()->show($lab_id);
         $this->view->displayErrors = '';
         $this->view->post = $details;
