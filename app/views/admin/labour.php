@@ -1,5 +1,6 @@
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
+<script type="text/javascript" src="<?=PROOT?>js/tools.js"></script>
 
 <?php $this->end(); ?>
 <?php $this->start('body') ?>
@@ -9,26 +10,29 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6 reg">
                 <div class="form-head">
-                    <div class="col-sm-8 head-text"><h2>edit <b> Labour </b></h2></div>
+                    <div class="col-sm-8 head-text"><h2>Edit <b> Labour </b></h2></div>
                 </div>
                 <form class="form-horizontal hr" method="post" action="saveLabour" >
                     <div class="dg-danger"><?= $this->displayErrors ?></div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="fname">Full Name</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="fullName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['fullName']?>" locked>
+                            <input type="text" class="form-control" name="fullName" id="fullName" onclick="warn('fullName')" placeholder="In block capital letters" required value="<?=$this->post['fullName']?>" locked>
+                            <div id="fullName-warn"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="lname">Last Name</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="lastName" id="xx" placeholder="In block capital letters" required value="<?=$this->post['lastName']?>" locked>
+                            <input type="text" class="form-control" name="lastName" id="lastName" onclick="warn('lastName')" placeholder="In block capital letters" required value="<?=$this->post['lastName']?>" locked>
+                            <div id="lastName-warn"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="name_init">Name with Initials</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="nameWIn" id="xx" placeholder="Ex:- A.B.C.Xyyyy" required value="<?=$this->post['nameWIn']?>" locked>
+                            <input type="text" class="form-control" name="nameWIn" id="nameWIn" onclick="warn('nameWIn')" placeholder="Ex:- A.B.C.Xyyyy" required value="<?=$this->post['nameWIn']?>" locked>
+                            <div id="nameWIn-warn"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,7 +55,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="nic">NIC Number</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="nic" id="xx" required value="<?=$this->post['nic']?>" locked>
+                            <input type="text" class="form-control" name="nic" id="nic" onclick="warn('nic')" required value="<?=$this->post['nic']?>" locked>
+                            <div id="nic-warn"></div>
                         </div>
                     </div>
                     <div class="form-group">

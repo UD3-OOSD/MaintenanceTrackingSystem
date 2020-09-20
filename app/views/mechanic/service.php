@@ -13,7 +13,7 @@
         <div class="dg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-4">Model</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <input type="text" id="ServiceId" name='serviceId' class="form-control" value="<?=$this->post['ServiceId']?>" locked="">
             </div>
         </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Service type</label>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" locked>
                     <option value="Engine service">Engine service</option>
                     <option value="axel service">axel service</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Servicemen :</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <input type="text" id="servicemen" name='Labourers' class="form-control" value="<?=$this->post['Labourers']?>">
             </div>
         </div>

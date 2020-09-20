@@ -1,5 +1,6 @@
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
+<script type="text/javascript" src="<?=PROOT?>js/tools.js"></script>
 
 <?php $this->end(); ?>
 <?php $this->start('body') ?>
@@ -7,20 +8,22 @@
 
 <div class="container">
     <div class="form-head">
-        <div class="col-sm-8 head-text"><h2>edit <b> Bus </b></h2></div>
+        <div class="col-sm-8 head-text"><h2>Edit <b> Bus </b></h2></div>
     </div>
     <form class="form-horizontal hr" method="post" action="saveBus">
       <div class="dg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-4">Registration No.</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="BusNumber" name='BusNumber' placeholder="Ex:- WP NA-XXXX" value="<?=$this->post['BusNumber']?>" locked>
+                <input type="text" class="form-control" id="BusNumber" onclick="warn('BusNumber')" name='BusNumber' placeholder="Ex:- WP NA-XXXX" value="<?=$this->post['BusNumber']?>" locked>
+                <div id="BusNumber-warn"></div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Date of Registration</label>
             <div class="col-sm-4">
-                <input type="date" id="RegistrationDate" name='RegistrationDate' class="form-control" value="<?=$this->post['RegistrationDate']?>" locked>
+                <input type="date" id="RegistrationDate" onclick="warn('RegistrationDate')" name='RegistrationDate' class="form-control" value="<?=$this->post['RegistrationDate']?>" locked>
+                <div id="RegistrationDate-warn"></div>
             </div>
         </div>
         <div class="form-group">
@@ -32,13 +35,15 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Manufactured Year</label>
             <div class="col-sm-4">
-                <input type="number" id="ManufacturedYear" name='ManufacturedYear' class="form-control" value="<?=$this->post['ManufacturedYear']?>" locked>
+                <input type="number" id="ManufacturedYear" onclick="warn('ManufacturedYear')" name='ManufacturedYear' class="form-control" value="<?=$this->post['ManufacturedYear']?>" locked>
+                <div id="ManufacturedYear-warn"></div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
-                <input type="text" id="BusCategory" name='BusCategory' class="form-control" value="<?=$this->post['BusCategory']?>" locked>
+                <input type="text" id="BusCategory" onclick="warn('BusCategory')" name='BusCategory' class="form-control" value="<?=$this->post['BusCategory']?>" locked>
+                <div id="BusCategory-warn"></div>
             </div>
         </div>
         <div class="form-group">

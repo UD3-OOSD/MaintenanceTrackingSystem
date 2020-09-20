@@ -84,6 +84,9 @@ class Validate{
                       $this->addError(["{$display} must be a positive value", $item]);
                   }
                   break;
+              case 'locked':
+                  $this->addError(["{$display} can not change", $item]);
+                  break;
           }
         }
       }

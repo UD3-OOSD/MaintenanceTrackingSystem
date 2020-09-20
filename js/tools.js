@@ -60,3 +60,13 @@ function checkNumber(){
     }
 }
 
+function warn(id){
+    //console.log(document.getElementById("locked").name);
+    var inumber = document.getElementById(id),
+        resultDiv = document.getElementById(inumber.name+"-warn");
+    console.log(resultDiv);
+    resultDiv.innerHTML = "this field can not change.";
+    resultDiv.style.color = "red";
+
+}
+
