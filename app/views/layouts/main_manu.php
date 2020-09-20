@@ -54,7 +54,7 @@
         <?php if(currentUser()): ?>
           <li class="vert-sep"></li>
             <li class="name-tab"><a href="#"><?=currentUser()->username?></a></li>
-          <li><div style="padding: 5px"><img src="<?=PROOT?>app/views/images/profile/<?=currentUser()->img_path?>" alt="Avatar" style="border-radius: 50%;block-size: 40px;border: solid 1px black;"></div></li>
+          <li><div style="padding: 5px"><img src="<?=PROOT?>app/views/images/profile/<?=currentUser()->img_path?>" alt="Avatar" style="border-radius: 50%;block-size: 40px;border: solid 2px #e0e0e0;"></div></li>
         <?php endif; ?>
 
       </ul>
