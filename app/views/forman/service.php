@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Service type :</label>
             <div class="col-sm-4">
-                <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" locked>
+                <select clid="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" locked>
                     <option value="Engine service">Engine service</option>
                     <option value="axel service">axel service</option>
                     <option value="gear box service">gear box service</option>
