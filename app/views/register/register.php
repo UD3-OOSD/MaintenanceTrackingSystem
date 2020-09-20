@@ -6,7 +6,7 @@
     <div class="form-head">
         <div class="col-sm-8 head-text"><h2> tmp <b> Register </b></h2></div>
     </div>
-    <div class="dg-danger"><?= $this->displayErrors ?></div>
+    <div class="bg-danger"><?= $this->displayErrors ?></div>
   <form class="form-horizontal hr" action="" method="post">
       <div class="form-group">
           <label class="control-label col-sm-4">Name</label>

@@ -81,6 +81,7 @@ class Admin extends Controller{
           'display' => 'Manufactured Year',
           'require' => true,
           'min' => 4,
+          'date_past' => true,
         ],
         'BusCategory' => [
           'display' => 'Model',
@@ -93,14 +94,17 @@ class Admin extends Controller{
         'Mileage' => [
           'display' => 'Mileage',
           'require' => true,
+          'positive' => true,
         ],
         'NumberOfSeats' => [
           'display' => 'NumberOfSeats',
           'require' => true,
+          'positive' => true,
         ],
         'RegistrationDate' => [
           'display' => 'Registration Date',
-          'require' => true
+          'require' => true,
+          'date_past' => true,
         ]
       ]);
       if ($validation->passed()){

@@ -42,7 +42,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
-                <select clid="list" name="acl" class="form-control">
+                <select clid="list" name="BusCategory" class="form-control">
                     <option value="Leyland">Leyland</option>
                     <option value="Honda">Honda</option>
                     <option value="Demo">Demo</option>
@@ -58,7 +58,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Current Mileage (km)</label>
             <div class="col-sm-4">
-                <input type="number" id="number" name='Mileage' class="form-control" onClick="checkNumber()" value="<?=$this->post['Mileage']?>">
+                <input type="number" id="number" name='Mileage' class="form-control" onkeyup="checkNumber()" value="<?=$this->post['Mileage']?>">
                 <div id="numberwarn"></div>
             </div>
         </div>

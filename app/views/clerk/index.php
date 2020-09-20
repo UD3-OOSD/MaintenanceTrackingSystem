@@ -14,13 +14,13 @@
         <div class="dg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-5">Registration No.</label>
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <input type="text" class="form-control" id="xx" name ='reg_no' placeholder="Ex:- WP NA-XXXX" required>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Bus ID</label>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <input type="text" class="form-control" id="xx" name='bus_id'>
             </div>
         </div>

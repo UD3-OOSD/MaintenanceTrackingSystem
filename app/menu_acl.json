@@ -11,7 +11,7 @@
   },
   "Admin" : {
     "Home" : "admin",
-    "Basses" : "admin/busView",
+    "Busses" : "admin/busView",
     "Labourers": "admin/labView",
     "Add new BUS" : "admin/addNewBus",
     "Add new Profile" : "admin/addNewLabour"

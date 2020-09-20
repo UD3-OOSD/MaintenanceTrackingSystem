@@ -5,7 +5,7 @@
 
 <div class="minicontainer">
     <div class="form-head">
-        <div class="col-sm-8 head-text"><h2> log <b> In</b></h2></div>
+        <div class="col-sm-8 head-text"><h2> Log <b> In</b></h2></div>
     </div>
   <div class="bg-danger"><?=$this->displayErrors ?></div>
   <form class="form-horizontal hr" action="<?=PROOT?>register/login" method="post">

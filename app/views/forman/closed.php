@@ -9,7 +9,7 @@
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
-            <div class="col-sm-8 head-text"><h2>Closed <b> Maintenance</b></h2></div>
+            <div class="col-sm-8 head-text"><h2>Finished <b> Maintenance</b></h2></div>
             <div class="table-filter">
                 <div class="search_box">
                     <label>Search:</label>

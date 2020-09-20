@@ -8,6 +8,7 @@ class Validate{
   }
 
   public function check($source, $items=[]){
+      #dnd($source);
     $this->_errors = [];
     foreach ($items as $item => $rules) {
       $item  = Input::sanitized($item);
@@ -21,11 +22,11 @@ class Validate{
           $this->addError(["{$display} is required", $item]);
         }else if(!empty($value)){
           switch ($rule) {
-            case 'min':
-              if (strlen($value) < $rule_value) {
-                $this->addError(["{$display} must be a minimum of {$rule_value} characters.", $item]);
-              }
-              break;
+              case 'min':
+                if (strlen($value) < $rule_value) {
+                  $this->addError(["{$display} must be a minimum of {$rule_value} characters.", $item]);
+                }
+                break;
 
               case 'max':
                 if (strlen($value) > $rule_value) {
@@ -68,6 +69,21 @@ class Validate{
                   $this->addError(["{$display} must be a valid emial address.", $item]);
                 }
                 break;
+              case 'date_past':
+                  if($value>date('Y-m-d')){
+                      $this->addError(["{$display} must be a day before today.", $item]);
+                  }
+                break;
+              case 'date_future':
+                  if($value<date('Y-m-d')){
+                      $this->addError(["{$display} must be a day on or after today.", $item]);
+                  }
+                  break;
+              case 'positive':
+                  if($value<0){
+                      $this->addError(["{$display} must be a positive value", $item]);
+                  }
+                  break;
           }
         }
       }
@@ -103,7 +119,7 @@ class Validate{
     foreach ($this->_errors as $error) {
       if(is_array($error)){
         $html .= '<li class="text-danger">'.$error[0].'</li>';
-        $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
+        #$html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
       }else{
         $html .= '<li class="text-danger">'.$error.'</li>';
       }
@@ -112,3 +128,33 @@ class Validate{
     return $html;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
