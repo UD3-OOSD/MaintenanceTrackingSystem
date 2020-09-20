@@ -122,7 +122,7 @@ class Validate{
     foreach ($this->_errors as $error) {
       if(is_array($error)){
         $html .= '<li class="text-danger">'.$error[0].'</li>';
-        $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
+        $html .= '<script>jQuery("document").ready(function(){jQuery("#'.$error[1].'").parent().closest("div").addClass("has-error");});</script>';
       }else{
         $html .= '<li class="text-danger">'.$error.'</li>';
       }
