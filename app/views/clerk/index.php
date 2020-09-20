@@ -11,7 +11,7 @@
         <div class="col-sm-8 head-text"><h2> Mileage <b> Update</b></h2></div>
     </div>
     <form class="form-horizontal hr" method="post" action="clerk/update">
-        <div class="dg-danger"><?= $this->displayErrors ?></div>
+        <div class="bg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-5">Registration No.</label>
             <div class="col-sm-3">

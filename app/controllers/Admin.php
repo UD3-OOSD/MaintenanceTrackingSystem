@@ -319,10 +319,6 @@ class Admin extends Controller{
                     'min' => 10,
                     'max' => 12,
                 ],
-                'email' => [
-                    'display' => 'Email',
-                    'require' => true,
-                ],
                 'tel' => [
                     'display' => 'NumberOfSeats',
                     'require' => true,

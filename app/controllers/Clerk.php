@@ -58,6 +58,7 @@ class Clerk extends Controller{
             }
           }
       }
-      $this->view->render('mechanic');
+      $this->view->displayErrors = $validation->displayErrors();
+      $this->view->render('clerk/index');
   }
 }
