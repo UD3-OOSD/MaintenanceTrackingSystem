@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Serice ID :</label>
             <div class="col-sm-4">
-                <input type="text" id="ServiceId" name='serviceId' onclick="warn('ServiceId')" class="form-control" value="<?=$this->post['ServiceId']?>" locked="">
+                <input type="text" id="ServiceId" name='serviceId' onclick="warn('ServiceId')" class="form-control" value="<?=$this->post['ServiceId']?>" locked>
             </div>
             <div id="ServiceId-warn"></div>
         </div>
