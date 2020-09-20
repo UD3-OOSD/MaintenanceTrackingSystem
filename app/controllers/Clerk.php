@@ -58,5 +58,6 @@ class Clerk extends Controller{
             }
           }
       }
+      $this->view->render('mechanic');
   }
 }
