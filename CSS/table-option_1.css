@@ -12,11 +12,11 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 body {
     color: #002c53;
-    background: #737373;
+    background: #333333;
     font-family: 'Roboto', sans-serif;
 }
 .table-wrapper {
-    background: #c1c1c1;
+    background: #eaeaea;
     padding: 20px;
     margin-left :auto;
     margin-right :auto;
