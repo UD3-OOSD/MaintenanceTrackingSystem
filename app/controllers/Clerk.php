@@ -6,7 +6,9 @@ class Clerk extends Controller{
 
   public function __construct($controller_name,$action){
     parent::__construct($controller_name, $action);
-    $this->bus = Bus::getMultitance($this->_controller,'0');
+      $this->load_system('SystemLabour');
+      $this->load_system('SystemBus');
+      $this->bus = Bus::getMultitance($this->_controller,'0');
   }
 
   public function indexAction(){
@@ -22,21 +24,25 @@ class Clerk extends Controller{
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();*/
-    $this->view->displayErrors = '';
-    $this->view->render('clerk/index');
+      $data = $this->SystemLabour->getLabour(Session::get('user-id'));
+      $posting_list = ['img_path'=> $data->img_path, 'id'=> $data->LabourId, 'name'=> $data->fullName, 'telNo'=> $data->tel, 'Address'=> $data->address];
+      $this->view->post = $posting_list;
+      $this->view->render('clerk/index');
   }
 
   public function updateAction(){  // connect to update button @uda
 
     //get data relate to bus_id and create $bus obj. and call it's action. @devin @avishka
       $validation = new Validate();
+      $posted_values = ['reg_no' => '', 'mileage' => ''];
       //dnd($_POST);
       if($_POST) {
+          $posted_values = posted_values($_POST);
           $validation->check($_POST, [
               'reg_no' => [
                   'display' => 'Registration No.',
                   'require' => true,
-                  'min' => 8  #check
+                  'is_numeric' => true,
               ],
               'mileage' => [
                   'display' => 'Mileage',
@@ -45,20 +51,16 @@ class Clerk extends Controller{
               ]
           ]);
           if ($validation->passed()) {
-            // there must be a creation pattern.
-            $this->bus = Bus::getMultitance($this->_controller,'1');
-             // dnd($this->bus->getState());
-            //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no']));
-              //dnd(ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no']));
-            if($this->bus->getState()->checkId($_POST['reg_no']) && ModelCommon::selectAllArray('bustable','BusNumber',$_POST['reg_no'])['deleted']==0) {
-                $this->bus->stateChange($this);
-                //dnd($this->bus->getState());
-                $this->bus->getState()->updateDistance($_POST['reg_no'], $_POST['mileage']);
-                $this->bus->stateChange($this);
+            if(!$this->SystemBus->update_distance($_POST['reg_no'],$_POST['mileage'])){
+                $this->view->post = $posted_values;
+                $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">bus number is invalid.</li>'.'</ul>';
+                $this->view->render('clerk/update');
             }
+            Router::redirect('clerk/update');
           }
       }
+      $this->view->post = $posted_values;
       $this->view->displayErrors = $validation->displayErrors();
-      $this->view->render('clerk/index');
+      $this->view->render('clerk/update');
   }
 }

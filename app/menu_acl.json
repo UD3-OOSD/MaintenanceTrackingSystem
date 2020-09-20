@@ -16,7 +16,10 @@
     "Add new BUS" : "admin/addNewBus",
     "Add new Profile" : "admin/addNewLabour"
   },
-  "Clerk" : "clerk",
+  "Clerk" : {
+    "Home" : "clerk",
+    "Update" : "clerk/update"
+  },
   "Mechanic" : {
     "Home" : "mechanic",
     "Start Maintains" : "mechanic/start",
