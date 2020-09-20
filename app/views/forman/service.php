@@ -1,6 +1,7 @@
 
 <?php $this->start('head') ?>
     <link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="<?=PROOT?>js/tools.js"></script>
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
@@ -14,26 +15,27 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Serice ID :</label>
             <div class="col-sm-4">
-                <input type="text" id="ServiceId" name='serviceId' class="form-control" value="<?=$this->post['ServiceId']?>" locked="">
+                <input type="text" id="ServiceId" name='serviceId' onclick="warn('ServiceId')" class="form-control" value="<?=$this->post['ServiceId']?>" locked="">
             </div>
+            <div id="ServiceId-warn"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Bus number : </label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="BusNumber" name='BusNumber' placeholder="Ex:- WP NA-XXXX" value="<?=$this->post['BusNumber']?>" locked>
+                <input type="text" class="form-control" id="BusNumber" onclick="warn('BusNumber')" name='BusNumber' placeholder="Ex:- WP NA-XXXX" value="<?=$this->post['BusNumber']?>" locked>
             </div>
+            <div id="BusNumber-warn"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Service type :</label>
             <div class="col-sm-4">
-                <select clid="list" name="serviceType" class="form-control" autofocus="<?=$this->post['serviceType']?>" locked>
-                    <option value="Engine service">Engine service</option>
-                    <option value="axel service">axel service</option>
-                    <option value="gear box service">gear box service</option>
-                    <option value="break pad & break oil">break pad & break oil</option>
-                    <option value="Other">Other</option>
+                <select clid="list" name="serviceType" id="serviceType" onclick="warn('serviceType')" class="form-control" autofocus="<?=$this->post['ServiceType']?>" locked>
+                    <option value="Tire">Tire</option>
+                    <option value="Oil">Oil</option>
+                    <option value="Engine">Engine</option>
                 </select>
             </div>
+            <div id="serviceType-warn"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4">Servicemen :</label>

@@ -184,7 +184,7 @@ class Forman extends Controller{
           $details = $this->service->getState()->show($service_num);
           $this->view->displayErrors = '';
           $this->view->post = $details;
-
+          #dnd($details);
           $this->view->render('forman/service');
       }
       else{
