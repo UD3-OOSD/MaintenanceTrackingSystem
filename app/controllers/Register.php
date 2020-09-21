@@ -70,7 +70,32 @@ class Register extends Controller{
     }
   }
 
-  public function registerAction(){
+  public function validateAction(){
+      $validation = new Validate();
+      $this->view->displayErrors = '';
+      if($_POST){
+          $validation->check($_POST,[
+              'val_key' => [
+                  'display' => 'val_key',
+                  'require' => true,
+              ]
+          ]);
+          if($validation->passed()){
+              $res = $this->UsersModel->checkKey($_POST['val_key']);
+              if($res){
+                  $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">Verification key is invalid.</li>'.'</ul>';
+                  $this->view->render('register/validation');
+              }else{
+                  Router::redirect('Register/register/'.$res);
+              }
+
+          }
+          $this->view->displayErrors = $validation->displayErrors();
+      }
+      $this->view->render('register/validation');
+  }
+
+  public function registerAction($values=''){
     $validation = new Validate();
     $posted_values = ['name' => '', 'acl'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
     if ($_POST) {
@@ -78,10 +103,6 @@ class Register extends Controller{
       $validation->check($_POST,[
         'name' => [
           'display' => 'Name',
-          'require' => true
-        ],
-        'acl' => [
-          'display' => 'acl',
           'require' => true
         ],
         'username' => [
@@ -116,6 +137,9 @@ class Register extends Controller{
         $newUser->login();
         Router::redirect('');
       }
+    }
+    if(!$values){
+        $posted_values = $values;
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();
