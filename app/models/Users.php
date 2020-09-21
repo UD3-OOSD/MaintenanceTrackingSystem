@@ -6,6 +6,7 @@ class Users extends Model{
 
   public function __construct($user = '',$acl='Other'){
     $table = 'users';
+    $this->idtype = 'LabourId';
     parent::__construct($table,'Users',$acl);
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
@@ -124,7 +125,7 @@ class Users extends Model{
 
 
   public function resetVerificationKey(){
-      $this->VerificationKey=0;
+      $this->VerificationKey=null;
       $this->save();
   }
 
@@ -136,10 +137,15 @@ class Users extends Model{
   public function verification_check($verification_code){
       $userobj = $this->findFirst(['conditions'=>'VerificationKey = ?', 'bind'=>[$verification_code]]);
       if ($userobj->LabourId){
+          $userobj->resetVerificationKey();
           return $userobj;
       }
       else{
           return false;
       }
+  }
+
+  public function retrieval_verified_data(){
+
   }
 }

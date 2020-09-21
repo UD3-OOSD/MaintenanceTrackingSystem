@@ -50,8 +50,8 @@ class Register extends Controller{
             $this->UsersModel->login($id,$remember);
             Session::set('user-id',$id);
             #echo($category);
-            #$this->UsersModel->get_img_path();
-            #dnd('    ');
+            #$usercheck = $this->UsersModel->verification_check('d1fe173d08e959397adf34b1d77e88d7');
+            #dnd($usercheck);
             Router::redirect(strtolower($acl));
         }else{
           $validation->addError("There is an error with your username or password.");
