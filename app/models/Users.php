@@ -132,4 +132,14 @@ class Users extends Model{
       $user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
       return($user_img_path);
   }
+
+  public function verification_check($verification_code){
+      $userobj = $this->findFirst(['conditions'=>'VerificationKey = ?', 'bind'=>[$verification_code]]);
+      if ($userobj->LabourId){
+          return $userobj;
+      }
+      else{
+          return false;
+      }
+  }
 }
