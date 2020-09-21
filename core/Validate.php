@@ -10,6 +10,7 @@ class Validate{
   public function check($source, $items=[]){
       #dnd($source);
     $this->_errors = [];
+    #dnd($items);
     foreach ($items as $item => $rules) {
       $item  = Input::sanitized($item);
       #echo $item;

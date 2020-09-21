@@ -30,7 +30,7 @@
               <button type="submit" class="btn btn-default">Submit</button>
           </div>
           <div class="col-sm-offset col-sm-2">
-              <a href="<?=PROOT?>register/register"><button type="button" class="btn btn-default">Register</button></a>
+              <a href="<?=PROOT?>register/validate"><button type="button" class="btn btn-default">Register</button></a>
           </div>
       </div>
 
