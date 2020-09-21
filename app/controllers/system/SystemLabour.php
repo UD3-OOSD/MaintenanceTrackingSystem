@@ -42,4 +42,5 @@ class SystemLabour extends System
     {
         return $this->LabourActiveModel->findByLabourId($id);
     }
+
 }

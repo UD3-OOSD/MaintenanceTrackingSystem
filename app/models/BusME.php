@@ -78,6 +78,7 @@ class BusME extends Model{
   public function  isBusNumberValid($id){
       #dnd($id);
       $params=['BusNumber'=>$id];
+      #dnd($this->isValidKey($params));
       return $this->isValidKey($params);
   }
 

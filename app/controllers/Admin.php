@@ -202,7 +202,7 @@ class Admin extends Controller{
     $this->bus = Bus::getMultitance($this->_controller,'1');
     #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
       //dnd($this->bus->getState()->checkId($bus_num));
-      #dnd($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num));
+      #dnd($this->bus->getState()->checkId($bus_num));
       if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
         //$this->bus->set_trigger();
         $this->bus->stateChange($this->bus);

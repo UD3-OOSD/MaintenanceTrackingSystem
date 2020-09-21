@@ -60,7 +60,7 @@ class EditingBus  implements BusState{
 
     public function checkId($id){
         //@devin
-        EditingBus::$BusMEModel->isBusNumberValid(   $id);
+        EditingBus::$BusMEModel->isBusNumberValid($id);
     }
 
 

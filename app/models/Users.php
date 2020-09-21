@@ -145,7 +145,27 @@ class Users extends Model{
       }
   }
 
-  public function retrieval_verified_data(){
+  public function retrieval_verified_data($userobj){
+      $user = ObjecttoArray($userobj);
+      $labour = ModelCommon::selectAllArray('labourdetails','LabourId',$user['LabourId']);
+      $attrstring = '';
+      $attributes = [];
 
-  }
+      foreach ($user as $attr => $value){
+        if(!in_array($attr,$attributes)){
+            $attrstring = $attrstring + '>'+$attr;
+            $attributes[] = $attr;
+        }
+      }
+
+      foreach ($labour as $attr => $value){
+          if(!in_array($attr,$attributes)){
+              $attrstring = $attrstring + '>'+$attr;
+              $attributes[] = $attr;
+          }
+      }
+
+      $attrstring = substr($attrstring,1);
+      return ($attrstring);
+    }
 }

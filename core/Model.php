@@ -213,7 +213,7 @@ class Model{
       if($params != []){
           foreach ($params as $key => $value){
               $result = $this->selectAllArray($key,$value);
-              #dnd($result);
+              #dnd($value);
               if ($result){
                   #dnd('trueeee');
                   return(true);
