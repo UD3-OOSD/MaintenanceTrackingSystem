@@ -138,7 +138,8 @@ class Users extends Model{
       $userobj = $this->findFirst(['conditions'=>'VerificationKey = ?', 'bind'=>[$verification_code]]);
       if ($userobj->LabourId){
           $userobj->resetVerificationKey();
-          return $userobj;
+          $userstr = filterToString($userobj,["acl","LabourId","email"]);
+          return $userstr;
       }
       else{
           return false;
@@ -168,4 +169,6 @@ class Users extends Model{
       $attrstring = substr($attrstring,1);
       return ($attrstring);
     }
+
+
 }

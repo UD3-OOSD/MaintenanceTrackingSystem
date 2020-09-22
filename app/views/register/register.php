@@ -1,23 +1,25 @@
 <?php $this->start('head'); ?>
 <link rel="stylesheet" href="<?=PROOT?>css/regfo.css" media="screen" title="no title" charset="utf-8" >
+<script type="text/javascript" src="<?=PROOT?>js/tools.js"></script>
 <?php $this->end(); ?>
 <?php $this->start('body'); ?>
 <div class="minicontainer">
     <div class="form-head">
-        <div class="col-sm-8 head-text"><h2> tmp <b> Register </b></h2></div>
+        <div class="col-sm-8 head-text"><h2> User <b> Register </b></h2></div>
     </div>
     <div class="bg-danger"><?= $this->displayErrors ?></div>
   <form class="form-horizontal hr" action="" method="post">
       <div class="form-group">
-          <label class="control-label col-sm-4">Name</label>
+          <label class="control-label col-sm-4">Labour id</label>
           <div class="col-sm-4">
-              <input type="text" name="name" class="form-control" value="<?=$this->post['name']?>" id="name">
+              <input type="text" name="lab_id" onclick="warn('lab_id')" class="form-control" value="<?=$this->post['lab_id']?>" id="lab_id">
           </div>
+          <div id="lab_id-warn"></div>
       </div>
       <div class="form-group">
           <label class="control-label col-sm-4" for="rank">Rank</label>
           <div class="col-sm-4">
-              <select clid="list" name="acl" class="form-control">
+              <select clid="list" id="acl" onclick="warn('acl')" name="acl" class="form-control">
                   <option value="Admin">Admin</option>
                   <option value="Forman">Forman</option>
                   <option value="Mechanics">Mechanics</option>
@@ -25,6 +27,7 @@
                   <option value="Other">Other</option>
               </select>
           </div>
+          <div id="acl-warn"></div>
       </div>
       <div class="form-group">
           <label class="control-label col-sm-4">Email</label>

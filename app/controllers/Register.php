@@ -81,11 +81,13 @@ class Register extends Controller{
               ]
           ]);
           if($validation->passed()){
-              $res = $this->UsersModel->checkKey($_POST['val_key']);
-              if($res){
+              $res = $this->UsersModel->verification_check($_POST['val_key']);
+              #dnd($res);
+              if($res == ""){
                   $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">Verification key is invalid.</li>'.'</ul>';
                   $this->view->render('register/validation');
               }else{
+                  #dnd($res);
                   Router::redirect('Register/register/'.$res);
               }
 
@@ -96,13 +98,14 @@ class Register extends Controller{
   }
 
   public function registerAction($values=''){
+    #dnd($values);
     $validation = new Validate();
-    $posted_values = ['name' => '', 'acl'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
+    $posted_values = ['lab_id' => '', 'acl'=>'', 'email'=>'','username'=> '', 'password'=>'', 'confirm'=> ''];
     if ($_POST) {
       $posted_values = posted_values($_POST);
       $validation->check($_POST,[
-        'name' => [
-          'display' => 'Name',
+        'lab_id' => [
+          'display' => 'lab_id',
           'require' => true
         ],
         'username' => [
@@ -138,8 +141,10 @@ class Register extends Controller{
         Router::redirect('');
       }
     }
-    if(!$values){
-        $posted_values = $values;
+    if($values != ""){
+        $val_lis = explode(" ",$values);
+        #dnd($val_lis);
+        $posted_values = ['lab_id' => $val_lis[1] , 'acl'=> $val_lis[0], 'email'=> $val_lis[2],'username'=> '', 'password'=>'', 'confirm'=> ''];
     }
     $this->view->post = $posted_values;
     $this->view->displayErrors = $validation->displayErrors();
