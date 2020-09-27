@@ -12,7 +12,7 @@
     <div style="padding: 10px 10px 10px 60px;float: left">
         <img class="" src="<?=PROOT?>app/views/images/profile/<?=$this->post['img_path']?>" alt="Avatar" style="border-radius: 50%;block-size: 150px;border: solid 1px black;">
     </div>
-    <div style="float: right;padding: 30px 410px 10px 10px;">
+    <div style="float: right;padding: 30px 35% 10px 10px;">
         <p>Labour ID : <?=$this->post['id']?></p>
         <p>Name : <?=$this->post['name']?></p>
         <p>Contact number : <?=$this->post['telNo']?></p>

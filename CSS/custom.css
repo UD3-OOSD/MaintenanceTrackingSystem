@@ -3,7 +3,7 @@
 }
 nav.navbar {
   background-color : #202020;
-  border-bottom: 1px solid #d5d5d5 ;
+  border-bottom: 2px solid #d5d5d5 ;
 }
 .pr-name{
   float: left;
@@ -40,6 +40,8 @@ nav.navbar {
   font-family:Arial;
   font-size:17px;
   text-decoration:none;
+  resize: both;
+  overflow: auto;
 }
 .myButton:hover {
   background-color:#bde0ff;
@@ -51,7 +53,7 @@ nav.navbar {
 .vert-sep{
   margin-top: 10px;
   height : 30px;
-  border-left:1px solid gray;
+  border-left:2px solid gray;
 }
 .watermark {
   position:fixed;

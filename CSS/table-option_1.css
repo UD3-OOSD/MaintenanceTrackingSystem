@@ -16,12 +16,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .table-wrapper {
+
     background: #eaeaea;
     padding: 20px;
     margin-left :auto;
     margin-right :auto;
     width : 75%;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 21px 20px 13px 0px rgba(0,0,0,0.79);
+    margin-top: 3%;
 }
 .table-title {
     background-color :#bde0ff;
