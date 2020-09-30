@@ -30,7 +30,7 @@ function listToStd(data,heads){
     }
     return lis;
 }
-console.log(document.cookie);
+//console.log(document.cookie);
 var cookies = document.cookie.replace(' ','').split(";").
 map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});

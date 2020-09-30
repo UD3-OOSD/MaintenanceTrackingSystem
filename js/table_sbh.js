@@ -59,7 +59,7 @@ function loadTableData(data){
             `</td>`;
         for(let head of Object.keys(elem)){
             dataHtml += `<td class=`+`"${head.substring(head.length-2)==='Id'? 'id':'comman'}"`+`>` +
-                `<span>${elem[head]}</span>`+
+                `<span>${elem[head].replace('-',' ')}</span>`+
                 `</td>`;
         }
         dataHtml += `<td class='index center'>` +
