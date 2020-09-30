@@ -42,7 +42,11 @@
           <?php else:
             $active = ($val == $currentPage)? 'active':''; ?>
             <li class="name-tab">
-                <a class="<?=$active?>" href="<?=$val?>"><?=$key?></a>
+                <?php if($key == "Google"): ?>
+                    <a class="<?=$active?>" href="<?=$val?>" target="_blank"><?=$key?></a>
+                <?php else: ?>
+                    <a class="<?=$active?>" href="<?=$val?>"><?=$key?></a>
+                <?php endif; ?>
             </li>
             <li class="vert-sep"></li>
           <?php endif; ?>

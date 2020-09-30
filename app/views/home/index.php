@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                    <img id="sltb-img" class="mx-auto d-block" width="200" height="120" src="<?=PROOT?>app/views/images/sltb-sri-lanka-transport-board-logo-F90A8F0DBE-seeklogo.png">
+                    <img id="sltb-img" class="mx-auto d-block" width="200" height="120" src="<?=PROOT?>app/views/images/badge.png">
                 </div>
             </div>
         </div>

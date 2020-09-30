@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" type="png" href="<?=PROOT?>app/views/images/badge.png">
+
     <title><?=$this->siteTitle(); ?></title>
 
     <!-- Bootstrap CSS -->
