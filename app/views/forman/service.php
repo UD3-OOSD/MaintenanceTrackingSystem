@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Serice ID :</label>
             <div class="col-sm-4">
-                <input type="text" id="ServiceId" name="serviceId" onclick="warn('ServiceId')" class="form-control" value="<?=$this->post['ServiceId']?>" locked>
+                <input type="text" id="ServiceId" name="ServiceId" onclick="warn('ServiceId')" class="form-control" value="<?=$this->post['ServiceId']?>" locked>
             </div>
             <div id="ServiceId-warn"></div>
         </div>
@@ -30,6 +30,7 @@
             <label class="control-label col-sm-4">Service type :</label>
             <div class="col-sm-4">
                 <select clid="list" name="serviceType" id="serviceType" onclick="warn('serviceType')" class="form-control" autofocus="<?=$this->post['ServiceType']?>" locked>
+                    <option value="<?=$this->post['ServiceType']?>" selected disabled hidden><p><?=$this->post['ServiceType']?></p></option>
                     <option value="Tire">Tire</option>
                     <option value="Oil">Oil</option>
                     <option value="Engine">Engine</option>
@@ -50,10 +51,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-1">
+            <div class="col-sm-offset-3 col-sm-3">
                 <button type="submit" class="btn btn-default" name="save" value="save">SAVE</button>
             </div>
-            <div class="col-sm-offset-1 col-sm-1">
+            <div class="col-sm-offset col-sm-3">
                 <button type="submit" class="btn btn-default" name="delete" value="delete">DELETE</button></a>
             </div>
         </div>

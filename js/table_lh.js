@@ -30,15 +30,15 @@ function listToStd(data,heads){
     }
     return lis;
 }
-
+console.log(document.cookie);
 var cookies = document.cookie.replace(' ','').split(";").
 map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-console.log(cookies,'ddd');
+//console.log(cookies,'ddd');
 var headers = cookies['headers'].split('+');
 var caller = cookies['action'].replace('-','/');
 var fetData = listToStd(cookies["data"].split('+'),headers);
-console.log(fetData);
+//console.log(fetData);
 window.onload = () => {
     loadTableData(fetData);
 };
@@ -58,7 +58,7 @@ function loadTableData(data){
             `</td>`;
         for(let head of Object.keys(elem)){
             dataHtml += `<td class=`+`"${head.substring(head.length-2)==='Id'? 'id':'comman'}"`+`>` +
-                `<span>${elem[head]}</span>`+
+                `<span>${elem[head].replace('-',' ')}</span>`+
                 `</td>`;
         }
         dataHtml += `</tr>`;

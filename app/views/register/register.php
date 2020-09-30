@@ -20,6 +20,7 @@
           <label class="control-label col-sm-4" for="rank">Rank</label>
           <div class="col-sm-4">
               <select clid="list" id="acl" onclick="warn('acl')" name="acl" class="form-control">
+                  <option value="<?=$this->post['acl']?>" selected disabled hidden><p><?=$this->post['acl']?></p></option>
                   <option value="Admin">Admin</option>
                   <option value="Forman">Forman</option>
                   <option value="Mechanics">Mechanics</option>
@@ -54,7 +55,7 @@
           </div>
       </div>
       <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-2">
+          <div class="col-sm-offset-4 col-sm-3">
               <button type="submit" class="btn btn-default">Register</button>
           </div>
       </div>

@@ -45,6 +45,7 @@
                         <label class="control-label col-sm-4" for="lname">Title</label>
                         <div class="col-sm-6">
                             <select clid="list" name="title" class="form-control">
+                                <option value="<?=$this->post['title']?>" selected disabled hidden><p><?=$this->post['title']?></p></option>
                                 <option value="Mr.">Mr.</option>
                                 <option value="Mrs.">Mrs.</option>
                                 <option value="Ms.">Ms.</option>
@@ -80,7 +81,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="race">Race</label>
                         <div class="col-sm-6">
-                            <select clid="list" name="race" class="form-control" autofocus="<? $this->post['race']?>" >
+                            <select clid="list" name="race" class="form-control" autofocus="<?=$this->post['race']?>" >
+                                <option value="<?=$this->post['race']?>" selected disabled hidden><p><?=$this->post['race']?></p></option>
                                 <option value="Sinhalese">Sinhalese</option>
                                 <option value="Tamil">Tamil</option>
                                 <option value="Muslim">Muslim</option>
@@ -92,7 +94,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="rank">Rank</label>
                         <div class="col-sm-6">
-                            <select clid="list" name="acl" class="form-control" autofocus="<? $this->post['acl']?>">
+                            <select clid="list" name="acl" class="form-control" autofocus="<?=$this->post['acl']?>">
+                                <option value="<?=$this->post['acl']?>" selected disabled hidden><p><?=$this->post['acl']?></p></option>
                                 <option value="Admin">Admin</option>
                                 <option value="Forman">Forman</option>
                                 <option value="Mechanics">Mechanics</option>
@@ -104,7 +107,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="religion">Religion</label>
                         <div class="col-sm-6">
-                            <select clid="list" name="religion" class="form-control" autofocus="<? $this->post['religion']?>">
+                            <select clid="list" name="religion" class="form-control" autofocus="<?=$this->post['religion']?>">
+                                <option value="<?=$this->post['religion']?>" selected disabled hidden><p><?=$this->post['religion']?></p></option>
                                 <option value="Buddhism">Buddhism</option>
                                 <option value="Hinduism">Hinduism</option>
                                 <option value="Christian">Christian</option>
@@ -127,10 +131,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-2">
+                        <div class="col-sm-offset-4 col-sm-3">
                             <button type="submit" class="btn btn-default" name="save" value="save">SAVE</button>
                         </div>
-                        <div class="col-sm-offset-1 col-sm-2">
+                        <div class="col-sm-offset col-sm-3">
                             <button type="submit" class="btn btn-default" name="delete" value="delete">DELETE</button></a>
                         </div>
                     </div>

@@ -175,7 +175,8 @@ class Admin extends Controller{
           ],
           'dob' => [
               'display' => 'Date Of Birth ',
-              'require' => true
+              'require' => true,
+              'date-past' => true
           ],
           'acl' => [
               'display' => 'Rank ',

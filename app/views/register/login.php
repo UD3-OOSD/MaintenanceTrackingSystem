@@ -26,10 +26,10 @@
       <label for="remember_me" class="control-label col-sm-8">Remember me<input type="checkbox" id="remember_me" name="remember_me" value="on"></label>
     </div>
       <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-2">
-              <button type="submit" class="btn btn-default">Submit</button>
+          <div class="col-sm-offset-3 col-sm-3">
+              <button type="submit" class="btn btn-default">Log in</button>
           </div>
-          <div class="col-sm-offset col-sm-2">
+          <div class="col-sm-offset col-sm-3">
               <a href="<?=PROOT?>register/validate"><button type="button" class="btn btn-default">Register</button></a>
           </div>
       </div>

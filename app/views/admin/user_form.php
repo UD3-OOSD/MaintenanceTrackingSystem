@@ -132,23 +132,14 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-2">
+            <div class="col-sm-offset-3 col-sm-3">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
-            <div class="col-sm-offset col-sm-2">
+            <div class="col-sm-offset col-sm-3">
                 <a href="EmployeeRegistrationForm.html"><button type="button" class="btn btn-default">Refresh</button></a>
             </div>
         </div>
     </form>
-</div>
-<div class="col-sm-6 reg minicontainer center">
-  <h1>send verification:</h1>
-  <form class="form-horizontal hr" action="./sendVarification" method="post">
-    <label for="mail">Email :</label>
-    <input type="email" name="mail" class="form-control">
-    <button type="submit" name="send" class = "btn btn-default">send</button>
-  </form>
-
 </div>
 
 <?php $this->end() ?>

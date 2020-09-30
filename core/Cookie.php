@@ -30,7 +30,6 @@ class Cookie {
       }
       $i = 0;
       while ($i<sizeof($name_list)){
-
           self::set($name_list[$i],$value_list[$i],100);
           #dnd($value_list[$i]);
           $i+=1;

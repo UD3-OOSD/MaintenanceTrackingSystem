@@ -85,14 +85,14 @@ class Register extends Controller{
               #dnd($res);
               if($res == ""){
                   $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">Verification key is invalid.</li>'.'</ul>';
-                  $this->view->render('register/validation');
+                  #$this->view->render('register/validation');
               }else{
                   #dnd($res);
                   Router::redirect('Register/register/'.$res);
               }
 
-          }
-          $this->view->displayErrors = $validation->displayErrors();
+          }else{
+          $this->view->displayErrors = $validation->displayErrors();}
       }
       $this->view->render('register/validation');
   }
@@ -118,7 +118,6 @@ class Register extends Controller{
         'email' => [
           'display' => 'Email',
           'require' => true,
-          'unique' => 'users',
           'max' => 150,
           'valid_email' => true
         ],
@@ -137,7 +136,7 @@ class Register extends Controller{
       if ($validation->passed()) {
         $newUser = new Users();
         $newUser->registerNewUser($_POST);
-        $newUser->login();
+        $newUser->login($_POST['lab_id']);
         Router::redirect('');
       }
     }

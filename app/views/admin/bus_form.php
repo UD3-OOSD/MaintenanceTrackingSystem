@@ -41,6 +41,7 @@
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
                 <select clid="list" name="BusCategory" class="form-control">
+                    <option value="<?=$this->post['BusCategory']?>" selected disabled hidden><p><?=$this->post['BusCategory']?></p></option>
                     <option value="Leyland">Leyland</option>
                     <option value="Honda">Honda</option>
                     <option value="Demo">Demo</option>
@@ -73,10 +74,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-2">
+            <div class="col-sm-offset-3 col-sm-3">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
-            <div class="col-sm-offset col-sm-2">
+            <div class="col-sm-offset col-sm-3">
                 <a href=""><button type="button" class="btn btn-default">Refresh</button></a>
             </div>
         </div>

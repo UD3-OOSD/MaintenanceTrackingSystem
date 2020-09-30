@@ -27,11 +27,10 @@
             <label class="control-label col-sm-4">Service type</label>
             <div class="col-sm-4">
                 <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" locked>
-                    <option value="Engine service">Engine service</option>
-                    <option value="axel service">axel service</option>
-                    <option value="gear box service">gear box service</option>
-                    <option value="break pad & break oil">break pad & break oil</option>
-                    <option value="Other">Other</option>
+                    <option value="<?=$this->post['ServiceType']?>" selected disabled hidden><p><?=$this->post['ServiceType']?></p></option>
+                    <option value="Tire">Tire</option>
+                    <option value="Oil">Oil</option>
+                    <option value="Engine">Engine</option>
                 </select>
             </div>
         </div>

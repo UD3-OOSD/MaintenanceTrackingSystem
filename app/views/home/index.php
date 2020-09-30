@@ -18,7 +18,7 @@
         <div class="page_header">
             <div class="row align-items-start">
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                    <img id="sl-img" class="mx-auto d-block" width="90" src="sl.png">
+                    <img id="sl-img" class="mx-auto d-block" width="90" src="<?=PROOT?>app/views/images/Emblem_of_Sri_Lanka.png">
                 </div>
                 <div id="sltb" class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="row text-center">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                    <img id="sltb-img" class="mx-auto d-block" width="200" height="120" src="sltb.png">
+                    <img id="sltb-img" class="mx-auto d-block" width="200" height="120" src="<?=PROOT?>app/views/images/sltb-sri-lanka-transport-board-logo-F90A8F0DBE-seeklogo.png">
                 </div>
             </div>
         </div>

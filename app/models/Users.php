@@ -59,16 +59,17 @@ class Users extends Model{
     return true;
   }
 
-  public function registerNewUser($params){
+  public function registerNewUser($params,$hash=''){
     $this->assign($params);
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
-    $hash = md5(uniqid() + rand(0, 100));
-    $this->VerificationKey = substr($hash,0,50);
+
+    $this->VerificationKey = $hash;
     #dnd($this);
     $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
       #dnd($this->LabourId);
     $this->save();
+    return $hash;
   }
 
   public static function loginUserFromCookie(){

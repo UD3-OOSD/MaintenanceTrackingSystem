@@ -13,7 +13,7 @@ class Labour {
   private static $lab = NULL;
 
 
-  public static function getMultitance($key,$state){
+    public static function getMultitance($key,$state){
       #dnd($key);
     if(!in_array($key,Labour::$keys)){
       return null;

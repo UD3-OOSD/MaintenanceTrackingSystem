@@ -42,10 +42,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-2">
+                    <div class="col-sm-offset-3 col-sm-3">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
-                    <div class="col-sm-offset-1 col-sm-2">
+                    <div class="col-sm-offset-1 col-sm-3">
                         <a href="ServiceRequestForm.html"><button type="button" class="btn btn-default">Refresh</button></a>
                     </div>
                 </div>

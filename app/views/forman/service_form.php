@@ -21,11 +21,10 @@
             <label class="control-label col-sm-4">Service type</label>
             <div class="col-sm-3">
                 <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" >
-                    <option value="Engine service">Engine service</option>
-                    <option value="axel service">axel service</option>
-                    <option value="gear box service">gear box service</option>
-                    <option value="break pad & break oil">break pad & break oil</option>
-                    <option value="Other">Other</option>
+                    <option value="<?=$this->post['ServiceType']?>" selected disabled hidden><p><?=$this->post['ServiceType']?></p></option>
+                    <option value="Tire">Tire</option>
+                    <option value="Oil">Oil</option>
+                    <option value="Engine">Engine</option>
                 </select>
             </div>
         </div>
@@ -42,10 +41,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-2">
+            <div class="col-sm-offset-3 col-sm-3">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
-            <div class="col-sm-offset col-sm-2">
+            <div class="col-sm-offset col-sm-3">
                 <a href=""><button type="button" class="btn btn-default">Refresh</button></a>
             </div>
         </div>

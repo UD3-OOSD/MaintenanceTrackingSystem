@@ -265,18 +265,19 @@ function filterToString($data,$heads){
     #dnd(gettype($data));
     if(gettype($data) != "object") {
         foreach ($data as $obj) {
-            #dnd($obj);
+            #print_r($obj);
             //$stdObj = new stdClass();
             foreach ($heads as $attr) {
                 #dnd($attr);
-                $stdObjs .= " " . $obj->$attr;
+                $stdObjs .= " " . join('-',explode(" ",$obj->$attr));
             }
         }
     }else{
         foreach ($heads as $attr) {
             #dnd($attr);
-            $stdObjs .= " " . $data->$attr;
+            $stdObjs .= " " . join('-',explode(" ",$obj->$attr));
         }
     }
-    return ltrim($stdObjs," ");
+    #dnd($stdObjs);
+    return trim($stdObjs," ");
 }

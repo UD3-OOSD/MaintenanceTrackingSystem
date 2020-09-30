@@ -1,7 +1,8 @@
 {
   "Home" : "home",
   "Forman" :{
-    "Home" : "forman/addService",
+    "Home" : "forman",
+    "Add Service" : "forman/addService",
     "Required Maintains" : "forman/approve",
     "Accepted Maintains" : "forman/accepted",
     "Started Maintains" : "forman/started",

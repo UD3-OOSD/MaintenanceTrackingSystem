@@ -42,7 +42,12 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
-                <input type="text" id="BusCategory" onclick="warn('BusCategory')" name='BusCategory' class="form-control" value="<?=$this->post['BusCategory']?>" locked>
+                <select clid="list" name='BusCategory' id="BusCategory" onclick="warn('BusCategory')" class="form-control" value="<?=$this->post['BusCategory']?>" locked>
+                    <option value="<?=$this->post['BusCategory']?>" selected disabled hidden><p><?=$this->post['BusCategory']?></p></option>
+                    <option value="Demo">Demo</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Layland">Leyland</option>
+                </select>
                 <div id="BusCategory-warn"></div>
             </div>
         </div>
@@ -72,10 +77,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-2">
+            <div class="col-sm-offset-3 col-sm-3">
                 <button type="submit" class="btn btn-default" name="save" value="save">SAVE</button>
             </div>
-            <div class="col-sm-offset col-sm-2">
+            <div class="col-sm-offset col-sm-3">
                 <button type="submit" class="btn btn-default" name="delete" value="delete">DELETE</button></a>
             </div>
         </div>
