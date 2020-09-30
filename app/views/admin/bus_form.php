@@ -41,10 +41,10 @@
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
                 <select clid="list" name="BusCategory" class="form-control">
-                    <option value="<?=$this->post['BusCategory']?>" selected disabled hidden><p><?=$this->post['BusCategory']?></p></option>
-                    <option value="Leyland">Leyland</option>
-                    <option value="Honda">Honda</option>
+                    <option value="<?=$this->post['BusCategory']?>" selected hidden><p><?=$this->post['BusCategory']?></p></option>
                     <option value="Demo">Demo</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Layland">Leyland</option>
                 </select>
             </div>
         </div>

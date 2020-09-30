@@ -6,8 +6,8 @@
     "Required Maintains" : "forman/approve",
     "Accepted Maintains" : "forman/accepted",
     "Started Maintains" : "forman/started",
-    "Finished Maintains" : "forman/closed",
-    "Closed Maintains" : "forman/close",
+    "Finished Maintains" : "forman/finished",
+    "Closed Maintains" : "forman/closed",
     "Expired Maintains" : "forman/expired"
   },
   "Admin" : {

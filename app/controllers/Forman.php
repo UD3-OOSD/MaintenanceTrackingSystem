@@ -106,7 +106,7 @@ class Forman extends Controller{
 
   }
 
-  public function closeAction($id = ''){
+  public function finishedAction($id = ''){
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {

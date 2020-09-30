@@ -1,7 +1,9 @@
 body{
     color: #002c53;
     #background: #737373;
-    background: #333333;
+    #background: #333333;
+    background-image: url(../app/views/images/back1.png);
+    background-repeat:repeat;
     font-family: 'Roboto', sans-serif;
 }
 h1{
@@ -10,7 +12,9 @@ h1{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .container{
-    background: #eaeaea;
+    #background: #eaeaea;
+    background-image: url(../app/views/images/back2.png);
+    background-repeat:repeat;
     padding: 10px;
     margin-left :auto;
     margin-right :auto;
@@ -20,7 +24,9 @@ h1{
     box-shadow:0px 0px 50px 20px rgba(0,0,0,0.79), 0 1px 4px rgba(0, 0, 0, 0.1) inset;
 }
 .minicontainer{
-    background: #eaeaea;
+    #background: #eaeaea;
+    background-image: url(../app/views/images/back2.png);
+    background-repeat:repeat;
     padding: 10px;
     margin-top: 10%;
     margin-left :auto;

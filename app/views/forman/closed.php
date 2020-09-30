@@ -2,14 +2,14 @@
 
 <?php $this->start('head') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table_sbh.js"></script>
+<script src="<?=PROOT?>js/table_sh.js"></script>
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>
 <div class="table-wrapper">
     <div class="table-title">
         <div class="row">
-            <div class="col-sm-8 head-text"><h2>Finished <b> Maintenance</b></h2></div>
+            <div class="col-sm-8 head-text"><h2>Closed <b> Maintenance</b></h2></div>
             <div class="table-filter">
                 <div class="search_box">
                     <label>Search:</label>

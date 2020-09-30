@@ -43,7 +43,7 @@
             <label class="control-label col-sm-4">Model</label>
             <div class="col-sm-4">
                 <select clid="list" name='BusCategory' id="BusCategory" onclick="warn('BusCategory')" class="form-control" value="<?=$this->post['BusCategory']?>" locked>
-                    <option value="<?=$this->post['BusCategory']?>" selected disabled hidden><p><?=$this->post['BusCategory']?></p></option>
+                    <option value="<?=$this->post['BusCategory']?>" selected hidden><p><?=$this->post['BusCategory']?></p></option>
                     <option value="Demo">Demo</option>
                     <option value="Honda">Honda</option>
                     <option value="Layland">Leyland</option>

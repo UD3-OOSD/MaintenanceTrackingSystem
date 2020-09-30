@@ -39,6 +39,7 @@
             <label class="control-label col-sm-4" for="lname">Title</label>
             <div class="col-sm-4">
                 <select clid="list" name="title" class="form-control">
+                    <option value="<?=$this->post['title']?>" selected hidden><p><?=$this->post['title']?></p></option>
                     <option value="Mr.">Mr.</option>
                     <option value="Mrs.">Mrs.</option>
                     <option value="Ms.">Ms.</option>
@@ -80,6 +81,7 @@
             <label class="control-label col-sm-4" for="race">Race</label>
             <div class="col-sm-4">
                 <select clid="list" name="race" class="form-control">
+                    <option value="<?=$this->post['race']?>" selected hidden><p><?=$this->post['race']?></p></option>
                     <option value="Sinhalese">Sinhalese</option>
                     <option value="Tamil">Tamil</option>
                     <option value="Muslim">Muslim</option>
@@ -92,6 +94,7 @@
             <label class="control-label col-sm-4" for="rank">Rank</label>
             <div class="col-sm-4">
                 <select clid="list" name="acl" class="form-control">
+                    <option value="<?=$this->post['acl']?>" selected hidden><p><?=$this->post['acl']?></p></option>
                     <option value="Admin">Admin</option>
                     <option value="Forman">Forman</option>
                     <option value="Mechanics">Mechanics</option>
@@ -104,6 +107,7 @@
             <label class="control-label col-sm-4" for="religion">Religion</label>
             <div class="col-sm-4">
                 <select clid="list" name="religion" class="form-control">
+                    <option value="<?=$this->post['religion']?>" selected hidden><p><?=$this->post['religion']?></p></option>
                     <option value="Buddhism">Buddhism</option>
                     <option value="Hinduism">Hinduism</option>
                     <option value="Christian">Christian</option>
@@ -136,7 +140,7 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
             <div class="col-sm-offset col-sm-3">
-                <a href="EmployeeRegistrationForm.html"><button type="button" class="btn btn-default">Refresh</button></a>
+                <a href=""><button type="button" class="btn btn-default">Refresh</button></a>
             </div>
         </div>
     </form>

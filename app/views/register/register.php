@@ -20,7 +20,7 @@
           <label class="control-label col-sm-4" for="rank">Rank</label>
           <div class="col-sm-4">
               <select clid="list" id="acl" onclick="warn('acl')" name="acl" class="form-control">
-                  <option value="<?=$this->post['acl']?>" selected disabled hidden><p><?=$this->post['acl']?></p></option>
+                  <option value="<?=$this->post['acl']?>" selected hidden><p><?=$this->post['acl']?></p></option>
                   <option value="Admin">Admin</option>
                   <option value="Forman">Forman</option>
                   <option value="Mechanics">Mechanics</option>

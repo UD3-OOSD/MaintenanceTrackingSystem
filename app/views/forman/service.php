@@ -30,7 +30,7 @@
             <label class="control-label col-sm-4">Service type :</label>
             <div class="col-sm-4">
                 <select clid="list" name="serviceType" id="serviceType" onclick="warn('serviceType')" class="form-control" autofocus="<?=$this->post['ServiceType']?>" locked>
-                    <option value="<?=$this->post['ServiceType']?>" selected disabled hidden><p><?=$this->post['ServiceType']?></p></option>
+                    <option value="<?=$this->post['ServiceType']?>" selected hidden><p><?=$this->post['ServiceType']?></p></option>
                     <option value="Tire">Tire</option>
                     <option value="Oil">Oil</option>
                     <option value="Engine">Engine</option>

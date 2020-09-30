@@ -72,19 +72,19 @@ class Admin extends Controller{
           'min' => 8  #check
         ],
         'EngineNumber' => [
-          'display' => 'Engine number',
+          'display' => 'EngineNumber',
           'require' => true,
           'unique' => 'bustable',
           'min' => 6,
         ],
         'ManufacturedYear' => [
-          'display' => 'Manufactured Year',
+          'display' => 'ManufacturedYear',
           'require' => true,
           'min' => 4,
           'date_past' => true,
         ],
         'BusCategory' => [
-          'display' => 'Model',
+          'display' => 'BusCategory',
           'require' => true,
         ],
         'Colour' => [
@@ -102,7 +102,7 @@ class Admin extends Controller{
           'positive' => true,
         ],
         'RegistrationDate' => [
-          'display' => 'Registration Date',
+          'display' => 'RegistrationDate',
           'require' => true,
           'date_past' => true,
         ]
