@@ -12,6 +12,10 @@ class Labour {
 
   private static $lab = NULL;
 
+  private function __construct()
+  {
+  }
+
 
     public static function getMultitance($key,$state){
       #dnd($key);
@@ -46,7 +50,7 @@ class Labour {
             Labour::$ls = ActiveLabour::getInstance();
             break;
         case '4':
-            Labour::$ls = ClosedBus::getInstance();
+            Labour::$ls = ClosedLabour::getInstance();
             break;
     }
   }

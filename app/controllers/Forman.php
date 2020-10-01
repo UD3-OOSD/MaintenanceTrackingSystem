@@ -240,9 +240,10 @@ class Forman extends Controller{
           if(isset($_POST['delete'])){
               //dnd('Command To Delete');
               $this->service = Service::getMultitance($this->_controller, '1');
+              Service::setId($_POST['ServiceId']);
               $this->service->set_trigger(0);
               $this->service->stateChange($this);
-              $this->service->getState()->delete($_POST['serviceId']);
+              $this->service->getState()->delete($_POST['ServiceId']);
               $this->view->displayarr1  = $this->view->displayarr2 = '';
               Router::redirect('forman');
           }

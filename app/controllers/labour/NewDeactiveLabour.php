@@ -52,8 +52,8 @@ class NewDeactiveLabour implements LabourState{
     //if invalide key.
     $this->view->render('validation');
     //else
-    $this->stateChange($lab);
-    $lab->getState()->edit();
+    //$this->stateChange($lab);
+    //$lab->getState()->edit();
   }
 
   public function checkValidation($id){

@@ -27,9 +27,10 @@
 
   </body>
   <body>
-  <div class="container-fluid" style="min-height:calc(100% - 125px);">
+  <div class="container-fluid" style="min-height:calc(100% - 125px);text-align: center !important;">
       <?=$this->content('foot'); ?>
-      <h6 class="watermark">designed by UD3</h6>
+      <div class="col mui--text-caption mui--text-light bottom-copyright-text" style="bottom: 2px; position: fixed; z-index: 95; color: #f2f2f2; opacity: 40%">© Copyright 2020. All Rights Reserved.</div>
+      <h6 class="watermark" style="bottom: 0px; ">designed by UD3</h6>
   </div>
   </body>
 </html>

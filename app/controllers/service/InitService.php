@@ -19,6 +19,7 @@ class InitService implements ServiceState{
   public function stateChange($service){
       if($service->get_trigger()){
           $service->setState('3');
+          dnd("doesn't work");
           InitService::$ServiceActiveModel->stateChange(Service::getId(),3);
 
       }else{
