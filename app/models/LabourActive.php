@@ -4,7 +4,7 @@ class LabourActive extends Model{
     public function __construct($labour = ''){
         $table = 'labourdetails';
         parent::__construct($table,'LabourActive');
-
+        $this->idtype = 'LabourId';
         if ($labour != '') {
             if (substr($labour,0,3)=='Lab') {
                 $l = $this->_db->findFirst('labourdetails', ['conditions' => 'LabourId = ?', 'bind' => [$labour]]);
@@ -77,5 +77,13 @@ class LabourActive extends Model{
             return($unique);
         }
         return false;
+    }
+
+    public function deleteLabour($id,$idtype){
+        #dnd($id);
+        $labour = $this->findByNIC($id);
+        #dnd($labour);
+        $labour->deleted = 1;
+        $labour->save();
     }
 }

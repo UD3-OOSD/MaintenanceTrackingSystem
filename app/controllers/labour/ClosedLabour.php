@@ -24,7 +24,7 @@ class ClosedLabour implements LabourState{
   public function delete($id){
     //delete particular records @avishka
     // add softdelete function in here. @devin.
-    ClosedLabour::$LabourActiveModel->deleted($id,'nic');
+    ClosedLabour::$LabourActiveModel->deleteLabour($id,'nic');
 
   }
 
