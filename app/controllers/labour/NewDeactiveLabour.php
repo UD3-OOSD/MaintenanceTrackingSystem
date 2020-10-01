@@ -25,13 +25,13 @@ class NewDeactiveLabour implements LabourState{
 
   public function fillAction($data){
         #dnd($data);
-    NewDeactiveLabour::$LabourActiveModel->registerNewLabouror($data);
     $rand = md5(uniqid() + rand(0, 100));
     $hash = substr($rand,0,50);
     #dnd('works');
     #dnd('0i0ifhjfioehiohgreirhjgieprhjiep0jhri');
     $this->send_mail($data['fullName'],$data['email'],$hash);
 
+    NewDeactiveLabour::$LabourActiveModel->registerNewLabouror($data);
     NewDeactiveLabour::$UsersModel->registerNewUser($data,$hash);
   }
 
