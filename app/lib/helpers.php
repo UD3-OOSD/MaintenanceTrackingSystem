@@ -210,14 +210,13 @@ function NicToId($id){
         $other = 'LabourId';
     }
 
-    return ModelCommon::selectAllArray('labourdetails',$column,$id)[0][$other];
+    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
 }
 
 function Nic2LabId($NIC){
     if ((substr($NIC,0,3)=='Lab')){
         return $NIC;
     }
-
     return NicToId($NIC);
 }
 
@@ -275,7 +274,7 @@ function filterToString($data,$heads){
     }else{
         foreach ($heads as $attr) {
             #dnd($attr);
-            $stdObjs .= " " . join('-',explode(" ",$obj->$attr));
+            $stdObjs .= " " . join('-',explode(" ",$data->$attr));
         }
     }
     #dnd($stdObjs);
