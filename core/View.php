@@ -12,8 +12,15 @@
       $viewString = implode(DS, $viewAry);
 
       if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$viewString.'.php')){
-        include(ROOT.DS.'app'.DS.'views'.DS.$viewString.'.php');
-        include(ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.$this->_layout.'.php');
+          if($viewString == 'home\index'){
+
+              include(ROOT.DS.'app'.DS.'views'.DS.$viewString.'.php');
+          }
+          else{
+              include(ROOT.DS.'app'.DS.'views'.DS.$viewString.'.php');
+              include(ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.$this->_layout.'.php');
+          }
+
       }else{
         die('This view\"'.$viewName.'\" does not exists.');
       }

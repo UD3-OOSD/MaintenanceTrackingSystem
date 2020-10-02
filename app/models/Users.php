@@ -60,6 +60,7 @@ class Users extends Model{
   }
 
   public function registerNewUser($params,$hash=''){
+      #dnd($params);
     $this->assign($params);
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);

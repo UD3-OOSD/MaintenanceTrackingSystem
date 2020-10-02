@@ -6,9 +6,9 @@
 
 body{
 background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.75)), url(../app/views/images/Front.jpg);
-height: 100vh;
+background-repeat: no-repeat;
+background-attachment: fixed;
 background-size: cover;
-background-position: center;
 max-width: inherit;
 margin: auto;
 max-width: inherit;
@@ -46,4 +46,12 @@ margin: auto;
 #btns:hover{
   background-color: #fff;
   color: #000;
+}
+.watermark {
+  position:fixed;
+  bottom:5px;
+  right:5px;
+  opacity:0.5;
+  z-index:99;
+  color: #f2f2f2;
 }

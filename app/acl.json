@@ -7,7 +7,7 @@
   },
   "LoggedIn" : {
     "denied" : {
-      "Home" : ["*"],
+      "Home" : ["index"],
       "Register" : ["login", "register"]
     },
     "Register" : ["logout"]
