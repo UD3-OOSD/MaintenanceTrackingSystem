@@ -64,13 +64,15 @@ class Users extends Model{
     $this->assign($params);
     $this->deleted = 0;
     $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
-
     $this->VerificationKey = $hash;
-    #dnd($this);
-    $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
-      #dnd($this->LabourId);
     $this->save();
     return $hash;
+  }
+
+  public function completeNewUser($params){
+      $this->assign($params);
+      $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
+      $this->save();
   }
 
   public static function loginUserFromCookie(){
