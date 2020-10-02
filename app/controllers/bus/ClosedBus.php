@@ -6,9 +6,11 @@ class ClosedBus  implements BusState{
 
   private static $closedbus = NULL;
   private static $BusMSModel;
+  private static $BusMEModel;
 
   private function __construct(){
       ClosedBus::$BusMSModel = ModelCommon::loading_model('BusMS');
+      ClosedBus::$BusMEModel = ModelCommon::loading_model('BusME');
   }
 
   public static function getInstance(){
@@ -27,6 +29,7 @@ class ClosedBus  implements BusState{
     //delete from $bussess with related services but not all. @avishka
     // add soft delete function to here. @devin
     ClosedBus::$BusMSModel->delete($id,'BusNumber');
+    ClosedBus::$BusMEModel->delete($id,'BusNumber');
   }
 
     public function updateDistance($BusNumber,$Distance)
