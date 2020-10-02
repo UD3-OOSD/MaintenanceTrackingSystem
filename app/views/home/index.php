@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
     <div class="page_header">
-        <div class="row align-items-start" style="margin-top: 5%">
+        <div class="row align-items-start" style="margin-top: 4%">
             <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                 <img id="sl-img" class="mx-auto d-block" width="90" src="<?=PROOT?>app/views/images/Emblem_of_Sri_Lanka.png">
             </div>
