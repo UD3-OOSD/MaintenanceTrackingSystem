@@ -68,18 +68,24 @@ class Model{
       return false;
   }
 
-  public function LeftJoinSpecific($tables,$keys,$params='*',$id=[]){
+  public function LeftJoinSpecific($tables,$keys,$params='*',$id=[],$unique=false){
     $rows = $this->LeftJoin($tables,$keys,$params);
     #dnd($rows);
     $result = [];
     if(!($id==[])){
         foreach($rows as $row){
-      #print_r($id);
+            #print_r($row);
             foreach($id as $key_id => $value_id){
+                #echo ($value_id);
                 if($row[$key_id]==$value_id){
-                 $result[] = $row;
+                    #print_r($row);
+                    $result[] = $row;
                  }
              }
+        }
+        #dnd('well');
+        if($unique){
+            $result=$result[0];
         }
         return $result;
     }

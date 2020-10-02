@@ -54,4 +54,8 @@ class SystemBus extends System
         }
         return false;
     }
+
+    public function update_distance($busnumber,$mileage){
+        return $this->BusMEModel->UpdateDistanceOfBus($busnumber,$mileage);
+    }
 }

@@ -6,6 +6,7 @@ class BusME extends Model{
   public function __construct($bus=''){
     $this->GrantedService = null ;
     $table='busmileage';
+    $this->idtype = 'BusNumber';
     parent::__construct($table,'BusME');
 
     if ($bus != '') {
@@ -30,11 +31,12 @@ class BusME extends Model{
     $tables=['bustable','buscategory'];
     $keys = ['BusCategory','BusType'];
     $params = ['bustable.BusId','buscategory.*'];
-    $id = ['BusNumber'=> $this->findIDbyBusNumber($this->BusNumber)];
+    $id = ['BusId'=> $this->findIDbyBusNumber($this->BusNumber)];
 
     //dnd($id);
-    $result=$this->LeftJoinSpecific($tables,$keys,$params,$id);
-    //dnd('here');
+    $result=$this->LeftJoinSpecific($tables,$keys,$params,$id,$unique=true);
+    #dnd('here');
+    #dnd($result);
     unset($result['BusId']);
     unset($result['BusType']);
     $filtered=[];
@@ -94,12 +96,11 @@ class BusME extends Model{
 
 
   public function UpdateTotalDistance($distance){
-      $this->TotalDistaceTravelled=$this->TotalDistaceTravelled+$distance;
+      $this->TotalDistanceTravelled=$this->TotalDistanceTravelled+$distance;
   }
 
   public function LogDistance($key,$distance){ #can be used to make zero
           $this->{$key}=$distance;
-          $this->save();
   }
 
   public function IncrementDistance($key,$distance){
@@ -114,19 +115,26 @@ class BusME extends Model{
   public function UpdateDistanceOfBus($id,$distance){
       //dnd('comes');
       $bus = $this->findByBusNumber($id);
-      //dnd($bus);
-      $bus->populatechecklist();
-      $bus->DistanceIncrement($distance);
+      if ($bus && isset($bus->deleted) && $bus->deleted==0){
+          $bus->populatechecklist();
+          $bus->DistanceIncrement($distance);
+          return true;
+      }
+      return false;
   }
 
   public function DistanceIncrement($distance){
       if (!($this->GrantedService == null) && isset($distance)){
           foreach ($this->GrantedService as $key => $value){
+              #print_r($this->GrantedService);
             $this->IncrementDistance($key,$distance);
           }
-          //dnd('is there any errore');
+          #dnd('is there any errore');
           $this->UpdateTotalDistance($distance);
+          $this->save();
+          return true;
       }
+      return false;
   }
 
   public function CheckForService(){

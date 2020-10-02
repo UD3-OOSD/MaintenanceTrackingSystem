@@ -42,7 +42,6 @@ class Clerk extends Controller{
               'reg_no' => [
                   'display' => 'Registration No.',
                   'require' => true,
-                  'is_numeric' => true,
               ],
               'mileage' => [
                   'display' => 'Mileage',
@@ -51,6 +50,7 @@ class Clerk extends Controller{
               ]
           ]);
           if ($validation->passed()) {
+              #dnd($this->SystemBus->update_distance($_POST['reg_no'],$_POST['mileage']));
             if(!$this->SystemBus->update_distance($_POST['reg_no'],$_POST['mileage'])){
                 $this->view->post = $posted_values;
                 $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">bus number is invalid.</li>'.'</ul>';
