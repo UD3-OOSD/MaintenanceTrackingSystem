@@ -36,6 +36,7 @@ class LabourActive extends Model{
     }
 
     public function registerNewLabouror($params){
+        print_r($params);
         $this->assign($params);
         $this->deleted=0;
         $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);

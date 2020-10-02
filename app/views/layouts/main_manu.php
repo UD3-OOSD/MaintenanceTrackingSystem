@@ -16,7 +16,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="" href="<?=PROOT?>home"><?=MENU_BRAND?></a>
+      <a class="" ><?=MENU_BRAND?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

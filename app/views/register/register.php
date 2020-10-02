@@ -23,7 +23,7 @@
                   <option value="<?=$this->post['acl']?>" selected hidden><p><?=$this->post['acl']?></p></option>
                   <option value="Admin">Admin</option>
                   <option value="Forman">Forman</option>
-                  <option value="Mechanics">Mechanics</option>
+                  <option value="Mechanic">Mechanics</option>
                   <option value="Clerk">Clerk</option>
                   <option value="Other">Other</option>
               </select>
