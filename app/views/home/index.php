@@ -1,6 +1,7 @@
 <?php $this->setSiteTitle('Home'); ?>
 
 <?php $this->start('head'); ?>
+<!--<link rel="stylesheet" href="<?=PROOT?>css/boostrap4.1.css" media="screen" title="no title" charset="utf-8" >-->
 <link rel="stylesheet" href="<?=PROOT?>css/home_index.css" media="screen" title="no title" charset="utf-8" >
 <link rel="stylesheet" href="<?=PROOT?>css/extra_css.css" media="screen" title="no title" charset="utf-8" >
 <style>
