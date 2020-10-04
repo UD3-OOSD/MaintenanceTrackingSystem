@@ -23,6 +23,7 @@ class Forman extends Controller{
 
   public function approveAction($id = ''){
       //$id = $_POST['service_num'];
+      #$SERVICEModel = new ServiceActive();
       if($id!= ''){
           #dnd($this->SystemService->check($id));
           $var = $this->SystemService->check($id);
@@ -37,10 +38,12 @@ class Forman extends Controller{
           }
       }
       //display resposive table ($_init)
+
       $serviceData = $this->SystemService->get(1);
       #dnd($serviceData);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Accept','approve']);
+      #sleep(5);
       $this->view->render('forman/required');
 
   }

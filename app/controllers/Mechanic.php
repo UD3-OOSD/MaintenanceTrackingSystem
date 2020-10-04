@@ -31,6 +31,7 @@ class Mechanic extends Controller{
           }
       }
 
+      #sleep(0.5);
       //display resposive table ($_closed)
       #dnd(Session::get('user-id'));
       $serviceData = $this->SystemService->checkSpecificLab(Session::get('user-id'),3);
@@ -50,6 +51,7 @@ class Mechanic extends Controller{
               Router::redirect('mechanic/finish');
           }
       }
+      #sleep(0.5);
 
       //display resposive table ($_closed)
       $serviceData = $this->SystemService->checkSpecificLab(Session::get('user-id'),4);

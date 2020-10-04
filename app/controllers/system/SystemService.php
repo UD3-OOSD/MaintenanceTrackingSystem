@@ -76,7 +76,7 @@ class SystemService extends System
     }
 
     public function updateServicesMetrics($id){
-        $params = $this->ServiceActiveModel->findByServiceId($id);
+        $params = ObjecttoArray($this->ServiceActiveModel->findByServiceId($id));
         $this->ServiceMatricsModel->addService($params);
     }
 
