@@ -15,6 +15,7 @@ class Forman extends Controller{
 
   public function indexAction(){
       $data = $this->SystemLabour->getLabour(Session::get('user-id'));
+      $this->SystemService->checkService();
       $posting_list = ['img_path'=> $data->img_path, 'id'=> $data->LabourId, 'name'=> $data->fullName, 'telNo'=> $data->tel, 'Address'=> $data->address];
       $this->view->post = $posting_list;
       $this->view->render('forman/index');
