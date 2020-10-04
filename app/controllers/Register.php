@@ -134,9 +134,8 @@ class Register extends Controller{
       ]);
 
       if ($validation->passed()) {
-        $newUser = new Users();
-        $newUser->registerNewUser($_POST);
-        $newUser->login($_POST['lab_id']);
+        $newUser = new Users($_POST['lab_id']);
+        $newUser->completeNewUser($_POST);
         Router::redirect('');
       }
     }
