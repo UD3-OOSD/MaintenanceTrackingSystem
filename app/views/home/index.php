@@ -42,7 +42,7 @@
         <div class="row align-items-center text-center">
             <div class="col"></div>
             <div class="col welcome" style="margin-top: 6%; letter-spacing: 6px;">
-                <h1 class="animate__animated animate__zoomIn animate__delay-0.2s">Welcome!</h1>
+                <h1 class="animate__animated animate__zoomIn animate__delay-0.5s">Welcome!</h1>
             </div>
             <div class="col"></div>
         </div>
