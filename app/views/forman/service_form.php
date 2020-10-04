@@ -9,7 +9,7 @@
     <div class="form-head">
         <div class="col-sm-8 head-text"><h2> add <b> Service </b></h2></div>
     </div>
-    <form class="form-horizontal hr" method="post" action="forman/addService">
+    <form class="form-horizontal hr" method="post" action="addService">
         <div class="dg-danger"><?= $this->displayErrors ?></div>
         <div class="form-group">
             <label class="control-label col-sm-4">Bus number : </label>
