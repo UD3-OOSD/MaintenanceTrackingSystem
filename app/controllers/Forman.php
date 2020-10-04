@@ -27,7 +27,9 @@ class Forman extends Controller{
           #dnd($this->SystemService->check($id));
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service->stateChange($this->service);
+              $service = Service::getMultitance('Forman','1');
+              $service->setId($id);
+              $service->getState()->stateChange($service);
               $this->SystemService->updateServicesMetrics($id);
           }else{
               echo $id." is invalid.";
@@ -45,16 +47,6 @@ class Forman extends Controller{
 
   public function closedAction($id=''){
 
-      if($id!= ''){
-          $var = $this->SystemService->check($id);
-          if($var) {
-              $this->service->stateChange($this->service);
-          }else{
-              echo $id." is invalid.";
-              Router::redirect('forman/closed');
-          }
-      }
-
       //display resposive table ($_closed)
       $serviceData = $this->SystemService->get(6);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
@@ -67,8 +59,10 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
+              $service = Service::getMultitance('Forman','1');
+              $service->setId($id);
               $this->service->set_trigger(0);
-              $this->service->stateChange($this->service);
+              $service->getState()->stateChange($service);
               $this->service->set_trigger(1);
           }else{
               echo $id." is invalid.";
@@ -85,7 +79,9 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service->stateChange($this->service);
+              $service = Service::getMultitance('Forman','1');
+              $service->setId($id);
+              $service->getState()->stateChange($service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/accepted');
@@ -112,8 +108,10 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service = $var;
-              $this->service->stateChange($this);
+              //$this->service->stateChange($this->service);
+              $service = Service::getMultitance('Forman','5');
+              $service->setId($id);
+              $service->getState()->stateChange($service);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/finished');
@@ -121,7 +119,7 @@ class Forman extends Controller{
       }
       $serviceData = $this->SystemService->get(5);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Close','close']);
+      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Close','finished']);
       $this->view->render('forman/finished');
 
   }

@@ -18,6 +18,7 @@ class DeletedService implements ServiceState{
 
   public function stateChange($service){
     $this->delete($service);
+    $this->ServiceActiveModel->stateChange($service->getId(),8);
   }
 
   public function saveState($id){

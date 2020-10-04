@@ -3,9 +3,10 @@
 class FinishedService implements ServiceState{
 
   private static $finservice = NULL;
+    private static $ServiceActiveModel;
 
   private function __construct(){
-
+      FinishedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -16,10 +17,11 @@ class FinishedService implements ServiceState{
   }
 
   public function stateChange($service){
-    if(!$service->get_trigger){
       $service->setState('6');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,6);
-    }// if service is not good then ? @nipun.
+      //dnd($this->ServiceActiveModel);
+      //$this->ServiceActiveModel->stateChange($service->ServiceId,6);
+      FinishedService::$ServiceActiveModel->stateChange($service->getId(),6);
+    // if service is not good then ? @nipun.
   }
 
     public function getState()
