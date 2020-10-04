@@ -79,7 +79,7 @@ class Forman extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $service = Service::getMultitance('Forman','1');
+              $service = Service::getMultitance('Forman','3');
               $service->setId($id);
               $service->getState()->stateChange($service);
           }else{
