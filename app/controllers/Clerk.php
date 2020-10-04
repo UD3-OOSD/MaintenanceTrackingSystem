@@ -8,6 +8,7 @@ class Clerk extends Controller{
     parent::__construct($controller_name, $action);
       $this->load_system('SystemLabour');
       $this->load_system('SystemBus');
+      $this->load_system('SystemService');
       $this->bus = Bus::getMultitance($this->_controller,'0');
   }
 
@@ -52,6 +53,7 @@ class Clerk extends Controller{
           if ($validation->passed()) {
               #dnd($this->SystemBus->update_distance($_POST['reg_no'],$_POST['mileage']));
             if(!$this->SystemBus->update_distance($_POST['reg_no'],$_POST['mileage'])){
+                $this->SystemService->checkService();
                 $this->view->post = $posted_values;
                 $this->view->displayErrors = '<ul class="bg-danger">'.'<li class="text-danger">bus number is invalid.</li>'.'</ul>';
                 $this->view->render('clerk/update');

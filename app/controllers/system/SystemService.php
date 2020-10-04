@@ -71,5 +71,9 @@ class SystemService extends System
         return($result);
     }
 
+    public function checkService(){
+        $this->ServiceActiveModel->checkAll();
+    }
+
 
 }
