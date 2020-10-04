@@ -18,10 +18,10 @@ class ExpiredService implements ServiceState{
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState('8');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,8);
+      $this->ServiceActiveModel->stateChange($service->getId(),8);
     }else{
       $service->setState('1');
-      $this->ServiceActiveModel->stateChange($service->ServiceId,1);
+      $this->ServiceActiveModel->stateChange($service->getId(),1);
       $this->delete_data($service);
     }
   }

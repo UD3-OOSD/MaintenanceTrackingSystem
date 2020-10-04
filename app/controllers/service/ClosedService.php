@@ -22,7 +22,10 @@ class ClosedService implements ServiceState{
   }
 
   public function stateChange($service){
+      $service->setState('8');
+      ClosedLabour::$ServiceActiveModel->stateChange(Service::getId(),8);
     $this->delete($service);
+
   }
 
   public function delete($id){

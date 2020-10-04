@@ -7,7 +7,8 @@ class Service{
   private static $caller = '';
   private static $keys = ['Admin','Mechanic','Forman'];
 
-  private static $ss, $_if = true, $time_bool = true, $service_id = '';
+  private static $ss, $_if = true, $time_bool = true;
+  private $service_id = '';
   #private static $count = 0;
   #private $ServiceId;
 
@@ -31,12 +32,12 @@ class Service{
     Service::$ss->stateChange($this);
   }
 
-  public static function setId($id){
-      Service::$service_id = $id;
+  public function setId($id){
+      $this->service_id = $id;
   }
 
-  public static function getId(){
-      return Service::$service_id;
+  public function getId(){
+      return $this->service_id;
   }
 
   public static function setState($st){
