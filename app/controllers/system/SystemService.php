@@ -63,11 +63,11 @@ class SystemService extends System
         $result = [];
         foreach ($services as $service=> $service_state){
             if ($service_state==$state){
-                $result[]=$service;
+                $result[]=$this->ServiceActiveModel->selectAll('ServiceId',$service);
             }
         }
 
-        #dnd($result);
+        dnd($result);
         return($result);
     }
 
