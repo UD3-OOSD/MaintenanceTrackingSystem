@@ -24,7 +24,9 @@ class Mechanic extends Controller{
       if($id != ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service->stateChange($this->service);
+              $service = Service::getMultitance('Mechanic','3');
+              $service->setId($id);
+              $service->getState()->stateChange($service);
           }else{
               echo $id." is invalid.";
               Router::redirect('mechanic/start');
@@ -45,7 +47,9 @@ class Mechanic extends Controller{
       if($id!= ''){
           $var = $this->SystemService->check($id);
           if($var) {
-              $this->service->stateChange($this->service);
+              $service = Service::getMultitance('Mechanic','4');
+              $service->setId($id);
+              $service->getState()->stateChange($service);
           }else{
               echo $id." is invalid.";
               Router::redirect('mechanic/finish');
