@@ -28,6 +28,7 @@ class Forman extends Controller{
           $var = $this->SystemService->check($id);
           if($var) {
               $this->service->stateChange($this->service);
+              $this->SystemService->updateServicesMetrics($id);
           }else{
               echo $id." is invalid.";
               Router::redirect('forman/approve');
