@@ -33,12 +33,13 @@ class Register extends Controller{
         #(password_verify(Input::get('password'), $user->password))? $v= "it's working." : $v = "it's not working";
         //echo Input::get('password') . ' '. $user->password;
         //dnd($user);
-        #$labourmodel = new LabourActive();
-        #$servicematrix = new ServiceMatrics();
-        #$labours = $labourmodel->selectAllArray('deleted',0,$filter=false);
-        #foreach ($labours as $labour){
-        #    $servicematrix->addLabour($labour['LabourId']);
-        #}
+        /*$labourmodel = new LabourActive();
+        $servicematrix = new ServiceMatrics();
+        $labours = $labourmodel->selectAllArray('deleted',0,$filter=false);
+        foreach ($labours as $labour){
+            $servicematrix->addLabour($labour['LabourId']);
+        }
+        */
         #$servicemodel = new ServiceActive();
         #$servicemodel->checkAll();
         #}
@@ -47,21 +48,15 @@ class Register extends Controller{
         #dnd('done');
             #$servicematrics->addservice($lab['LabourId']);
         #}
+          #$labourmodel = new LabourActive();
           /*
-        $services = $servicemodel->selectAllArray('deleted',1,$filter=false);
+          $servicematrix = new ServiceMatrics();
+          $servicemodel = new ServiceActive();
+        $services = $servicemodel->selectAllArray('deleted',0,$filter=false);
         foreach($services as $service){
-            $labourers = $service['Labourers'];
-            if($labourers){
-                $labourers=trim($labourers);
-                $labourers = explode(",",$labourers);
-                $result = [];
-                $result['ServiceId'] = $service['ServiceId'];
-                foreach ($labourers as $labourer){
-                    $result[$labourer] = $service['ServiceState'];
-                }
-                $servicematrix->addService($result);
+            $servicematrix->addService($service);
             }
-        }*/
+        */
 
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");

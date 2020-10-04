@@ -66,8 +66,8 @@ class SystemService extends System
                 $result[]=$this->ServiceActiveModel->selectAll('ServiceId',$service);
             }
         }
-
-        dnd($result);
+        #dnd("here");
+        #dnd($result);
         return($result);
     }
 

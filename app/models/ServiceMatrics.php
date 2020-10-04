@@ -52,10 +52,16 @@ class ServiceMatrics extends Model{
         $reformed['ServiceId'] = $params['ServiceId'];
         $reformed['deleted'] = 0;
 
-        dnd($reformed);
+        #dnd($reformed);
         if($params['Labourers']){
             foreach (explode(',',trim($params['Labourers'])) as $Labourer){
                 $reformed[$Labourer] = $params['ServiceState'];
+            }
+
+            foreach($this->_columnNames as $column){
+                if(!isset($reformed[$column])){
+                    $reformed[$column] = -1;
+                }
             }
         }
         #dnd($reformed);
@@ -96,6 +102,7 @@ class ServiceMatrics extends Model{
                 $services = array_merge($state_service, $services);
             }
         }
+        #dnd($services);
         return($services);
     }
 
