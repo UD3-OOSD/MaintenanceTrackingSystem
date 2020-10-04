@@ -28,7 +28,7 @@ class SystemService extends System
         if (is_int($state)){
 
             #return ModelCommon::selectAllArray('bustable','BusState',$state);
-            return $this->ServiceActiveModel->selectAll('ServiceState',$state);
+            return $this->ServiceMatricsModel->selectAll('ServiceState',$state);
         }
         return false;
     }
@@ -73,6 +73,11 @@ class SystemService extends System
 
     public function checkService(){
         $this->ServiceActiveModel->checkAll();
+    }
+
+    public function updateServicesMetrics($id){
+        $params = $this->ServiceActiveModel->findByServiceId($id);
+        $this->ServiceMatricsModel->addService($params);
     }
 
 
