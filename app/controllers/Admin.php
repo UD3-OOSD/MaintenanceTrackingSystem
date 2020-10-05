@@ -263,10 +263,12 @@ class Admin extends Controller{
                 'Mileage' => [
                     'display' => 'Mileage',
                     'require' => true,
+                    'positive'=>true,
                 ],
                 'NumberOfSeats' => [
                     'display' => 'NumberOfSeats',
                     'require' => true,
+                    'positive' => true,
                 ]
             ]);
             if ($validation->passed()) {
@@ -341,7 +343,8 @@ class Admin extends Controller{
                 ],
                 'dob' => [
                     'display' => 'Date Of Birth ',
-                    'require' => true
+                    'require' => true,
+                    'date_past' => true,
                 ],
                 'acl' => [
                     'display' => 'Rank ',

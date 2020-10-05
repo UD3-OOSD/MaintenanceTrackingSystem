@@ -155,8 +155,9 @@ class Forman extends Controller{
                   'min' => 4,
               ],
               'ServiceInitiatedDate' => [
-                  'display' => 'Start Date',
-                  'require' => true
+                  'display' => 'ServiceInitiatedDate',
+                  'require' => true,
+                  'date_future' => true,
               ]
           ]);
           if ($validation->passed()) {

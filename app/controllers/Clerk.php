@@ -46,7 +46,7 @@ class Clerk extends Controller{
               'mileage' => [
                   'display' => 'Mileage',
                   'require' => true,
-                  'is_numeric' => true
+                  'positive' => true
               ]
           ]);
           if ($validation->passed()) {
