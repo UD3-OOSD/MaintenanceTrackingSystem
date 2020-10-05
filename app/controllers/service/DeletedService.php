@@ -31,7 +31,7 @@ class DeletedService implements ServiceState{
   }
 
   public function delete($service){
-     DeletedService::$ServiceActiveModel->delete($service   ,'ServiceId');
+     DeletedService::$ServiceActiveModel->delete($service ,'ServiceId');
      DeletedService::$ServiceMatrixModel->delete($service ,'ServiceId');
     //@devin soft delete.
   }

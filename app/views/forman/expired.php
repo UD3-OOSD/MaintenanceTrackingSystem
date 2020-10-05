@@ -2,7 +2,7 @@
 
 <?php $this->start('head') ?>
 <link rel="stylesheet" href="<?=PROOT?>css/table-option_1.css" media="screen" title="no title" charset="utf-8" >
-<script src="<?=PROOT?>js/table_sbh.js"></script>
+<script src="<?=PROOT?>js/table_sh.js"></script>
 <?php $this->end() ?>
 
 <?php $this->start('body') ?>

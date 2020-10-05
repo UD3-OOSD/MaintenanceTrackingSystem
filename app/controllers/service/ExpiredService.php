@@ -3,9 +3,10 @@
 class ExpiredService implements ServiceState{
 
   private static $expservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-
+      ExpiredService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -18,10 +19,10 @@ class ExpiredService implements ServiceState{
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState('8');
-      $this->ServiceActiveModel->stateChange($service->getId(),8);
+      ExpiredService::$ServiceActiveModel->stateChange($service->getId(),8);
     }else{
-      $service->setState('1');
-      $this->ServiceActiveModel->stateChange($service->getId(),1);
+      $service->setState('0');
+      ExpiredService::$ServiceActiveModel->stateChange($service->getId(),0);
       $this->delete_data($service);
     }
   }

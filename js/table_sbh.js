@@ -33,13 +33,13 @@ function listToStd(data,heads){
 var cookies = document.cookie.replace(' ','').split(";").
 map(function(el){ return el.replace(' ','').split("="); }).
 reduce(function(prev,cur){ prev[cur[0]] = cur[1];return prev },{});
-console.log(cookies)
+//console.log(cookies)
 var headers = cookies['headers'].split('+');
 var caller = cookies['action'].replace('-','/');
 var fetData = listToStd(cookies["data"].split('+'),headers);
 var butName = cookies['buttonName'];
 var butaction = cookies['buttonAction'];
-console.log(fetData);
+//console.log(fetData);
 window.onload = () => {
     loadTableData(fetData);
 };

@@ -51,7 +51,7 @@ class Forman extends Controller{
       //display resposive table ($_closed)
       $serviceData = $this->SystemService->get(6);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
+      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'viewservice']);
       $this->view->render('forman/closed');
 
   }
@@ -100,7 +100,7 @@ class Forman extends Controller{
   public function startedAction(){
       $serviceData = $this->SystemService->get(4);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
+      Cookie::setList(['headers','data','action'],[listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'viewservice']);
       $this->view->render('forman/started');
 
   }
@@ -120,7 +120,7 @@ class Forman extends Controller{
       }
       $serviceData = $this->SystemService->get(5);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Close','finished']);
+      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'viewservice','Close','finished']);
       $this->view->render('forman/finished');
 
   }
@@ -128,7 +128,7 @@ class Forman extends Controller{
   public function expiredAction(){
       $serviceData = $this->SystemService->get(7);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
-      Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice','Renew','editService']);
+      Cookie::setList(['headers','data','action'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'editservice']);
       $this->view->render('forman/expired');
 
   }
@@ -174,22 +174,40 @@ class Forman extends Controller{
 
   }
 
-
-
-  public function editServiceAction(){
+  public function viewServiceAction(){
       $service_num = $_POST['service_num'];
       #dnd($_POST);
-      $this->service = Service::getMultitance($this->_controller,'2');
-      if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
-          $this->service->stateChange($this);
-          $details = $this->service->getState()->show($service_num);
+      $service = Service::getMultitance($this->_controller,'2');
+      $service->setId($service_num);
+      if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+          $details = $service->getState()->show($service_num);
           $this->view->displayErrors = '';
           $this->view->post = $details;
-          #dnd($details);
+          //dnd($details);
+          $this->view->render('forman/service_view');
+      }
+      else{
+          $this->view->displayarr1 = 'the entered Service number not in the system.';
+          $this->view->displayarr2 = '';
+          Router::redirect('forman');
+      }
+  }
+
+  public function editServiceAction(){
+
+      $service_num = $_POST['service_num'];
+      #dnd($_POST);
+      $service = Service::getMultitance($this->_controller,'2');
+      $service->setId($service_num);
+      if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+          $details = $service->getState()->show($service_num);
+          $this->view->displayErrors = '';
+          $this->view->post = $details;
+          //dnd($details);
           $this->view->render('forman/service');
       }
       else{
-          $this->view->displayarr1 = 'the entered Bus Number not in the system.';
+          $this->view->displayarr1 = 'the entered Service number not in the system.';
           $this->view->displayarr2 = '';
           Router::redirect('forman');
       }
@@ -198,24 +216,23 @@ class Forman extends Controller{
 
   public function saveServiceAction(){
       $validation = new Validate();
-      $posted_values = ['BusNumber' => '', 'EngineNumber' => '','ManufacturedYear' => '','Colour' => '','Mileage' => '', 'BusCategory' => '' , 'RegistrationDate' => '','NumberOfSeats' => '',];
+      $posted_values = ['ServiceId' => '', 'BusNumber' => '','serviceType' => '','Labourers' => '','ServiceInitialDate' => ''];
 
       if ($_POST){
           if(isset($_POST['save'])) {
               $posted_values = posted_values($_POST);
               $validation->check($_POST, [
-                  'serviceId' => [
+                  'ServiceId' => [
                       'display' => 'ServiceId',
                       'require' => true,
-                      'unique' => 'activeservice'
                   ],
                   'BusNumber' => [
                       'display' => 'BusNumber',
                       'require' => true,
                       'min' => 8  #check
                   ],
-                  'serviceType' => [
-                      'display' => 'serviceType',
+                  'ServiceType' => [
+                      'display' => 'ServiceType',
                       'require' => true,
                   ],
                   'Labourers' => [
@@ -223,35 +240,41 @@ class Forman extends Controller{
                       'require' => true,
                   ],
                   'ServiceInitialDate' => [
-                      'display' => 'ServiceDate',
+                      'display' => 'ServiceInitialDate',
                       'require' => true,
+                      'date_future' => true,
                   ]
               ]);
               if ($validation->passed()) {
                   #$bus_num = $_POST['bus_num'];
-                  $this->service = Service::getMultitance($this->_controller, '2');
-
-                  $this->service->getState()->updateDetails($_POST);
-                  $this->service->stateChange($this);
+                  $service = Service::getMultitance($this->_controller, '2');
+                  $service->setId($_POST['ServiceId']);
+                  $service->getState()->updateDetails($_POST);
+                  $service->stateChange($this);
                   Router::redirect('forman');
+
+              }
+              else{
+                  $this->view->post = $posted_values;
+                  $this->view->displayErrors = $validation->displayErrors();
               }
           }
-
           if(isset($_POST['delete'])){
-              //dnd('Command To Delete');
-              $this->service = Service::getMultitance($this->_controller, '1');
-              Service::setId($_POST['ServiceId']);
-              $this->service->set_trigger(0);
-              $this->service->stateChange($this);
-              $this->service->getState()->delete($_POST['ServiceId']);
+              $service = Service::getMultitance($this->_controller, '1');
+              $service->setId($_POST['ServiceId']);
+              //Service::setId($_POST['ServiceId']);
+              $service->set_trigger(0);
+              $service->stateChange($this);
+              $service->getState()->delete($_POST['ServiceId']);
               $this->view->displayarr1  = $this->view->displayarr2 = '';
               Router::redirect('forman');
           }
 
+
       }
       $this->view->post = $posted_values;
       $this->view->displayErrors = $validation->displayErrors();
-      $this->view->render('mechanic/index');
+      $this->view->render('forman/service');
       //validation
       //save in the DB -> look Admin saveBusAction();
   }
