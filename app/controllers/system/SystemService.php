@@ -59,14 +59,15 @@ class SystemService extends System
     }
 
     public function checkSpecificLab($lab,$state){
+        //dnd($lab);
         $services = ($this->ServiceMatricsModel->getServicesforLabour($lab));
         $result = [];
         foreach ($services as $service=> $service_state){
             if ($service_state==$state){
-                $result[]=$service;
+                $result[]=$this->ServiceActiveModel->selectAll('ServiceId',$service);
             }
         }
-
+        #dnd("here");
         #dnd($result);
         return($result);
     }
@@ -76,7 +77,7 @@ class SystemService extends System
     }
 
     public function updateServicesMetrics($id){
-        $params = $this->ServiceActiveModel->findByServiceId($id);
+        $params = ObjecttoArray($this->ServiceActiveModel->findByServiceId($id));
         $this->ServiceMatricsModel->addService($params);
     }
 

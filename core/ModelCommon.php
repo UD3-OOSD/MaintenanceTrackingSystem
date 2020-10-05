@@ -88,6 +88,7 @@ class ModelCommon{
   public static function nextID($table){
       $db= DB::getMultitance();
       $value = $db->numOfRows($table);
+      #dnd($table);
       $count = $value[0]["COUNT(*)"];
       $count+=1;
       return "{$count}";

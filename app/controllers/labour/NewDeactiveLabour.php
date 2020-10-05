@@ -26,7 +26,7 @@ class NewDeactiveLabour implements LabourState{
   public function fillAction($data){
         #dnd($data);
     $rand = md5(uniqid() + rand(0, 100));
-    $hash = substr($rand,0,50);
+    $hash = substr($rand,0,5);
     #dnd('works');
     #dnd('0i0ifhjfioehiohgreirhjgieprhjiep0jhri');
     $this->send_mail($data['fullName'],$data['email'],$hash);

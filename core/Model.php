@@ -253,10 +253,12 @@ class Model{
 
   public function selectAll($column,$key, $filter=true,  $single_lock = true){
         //dnd('selectall');
-        $results = $this->selectAllWithDelete($column,$key);
-        if($filter){
-            $results = filter($results);
-        }
+      $results = $this->selectAllWithDelete($column,$key);
+      #dnd($results);
+      if($filter){
+          $results = filter($results);
+      }
+
       if($single_lock){
           if (count($results)==1){
               return($results[0]);
