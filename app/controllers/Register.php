@@ -49,14 +49,14 @@ class Register extends Controller{
             #$servicematrics->addservice($lab['LabourId']);
         #}
           #$labourmodel = new LabourActive();
-          /*
+
           $servicematrix = new ServiceMatrics();
           $servicemodel = new ServiceActive();
-        $services = $servicemodel->selectAllArray('deleted',0,$filter=false);
+        $services = $servicemodel->selectAllArray('deleted',1,$filter=false);
         foreach($services as $service){
             $servicematrix->addService($service);
             }
-        */
+
 
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");

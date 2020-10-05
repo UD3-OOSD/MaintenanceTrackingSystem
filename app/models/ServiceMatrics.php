@@ -108,7 +108,7 @@ class ServiceMatrics extends Model{
 
     public function getServicesforLabour($LabourId){
         $services = $this->forSelectedLabouror($LabourId);
-        #dnd($services);
+        //dnd($services);
         $serviceIds = [];
 
         foreach($services as $service){
