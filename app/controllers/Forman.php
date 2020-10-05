@@ -37,6 +37,7 @@ class Forman extends Controller{
           }
       }
       //display resposive table ($_init)
+      //dnd($this->SystemService->get(1));
       $serviceData = $this->SystemService->get(1);
       #dnd($serviceData);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
@@ -228,7 +229,6 @@ class Forman extends Controller{
               ]);
               if ($validation->passed()) {
                   #$bus_num = $_POST['bus_num'];
-                  dnd('Proceeding Saving');
                   $this->service = Service::getMultitance($this->_controller, '2');
 
                   $this->service->getState()->updateDetails($_POST);
