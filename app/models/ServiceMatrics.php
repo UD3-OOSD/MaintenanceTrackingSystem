@@ -68,9 +68,7 @@ class ServiceMatrics extends Model{
         return $reformed;
     }
 
-    public function deleteService($ServiceId){
-        return $this->delete($ServiceId,$this->idtype);
-    }
+
     public function getLabourersforService($ServiceId){
         $service = $this->forselectedService($ServiceId);
         $labourers=[];
