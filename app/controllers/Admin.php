@@ -324,7 +324,7 @@ class Admin extends Controller{
                     'max' => 12,
                 ],
                 'tel' => [
-                    'display' => 'NumberOfSeats',
+                    'display' => 'tel',
                     'require' => true,
                     'is_numeric' => true,
                     'min' => 10

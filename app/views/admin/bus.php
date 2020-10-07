@@ -72,7 +72,7 @@
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="remember">I accept that this registration form is completed only by myself.</label>
+                    <label><input type="checkbox" name="remember" required>I accept that this registration form is completed only by myself.</label>
                 </div>
             </div>
         </div>

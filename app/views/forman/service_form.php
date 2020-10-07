@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Service type</label>
             <div class="col-sm-3">
-                <select id="list" name="serviceType" class="form-control" autofocus="<? $this->post['serviceType']?>" >
+                <select id="list" name="ServiceType" class="form-control" autofocus="<? $this->post['serviceType']?>" >
                     <option value="<?=$this->post['ServiceType']?>" selected hidden><p><?=$this->post['ServiceType']?></p></option>
                     <option value="Tire">Tire</option>
                     <option value="Oil">Oil</option>
@@ -37,7 +37,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Date : </label>
             <div class="col-sm-4">
-                <input type="date" id="ServiceInitiatedDate" name='ServiceInitialDate' class="form-control" value="<?=$this->post['ServiceInitialDate']?>" >
+                <input type="date" id="ServiceInitiatedDate" name="ServiceInitiatedDate" class="form-control" value="<?=$this->post['ServiceInitialDate']?>" >
             </div>
         </div>
         <div class="form-group">
