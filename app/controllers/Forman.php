@@ -142,7 +142,6 @@ class Forman extends Controller{
               'BusNumber' => [
                   'display' => 'BusNumber',
                   'require' => true,
-                  'unique' => 'bustable',
                   'min' => 8  #check
               ],
               'ServiceType' => [
@@ -155,7 +154,7 @@ class Forman extends Controller{
                   'min' => 4,
               ],
               'ServiceInitiatedDate' => [
-                  'display' => 'ServiceInitiatedDate',
+                  'display' => 'Service Initiated Date',
                   'require' => true,
                   'date_future' => true,
               ]

@@ -73,6 +73,7 @@ class Users extends Model{
       $this->assign($params);
       $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
       if($this->acl=='Mechanic'){
+          #dnd('here');
           ServiceMatrics::addLabour($this->LabourId);
       }
       $this->save();

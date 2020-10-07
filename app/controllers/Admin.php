@@ -157,7 +157,7 @@ class Admin extends Controller{
           'require' => true,
         ],
         'tel' => [
-          'display' => 'NumberOfSeats',
+          'display' => 'Phone number',
           'require' => true,
           'is_numeric' => true,
           'min' => 10
@@ -324,7 +324,7 @@ class Admin extends Controller{
                     'max' => 12,
                 ],
                 'tel' => [
-                    'display' => 'NumberOfSeats',
+                    'display' => 'Phone Number',
                     'require' => true,
                     'is_numeric' => true,
                     'min' => 10

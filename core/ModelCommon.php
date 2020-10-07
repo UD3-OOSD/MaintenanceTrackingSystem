@@ -40,6 +40,7 @@ class ModelCommon{
 
   public static function addColumn($table,$column_name,$data_type,$default = null){
       $db = DB::getMultitance();
+      #dnd($db);
       $db->addColumn($table,$column_name,$data_type,$default);
   }
 

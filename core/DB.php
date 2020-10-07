@@ -349,18 +349,27 @@
 
 
     public function addColumn($table,$column_name,$data_type,$default) {
-        if (isset($data_type)&&isset($column_name)&&isset($table)){
+        #echo($table);
+        #echo('<br>');
+        #echo($data_type);
+        #echo('<br>');
+        #echo($column_name);
+        #echo('<br>');
+        #echo($default);
+        #echo('<br>');
+        if (!is_null($data_type)&& !is_null($column_name) && !is_null($table)){
             if($default == null){
                 $sql ="ALTER TABLE {$table} ADD {$column_name} {$data_type} NULL";
             }else{
                 $sql = "ALTER TABLE {$table} ADD {$column_name} {$data_type} NOT NULL DEFAULT {$default}";
             }
-
+            #dnd($sql);
             if($this->query($sql)){
                 return(true);
             }
 
         }
+        #dnd('lol');
         return (false);
     }
 

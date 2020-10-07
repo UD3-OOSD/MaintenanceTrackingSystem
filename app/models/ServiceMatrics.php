@@ -4,11 +4,10 @@ class ServiceMatrics extends Model{
 
     public static $Instance;
     public static $states;
-    private static $table;
+    public static $table = 'servicematrics';
 
     public function __construct($service=''){
         $this->idtype = 'ServiceId';
-        ServiceMatrics::$table='servicematrics';
         ServiceMatrics::$states = [0 => 'NewService',
                                   1 => 'InitService',
                                   2 => 'LockedService',
@@ -34,6 +33,7 @@ class ServiceMatrics extends Model{
 
 
     public static function addLabour($LabId){
+        #dnd(ServiceMatrics::$table);
         if (ModelCommon::addColumn(ServiceMatrics::$table,$LabId,'INT(11)',-1)){
             return true;
         }
@@ -50,7 +50,7 @@ class ServiceMatrics extends Model{
         $columns = ($this->_columnNames);
         #dnd($columns);
         $reformed['ServiceId'] = $params['ServiceId'];
-        $reformed['deleted'] = 0;
+        $reformed['deleted'] = 1;
 
         #dnd($reformed);
         if($params['Labourers']){
