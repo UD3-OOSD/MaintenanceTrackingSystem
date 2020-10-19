@@ -37,7 +37,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Date : </label>
             <div class="col-sm-4">
-                <input type="date" id="ServiceInitiatedDate" name="ServiceInitiatedDate" class="form-control" value="<?=$this->post['ServiceInitialDate']?>" >
+                <input type="date" id="ServiceDate" name="ServiceDate" class="form-control" value="<?=$this->post['ServiceDate']?>" >
             </div>
         </div>
         <div class="form-group">
