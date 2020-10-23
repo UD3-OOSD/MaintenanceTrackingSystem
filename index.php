@@ -24,6 +24,8 @@
           require_once(ROOT.DS.'app'.DS.'controllers'.DS.'system'.DS.$classname.'.php');
       }elseif(file_exists(ROOT.DS.'app'.DS.'models'.DS.$classname.'.php')){
         require_once(ROOT.DS.'app'.DS.'models'.DS.$classname.'.php');
+      }elseif(file_exists(ROOT.DS.'app'.DS.'models'.DS.'communication'.DS.$classname.'.php')){
+          require_once(ROOT.DS.'app'.DS.'models'.DS.'communication'.DS.$classname.'.php');
       }
     }
 

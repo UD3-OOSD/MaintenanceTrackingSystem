@@ -32,9 +32,9 @@ class ServiceMatrics extends Model{
     }
 
 
-    public static function addLabour($LabId){
+    public function addLabour($LabId){
         #dnd(ServiceMatrics::$table);
-        if (ModelCommon::addColumn(ServiceMatrics::$table,$LabId,'INT(11)',-1)){
+        if ($this->addColumn($LabId,'INT(11)',-1)){
             return true;
         }
         return false;

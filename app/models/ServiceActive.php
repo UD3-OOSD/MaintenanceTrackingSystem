@@ -1,10 +1,13 @@
 <?php
 
 class ServiceActive extends Model{
+    private $CommandMap;
 
     public function __construct($service=''){
         $table='activeservices';
         parent::__construct($table,'ServiceActive');
+        $this->CommandMap = [];
+        $this->idtype = 'ServiceId';
         if ($service != '') {
             $s = null;
             if (substr($service,0,4)=='Serv') {
@@ -35,17 +38,29 @@ class ServiceActive extends Model{
         return($this->findFirst(['conditions'=>'ServiceId  = ?','bind'=>[$id]]));
     }
 
+    public function addCommandToMap($commands){
+        foreach ($commands as $command_name => $command){
+            $this->CommandMap[$command_name] = $command;
+        }
+    }
+
 
 
 
     public function registerNewService($params,$state=0){
-        $this->assign($params);
-        $this->deleted = 0;
-        $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
-        $this->ServiceState =$state;
-        #print_r($this);
-        $this->save();
-
+        if ($params){
+            if (!array_key_exists('BusCategoryFillCommunication',$this->CommandMap)){
+                $this->addCommandToMap(['BusCategoryFillCommunication'=>new BusCategoryFillCommunication()]);
+            }
+            $this->assign($params);
+            $this->deleted = 0;
+            $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
+            $this->ServiceState =$state;
+            $this->save();
+            if (!(isset($params['BusCategory']))){
+                $this->CommandMap['BusCategoryFillCommunication']->setDetails(['BusNumber'=>$this->BusNumber,'ServiceId'=>$this->ServiceId])->execute();
+            }
+        }
     }
     public function stateChange_this($state){
         return $this->stateChange($this->ServiceId,$state);

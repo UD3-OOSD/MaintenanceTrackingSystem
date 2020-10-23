@@ -3,6 +3,7 @@
 class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
+  protected $Communication_result;
     protected $idtype;
 
     public function __construct($table,$name = '',$acl='Other'){

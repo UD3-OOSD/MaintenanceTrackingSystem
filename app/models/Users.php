@@ -3,11 +3,13 @@
 class Users extends Model{
   private $_isLoggedIn, $_sessionName, $_cookieName;
   public static $currentLoggedInUser = null;
+  private $CommandMap;
 
   public function __construct($user = '',$acl='Other'){
     $table = 'users';
-    $this->idtype = 'LabourId';
     parent::__construct($table,'Users',$acl);
+    $this->idtype = 'LabourId';
+    $this->CommandMap = [];
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
     $this->_softDelete = true;
@@ -59,6 +61,12 @@ class Users extends Model{
     return true;
   }
 
+    public function addCommandToMap($commands){
+        foreach ($commands as $command_name => $command){
+            $this->CommandMap[$command_name] = $command;
+        }
+    }
+
   public function registerNewUser($params,$hash=''){
       #dnd($params);
     $this->assign($params);
@@ -73,8 +81,12 @@ class Users extends Model{
       $this->assign($params);
       $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
       if($this->acl=='Mechanic'){
-          #dnd('here');
-          ServiceMatrics::addLabour($this->LabourId);
+          if (!array_key_exists('AddLabourColumnCommunication',$this->CommandMap)){
+              $this->addCommandToMap(['AddLabourColumnCommunication'=>new AddLabourColumnCommunication()]);
+          }
+
+          $this->CommandMap['AddLabourColumnCommunication']->setDetails(['LabourId'=>$this->LabourId])->execute();
+          #ServiceMatrics::addLabour($this->LabourId);
       }
       $this->save();
   }
