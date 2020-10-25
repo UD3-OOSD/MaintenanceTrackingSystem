@@ -53,7 +53,8 @@ class BusME extends Model{
   public function NewBusDistanceUpdate($BusNumber,$Distance){
     #dnd($Distance);
 
-    $columns = ModelCommon::getColumnNames($this->_table);
+    #$columns = ModelCommon::getColumnNames($this->_table);
+    $columns = $this->getColumnNames();
     $params=['BusNumber'=>$BusNumber];
     #echo(implode('    |||',$columns));
     #dnd('..............................');
@@ -91,7 +92,14 @@ class BusME extends Model{
   }
 
   public function findIDbyBusNumber($BusNumber){
-      return (ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)['BusId']);
+      if(!array_key_exists('FindBusIdFromBusNumberCommunication',$this->CommandMap)){
+          $this->addCommandToMap(['FindBusIdFromBusNumberCommunication'=>new FindBusIdFromBusNumberCommunication()]);
+      }
+
+      if ($this->CommandMap['FindBusIdFromBusNumberCommunication']->setDetails(['BusNumber'=>$BusNumber])->communicate($this)){
+          return ($this->Communication_result);
+      }
+      //return (ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)['BusId']);
   }
 
 

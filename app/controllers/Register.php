@@ -50,14 +50,17 @@ class Register extends Controller{
         #}
           #$labourmodel = new LabourActive();
 
+        /*
           $servicematrix = new ServiceMatrics();
           $servicemodel = new ServiceActive();
         $services = $servicemodel->selectAllArray('deleted',1,$filter=false);
         foreach($services as $service){
             $servicematrix->addService($service);
             }
+        */
 
-
+          #$servicematrix0 = new ServiceMatrics();
+          #$servicematrix0::addLabour('Labour15');
 
          # ModelCommon::addColumn('users','VerificationKey',"VARCHAR(255)");
         if ($user&& password_verify(Input::get('password'),$user->password )) {

@@ -59,11 +59,12 @@ class Users extends Model{
     return true;
   }
 
+
   public function registerNewUser($params,$hash=''){
       #dnd($params);
     $this->assign($params);
     $this->deleted = 0;
-    $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+    $this->LabourId = 'Lab' . $this->nextID();
     $this->VerificationKey = $hash;
     $this->save();
     return $hash;
@@ -73,7 +74,12 @@ class Users extends Model{
       $this->assign($params);
       $this->password = password_hash($this->password,PASSWORD_DEFAULT);  // thus must uncomment.
       if($this->acl=='Mechanic'){
-          ServiceMatrics::addLabour($this->LabourId);
+          if (!array_key_exists('AddLabourColumnCommunication',$this->CommandMap)){
+              $this->addCommandToMap(['AddLabourColumnCommunication'=>new AddLabourColumnCommunication()]);
+          }
+
+          $this->CommandMap['AddLabourColumnCommunication']->setDetails(['LabourId'=>$this->LabourId])->execute();
+          #ServiceMatrics::addLabour($this->LabourId);
       }
       $this->save();
   }
@@ -137,7 +143,10 @@ class Users extends Model{
   }
 
   public static function get_img_path($user_id){
-      $user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
+      $GetImagePath = new GetImagePathCommunication();
+      #dnd($GetImagePath);
+      $user_img_path = $GetImagePath->setDetails(['LabourId'=>$user_id])->return();
+      #$user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
       return($user_img_path);
   }
 
@@ -154,8 +163,13 @@ class Users extends Model{
   }
 
   public function retrieval_verified_data($userobj){
+      if(!array_key_exists('RetrieveLabourDetailsCommunication',$this->CommandMap)){
+          $this->addCommandToMap(['RetrieveLabourDetailsCommunication'=>new RetrieveLabourDetailsCommunication()]);
+      }
+
       $user = ObjecttoArray($userobj);
-      $labour = ModelCommon::selectAllArray('labourdetails','LabourId',$user['LabourId']);
+      $this->CommandMap['RetrieveLabourDetailsCommunication']->setDetails(['LabourId'=>$user['LabourId']])->communicate($this);
+      $labour = $this->Communication_result; #ModelCommon::selectAllArray('labourdetails','LabourId',$user['LabourId']);
       $attrstring = '';
       $attributes = [];
 

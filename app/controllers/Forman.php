@@ -136,15 +136,14 @@ class Forman extends Controller{
 
   public function addServiceAction(){
       $validation = new Validate();
-      $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceInitiatedDate' => '','Labourers' => ''];
+      $posted_values = ['ServiceType' => '', 'BusNumber' => '','ServiceDate' => '','Labourers' => ''];
       if ($_POST) {
           $posted_values = posted_values($_POST);
           $validation->check($_POST, [
               'BusNumber' => [
                   'display' => 'BusNumber',
                   'require' => true,
-                  'unique' => 'bustable',
-                  'min' => 8  #check
+                  'min' => 5  #check
               ],
               'ServiceType' => [
                   'display' => 'Service Type',
@@ -155,8 +154,8 @@ class Forman extends Controller{
                   'require' => true,
                   'min' => 4,
               ],
-              'ServiceInitiatedDate' => [
-                  'display' => 'ServiceInitiatedDate',
+              'ServiceDate' => [
+                  'display' => 'Service Initiated Date',
                   'require' => true,
                   'date_future' => true,
               ]
@@ -170,7 +169,7 @@ class Forman extends Controller{
               Router::redirect('forman');
           }
       }
-      dnd($validation->displayErrors());
+      #dnd($validation->displayErrors());
       $this->view->post = $posted_values;
       $this->view->displayErrors = $validation->displayErrors();
       $this->view->render('forman/service_form');#check with @nip and @uda
