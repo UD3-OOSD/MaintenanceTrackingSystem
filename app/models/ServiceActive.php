@@ -1,12 +1,10 @@
 <?php
 
 class ServiceActive extends Model{
-    private $CommandMap;
 
     public function __construct($service=''){
         $table='activeservices';
         parent::__construct($table,'ServiceActive');
-        $this->CommandMap = [];
         $this->idtype = 'ServiceId';
         if ($service != '') {
             $s = null;
@@ -37,13 +35,6 @@ class ServiceActive extends Model{
     public function findByServiceId($id){
         return($this->findFirst(['conditions'=>'ServiceId  = ?','bind'=>[$id]]));
     }
-
-    public function addCommandToMap($commands){
-        foreach ($commands as $command_name => $command){
-            $this->CommandMap[$command_name] = $command;
-        }
-    }
-
 
 
 

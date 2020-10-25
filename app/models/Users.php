@@ -3,13 +3,11 @@
 class Users extends Model{
   private $_isLoggedIn, $_sessionName, $_cookieName;
   public static $currentLoggedInUser = null;
-  private $CommandMap;
 
   public function __construct($user = '',$acl='Other'){
     $table = 'users';
     parent::__construct($table,'Users',$acl);
     $this->idtype = 'LabourId';
-    $this->CommandMap = [];
     $this->_sessionName = CURRENT_USER_SESSION_NAME;
     $this->_cookieName = REMEMBER_ME_COOKIE_NAME;
     $this->_softDelete = true;
@@ -61,11 +59,6 @@ class Users extends Model{
     return true;
   }
 
-    public function addCommandToMap($commands){
-        foreach ($commands as $command_name => $command){
-            $this->CommandMap[$command_name] = $command;
-        }
-    }
 
   public function registerNewUser($params,$hash=''){
       #dnd($params);
@@ -150,7 +143,10 @@ class Users extends Model{
   }
 
   public static function get_img_path($user_id){
-      $user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
+      $GetImagePath = new GetImagePathCommunication();
+      #dnd($GetImagePath);
+      $user_img_path = $GetImagePath->setDetails(['LabourId'=>$user_id])->return();
+      #$user_img_path = ModelCommon::selectAllArray('Labourdetails','LabourId',$user_id)['img_path'];
       return($user_img_path);
   }
 
@@ -167,8 +163,13 @@ class Users extends Model{
   }
 
   public function retrieval_verified_data($userobj){
+      if(!array_key_exists('RetrieveLabourDetailsCommunication',$this->CommandMap)){
+          $this->addCommandToMap(['RetrieveLabourDetailsCommunication'=>new RetrieveLabourDetailsCommunication()]);
+      }
+
       $user = ObjecttoArray($userobj);
-      $labour = ModelCommon::selectAllArray('labourdetails','LabourId',$user['LabourId']);
+      $this->CommandMap['RetrieveLabourDetailsCommunication']->setDetails(['LabourId'=>$user['LabourId']])->communicate($this);
+      $labour = $this->Communication_result; #ModelCommon::selectAllArray('labourdetails','LabourId',$user['LabourId']);
       $attrstring = '';
       $attributes = [];
 

@@ -4,9 +4,11 @@ class NewService implements ServiceState{
 
   private static $newservice = NULL;
   private static $ServiceActiveModel;
+  private static $ServiceMatricsModel;
 
   private function __construct(){
       NewService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
+      NewService::$ServiceMatricsModel = ModelCommon::loading_model('ServiceMatrics');
   }
 
   public static function getInstance(){
@@ -30,6 +32,9 @@ class NewService implements ServiceState{
   public function fillAction($params){
       //@devin : check this out.
       NewService::$ServiceActiveModel->registerNewService($params);
+      if(isset($params['Labourers'])){
+          NewService::$ServiceMatricsModel->addService($params);
+      }
 
   }
 

@@ -22,4 +22,13 @@ class AddLabourColumnCommunication extends Communication{
         $this->ServiceMatrixModel->addLabour($this->LabourId);
         $this->resetSelf();
     }
+
+    function communicate($model){
+        //no implementation
+    }
+
+    function return()
+    {
+        // no implementation
+    }
 }

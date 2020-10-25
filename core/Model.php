@@ -4,10 +4,12 @@ class Model{
   protected $_db, $_table, $_modelName, $_softDelete =true , $_columnNames = [];
   public $id;
   protected $Communication_result;
+  protected $CommandMap;
     protected $idtype;
 
     public function __construct($table,$name = '',$acl='Other'){
     $this->_db = DB::getMultitance($acl);
+    $this->CommandMap = [];
     #echo($acl);
     $this->_table = $table;
     $this->acl = $acl;
@@ -17,6 +19,12 @@ class Model{
     else{    $this->_modelName = $name;}
 
   }
+
+    public function addCommandToMap($commands){
+        foreach ($commands as $command_name => $command){
+            $this->CommandMap[$command_name] = $command;
+        }
+    }
 
   protected function _setTableColumns(){
     $columns = $this->get_columns();
@@ -112,6 +120,16 @@ class Model{
     //($results);
     return $results;
   }
+  protected function numOfRows(){
+        return $this->_db->numOfRows($this->_table);
+  }
+
+  protected function nextID(){
+      $value = $this->numOfRows();
+      $count = $value[0]["COUNT(*)"];
+      $count+=1;
+      return "{$count}";
+  }
 
   public function findById($id){
     return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
@@ -128,7 +146,6 @@ class Model{
     // determine whether to update or INSERT
      #dnd($idtype);
     #dnd(property_exists($this, $idtype));
-     #dnd(ModelCommon::validationID($this->_table,$idtype,$this->{$idtype}));
     if(property_exists($this, $idtype) && ModelCommon::validationID($this->_table,$idtype,$this->{$idtype})){
       #dnd('doesnt work');
       return $this->update($idtype ,$this->{$idtype}, $fields);
@@ -138,6 +155,22 @@ class Model{
       #dnd('.......................................');
       return $this->insert($fields);
     }
+  }
+
+  public function validationID(){
+      $table= $this->_table;
+      $column = $this->idtype;
+      $value = $this->{$idtype};
+
+      $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
+      #print_r($params);
+      #echo('<br>');
+      #echo("{$column} = ?");
+      #print_r($db->find($table,$params));
+      if ($this->_db->find($table,$params)){
+          return(true);
+      }
+      return (false);
   }
 
   public function insert($fields){

@@ -31,4 +31,13 @@
             $this->ServiceId = $params['ServiceId'];
             return($this);
         }
+
+        function communicate($model){
+            // No implementation
+        }
+
+        function return()
+        {
+            // no implementation
+        }
     }
