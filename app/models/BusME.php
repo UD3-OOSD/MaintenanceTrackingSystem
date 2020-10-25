@@ -53,7 +53,8 @@ class BusME extends Model{
   public function NewBusDistanceUpdate($BusNumber,$Distance){
     #dnd($Distance);
 
-    $columns = ModelCommon::getColumnNames($this->_table);
+    #$columns = ModelCommon::getColumnNames($this->_table);
+    $columns = $this->getColumnNames();
     $params=['BusNumber'=>$BusNumber];
     #echo(implode('    |||',$columns));
     #dnd('..............................');

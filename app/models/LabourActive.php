@@ -39,7 +39,8 @@ class LabourActive extends Model{
         print_r($params);
         $this->assign($params);
         $this->deleted=0;
-        $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+        #$this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+        $this->LabourId = 'Lab' . $this->nextID();
         #dnd($this);
         $this->LabourState =0;
         $this->save();

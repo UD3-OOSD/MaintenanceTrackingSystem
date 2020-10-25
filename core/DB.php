@@ -190,7 +190,7 @@
         $this->runSQL($sql);
         #dnd($fieldString);
         #$this->query($sql);
-        return true;
+        return ($this->results());
       }
       #dnd($valueString);
       return false;

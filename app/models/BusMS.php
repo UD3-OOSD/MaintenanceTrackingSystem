@@ -27,7 +27,8 @@ class BusMS extends Model{
       #dnd($params);
     $this->assign($params);
     $this->deleted=0;
-    $this->BusId = 'Bus' . ModelCommon::nextID($this->_table);
+    #$this->BusId = 'Bus' . ModelCommon::nextID($this->_table);
+    $this->BusId = 'Bus' . $this->nextID();
     $this->BusState = 0;
     $this->save();
   }

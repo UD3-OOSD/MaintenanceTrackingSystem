@@ -64,7 +64,7 @@ class Users extends Model{
       #dnd($params);
     $this->assign($params);
     $this->deleted = 0;
-    $this->LabourId = 'Lab' . ModelCommon::nextID($this->_table);
+    $this->LabourId = 'Lab' . $this->nextID();
     $this->VerificationKey = $hash;
     $this->save();
     return $hash;

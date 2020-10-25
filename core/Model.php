@@ -131,6 +131,15 @@ class Model{
       return "{$count}";
   }
 
+  public function getColumnNames(){
+      $rows = $this->_db->getColumnNames($this->_table);
+      $values=[];
+      foreach($rows as $row){
+          array_push($values,$row['COLUMN_NAME']);
+      }
+      return($values);
+  }
+
   public function findById($id){
     return $this->findFirst(['conditions'=>"id = ?", 'bind' => [$id]]);
   }
@@ -146,7 +155,7 @@ class Model{
     // determine whether to update or INSERT
      #dnd($idtype);
     #dnd(property_exists($this, $idtype));
-    if(property_exists($this, $idtype) && ModelCommon::validationID($this->_table,$idtype,$this->{$idtype})){
+    if(property_exists($this, $idtype) && $this->validationID()){
       #dnd('doesnt work');
       return $this->update($idtype ,$this->{$idtype}, $fields);
     }else{

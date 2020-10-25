@@ -45,7 +45,8 @@ class ServiceActive extends Model{
             }
             $this->assign($params);
             $this->deleted = 0;
-            $this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
+            #$this->ServiceId = 'Serv' . ModelCommon::nextID($this->_table);
+            $this->ServiceId = 'Serv' . $this->nextID();
             $this->ServiceState =$state;
             $this->save();
             if (!(isset($params['BusCategory']))){
