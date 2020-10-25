@@ -169,7 +169,8 @@ class Model{
   public function validationID(){
       $table= $this->_table;
       $column = $this->idtype;
-      $value = $this->{$idtype};
+      $value = $this->{$this->idtype};
+      #dnd($value);
 
       $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
       #print_r($params);
@@ -177,6 +178,7 @@ class Model{
       #echo("{$column} = ?");
       #print_r($db->find($table,$params));
       if ($this->_db->find($table,$params)){
+          #dnd('true');
           return(true);
       }
       return (false);

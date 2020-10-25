@@ -2,11 +2,12 @@
 
 class ModelCommon{
 
+    /*
   public static function  find($table,$params = []){
     $db= DB::getMultitance();
     $results = [];
     $resultsQuery = $db->findArray($table, $params);
-    /*
+
     foreach ($resultsQuery as $result) {
 
 
@@ -18,10 +19,11 @@ class ModelCommon{
 
 
     }
-    */
+
     return $resultsQuery;
   }
-
+*/
+  /*
   public static function insert($table, $fields){
       $db=DB::getMultitance();
       return ($db->insert($table,$fields));
@@ -37,19 +39,24 @@ class ModelCommon{
     }
     return($values);
   }
+  */
 
+  /*
   public static function addColumn($table,$column_name,$data_type,$default = null){
       $db = DB::getMultitance();
       #dnd($db);
       $db->addColumn($table,$column_name,$data_type,$default);
   }
-
+  */
+  /*
   public static function UpdateRow($table, $unique, $fields){
       $db = DB::getMultitance();
       return $db->updateRow($table, $unique, $fields);
 
   }
+  */
 
+  /*
   public static function KeyExist($table, $unique=[]){
       $db= DB::getMultitance();
       if($unique != []){
@@ -66,7 +73,7 @@ class ModelCommon{
       }
       return (false);
 }
-
+  */
   public static function validationID($table , $column ,$value){
       $db = DB::getMultitance();
       $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
@@ -85,7 +92,7 @@ class ModelCommon{
           return (new $model());
       }
   }
-
+  /*
   public static function nextID($table){
       $db= DB::getMultitance();
       $value = $db->numOfRows($table);
@@ -94,9 +101,9 @@ class ModelCommon{
       $count+=1;
       return "{$count}";
   }
+  */
 
-
-
+  /*
   public static function ObjectTOArray($obj){
     if (is_object($obj)) {
         // Gets the properties of the given object
@@ -106,11 +113,7 @@ class ModelCommon{
     }
 
     if (is_array($obj)) {
-        /*S
-        * Return array converted to object
-        * Using __FUNCTION__ (Magic constant)
-        * for recursive call
-        */
+
         #echo(implode('    |||',$obj));
         return array_map(__FUNCTION__, $obj);
     } else {
@@ -118,7 +121,9 @@ class ModelCommon{
         return $obj;
     }
   }
+  */
 
+  /*
   public static function selectAllWithDelete($table,$column,$key){
       $db = DB::getMultitance();
       $results=[];
@@ -133,6 +138,7 @@ class ModelCommon{
       }
       return(false);
   }
+  */
 
     public static function selectAllArrayWithDelete($table,$column,$key){
         $db = DB::getMultitance();
@@ -149,6 +155,7 @@ class ModelCommon{
         return(false);
     }
 
+    /*
     public static function selectAll($table,$column,$key,$filter=true , $single_lock = true){
         $results = ModelCommon::selectAllWithDelete($table,$column,$key);
         if($filter){
@@ -163,6 +170,7 @@ class ModelCommon{
         return $results;
 
     }
+    */
 
     public static function selectAllArray($table,$column ='deleted',$key = 0,$filter=true, $single_lock = true){
         $results = ModelCommon::selectAllArrayWithDelete($table,$column,$key);
