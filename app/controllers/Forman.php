@@ -163,7 +163,7 @@ class Forman extends Controller{
           if ($validation->passed()) {
               $this->service = Service::getMultitance($this->_controller,'0');
               $this->service->getState()->fillAction($_POST);
-              $this->service->set_trigger();
+              $this->service->set_trigger(1);
               #$this->service->fillAction($_POST,'forman');
               $this->service->stateChange($this->service);
               Router::redirect('forman');
