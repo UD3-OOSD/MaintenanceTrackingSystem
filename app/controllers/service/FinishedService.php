@@ -18,7 +18,6 @@ class FinishedService implements ServiceState{
 
   public function stateChange($service){
       $service->setState('6');
-      //dnd($this->ServiceActiveModel);
       //$this->ServiceActiveModel->stateChange($service->ServiceId,6);
       FinishedService::$ServiceActiveModel->stateChange($service->getId(),6);
     // if service is not good then ? @nipun.
