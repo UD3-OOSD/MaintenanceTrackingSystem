@@ -73,7 +73,8 @@ class Service{
       #return Service::$ss;
   }
   public function setAttr($data){
-      $columns = ModelCommon::getColumnNames('activeservices');
+      #$columns = ModelCommon::getColumnNames('activeservices');
+      $columns = Service::$ss->getColumnNames();
       foreach ($data as $key => $value){
           if(in_array($key,$columns)){
               $this->$key = $value;

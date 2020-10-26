@@ -18,6 +18,10 @@ class NewService implements ServiceState{
     return NewService::$newservice;
   }
 
+  public function getColumnNames(){
+      return NewService::$ServiceActiveModel->getColumnNames();
+  }
+
   public function stateChange($service){
     if($service->get_trigger()){
       $service->setState('3');
