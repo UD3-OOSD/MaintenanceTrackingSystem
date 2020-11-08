@@ -27,8 +27,10 @@ class ClosedLabour implements LabourState{
     //delete particular records @avishka
     // add softdelete function in here. @devin.
     #dnd(currentUser());
+    #dnd($nic);
     $LabourId = Nic2LabId($nic);
     if(currentUser()->LabourId != $LabourId){
+        #dnd('fine');
         ClosedLabour::$UsersModel->delete($LabourId,'LabourId');
         ClosedLabour::$LabourActiveModel->delete($nic,'nic');
     }

@@ -32,7 +32,7 @@ class LabourActive extends Model{
         //dnd($id);
         $params=$this->createunique($id);
         //dnd($params);
-        return $this->isValidKey($params);
+        return($this->isValidKey($params) && $this->findcheck($params));
     }
 
     public function registerNewLabouror($params){

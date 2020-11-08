@@ -69,7 +69,7 @@ class ServiceActive extends Model{
 
     public function  isServiceIdValid($id){
         $params=['ServiceId'=>$id];
-        return $this->isValidKey($params);
+        return ($this->isValidKey($params) && $this->findcheck($params));
     }
 
     public function edit($id,$params){

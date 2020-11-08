@@ -111,7 +111,7 @@ function sendMail($to,$header,$mass,$link=''){
 function validationID($table , $column , $value ,$tag){
 
     $html = '<ul class="id_danger">';
-    if (ModelCommon::validationID($table, $column, $value)) {
+    if (ID_isvalid($table, $column, $value)) {
         $html .= '<li class="text-danger">' . "The {$value} is not in {$column} in table {$table}" . '</li>';
         $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#' . $tag . '").parent().closest("div").addClass("has-error");});</script>';
     } else {
@@ -125,10 +125,15 @@ function validationID($table , $column , $value ,$tag){
 
 }
 
+function ID_isvalid($table, $column, $value){
+    $model = ModelCommon::loading_model($table);
+    return $model->isValidKey([$column=>$value]);
+}
+
 function validationID($table , $column , $value ,$tag){
 
    $html = '<ul class="id_danger">';
-   if(ModelCommon::validationID($table , $column , $value)){
+   if(ID_isvalid($table , $column , $value)){
        $html .= '<li class="text-danger">'."The {$value} is not in {$column} in table {$table}".'</li>';
        $html .= '<script>jQuery{"document"}.ready(function(){jQuery("#'.$tag.'").parent().closest("div").addClass("has-error");});</script>';
    }else{
@@ -201,7 +206,7 @@ function filter_attr($collection, $attrs){
 }
 
 function NicToId($id){
-    #dnd('arrived');
+    #dnd($id);
     if (substr($id,0,3)=='Lab'){
         $column = 'LabourId';
         $other = 'nic';
@@ -209,8 +214,11 @@ function NicToId($id){
         $column = 'nic';
         $other = 'LabourId';
     }
-
-    return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
+    #dnd($id);
+    $Labour = ModelCommon::loading_model('LabourActive',$specific = $id);
+    #dnd('after');
+    return $Labour->{$other};
+    #return ModelCommon::selectAllArray('labourdetails',$column,$id)[$other];
 }
 
 function Nic2LabId($NIC){
@@ -233,7 +241,9 @@ function BusNumber2Id($BusNumber){
         return($BusNumber);
     }
 
-    return ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)[0]['BusId'];
+    $bus = ModelCommon::loading_model('bustable',$BusNumber);
+    return $bus->BusId;
+    #return ModelCommon::selectAllArray('bustable','BusNumber',$BusNumber)[0]['BusId'];
 }
 
 function listToString($list){

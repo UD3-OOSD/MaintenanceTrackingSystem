@@ -69,7 +69,8 @@ class Mechanic extends Controller{
         #dnd($this->_controller);
         $this->service = Service::getMultitance($this->_controller,'2');
         #dnd($this->service);
-        if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+        #if($this->service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+        if($this->service->getState()->checkId($service_num)){
             $this->service->stateChange($this);
             $details = $this->service->getState()->show($service_num);
             $this->view->displayErrors = '';

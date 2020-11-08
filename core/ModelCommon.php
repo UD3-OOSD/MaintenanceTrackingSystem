@@ -2,6 +2,24 @@
 
 class ModelCommon{
 
+    public static function loading_model( $model,$specific = null){
+        #echo('fuck you');
+        #echo('<br>');
+        #echo($model);
+        #echo(class_exists($model) && is_string($specific));
+        #echo('<br>');
+        if (class_exists($model) && !is_string($specific)) {
+            #echo('1');
+            return (new $model());
+        }
+
+        if (class_exists($model) && is_string($specific)) {
+            #echo('2');
+            return (new $model($specific));
+        }
+
+    }
+
     /*
   public static function  find($table,$params = []){
     $db= DB::getMultitance();
@@ -74,6 +92,7 @@ class ModelCommon{
       return (false);
 }
   */
+  /*
   public static function validationID($table , $column ,$value){
       $db = DB::getMultitance();
       $params=['conditions'=> "{$column} = ?",'bind'=>[$value]];
@@ -86,12 +105,9 @@ class ModelCommon{
       }
       return (false);
   }
+   */
 
-  public static function loading_model( $model){
-      if (class_exists($model)) {
-          return (new $model());
-      }
-  }
+
   /*
   public static function nextID($table){
       $db= DB::getMultitance();
@@ -139,7 +155,7 @@ class ModelCommon{
       return(false);
   }
   */
-
+    /*
     public static function selectAllArrayWithDelete($table,$column,$key){
         $db = DB::getMultitance();
         $results=[];
@@ -153,7 +169,7 @@ class ModelCommon{
             }
         }
         return(false);
-    }
+    }*/
 
     /*
     public static function selectAll($table,$column,$key,$filter=true , $single_lock = true){
@@ -172,6 +188,8 @@ class ModelCommon{
     }
     */
 
+    /*
+
     public static function selectAllArray($table,$column ='deleted',$key = 0,$filter=true, $single_lock = true){
         $results = ModelCommon::selectAllArrayWithDelete($table,$column,$key);
         if($filter){
@@ -185,5 +203,6 @@ class ModelCommon{
         }
         return $results;
     }
+    */
 
 }

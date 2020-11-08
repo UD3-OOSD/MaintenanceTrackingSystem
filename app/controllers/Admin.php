@@ -205,7 +205,8 @@ class Admin extends Controller{
     #$this->bus->setTableState(3);//set state to '1' and in the checkId method stateChange();
       //dnd($this->bus->getState()->checkId($bus_num));
       #dnd($this->bus->getState()->checkId($bus_num));
-      if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
+      #if($this->bus->getState()->checkId($bus_num) && ModelCommon::selectAllArray('bustable','BusNumber',$bus_num)){
+      if($this->bus->getState()->checkId($bus_num)){
         //$this->bus->set_trigger();
         $this->bus->stateChange($this->bus);
         $details = $this->bus->getState()->show($bus_num);
@@ -226,7 +227,8 @@ class Admin extends Controller{
     //$details = ActiveLockLabour::getInstance()->fitAction($lab_id);
     $this->lab = Labour::getMultitance($this->_controller,'2');
     #dnd(ModelCommon::selectAllArray('labourdetails','LabourId',$lab_id));
-    if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','LabourId',$lab_id)){
+    #if($this->lab->getState()->checkId($lab_id) && ModelCommon::selectAllArray('labourdetails','LabourId',$lab_id)){
+    if($this->lab->getState()->checkId($lab_id)){
         $this->lab->stateChange($this->lab);
         #dnd($this->lab->getState()->show($lab_id));
         $details = $this->lab->getState()->show($lab_id);

@@ -50,6 +50,14 @@ class BusME extends Model{
     return $filtered;
   }
 
+  public function removeAllServicesOfBus($id){
+      if(!array_key_exists('RemoveAllServicesOfBus',$this->CommandMap)){
+          $this->addCommandToMap(['RemoveAllServicesOfBus'=>new RemoveAllServicesOfBus()]);
+      }
+
+      $this->CommandMap['RemoveAllServicesOfBus']->setDetails(['BusNumber'=>$id])->execute();
+  }
+
   public function NewBusDistanceUpdate($BusNumber,$Distance){
     #dnd($Distance);
 
@@ -81,8 +89,9 @@ class BusME extends Model{
   public function  isBusNumberValid($id){
       #dnd($id);
       $params=['BusNumber'=>$id];
-      #dnd($this->isValidKey($params));
-      return $this->isValidKey($params);
+      #dnd($params);
+      #dnd($this->findcheck($params));
+      return ($this->isValidKey($params) && $this->findcheck($params));
   }
 
 
@@ -161,6 +170,15 @@ class BusME extends Model{
       $bus->populatechecklist();
       return $bus->CheckForService();
   }
+
+  /*
+    public function findcheck($params){
+      $bus = $this->find(['conditions'=>'BusNumber = ?', 'bind'=>[$params['BusNumber']]]);
+      if($bus && isset($bus->BusNumber) && !is_null($bus->BusNumber) && isset($bus->deleted) && $bus->deleted==0){
+          return true;
+      }
+      return false;
+    }*/
 }
 
 

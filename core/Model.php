@@ -198,10 +198,13 @@ class Model{
     return $this->_db->UpdateRow($this->_table,[$idtype=>$id],$fields);
   }
 
+  public function getDeleteOption(){
+      return $this->_softDelete;
+  }
+
   public function delete($id='',$idname=''){
         //dnd('ojhaeuhbfyr3w');
     if($id == '' && $idname = '') return false;
-
     $id = ($id == '' ) ? $this->{$idname} : $id;
 
     if($this->_softDelete){
@@ -274,6 +277,21 @@ class Model{
       return (false);
       #dnd($params);
   }
+
+    public function findcheck($params){
+        foreach ($params as $key => $value){
+            #echo($key)
+            $condition = $key.' = ?';
+            #print_r(['conditions'=>$key, 'bind'=>[$value]]);
+            #dnd($key);
+            $object = $this->findFirst(['conditions'=>$condition, 'bind'=>[$value]]);
+            #dnd($object);
+            if($object && isset($object->{$key}) && !is_null($object->{$key}) && isset($object->deleted) && $object->deleted==0){
+                return true;
+            }
+            return false;
+        }
+    }
 
   public function addColumn($column_name,$data_type,$default = null){
     return $this->_db->addColumn($this->_table,$column_name,$data_type,$default);

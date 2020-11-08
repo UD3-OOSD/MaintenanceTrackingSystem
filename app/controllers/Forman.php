@@ -181,7 +181,8 @@ class Forman extends Controller{
       #dnd($_POST);
       $service = Service::getMultitance($this->_controller,'2');
       $service->setId($service_num);
-      if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+      #if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+      if($service->getState()->checkId($service_num)){
           $details = $service->getState()->show($service_num);
           $this->view->displayErrors = '';
           $this->view->post = $details;
@@ -201,7 +202,8 @@ class Forman extends Controller{
       #dnd($_POST);
       $service = Service::getMultitance($this->_controller,'2');
       $service->setId($service_num);
-      if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+      #if($service->getState()->checkId($service_num) && ModelCommon::selectAllArray('activeservices','ServiceId',$service_num)){
+      if($service->getState()->checkId($service_num)){
           $details = $service->getState()->show($service_num);
           $this->view->displayErrors = '';
           $this->view->post = $details;
