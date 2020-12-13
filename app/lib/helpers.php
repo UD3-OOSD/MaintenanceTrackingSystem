@@ -277,7 +277,8 @@ function filterToString($data,$heads){
             #print_r($obj);
             //$stdObj = new stdClass();
             foreach ($heads as $attr) {
-                #dnd($attr);
+                #echo($attr);
+                #echo('<br>');
                 $stdObjs .= " " . join('-',explode(" ",$obj->$attr));
             }
         }

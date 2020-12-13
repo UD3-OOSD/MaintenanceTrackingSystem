@@ -119,7 +119,7 @@ class Forman extends Controller{
           }
       }
       $serviceData = $this->SystemService->get(5);
-      dnd($serviceData);
+      #dnd($serviceData);
       $serviceHeads = ['ServiceId','ServiceType','BusNumber','ServiceDate'];
       Cookie::setList(['headers','data','action','buttonName','buttonAction'], [listToString($serviceHeads),filterToString($serviceData,$serviceHeads),'viewservice','Close','finished']);
       $this->view->render('forman/finished');
