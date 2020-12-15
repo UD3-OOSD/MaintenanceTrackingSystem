@@ -68,8 +68,23 @@ class SystemService extends System
             }
         }
         #dnd("here");
-        #dnd($result);
-        return($result);
+
+        $filtered = [];
+        //foreach($result as $r){
+         //   if($r )
+        //}
+        //$finished=[];
+        if(is_array($result)){
+            //$finished = [];
+            foreach ($result as $r){
+                $arr = (array)$r;
+                if ($arr){
+                    $filtered[] = $r;
+                }
+            }
+        }
+        #dnd($filtered);
+        return($filtered);
     }
 
     public function checkService(){

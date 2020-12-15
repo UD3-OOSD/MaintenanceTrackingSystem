@@ -2,10 +2,12 @@
 
 class StartedService implements ServiceState{
 
+
   private static $stservice = NULL;
+  private static $ServiceActiveModel;
 
   private function __construct(){
-
+      StartedService::$ServiceActiveModel = ModelCommon::loading_model('ServiceActive');
   }
 
   public static function getInstance(){
@@ -17,10 +19,10 @@ class StartedService implements ServiceState{
 
   public function stateChange($service){
     $service->setState('5');
-    $this->ServiceActiveModel->stateChange($service->getId(),5);
+    StartedService::$ServiceActiveModel->stateChange($service->getId(),5);
   }
 
-    public function getState()
+  public function getState()
     {
         // TODO: Implement getState() method.
     }
