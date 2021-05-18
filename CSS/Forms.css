@@ -1,0 +1,43 @@
+body{
+    background: linear-gradient(to right, #141c24, #1f2c38, #34495e, #43607d, #34495e, #1f2c38, #141c24);
+}
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.register{
+    background: transparent;
+    background-size: 100% 800px;
+    color: white;
+    padding: 15px;
+    position: relative;
+}
+#y1{
+    margin-top: 100px;
+}
+#y2{
+    margin-top: 75px;
+}
+.reg{
+    background-color: #063358;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 15px;
+    margin-top: 0px;
+}
+.btn-default{
+    font: bold;
+    width: 100px;
+}
+.btn-default:hover{
+    background: #acc2b2;
+}
+textarea{
+    border-radius: 5px;
+    color: #4d4a4a;
+    padding: 5px 12px;
+}
+textarea:focus{
+    outline: none;
+}

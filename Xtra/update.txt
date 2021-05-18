@@ -1,0 +1,41 @@
+public function update($table, $id, $fields = []){
+      $fieldString = '';
+      $values = [];
+      foreach ($fields as $field => $value) {
+        $fieldString .= ' '.$field.' = ?,';
+        $values[] = $value;
+      }
+      $fieldString = trim($fieldString);
+      $fieldString = rtrim($fieldString, ',');
+      $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
+      dnd( $sql);
+      if (!$this->query($sql, $values)->error()) {
+        return true;
+      }
+      return false;
+      #$sql = "UPDATE contact SET f-name = 'Antonie' WHERE id = 3";
+    }
+
+
+
+
+public function UpdateRow($table,$unique,$params){
+        $fieldString = '';
+        $values = [];
+        foreach ($params as $field => $value) {
+            $fieldString .= ' '.$field.' = ?,';
+            $values[] = $value;
+        }
+        $fieldString = trim($fieldString);
+        $fieldString = rtrim($fieldString, ',');
+        foreach ($unique as $key => $val){
+            $val="'{$val}'";
+            $sql = "UPDATE {$table} SET {$fieldString} WHERE {$key} = {$val}";
+            #echo($sql);
+            #echo('<br>');
+            if (!$this->query($sql, $values)->error()) {
+                return true;
+            }
+        }
+        return false;
+    }

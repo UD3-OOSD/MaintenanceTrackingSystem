@@ -1,0 +1,62 @@
+body{
+    color: #002c53;
+    #background: #737373;
+    #background: #333333;
+    background-image: url(../app/views/images/back1.png);
+    background-repeat:repeat;
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container{
+    #background: #eaeaea;
+    background-image: url(../app/views/images/back2.png);
+    background-repeat:repeat;
+    padding: 10px;
+    margin-left :auto;
+    margin-right :auto;
+    width : 60%;
+    border-radius: 5px;
+    margin-top: 3%;
+    box-shadow:0px 0px 50px 20px rgba(0,0,0,0.79), 0 1px 4px rgba(0, 0, 0, 0.1) inset;
+}
+.minicontainer{
+    #background: #eaeaea;
+    background-image: url(../app/views/images/back2.png);
+    background-repeat:repeat;
+    padding: 10px;
+    margin-top: 10%;
+    margin-left :auto;
+    margin-right :auto;
+    width : 45%;
+    border-radius: 5px;
+    box-shadow:0px 0px 50px 15px rgba(0,0,0,0.79), inset 0px 0px 13px -3px rgba(255,255,255,1);
+}
+.btn-default{
+    width: 100%;
+    border-radius: 50px;
+    background: aliceblue;
+    border:1px solid #566787;
+    color: #566787;
+    resize: both;
+    overflow: auto;
+}
+.btn-default:hover{
+    background: #002c53;
+    color: white;
+}
+.form-head{
+    background-color :#bde0ff;
+    padding-bottom: 50px;
+    margin: 10px 10px 10px 10px;
+}
+.form-head h2 {
+    margin: 8px 0 0;
+    font-size: 30px;
+}
+
+
+

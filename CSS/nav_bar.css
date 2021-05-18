@@ -1,0 +1,112 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  #background: linear-gradient(to right, #58595e, #23242b);
+  background-image: url(../app/views/images/nav_back1.png);
+  background-repeat:repeat;
+}
+
+header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 40px;
+  background: #262626;
+  width: 100%;
+  box-sizing: border-box;
+}
+header .logo{
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  float: left;
+  font-weight: bold;
+  padding-left: 25px;
+}
+header nav{
+  float: right;
+  z-index: 100;
+}
+header nav ul{
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+header nav ul li{
+  list-style: none;
+}
+header nav ul li a{
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+header nav ul li a:hover, header nav ul li a.active{
+  color: #fff;
+  background: #2196f3;
+}
+header nav ul li a.active{
+  cursor: default;
+}
+.menu-toggle{
+  cursor: pointer;
+  color: #fff;
+  float: right;
+  line-height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+.icon{
+  cursor: pointer;
+  color: #fff;
+  float: right;
+  line-height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+}
+#icon_1{
+  float: left;
+  cursor: default;
+}
+#icon_2{
+  padding-right: 20px;
+}
+#icon_3{
+  padding-right: 25px;
+}
+a{
+  color: white;
+}
+
+@media (max-width: 1370px) {
+  header{
+    padding: 0 20px;
+  }
+  header nav{
+    position: absolute;
+    width: 35%;
+    height: calc(100vh - 50px);
+    background: #333;
+    top: 50px;
+    left: -100%;
+    transition: 0.3s;
+  }
+  header nav.active{
+    left: 0;
+  }
+  header nav ul{
+    display: block;
+    text-align: center;
+  }
+  header nav ul li a{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .menu-toggle{
+    display: block;
+  }
+}

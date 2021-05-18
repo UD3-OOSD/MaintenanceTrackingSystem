@@ -1,0 +1,32 @@
+{
+  "Home" : "home/index",
+  "Forman" :{
+    "Home" : "forman",
+    "Add Service" : "forman/addService",
+    "Required Maintains" : "forman/approve",
+    "Accepted Maintains" : "forman/accepted",
+    "Started Maintains" : "forman/started",
+    "Finished Maintains" : "forman/finished",
+    "Closed Maintains" : "forman/closed",
+    "Expired Maintains" : "forman/expired"
+  },
+  "Admin" : {
+    "Home" : "admin",
+    "Busses" : "admin/busView",
+    "Labourers": "admin/labView",
+    "Add new BUS" : "admin/addNewBus",
+    "Add new Profile" : "admin/addNewLabour"
+  },
+  "Clerk" : {
+    "Home" : "clerk",
+    "Update" : "clerk/update"
+  },
+  "Mechanic" : {
+    "Home" : "mechanic",
+    "Start Maintains" : "mechanic/start",
+    "Finish Maintains" : "mechanic/finish"
+  },
+  "Google" : "https://www.google.com",
+  "Login" : "register/login",
+  "Logout" : "register/logout"
+}

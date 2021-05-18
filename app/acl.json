@@ -1,0 +1,33 @@
+{
+  "Guest" : {
+    "denied" : {},
+    "Home" : ["*"],
+    "Register" : ["login", "register","validate"],
+    "Restricted" : ["*"]
+  },
+  "LoggedIn" : {
+    "denied" : {
+      "Home" : ["index"],
+      "Register" : ["login", "register"]
+    },
+    "Register" : ["logout"]
+  },
+  "Admin" : {
+    "denied" : {},
+    "Admin" : ["*"],
+    "Restricted" : ["*"]
+  },
+  "Forman" : {
+    "denied" : {},
+    "Forman" : ["*"]
+  },
+  "Mechanic" : {
+    "denied" : {},
+    "Mechanic" : ["*"]
+  },
+  "Clerk" : {
+    "denied" : {},
+    "Clerk" : ["*"]
+  }
+
+}

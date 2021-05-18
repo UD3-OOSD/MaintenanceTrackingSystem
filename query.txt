@@ -1,0 +1,43 @@
+SELECT
+    bustable.BusId,
+    buscategory.*
+FROM
+    bustable
+LEFT JOIN buscategory ON bustable.BusCategory = buscategory.BusType;
+
+#for service checable joining BusM -> populatechecklist
+
+
+
+SELECT
+    busmileage.*
+FROM
+    bustable
+LEFT JOIN busmileage ON busmileage.BusId = bustable.BusId;
+
+#for busmileage joining BusM -> populatemileageobject
+
+
+#getting column details
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'bustable'
+
+
+ SELECT * FROM `bustable` WHERE BusCategory='Leyland'
+
+
+//for the checkALL in ServiceActive
+SELECT
+    bustable.BusId,bustable.BusNumber,busmileage.*
+FROM
+    busmileage
+LEFT JOIN bustable ON busmileage.BusNumber = bustable.BusNumber;
+
+
+SELECT
+    bustable.BusId,bustable.BusNumber,buscategory.*,bustable.deleted
+FROM
+    buscategory
+LEFT JOIN bustable ON bustable.BusCategory = buscategory.BusType;
